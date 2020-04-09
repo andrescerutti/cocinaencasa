@@ -496,7 +496,7 @@ INGREDIENTS = [
 
   {
     name: "Pan molido",
-    remote_image_url: "https://alazan.com.mx/wp-content/uploads/2018/04/pan-molido.jpg"
+    remote_image_url: "https://www.chapela.es/wp-content/uploads/2017/11/Queso-semicurado-web-min.png"
   },
   {
     name: "Arroz Carnioli",
