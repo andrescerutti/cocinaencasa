@@ -1,0 +1,44 @@
+.cookware-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+#check-button {
+  font-size: 150px;
+  color: #73B948;
+}
+
+#confirmation-code {
+  color: #3B5998;
+  font-weight: 900;
+}
+
+#size-image {
+  width: 200px;
+  height: 200px;
+}
+
+
+
+
+@media(max-width: 920px) {
+  .cookware-cards {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+
+@media(max-width: 680px) {
+  .cookware-cards {
+  grid-template-columns: 1fr;
+  }
+}
+
+
+
+button.mercadopago-button {
+  background-color: #0B5FC4;
+  color: white;
+  border: 1px solid #111;
+  border-radius: 3;
+}

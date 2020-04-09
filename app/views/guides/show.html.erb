@@ -1,0 +1,25 @@
+<div class="container px-5">
+  <div class="d-flex flex-column justify-content-center my-3">
+    <h2 class="font-weight-bold text-center text-md-left"><%= @kit.name %></h2>
+
+    <iframe id="ytplayer" type="text/html" width="100%" height="480"
+      src="https://www.youtube.com/embed/<%= @guide.video %>?controls=2rails"
+      frameborder="0"/>
+    </iframe>
+  </div>
+  <div class="steps">
+    <h3 class="font-weight-bold">Pasos a seguir:</h3>
+    <% @guide.steps.reverse.each do |step| %>
+      <div class="d-flex align-items-center">
+        <p class="stepnumber font-weight-bold mr-3" style="font-size: 70px"><%= step.order %>.</p>
+        <p class="text-muted"><%= step.content %></p>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <h2 class="font-weight-bold text-center">Et Voilà!</h2>
+  </div>
+</div>
+
+
+

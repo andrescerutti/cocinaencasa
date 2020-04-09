@@ -1,0 +1,7 @@
+<p>Hola <%= @resource.email %>!</p>
+
+<p>Tu cuenta fue bloqueda por introducir erroneamente tus datos repetidas veces</p>
+
+<p>Hace clic en el link a continuacion para desbloquearla:</p>
+
+<p><%= link_to 'Desbloquear mi cuenta', unlock_url(@resource, unlock_token: @token) %></p>

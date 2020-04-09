@@ -1,0 +1,45 @@
+<div class="container d-flex justify-content-center mt-5">
+  <div class="col-md-6">
+    <h2>Registro</h2>
+
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    label: "Email" ,
+                    input_html: {  autocomplete: "email" }%>
+        <%= f.input :password,
+                    required: true,
+                      label: "Nueva contraseña" ,
+                    hint: ("#{@minimum_password_length} caracteres minimos" if @minimum_password_length),
+                    input_html: { autocomplete: "nueva contraseña" } %>
+        <%= f.input :password_confirmation,
+                    label: "Nueva contraseña" ,
+                    required: true,
+                    input_html: { autocomplete: "nueva contraseña" } %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Registro", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

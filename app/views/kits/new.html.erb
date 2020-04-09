@@ -1,0 +1,14 @@
+<%= simple_form_for [@kit] do |f| %>
+  <%= f.input :name, label: false, placeholder: 'Name' %>
+  <%= f.input :stock, as: :integer, label: false, placeholder: 'Stock' %>
+  <%= f.input :price, as: :integer, label: false, placeholder: 'Price' %>
+  <%= f.input :size, as: :integer, label: false, placeholder: 'Size' %>
+  <%= f.input :preparation_time, label: false, placeholder: 'Preparation time' %>
+  <%= f.input :description, as: :text, label: false, placeholder: 'Description' %>
+  <%= f.input :logo, label: false %>
+  <%= f.input :logo_cache, as: :hidden %>
+  <div class="links">
+    <%= f.button :submit, class:'btn btn-primary' %>
+    <%= link_to 'Index', root_path, class: "bootstrapbutton" %>
+  </div>
+<% end %>
