@@ -26,6 +26,7 @@ gem 'letter_opener', group: :development
 
 group :development do
   gem 'web-console', '>= 3.3.0'
+  gem 'dotenv-rails', groups: [:development, :test]
 end
 
 group :development, :test do
