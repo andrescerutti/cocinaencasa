@@ -11,6 +11,6 @@ class Restaurant < ApplicationRecord
   has_many :orders, through: :kits
 
   validates :name, presence: true
-  validates :image, presence: true
+  # validates :image, presence: true
 
 end

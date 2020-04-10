@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :addresses, as: :addressable
   has_many :cards
+  has_many :restaurants
 
   validates :email, presence: true, uniqueness: true
   validates :permision_level, presence: true, numericality: true, inclusion: { in: (1..5) }
