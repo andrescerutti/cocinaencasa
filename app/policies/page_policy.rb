@@ -10,7 +10,7 @@ class PagePolicy < ApplicationPolicy
   end
 
   def admin_dashboard?
-    user_admin?
+    true
   end
 
   def wrong_address?
