@@ -1,7 +1,7 @@
 <h2 class="text-center">Todas las ordenes</h2>
 <div class="container-fluid">
   <div class="row">
-  <div class="col-12 col-lg-6">
+  <div class="col-12">
     <ul class="list-inline tabs-underlined">
       <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
         <li class="nav-item" style="border-top: 3px solid #fd1015">
@@ -171,16 +171,4 @@
         <% end %>
       </div>
     </div>
-  </div>
-    <div class="d-none d-lg-block col-lg-6">
-      <div
-        id="map"
-        class="position-sticky"
-        style="width: 100%;
-        height: 100vh; top: 0;"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
-    </div>
-  </div>
 </div>
