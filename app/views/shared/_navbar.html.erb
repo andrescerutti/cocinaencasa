@@ -17,8 +17,8 @@
 
     <div>
 
-      <%= link_to "Mis ordenes", user_dashboard_path, class: "btn btn-primary mr-1 d-none d-md-block"%>
-
+      <%= link_to "Mis ordenes", user_dashboard_path, class: "btn btn btn-light border-primary text-primary mr-2"%>
+      <%= link_to "Dashboard", admin_dashboard_path, class: "btn btn btn-light border-primary text-primary mr-2"%>
       </div>
         <div class="dropdown">
           <% if current_user.avatar_image? %>
@@ -36,8 +36,9 @@
             <%= link_to "Cerrar Sesion", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
           </div>
         </div>
+
     <% else %>
-        <%= link_to "Ingresar", new_user_session_path, class: "btn btn-primary mr-1"%>
+        <%= link_to "Ingresar", new_user_session_path, class: "btn btn-light border-primary text-primary mr-1"%>
         <%= link_to "Registrarse", new_user_registration_path, class: "btn btn-primary" %>
     <% end %>
   </div>
