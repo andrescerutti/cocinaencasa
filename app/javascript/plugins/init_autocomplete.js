@@ -1,10 +1,5 @@
 import places from 'places.js';
 
-// var placesAutocomplete = places({
-//     appId: 'pl7E188RO19A',
-//     apiKey: '84aca937548e9ca30c537fbb014687b0',
-//     container:
-//   });
 
 const initAutocomplete = () => {
   const addressInput = document.querySelector('#query_address');
