@@ -171,16 +171,30 @@
         <% end %>
       </div>
     </div>
-  </div>
-    <div class="d-none d-lg-block col-lg-6">
-      <div
-        id="map"
-        class="position-sticky"
-        style="width: 100%;
-        height: 100vh; top: 0;"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
-    </div>
-  </div>
 </div>
+    <div class="col-12 col-lg-6">
+      <h2>Todos mis kits</h2>
+      <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary" %>
+      <div class="">
+        <% @kits.each do |kit| %>
+            <div class="card-scroll pr-0 pl-2 mr-3 col-lg-6">
+             <div class="card-kit">
+              <%= cl_image_tag kit.image, class: "rounded"%>
+               <div class="card-body">
+                 <div>
+                   <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></h5>
+                   <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
+                 </div>
+                 <div class="d-flex justify-content-between">
+                   <p class="card-text card-price">$ <%= kit.price %></p>
+                   <%= link_to "Show", kit_path(kit), class: "btn btn-primary" %>
+                   <%= link_to "Edit", edit_kit_path(kit), class: "btn btn-primary" %>
+
+                 </div>
+               </div>
+              </div>
+              </div>
+          <% end %>
+      </div>
+
+    </div>
