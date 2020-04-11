@@ -17,7 +17,7 @@
 
     <div>
 
-      <%= link_to "Mis ordenes", user_dashboard_path, class: "btn btn-primary mr-2 d-none d-md-block"%>
+      <%= link_to "Mis ordenes", user_dashboard_path, class: "btn btn btn-light border-primary text-primary mr-2 d-none d-md-block"%>
 
       </div>
         <div class="dropdown">
@@ -37,7 +37,7 @@
           </div>
         </div>
     <% else %>
-        <%= link_to "Ingresar", new_user_session_path, class: "btn btn-primary mr-1"%>
+        <%= link_to "Ingresar", new_user_session_path, class: "btn btn-light border-primary text-primary mr-1"%>
         <%= link_to "Registrarse", new_user_registration_path, class: "btn btn-primary" %>
     <% end %>
   </div>
