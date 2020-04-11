@@ -136,10 +136,10 @@ ActiveRecord::Schema.define(version: 2020_04_11_214806) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date_delivery"
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.string "delivery_provider"
-    t.datetime "date_delivery"
     t.integer "status", default: 0
     t.string "reference_number"
     t.string "reason"
