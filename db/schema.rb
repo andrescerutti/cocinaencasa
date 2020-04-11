@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_29_121351) do
+ActiveRecord::Schema.define(version: 2020_04_11_214806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,12 @@ ActiveRecord::Schema.define(version: 2019_11_29_121351) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "phone"
+    t.string "test_mp_public_key"
+    t.string "test_mp_private_key"
+    t.string "prod_mp_public_key"
+    t.string "prod_mp_private_key"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
@@ -201,6 +207,7 @@ ActiveRecord::Schema.define(version: 2019_11_29_121351) do
     t.bigint "addressable_id"
     t.string "mpcard_id"
     t.string "mpcustomer_id"
+    t.string "phone"
     t.index ["addressable_type", "addressable_id"], name: "index_users_on_addressable_type_and_addressable_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
