@@ -8,6 +8,10 @@ class PagesController < ApplicationController
   def components
   end
 
+  def contact
+
+  end
+
   def user_dashboard
     # @restaurants = Restaurant.all
     @kits = Kit.all
