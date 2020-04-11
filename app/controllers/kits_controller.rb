@@ -1,6 +1,6 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :show, :category]
+  skip_before_action :authenticate_user!, only: [:index, :sphow, :category]
   def index
     # 1. Geocode Address from params (Mapbox o Nominatum)
     # 2. Si hay restaurants, proceso normal, sino redirect to wrong_address
