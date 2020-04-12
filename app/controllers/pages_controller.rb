@@ -13,7 +13,7 @@ class PagesController < ApplicationController
   end
 
   def user_dashboard
-    @brands = Brand.find(1..5)
+    # @brands = Brand.find(1..5)
     @restaurants = Restaurant.all
     @kits = Kit.all
     @orders = Order.where(user: current_user)
