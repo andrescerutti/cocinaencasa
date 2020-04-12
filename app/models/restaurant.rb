@@ -14,9 +14,8 @@ class Restaurant < ApplicationRecord
   validates :email, presence: true
   validates :phone, presence: true
 
-  encrypts :test_mp_public_key_ciphertext
-  encrypts :test_mp_private_key_ciphertext
-  encrypts :prod_mp_public_key_ciphertext
-  encrypts :prod_mp_private_key_ciphertext
-
+  encrypts :test_mp_public_key
+  encrypts :test_mp_private_key
+  encrypts :prod_mp_public_key
+  encrypts :prod_mp_private_key
 end
