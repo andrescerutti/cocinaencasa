@@ -8,6 +8,10 @@ class PagesController < ApplicationController
   def components
   end
 
+  def contact
+
+  end
+
   def user_dashboard
     @brands = Brand.find(1..5)
     @restaurants = Restaurant.all
