@@ -8,4 +8,9 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     mail(to: @user.email, subject: 'Bienvenido a Cocina En Casa!')
   end
+
+  def restaurant_form
+
+
+  end
 end
