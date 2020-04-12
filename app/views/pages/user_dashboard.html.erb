@@ -1,12 +1,12 @@
 <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
 
-  <h1><%= @brands.name %></h1>
+  <h1>Mis Ordenes</h1>
 </div>
 
 <div class="container-fluid mt-2">
   <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Ordenes en camino" aria-selected="true">Ordens</a>
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Ordenes en camino" aria-selected="true">Ordenes en camino</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="Historial de ordenes" aria-selected="false">Historial de ordenes</a>
@@ -75,7 +75,7 @@
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
         <div class="col-12">
         <div class="d-flex flex-wrap mx-3 justify-content-around">
-          <% @brands.restaurants.kits.each do |kit| %>
+          <% @kits.each do |kit| %>
             <%= link_to kit_path(kit) do  %>
               <div class="card-kit mx-auto" style="width: 300px">
                 <%= cl_image_tag kit.image, class: "rounded"%>

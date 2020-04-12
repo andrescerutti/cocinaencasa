@@ -453,6 +453,10 @@ BRANDS = [
                   {
                     name: 'Mano Rota',
                     phone: "123123123123123",
+                    test_mp_public_key: "TEST-063df879-b849-45df-87e0-81ea1f09cea1",
+                    test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
+                    prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
+                    prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://tendencias.tv/wp-content/uploads/2016/07/MANO-ROTA.jpg',
                     address_attributes: {
@@ -583,6 +587,10 @@ BRANDS = [
     restaurants: [ {
                     name: 'Abantal',
                     phone: "123123123123123",
+                    test_mp_public_key: "TEST-063df879-b849-45df-87e0-81ea1f09cea1",
+                    test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
+                    prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
+                    prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://www.diariodesevilla.es/2019/09/17/con_cuchillo_y_tenedor/cosas_de_come/mesa-junto-cocina_1392470814_107011889_1994x1024.jpg',
                     address_attributes: {
@@ -756,6 +764,10 @@ BRANDS = [
     restaurants: [
                   {
                     name: 'Ristorante La Pineta',
+                    test_mp_public_key: "TEST-063df879-b849-45df-87e0-81ea1f09cea1",
+                    test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
+                    prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
+                    prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
                     phone: "123123123123123",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://i.imgur.com/VdMltvq.png',
@@ -923,6 +935,10 @@ BRANDS = [
                     {
                     name: 'Buenos Aires Rock',
                     phone: "123123123123123",
+                    test_mp_public_key: "TEST-063df879-b849-45df-87e0-81ea1f09cea1",
+                    test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
+                    prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
+                    prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://i.imgur.com/ZuopTOE.png',
                     address_attributes: {
