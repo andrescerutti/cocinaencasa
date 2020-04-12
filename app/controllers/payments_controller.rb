@@ -14,9 +14,9 @@ class PaymentsController < ApplicationController
 
   def create
     require 'mercadopago'
-    $mp = MercadoPago.new(ENV["MP_PRIVATE_TOKEN"])
-
     @order = Order.find(params[:order_id])
+    $mp = MercadoPago.new(@order.kit.restaurant.test_mp_private_key)
+
     @payment = Payment.new
 
     token = params[:token]
