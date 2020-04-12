@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_214806) do
+ActiveRecord::Schema.define(version: 2020_04_12_044505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,11 @@ ActiveRecord::Schema.define(version: 2020_04_11_214806) do
     t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "city"
+    t.string "flat_number"
+    t.string "state"
+    t.string "cp"
+    t.string "street"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
@@ -136,10 +141,10 @@ ActiveRecord::Schema.define(version: 2020_04_11_214806) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date_delivery"
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.string "delivery_provider"
+    t.datetime "date_delivery"
     t.integer "status", default: 0
     t.string "reference_number"
     t.string "reason"
