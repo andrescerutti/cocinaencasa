@@ -172,23 +172,23 @@
       </div>
     </div>
 </div>
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-6 text-center">
       <h2>Todos mis kits</h2>
-      <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary" %>
-      <div class="">
+<!--       <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary" %>
+ -->      <div class="">
         <% @kits.each do |kit| %>
             <div class="card-scroll pr-0 pl-2 mr-3 col-lg-6">
-             <div class="card-kit">
+             <div class="card-kit mt-5" style="width: 400px; height: 550px; margin-left: 60px;">
               <%= cl_image_tag kit.image, class: "rounded"%>
                <div class="card-body">
                  <div>
-                   <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></h5>
-                   <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
-                 </div>
-                 <div class="d-flex justify-content-between">
+                   <p class="card-title mb-1 text-wrap text-truncate" style="height: 45px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></p>
+                   <p class="card-text overflow-ellipsis card-description" style=""><%= kit.description %></p>
                    <p class="card-text card-price">$ <%= kit.price %></p>
-                   <%= link_to "Show", kit_path(kit), class: "btn btn-primary" %>
-                   <%= link_to "Edit", edit_kit_path(kit), class: "btn btn-primary" %>
+                 </div>
+                 <div class="d-flex justify-content-between mt-2">
+                   <%= link_to "Show", kit_path(kit), class: "btn btn-primary", style: "width: 120px; margin-left: 50px;" %>
+                   <%= link_to "Edit", edit_kit_path(kit), class: "btn btn-outline-primary", style: "width: 120px; margin-right: 50px;" %>
 
                  </div>
                </div>
