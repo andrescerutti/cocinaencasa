@@ -39,7 +39,6 @@
       <!-- form direccion  -->
 
       <%= f.simple_fields_for :addresses do |a| %>
-      <%= a.input :address, placeholder: "Ingresá tu dirección", input_html: { id: "order_address_address", class: 'w-100' }, wrapper_html: { class: 'w-100 mb-md-0' }, label: false %>
       <%= a.input :city, placeholder: "Ciudad", label: false %>
       <%= a.input :state, placeholder: "Provincia", label: false %>
       <%= a.input :street, placeholder: "Calle", label: false %>
@@ -47,7 +46,6 @@
       <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
 
       <% end %>
-
       <h4 class='kitdescr my-2'><%= @kit.description %></h4>
       <%= f.submit "Seleccione la cantidad de Kits", class:"btn btn-primary btn-block disabled", id:"submit_order_kit", disabled:"disabled" %>
       <% end %>

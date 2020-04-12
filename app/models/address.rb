@@ -5,7 +5,7 @@ class Address < ApplicationRecord
   belongs_to :restaurant, optional: true
   belongs_to :user, optional: true
 
-  validates :address, presence: true
+  # validates :address, presence: true
   # validates :city, presence: true
   # validates :state, presence: true
   # validates :cp, presence: true
