@@ -1,11 +1,14 @@
 const calculateKit = () => {
   const amount = document.querySelector("#order_amount")
-  const address = document.querySelector("#order_address_address")
+  const city = document.querySelector("#order_addresses_city")
+  const state = document.querySelector("#order_addresses_state")
+  const street = document.querySelector("#order_addresses_street")
+  const cp = document.querySelector("#order_addresses_cp")
   const button = document.querySelector("#submit_order_kit")
   const price = document.querySelector("#price")
 
   const updatePrice = () => {
-    if (amount.value > 0 && address.value !== "") {
+    if (amount.value > 0 && cp.value !== "" ) {
       button.classList.remove("disabled")
       button.disabled = ""
       if (amount.value > 1) {
@@ -24,7 +27,7 @@ const calculateKit = () => {
 
   if (amount) {
     amount.addEventListener("change", event => updatePrice())
-    address.addEventListener("keyup", event => updatePrice())
+    cp.addEventListener("keyup", event => updatePrice())
 
   }
 }
