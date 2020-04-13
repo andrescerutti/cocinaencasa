@@ -15,6 +15,7 @@ class PaymentsController < ApplicationController
   def create
     require 'mercadopago'
     @order = Order.find(params[:order_id])
+
     restaurant_mepa_private_key = @order.kit.restaurant.prod_mp_private_key
 
     Rails.logger.info("The restaurant_mepa_private_key class is : #{restaurant_mepa_private_key.class}")
@@ -22,6 +23,7 @@ class PaymentsController < ApplicationController
       Rails.logger.info("Its last 4 chars are : #{restaurant_mepa_private_key[-4..-1]}")
     end
     $mp = MercadoPago.new(restaurant_mepa_private_key)
+
 
     @payment = Payment.new
 
@@ -45,7 +47,7 @@ class PaymentsController < ApplicationController
     payment_response = $mp.post("/v1/payments", payment)
     # ask for the customer, if not exists the create a new one, else get the customer_id and the card_id
 
-      #raise
+      raise
     if payment_response["status"] == "201" && payment_response["response"]["status"] == "approved"
       # logger.debug "respuesta mp #{payment_response}"
 
