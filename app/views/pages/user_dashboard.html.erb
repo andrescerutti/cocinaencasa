@@ -12,7 +12,7 @@
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="Historial de ordenes" aria-selected="false">Historial de ordenes</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="Favoritos" aria-selected="false">Mis ordenes</a>
+      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="Favoritos" aria-selected="false">Destacados</a>
     </li>
   </ul>
     <div class="tab-content" id="myTabContent">
@@ -81,7 +81,7 @@
             <%= link_to kit_path(kit) do  %>
               <div class="card-kit mx-auto" style="width: 300px">
                 <%= cl_image_tag kit.image, class: "rounded"%>
-                <%= link_to "Receta", guide_path(kit.guide), class: "btn btn-primary border border-light", style: "position: absolute; left: 220px; bottom: 160px;" %>
+                <%= link_to "Favorito", guide_path(kit.guide), class: "btn btn-success border border-light text-light", style: "position: absolute; left: 215px; bottom: 160px;" %>
                  <div class="card-body">
                    <div>
                      <h5 class="card-title mb-1 text-wrap" style="height: 50px"><%= kit.name %></h5>
