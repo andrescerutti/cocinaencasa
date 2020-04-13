@@ -15,7 +15,15 @@ class PaymentsController < ApplicationController
   def create
     require 'mercadopago'
     @order = Order.find(params[:order_id])
-    $mp = MercadoPago.new(@order.kit.restaurant.test_mp_private_key)
+
+    restaurant_mepa_private_key = @order.kit.restaurant.prod_mp_private_key
+
+    Rails.logger.info("The restaurant_mepa_private_key class is : #{restaurant_mepa_private_key.class}")
+    if restaurant_mepa_private_key.class == String
+      Rails.logger.info("Its last 4 chars are : #{restaurant_mepa_private_key[-4..-1]}")
+    end
+    $mp = MercadoPago.new(restaurant_mepa_private_key)
+
 
     @payment = Payment.new
 
