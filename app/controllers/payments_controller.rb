@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
   def create
     require 'mercadopago'
     @order = Order.find(params[:order_id])
-    $mp = MercadoPago.new(@order.kit.restaurant.test_mp_private_key)
+    $mp = MercadoPago.new(@order.kit.restaurant.prod_mp_private_key)
 
     @payment = Payment.new
 
