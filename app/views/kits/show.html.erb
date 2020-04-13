@@ -47,6 +47,7 @@
       <%= a.input :cp, placeholder: "Codigo Postal", label: false %>
       <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
 
+      <% end %>
       <h4 class='kitdescr my-2'><%= @kit.description %></h4>
       <%= f.submit "Seleccione la cantidad de Kits", class:"btn btn-primary btn-block disabled", id:"submit_order_kit", disabled:"disabled" %>
       <% end %>
