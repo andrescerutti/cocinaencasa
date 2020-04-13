@@ -144,7 +144,9 @@
                                                             <td>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.2; letter-spacing: -0.5; font-size: 40px; font-weight: bold;">
-                                                                    Hola gaspar
+                                                                    Hola, <%= @user.full_name.split(" ").map { |s| s.capitalize }.join(' ') %>
+
+
                                                                 </p>
                                                             </td>
                                                         </tr>
@@ -198,19 +200,19 @@
                                                                     TOTAL</p>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 30px; font-weight: bold;">
-                                                                    $365,00</p>
+                                                                    </p>
                                                                 <p
                                                                     style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
                                                                     Metodo
-                                                                    de pago: Efectivo</p>
+                                                                    de pago: Mercado Pago</p>
                                                                 <p
                                                                     style="display: none; color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                    Easy
+
                                                                     creditos:
                                                                     $0,00</p>
                                                                 <p
                                                                     style="display: none; color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                    EasyPay:
+                                                                    Pay:
                                                                     $0,00</p>
                                                                 <p
                                                                     style="display: none; color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
@@ -531,7 +533,7 @@
                                                                         <td>
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                Easy
+
                                                                                 Pay</p>
                                                                         </td>
                                                                         <td align="right">
@@ -545,7 +547,7 @@
                                                                         <td>
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                Easy creditos</p>
+                                                                              creditos</p>
                                                                         </td>
                                                                         <td align="right">
                                                                             <p
@@ -888,7 +890,7 @@
                                                     <p
                                                         style="color: #e6e6e6; font-size: 18px; letter-spacing: -0.5; font-weight: 300; margin-bottom: 5px">
                                                         Equipo
-                                                        Easychef</p>
+                                                        Cociná En Casa</p>
                                                 </td>
                                                 <td width="40"></td>
                                             </tr>
