@@ -1,3 +1,5 @@
+<div class="container mt-3">
+<%= link_to "", :back, class: "fas fa-arrow-left mb-2", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
 <%= simple_form_for [@kit] do |f| %>
   <%= f.input :name, label: false, placeholder: 'Name' %>
   <%= f.input :stock, as: :integer, label: false, placeholder: 'Stock' %>
@@ -6,7 +8,8 @@
   <%= f.input :preparation_time, label: false, placeholder: 'Preparation time' %>
   <%= f.input :description, as: :text, label: false, placeholder: 'Description' %>
   <div class="links">
-    <%= f.button :submit, class:'bootstrapbutton' %>
-    <%= link_to 'Index', root_path, class: "bootstrapbutton" %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+    <%= link_to 'Index', root_path, class: "btn btn-outline-primary" %>
   </div>
 <% end %>
+</div>

@@ -173,12 +173,12 @@
     </div>
 </div>
     <div class="col-12 col-lg-6 text-center">
-      <h2>Todos mis kits</h2>
+      <h2 class="">Todos mis kits</h2>
 <!--       <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary" %>
  -->      <div class="">
         <% @kits.each do |kit| %>
             <div class="card-scroll pr-0 pl-2 mr-3 col-lg-6">
-             <div class="card-kit mt-5" style="width: 400px; height: 550px; margin-left: 60px;">
+             <div class="card-kit mt-1" style="width: 400px; height: 550px; margin-left: 160px;">
               <%= cl_image_tag kit.image, class: "rounded"%>
                <div class="card-body">
                  <div>
