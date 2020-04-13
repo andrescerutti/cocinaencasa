@@ -453,10 +453,10 @@ BRANDS = [
                   {
                     name: 'Mano Rota',
                     phone: "123123123123123",
-                    test_mp_public_key: "TEST-063df879-b849-45df-87e0-81ea1f09cea1",
-                    test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
-                    prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
-                    prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
+                    test_mp_public_key: "TEST-97be680b-9143-4d57-80bf-50ae0576c5f2",
+                    test_mp_private_key: "TEST-5497686852257892-041221-d6bb381c98ee79cdcd0872704a705297-168219137",
+                    prod_mp_public_key: "APP_USR-d47234f2-9c8d-40d2-89a8-654125e5cf47",
+                    prod_mp_private_key: "APP_USR-5497686852257892-041221-f838a8d921fa05cb3f14f83f25464505-168219137",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://tendencias.tv/wp-content/uploads/2016/07/MANO-ROTA.jpg',
                     address_attributes: {
@@ -470,7 +470,7 @@ BRANDS = [
             { general_information: {
                 name: 'Pollo relleno de queso fundido y chorizo',
                 stock: 10,
-                price: 350,
+                price: 1,
                 size: 1,
                 preparation_time: 25,
                 description: 'Pollo relleno de una combinación entre Queso derretido y Chorizo.',
@@ -587,10 +587,10 @@ BRANDS = [
     restaurants: [ {
                     name: 'Abantal',
                     phone: "123123123123123",
-                    test_mp_public_key: "TEST-063df879-b849-45df-87e0-81ea1f09cea1",
-                    test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
-                    prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
-                    prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
+                    test_mp_public_key: "TEST-616e8f02-6dda-4804-a211-a8420a5b1dfc",
+                    test_mp_private_key: "TEST-5189200031208569-041221-5d856d7977f9479b339288b6cf41e4ae-125522072",
+                    prod_mp_public_key: "APP_USR-516eb105-81a6-4e01-8566-75fe8fb966e3",
+                    prod_mp_private_key: "APP_USR-5189200031208569-041221-e925141c98437e21acad9c43384276cd-125522072",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://www.diariodesevilla.es/2019/09/17/con_cuchillo_y_tenedor/cosas_de_come/mesa-junto-cocina_1392470814_107011889_1994x1024.jpg',
                     address_attributes: {
@@ -604,7 +604,7 @@ BRANDS = [
             { general_information: {
                                       name: 'Costillar de cerdo',
                                       stock: 15,
-                                      price: 500,
+                                      price: 1,
                                       size: 1,
                                       preparation_time: 50,
                                       description: 'Costillar de cerdo asado a fuego lento, aderezado con salsa barbacoa, acompañado de papas fritas.',
@@ -696,7 +696,7 @@ BRANDS = [
             { general_information: {
                                       name: 'Croquetas de Pollo y Brócoli',
                                       stock: 10,
-                                      price: 230,
+                                      price: 1,
                                       size: 1,
                                       preparation_time: 55,
                                       description: 'Exquisitas Croquetas de Brócoli',
@@ -834,7 +834,7 @@ BRANDS = [
             { general_information: {
                                       name: 'Spaghetti con Salsa de Remolacha',
                                       stock: 10,
-                                      price: 410,
+                                      price: 1,
                                       size: 1,
                                       preparation_time: 60,
                                       description: 'Con un poco de Nuez y toda la nutrición de la Remolacha, estos Spaghettis son la forma más saludable para disfrutar de una buena pasta.',
@@ -952,7 +952,7 @@ BRANDS = [
             { general_information: {
                 name: 'Sandwich de Espinaca',
                 stock: 10,
-                price: 350,
+                price: 1,
                 size: 1,
                 preparation_time: 20,
                 description: 'Una opción saludable y deliciosa.',
