@@ -58,7 +58,7 @@ class PaymentsController < ApplicationController
         current_user.mpcustomer_id = customer_response["response"]["id"]
 
         # add a card to the customer
-        card_response = $mp.post("/v1/customers/#{customer_response["response"]["id"]}/cards", {token: token})
+        card_response = $mp.post("/v1/customers/#{customer_response['response']['id']}/cards", {token: token})
 
         current_user.mpcard_id = card_response["response"]["id"]
         current_user.save!
