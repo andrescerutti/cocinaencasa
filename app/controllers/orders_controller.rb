@@ -63,6 +63,6 @@ class OrdersController < ApplicationController
   end
 
   def address_params
-    params[:order][:addresses].permit(:address)
+    params[:order][:addresses].permit(:city, :street, :state, :flat_number, :cp)
   end
 end

@@ -17,7 +17,7 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def order_assignment?
-    user_admin?
+    true
   end
 
   def destroy?
