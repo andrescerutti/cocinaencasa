@@ -5,7 +5,7 @@
 <div class="container-fluid mt-2">
   <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Ordenes en camino" aria-selected="true">Ordenes en camino</a>
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="Ordenes en camino" aria-selected="true">Órdenes en camino</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="Historial de ordenes" aria-selected="false">Historial de ordenes</a>
@@ -18,8 +18,6 @@
 
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="d-flex flex-wrap mx-3" >
-        <% if  @order.present?%>
-
           <% @orders.each do |order| %>
             <% if order.date_delivery > Date.today %>
                 <div class="card-kit border mx-auto" style=" width: 300px">
@@ -39,20 +37,13 @@
                 </div>
             <% end %>
           <% end %>
-        <% else %>
-          <div class="container text-center">
-            <h4 class="my-5">Todabvia no realizaste tu primer compra!</h4>
-            <img src="https://image.flaticon.com/icons/svg/711/711979.svg" width="180" height="180">
-          </div>
-        <% end %>
       </div>
     </div>
 
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="col-12">
           <div class="d-flex flex-wrap mx-3">
-            <% if @order.present? %>
-              <% @orders.each do |order| %>
+         <% @orders.each do |order| %>
                 <% if order.date_delivery < Date.today %>
                     <div class="card-kit border mx-auto" style=" width: 300px">
                       <div>
@@ -78,12 +69,7 @@
                     </div>
                 <% end %>
               <% end %>
-            <% else %>
-              <div class="container text-center">
-                <h4 class="my-5">Todabvia no realizaste tu primer compra!</h4>
-                <img src="https://image.flaticon.com/icons/svg/711/711979.svg" width="180" height="180">
-              </div>
-            <% end %>
+
           </div>
         </div>
       </div>
