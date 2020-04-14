@@ -41,8 +41,8 @@
 
       <%= f.simple_fields_for :addresses do |a| %>
 
-      <%= a.input :city, placeholder: "Ciudad", label: false %>
       <%= a.input :state, placeholder: "Provincia", label: false %>
+      <%= a.input :city, placeholder: "Localidad", label: false %>
       <%= a.input :street, placeholder: "Calle", label: false %>
       <%= a.input :cp, placeholder: "Codigo Postal", label: false %>
       <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
