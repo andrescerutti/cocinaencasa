@@ -27,8 +27,12 @@
           <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
           <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
-                 <h5><%= order.user.first_name %> <%= order.user.last_name %> (<%= order.user_id %>)</h5>
-                 <p class="font-weight-light"><%= order.address.address %></p>
+                 <% if order.user.first_name == nil && order.user.last_name == nil%>
+                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
+                 <% else %>
+                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
+                 <% end %>
+                 <p class="font-weight-light"><%= order.address.city %>, <%= order.address.state %>, <%= order.address.street %>, <%= order.address.flat_number %></p>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
@@ -47,7 +51,6 @@
         <% else %>
           <p>No hay ordenes pendientes</p>
         <% end %>
-
       </div>
 
 
@@ -57,7 +60,11 @@
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
-                 <h5><%= order.user.first_name %> <%= order.user.last_name %> (<%= order.user_id %>)</h5>
+                <% if order.user.first_name == nil && order.user.last_name == nil%>
+                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
+                <% else %>
+                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
+                <% end %>
                  <p class="font-weight-light"><%= order.address.address %></p>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
@@ -87,8 +94,11 @@
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
-                 <h5><%= order.user.first_name %> <%= order.user.last_name %> (<%= order.user_id %>)</h5>
-                 <p class="font-weight-light"><%= order.address.address %></p>
+                <% if order.user.first_name == nil && order.user.last_name == nil%>
+                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
+                <% else %>
+                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
+                <% end %>                 <p class="font-weight-light"><%= order.address.address %></p>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
@@ -117,8 +127,11 @@
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
-                 <h5><%= order.user.first_name %> <%= order.user.last_name %> (<%= order.user_id %>)</h5>
-                 <p class="font-weight-light"><%= order.address.address %></p>
+                <% if order.user.first_name == nil && order.user.last_name == nil%>
+                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
+                <% else %>
+                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
+                <% end %>                 <p class="font-weight-light"><%= order.address.address %></p>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
@@ -147,8 +160,11 @@
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
-                 <h5><%= order.user.first_name %> <%= order.user.last_name %> (<%= order.user_id %>)</h5>
-                 <p class="font-weight-light"><%= order.address.address %></p>
+                <% if order.user.first_name == nil && order.user.last_name == nil%>
+                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
+                <% else %>
+                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
+                <% end %>                 <p class="font-weight-light"><%= order.address.address %></p>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
@@ -174,9 +190,10 @@
 </div>
     <div class="col-12 col-lg-6 text-center">
       <h2 class="">Todos mis kits</h2>
-<!--       <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary" %>
- -->      <div class="">
+      <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary" %>
+      <div class="">
         <% @kits.each do |kit| %>
+      <% link_to "Nuevo Kit", new_kit_path(kit), class: "btn btn-primary", style: "width: 120px; margin-left: 50px;" %>
             <div class="card-scroll pr-0 pl-2 mr-3 col-lg-6">
              <div class="card-kit mt-1" style="width: 400px; height: 550px; margin-left: 160px;">
               <%= cl_image_tag kit.image, class: "rounded"%>
