@@ -3,7 +3,7 @@ class PaymentMailerPreview < ActionMailer::Preview
 
   # Preview this email at http://localhost:3000/rails/mailers/payment_mailer/confirmed
   def confirmed
-    PaymentMailer.confirmed
+    PaymentMailer.with(payment: Payment.first).confirmed
   end
 
 end
