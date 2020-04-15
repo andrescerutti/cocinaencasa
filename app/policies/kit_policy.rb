@@ -7,11 +7,11 @@ class KitPolicy < ApplicationPolicy
 
 
   def create?
-    return true
+    true
   end
 
   def show?
-    return true
+    true
   end
 
   def update?
