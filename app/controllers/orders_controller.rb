@@ -19,10 +19,12 @@ class OrdersController < ApplicationController
     @order.user = current_user
     @order.kit = Kit.find(params[:kit_id])
     @order.code = "#{@order.kit_id}-#{@order.user_id}-#{rand(0..1000000)}"
-    order_address = Address.new(address_params)
-    @order.address = order_address
-    current_user.addresses << Address.new(address_params) unless current_user.addresses.find_by(city: order_address.city)
-    current_user.save
+    if params[:order][:addresses].present?
+      order_address = Address.new(address_params)
+      @order.address = order_address
+      current_user.addresses << Address.new(address_params) unless current_user.addresses.find_by(city: order_address.city)
+      current_user.save
+    end
     @payment = Payment.new
     @payment.order = @order
     authorize @order

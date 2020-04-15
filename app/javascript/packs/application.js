@@ -6,7 +6,10 @@ import { checkDisabledButton } from '../plugins/disable_button';
 import "bootstrap";
 import "../plugins/flatpickr"
 import 'mapbox-gl/dist/mapbox-gl.css'; // <-- you need to uncomment the stylesheet_pack_tag in the layout!
+import { initFormToggler } from '../plugins/form_toggler';
 
+
+initFormToggler();
 validateAddress();
 calculateKit();
 initAutocomplete();

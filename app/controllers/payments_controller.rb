@@ -16,7 +16,7 @@ class PaymentsController < ApplicationController
     require 'mercadopago'
     @order = Order.find(params[:order_id])
 
-    restaurant_mepa_private_key = @order.kit.restaurant.prod_mp_private_key
+    restaurant_mepa_private_key = @order.kit.restaurant.test_mp_private_key
 
     Rails.logger.info("The restaurant_mepa_private_key class is : #{restaurant_mepa_private_key.class}")
     if restaurant_mepa_private_key.class == String
@@ -74,6 +74,13 @@ class PaymentsController < ApplicationController
       redirect_to order_payment_path(@order, @payment)
     else
       redirect_to failed_path
+    end
+     if @payment.save
+      mail = PaymentMailer.with(payment: @payment).confirmed
+      mail.deliver_now
+      redirect_to order_payment_path(@order, @payment)
+    else
+      render :new
     end
   end
 end

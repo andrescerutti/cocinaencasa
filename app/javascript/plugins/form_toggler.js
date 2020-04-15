@@ -20,7 +20,6 @@ const initFormToggler = () => {
           glovo_deliver.style.display = '';
         nestedForm.style.display = 'none';
         moto_deliver.style.display = 'none';
-
       }
     }
   });
