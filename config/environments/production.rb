@@ -94,5 +94,5 @@ Rails.application.configure do
 
   # Mailer
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "www.easychef.xyz" }
+  config.action_mailer.default_url_options = { host: "www.cocinaencasa.com.ar" }
 end
