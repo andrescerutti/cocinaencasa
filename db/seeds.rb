@@ -974,28 +974,7 @@ BRANDS = [
                                 { order: 3, content: "Dejar enfriar. Unir con la mozzarella rallada y armar los sandwich." },
                                 { order: 4, content: "Dorar por ambos lados en un sartén con manteca." },
                                ]
-                      },
-              kit_orders: [
-                            {
-                              kit_name: "Sandwich de Espinaca",
-                              user_email: "guillermo@gmail.com",
-                              check_out_session_id: "pending",
-                              amount: 1,
-                              status: 1,
-                              code: "432509",
-                              date_delivery: "2019/12/19 07:00",
-                              address_attributes: {
-                                                    address: "Avenida Libertador 3380, Buenos Aires, Ciudad Autónoma de Buenos Aires, Argentina",
-                                                    latitude: -34.571301,
-                                                    longitude: -58.468190,
-                                                  },
-                              review: {
-                                        content: "Una comida saludable en un ratito lista!",
-                                        rating: 4,
-                                        remote_image_url: "https://i.imgur.com/eqtCBbk.png"
-                                      }
-                            },
-                          ],
+                      }
             }
           ]
   },
@@ -1093,13 +1072,13 @@ BRANDS.each do |brand_data|
               KitCookware.create!(kit: kit, cookware: cookware)
             end
           end
-          kit_info[:kit_orders].each do |kit_order|
-            puts 'creating kit order'
-            user = User.find_by(email: kit_order[:user_email])
-            order = Order.create!(kit: kit, user: user, code: "#{kit.id}-#{user.id}-#{rand(0..1000000)}",  date_delivery: kit_order[:date_delivery], amount: kit_order[:amount], status: kit_order[:status], address_attributes: kit_order[:address_attributes])
-            puts "Creating review for order #{order.id}. (content: #{kit_order[:review][:content]})"
-            review = Review.create!(order: order, content: kit_order[:review][:content], rating: kit_order[:review][:rating], remote_image_url: kit_order[:review][:remote_image_url])
-          end
+          # kit_info[:kit_orders].each do |kit_order|
+          #   puts 'creating kit order'
+          #   user = User.find_by(email: kit_order[:user_email])
+          #   order = Order.create!(kit: kit, user: user, code: "#{kit.id}-#{user.id}-#{rand(0..1000000)}",  date_delivery: kit_order[:date_delivery], amount: kit_order[:amount], status: kit_order[:status], address_attributes: kit_order[:address_attributes])
+          #   puts "Creating review for order #{order.id}. (content: #{kit_order[:review][:content]})"
+          #   review = Review.create!(order: order, content: kit_order[:review][:content], rating: kit_order[:review][:rating], remote_image_url: kit_order[:review][:remote_image_url])
+          # end
         end
       end
     end
