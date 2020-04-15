@@ -146,7 +146,7 @@
                                                             <td>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.2; letter-spacing: -0.5; font-size: 40px; font-weight: bold;">
-                                                                    Hola, <%= @payment.order.user.email.split(" ").map { |s| s.capitalize }.join(' ') %>
+                                                                    Hola, <%= @payment.order.user.first_name.capitalize %> <%= @payment.order.user.last_name.capitalize %>
 
 
                                                                 </p>
@@ -202,7 +202,7 @@
                                                                     TOTAL </p>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 30px; font-weight: bold;">
-                                                                    $<%= @payment.order.amount %></p>
+                                                                    $ <%= @payment.order.amount * @payment.order.kit.price %></p>
                                                                 <p
                                                                     style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
                                                                     Metodo
@@ -249,13 +249,12 @@
                                                                      TIPO DE ENTREGA</p>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 22px; font-weight: bold;">
-                                                                    Mariana Sosa</p><span
+                                                                    <%= @payment.order.delivery_provider %></p><span
                                                                     style="display:;">
                                                                     <p
                                                                         style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                        Entrega
-                                                                        tu pedido en
-                                                                        Motocicleta</p>
+                                                                        <%= @payment.order.reference_number %>
+                                                                        </p>
                                                                 </span>
 
                                                             </td>
@@ -389,10 +388,10 @@
                                                                         <td align="right">
                                                                             <p
                                                                                 style="color: #303336; line-height: 1.5; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $350,00</p>
+                                                                                $ <%= @payment.order.amount * @payment.order.kit.price %></p>
                                                                             <p
                                                                                 style="color: #9fa2a2; line-height: 1.5; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $350,00 c/u
+                                                                                $ <%= @payment.order.amount * @payment.order.kit.price %>
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -523,97 +522,7 @@
                                             <tr style="display: ">
                                                 <td width="40"></td>
                                                 <td>
-                                                    <table style="border: 1px solid #e6ebf1" cellpadding="0"
-                                                        cellspacing="0" align="center" width="100%">
-                                                        <tr>
-                                                            <td style="padding: 15px;">
-                                                                <p
-                                                                    style="color: #303336; line-height: 1.8; letter-spacing: -0.5; padding: 0 0 10px 0; font-size: 14px; font-weight:600">
-                                                                    DESCUENTOS</p>
-                                                                <table width="100%">
 
-
-                                                                    <tr
-                                                                        style="display: none">
-                                                                        <td>
-                                                                            <p
-                                                                                style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-
-                                                                                Pay</p>
-                                                                        </td>
-                                                                        <td align="right">
-                                                                            <p
-                                                                                style="color: #ff7175; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $0,00</p>
-                                                                    </tr>
-
-                                                                    <tr
-                                                                        style="display: none">
-                                                                        <td>
-                                                                            <p
-                                                                                style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                              creditos</p>
-                                                                        </td>
-                                                                        <td align="right">
-                                                                            <p
-                                                                                style="color: #ff7175; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $0,00</p>
-                                                                        </td>
-                                                                    </tr>
-
-
-                                                                    <tr style="display: ">
-                                                                        <td>
-                                                                            <p
-                                                                                style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                Oferta</p>
-                                                                        </td>
-                                                                        <td align="right">
-                                                                            <p
-                                                                                style="color: #0B60C4; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $60,00</p>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr
-                                                                        style="display: none">
-                                                                        <td>
-                                                                            <p
-                                                                                style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                Descuento por "Mismo precio Garantizado"
-                                                                            </p>
-                                                                        </td>
-                                                                        <td align="right">
-                                                                            <p
-                                                                                style="color: #ff7175; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $0,00</p>
-                                                                        </td>
-                                                                    </tr>
-
-
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <hr style="border-top: 1.5px solid #e6ebf1">
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <p
-                                                                                style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 14px; font-weight: 600;">
-                                                                                Total
-                                                                                descuentos</p>
-                                                                        </td>
-                                                                        <td align="right">
-                                                                            <p
-                                                                                style="color: #0B60C4; line-height: 1.8; letter-spacing: -0.5; font-size: 14px; font-weight: 600;">
-                                                                                $60,00</p>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
                                                 </td>
                                                 <td width="40"></td>
                                             </tr>
