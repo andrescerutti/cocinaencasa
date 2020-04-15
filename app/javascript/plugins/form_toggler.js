@@ -5,21 +5,21 @@ const initFormToggler = () => {
       const option = event.target;
       const  nestedForm = document.getElementById('address_form');
       const  glovo_deliver = document.getElementById('instructions');
-      const  moto_deliver = document.getElementById('moto');
+      const  pickup = document.getElementById('pickup');
       if (option.value !== 'Glovo') {
-        if (option.value == 'Envío a domicilio'){
-          moto_deliver.style.display = '';
-          nestedForm.style.display = 'none';
+        if (option.value == 'Envio a domicilio'){
+          nestedForm.style.display = '';
+          pickup.style.display = 'none';
           glovo_deliver.style.display = 'none';
         } else {
-          nestedForm.style.display = '';
-          moto_deliver.style.display = 'none';
+          pickup.style.display = '';
+          nestedForm.style.display = 'none';
           glovo_deliver.style.display = 'none';
         }
       } else {
           glovo_deliver.style.display = '';
         nestedForm.style.display = 'none';
-        moto_deliver.style.display = 'none';
+        pickup.style.display = 'none';
       }
     }
   });

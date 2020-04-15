@@ -43,7 +43,13 @@
 
       </div>
 
+      <div id="pickup">
+        <p> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
+      </div>
 
+      <div id="instructions">
+        <p> Cuando recibas un mail confirmando que tu orden esta lista deberas enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> (<%=  @kit.restaurant.address.address %>) </p>
+      </div>
       <!-- form direccion  -->
         <div display="" id="address_form">
           <%= f.simple_fields_for :addresses do |a| %>
