@@ -4,7 +4,7 @@
 
     <% if @user.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        <h2><%= pluralize(@user.errors.count, "error") %> Hubo un error, reingresar datos.</h2>
 
         <ul>
         <% @user.errors.full_messages.each do |msg| %>
@@ -24,6 +24,15 @@
                     autofocus: true,
                     label: "Email" ,
                     input_html: {  autocomplete: "email" }%>
+        <%= f.input :first_name,
+                    required: true,
+                    label: "Nombre" ,
+                    input_html: {  autocomplete: "Nombre" }%>
+        <%= f.input :last_name,
+                    required: true,
+                    label: "Apellido" ,
+                    input_html: {  autocomplete: "Apellido" }%>
+
         <%= f.input :password,
                     required: true,
                       label: "Nueva contraseña" ,

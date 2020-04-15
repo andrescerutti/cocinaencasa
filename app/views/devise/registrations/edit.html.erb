@@ -1,11 +1,13 @@
 <div class="container">
-  <h2 class="pt-3 my-4">Editar perfil <%= @user.first_name %> <%= @user.last_name %></h2>
+  <h2 class="pt-3 my-4">Mi perfil: <%= @user.first_name %> <%= @user.last_name %></h2>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
       <%= f.input :email, required: true, autofocus: true %>
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
       <%= f.input :avatar_image, required: true %>
       <%= f.input :avatar_image_cache, required: true, as: :hidden %>
 
@@ -24,13 +26,12 @@
                   hint: "necesitamos tu contraseña actual para confirmar los cambios",
                   input_html: { autocomplete: "contraseña actual" } %>
     </div>
-    <div class="form-actions bg-primary mb-3 rounded text-center">
-      <%= f.button :submit, "Actualizar" %>
+    <div class="form-actions mb-3">
+      <%= f.button :submit, "Actualizar", class: "btn btn-primary rounded text-center w-100"%>
     </div>
   <% end %>
-  <h3 class="my-4">Cancelar mi cuenta</h3>
 
-  <p>Unhappy? <%= link_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro?" }, method: :delete %></p>
+  <p><%= link_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estás seguro?" }, method: :delete, class: "btn btn-danger" %></p>
 
-  <%= link_to "Volver", :back %>
+  <%= link_to "Volver", :back, class: "btn btn-primary" %>
 </div>

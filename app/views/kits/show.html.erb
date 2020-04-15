@@ -19,7 +19,7 @@
             </div>
 
             <div style="width: 120px;">
-              <%= f.input :amount, collection: 1..@kit.stock, label: false %>
+              <%= f.input :amount, collection: 2..@kit.stock, label: false %>
               <span class="d-none" id="price"><%= @kit.price %></span>
             </div>
           </div>
@@ -36,21 +36,30 @@
         </div>
       </div>
 
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+        </div>
+          <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
+
+      </div>
+
 
       <!-- form direccion  -->
+        <div display="" id="address_form">
+          <%= f.simple_fields_for :addresses do |a| %>
+          <%= a.input :state, placeholder: "Provincia", label: false %>
+          <%= a.input :city, placeholder: "Localidad", label: false %>
+          <%= a.input :street, placeholder: "Calle", label: false %>
+          <%= a.input :cp, placeholder: "Codigo Postal", label: false %>
+          <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
 
-      <%= f.simple_fields_for :addresses do |a| %>
+          <% end %>
+        </div>
+        <h4 class='kitdescr my-2'><%= @kit.description %></h4>
+        <%= f.submit "Seleccione la cantidad de Kits", class:"btn btn-primary btn-block disabled", id:"submit_order_kit", disabled:"disabled" %>
 
-      <%= a.input :state, placeholder: "Provincia", label: false %>
-      <%= a.input :city, placeholder: "Localidad", label: false %>
-      <%= a.input :street, placeholder: "Calle", label: false %>
-      <%= a.input :cp, placeholder: "Codigo Postal", label: false %>
-      <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
+        <% end %>
 
-      <% end %>
-      <h4 class='kitdescr my-2'><%= @kit.description %></h4>
-      <%= f.submit "Seleccione la cantidad de Kits", class:"btn btn-primary btn-block disabled", id:"submit_order_kit", disabled:"disabled" %>
-      <% end %>
     </div>
     <div class="col-md-6 d-none d-md-block">
 

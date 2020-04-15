@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
   include Pundit
   after_action :store_action
 
@@ -15,6 +16,11 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:avatar_image, :avatar_image_cache, :first_name, :last_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:avatar_image, :avatar_image_cache, :first_name, :last_name])
+  end
 
   def store_action
     return unless request.get?
@@ -37,3 +43,4 @@ class ApplicationController < ActionController::Base
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end
 end
+

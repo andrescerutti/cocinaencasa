@@ -7,8 +7,9 @@ const calculateKit = () => {
   const button = document.querySelector("#submit_order_kit")
   const price = document.querySelector("#price")
 
+
   const updatePrice = () => {
-    if (amount.value > 0 && cp.value !== "" ) {
+    if (amount.value > 0 ) {
       button.classList.remove("disabled")
       button.disabled = ""
       if (amount.value > 1) {
