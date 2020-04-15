@@ -491,7 +491,7 @@
             height="100%"
             valign="top"
             bgcolor="">
-            <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;"><%= @user.email.split(" ").map { |s| s.capitalize }.join(' ') %>, hoy convertite en tu propio chef y disfruta de quedarte en casa!</span></p>
+            <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;"><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>, hoy convertite en tu propio chef y disfruta de quedarte en casa!</span></p>
         </td>
       </tr>
     </table>
