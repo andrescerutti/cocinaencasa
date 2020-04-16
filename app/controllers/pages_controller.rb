@@ -17,6 +17,7 @@ class PagesController < ApplicationController
     @restaurants = Restaurant.all
     @kits = Kit.all
     @orders = Order.where(user: current_user)
+    @payments = Payment.where(order: @orders)
     @pages = "asd"
     authorize :page, :user_dashboard?
   end
@@ -25,7 +26,6 @@ class PagesController < ApplicationController
     status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' }
     @orders = Order.joins(kit: {restaurant: :user}).where(users: {id: current_user.id})
     @kits = Kit.joins(restaurant: :user).where(users: {id: current_user.id})
-
 
     # @markers = @orders.map do |order|
     #   {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_185717) do
+ActiveRecord::Schema.define(version: 2020_04_16_161907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_185717) do
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "approved", default: false
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
@@ -173,7 +174,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_185717) do
     t.text "test_mp_private_key_ciphertext"
     t.text "prod_mp_public_key_ciphertext"
     t.text "prod_mp_private_key_ciphertext"
-    t.boolean "own_delivery"
+    t.boolean "own_delivery", default: false
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
