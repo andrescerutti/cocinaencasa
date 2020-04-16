@@ -41,10 +41,11 @@
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
               </div>
-             <div class="p-2 w-25 d-flex flex-column justify-content-end">
+             <div class="p-2 w-25 d-flex flex-column justify-content-center">
+                <p>Metodo de envío: <%= order.delivery_provider %></p>
+                <p>Nº referencia: <%= order.code %></p>
                 <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
                 <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar inicio de envio." } do |f| %>
-                  <%= f.input :reference_number, placeholder: "Nº referencia", label: false, required: true %>
                   <%= f.hidden_field :status, value: :on_transit %>
                   <%= f.submit 'Solicitar', class: 'btn btn-primary p-1 w-100'  %>
                 <% end %>
@@ -68,14 +69,16 @@
                 <% else %>
                   <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
                 <% end %>
-                 <p class="font-weight-light"><%= order.address.address %></p>
+                <% if order.address.present? %>
+                 <p class="font-weight-light">Direccion de entrega: <%= order.address.address %></p>
+                <% end %>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
               </div>
-             <div class="p-2 w-25 d-flex flex-column justify-content-end">
+             <div class="p-2 w-25 d-flex flex-column justify-content-center">
                 <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
-                  <p>Proveedor: <%= order.delivery_provider %></p>
+                  <p>Metodo de envío: <%= order.delivery_provider %></p>
                   <p>Nº referencia: <%= order.reference_number %></p>
                   <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar entrega en domicilio." }, class:"w-100" do |f| %>
                   <%= f.hidden_field :status, value: :delivered %>
@@ -101,12 +104,15 @@
                   <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
                 <% else %>
                   <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
-                <% end %>                 <p class="font-weight-light"><%= order.address.address %></p>
+                <% end %>
+                <% if order.address.present?%>
+                  <p class="font-weight-light"><%= order.address.address %></p>
+                 <% end %>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
               </div>
-             <div class="p-2 w-25 p-2 w-25 d-flex flex-column justify-content-end">
+             <div class="p-2 w-25 p-2 w-25 d-flex flex-column justify-content-center">
                 <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
                 <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar cancelacion de ordern." } do |f| %>
                   <%= f.hidden_field :status, value: :canceled %>
@@ -134,7 +140,10 @@
                   <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
                 <% else %>
                   <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
-                <% end %>                 <p class="font-weight-light"><%= order.address.address %></p>
+                <% end %>
+                <% if order.address.present?%>
+                  <p class="font-weight-light"><%= order.address.address %></p>
+                 <% end %>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
@@ -164,7 +173,9 @@
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
-                 <p class="font-weight-light"><%= order.address.address %></p>
+                 <% if order.address.present? %>
+                  <p class="font-weight-light"><%= order.address.address %></p>
+                 <% end %>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
                  <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
