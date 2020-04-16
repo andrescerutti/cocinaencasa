@@ -4,10 +4,23 @@ const initFormToggler = () => {
     if (event.target && event.target.classList.contains("radio_buttons")) {
       const option = event.target;
       const  nestedForm = document.getElementById('address_form');
-      if (option.value == 'Glovo - Retira por el local') {
-        nestedForm.style.display = 'none';
+      const  glovo_deliver = document.getElementById('instructions');
+      const  pickup = document.getElementById('pickup');
+
+      if (option.value !== 'Glovo') {
+        if (option.value == 'Retirar por el local'){
+          nestedForm.style.display = 'none';
+          pickup.style.display = '';
+          glovo_deliver.style.display = 'none';
+        } else {
+          pickup.style.display = 'none';
+          nestedForm.style.display = '';
+          glovo_deliver.style.display = 'none';
+        }
       } else {
-        nestedForm.style.display = '';
+          glovo_deliver.style.display = '';
+          nestedForm.style.display = 'none';
+          pickup.style.display = 'none';
       }
     }
   });

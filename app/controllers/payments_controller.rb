@@ -76,9 +76,9 @@ class PaymentsController < ApplicationController
       redirect_to failed_path
     end
      if @payment.save
+      # @payment.order.kit.stock - @payment.order.amount
       mail = PaymentMailer.with(payment: @payment).confirmed
       mail.deliver_now
-      redirect_to order_payment_path(@order, @payment)
     else
       render :new
     end
