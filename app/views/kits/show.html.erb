@@ -36,36 +36,51 @@
         </div>
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
+      <% if @kit.restaurant.own_delivery == true %>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+          </div>
+            <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
         </div>
-          <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
 
-      </div>
-
-      <div id="pickup">
-        <p> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
-      </div>
-
-      <div id="instructions">
-        <p> Cuando recibas un mail confirmando que tu orden esta lista deberas enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> (<%=  @kit.restaurant.address.address %>) </p>
-      </div>
-      <!-- form direccion  -->
-        <div display="" id="address_form">
-          <%= f.simple_fields_for :addresses do |a| %>
-          <%= a.input :state, placeholder: "Provincia", label: false %>
-          <%= a.input :city, placeholder: "Localidad", label: false %>
-          <%= a.input :street, placeholder: "Calle", label: false %>
-          <%= a.input :cp, placeholder: "Codigo Postal", label: false %>
-          <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
-
-          <% end %>
+        <div id="pickup">
+          <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
         </div>
-        <h4 class='kitdescr my-2'><%= @kit.description %></h4>
-        <%= f.submit "Seleccione la cantidad de Kits", class:"btn btn-primary btn-block disabled", id:"submit_order_kit", disabled:"disabled" %>
+
+        <!-- form direccion  -->
+          <div display="" id="address_form">
+            <%= f.simple_fields_for :addresses do |a| %>
+            <%= a.input :state, placeholder: "Provincia", label: false %>
+            <%= a.input :city, placeholder: "Localidad", label: false %>
+            <%= a.input :street, placeholder: "Calle", label: false %>
+            <%= a.input :cp, placeholder: "Codigo Postal", label: false %>
+            <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
+
+            <% end %>
+          </div>
+
+        <% elsif @kit.restaurant.own_delivery == false %>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <%= f.input :delivery_provider, collection: Order::PROVIDER2, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
+          </div>
+
+          <div id="pickup">
+            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
+          </div>
+
+          <div id="instructions">
+            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail confirmando que tu orden esta lista deberas enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> (<%=  @kit.restaurant.address.address %>) </p>
+          </div>
 
         <% end %>
 
+          <h4 class='kitdescr my-2'><%= @kit.description %></h4>
+
+        <%= f.submit "Seleccione la cantidad de Kits", class:"btn btn-primary btn-block disabled", id:"submit_order_kit", disabled:"disabled" %>
+        <% end %>
     </div>
     <div class="col-md-6 d-none d-md-block">
 
@@ -73,7 +88,6 @@
         <img class=" w-100 mb-4 position-relative rounded" src="<%= @kit.image %>" alt="imagen del plato de comida">
         <p class="text-white .d-none .d-sm-block mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparacion <%= @kit.preparation_time %> min </p>
       </div>
-
     </div>
   </div>
 

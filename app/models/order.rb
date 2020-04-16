@@ -11,5 +11,6 @@ class Order < ApplicationRecord
   enum status: { pending: 0, on_transit: 1, delivered: 3, canceled: 4, refunded: 5 }
 
   scope :deliverable, -> { where(delivery_provider: "Glovo") }
-  PROVIDER = ["Glovo", "Retira por el local", "Envio a domicilio"]
+  PROVIDER2 = ["Glovo", "Retirar por el local"]
+  PROVIDER = ["Envio a domicilio", "Retirar por el local"]
 end

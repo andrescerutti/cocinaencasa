@@ -6,20 +6,21 @@ const initFormToggler = () => {
       const  nestedForm = document.getElementById('address_form');
       const  glovo_deliver = document.getElementById('instructions');
       const  pickup = document.getElementById('pickup');
+
       if (option.value !== 'Glovo') {
-        if (option.value == 'Envio a domicilio'){
-          nestedForm.style.display = '';
-          pickup.style.display = 'none';
+        if (option.value == 'Retirar por el local'){
+          nestedForm.style.display = 'none';
+          pickup.style.display = '';
           glovo_deliver.style.display = 'none';
         } else {
-          pickup.style.display = '';
-          nestedForm.style.display = 'none';
+          pickup.style.display = 'none';
+          nestedForm.style.display = '';
           glovo_deliver.style.display = 'none';
         }
       } else {
           glovo_deliver.style.display = '';
-        nestedForm.style.display = 'none';
-        pickup.style.display = 'none';
+          nestedForm.style.display = 'none';
+          pickup.style.display = 'none';
       }
     }
   });
