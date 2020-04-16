@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
     if params[:order][:addresses].present?
       order_address = Address.new(address_params)
       @order.address = order_address
-      current_user.addresses << Address.new(address_params) unless current_user.addresses.find_by(city: order_address.city)
+      current_user.addresses << Address.new(address_params) unless current_user.addresses.find_by(city: order_address.city, street: order_address.street, state: order_address.state, flat_number: order_address.flat_number)
       current_user.save
     end
     @payment = Payment.new
