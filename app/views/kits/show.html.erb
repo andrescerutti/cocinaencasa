@@ -43,12 +43,12 @@
             <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
         </div>
 
-        <div id="pickup">
+        <div id="pickup" style="display: none">
           <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
         </div>
 
         <!-- form direccion  -->
-          <div display="" id="address_form">
+          <div style="display: none" id="address_form">
             <%= f.simple_fields_for :addresses do |a| %>
             <%= a.input :state, placeholder: "Provincia", label: false %>
             <%= a.input :city, placeholder: "Localidad", label: false %>
@@ -59,7 +59,7 @@
             <% end %>
           </div>
 
-        <% elsif @kit.restaurant.own_delivery == false %>
+        <% else %>
 
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -67,11 +67,11 @@
             <%= f.input :delivery_provider, collection: Order::PROVIDER2, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
           </div>
 
-          <div id="pickup">
+          <div id="pickup" style="display: none">
             <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
           </div>
 
-          <div id="instructions">
+          <div id="instructions" style="display: none">
             <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail confirmando que tu orden esta lista deberas enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> (<%=  @kit.restaurant.address.address %>) </p>
           </div>
 
