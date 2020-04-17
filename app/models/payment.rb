@@ -4,4 +4,8 @@ class Payment < ApplicationRecord
   def guide
     order.kit.guide
   end
+
+  def update_approved(state)
+    update(approved: state)
+  end
 end
