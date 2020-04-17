@@ -30,7 +30,6 @@ class OrdersController < ApplicationController
     authorize @order
     if @order.save
       redirect_to @order
-      @order.kit.stock = @order.kit.stock - @order.amount
     else
       render @order.kit
     end
