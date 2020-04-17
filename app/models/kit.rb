@@ -36,4 +36,9 @@ class Kit < ApplicationRecord
   def average_rating
     reviews.average(:rating).to_f.round(1)
   end
+
+  def update_stock(amount_variation)
+    new_amount = stock - amount_variation
+    update(stock: new_amount)
+  end
 end
