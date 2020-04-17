@@ -1,6 +1,6 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :show, :category, :new, :create]
+  skip_before_action :authenticate_user!, only: [:index, :show, :category, :new, :create, :update_stock]
   def index
     # 1. Geocode Address from params (Mapbox o Nominatum)
     # 2. Si hay restaurants, proceso normal, sino redirect to wrong_address
@@ -60,6 +60,10 @@ class KitsController < ApplicationController
     @kits = Kit.joins(kit_categories: :category).where("categories.name = ?", params[:name])
     authorize @kits
     @category = params["name"]
+  end
+
+  def update_stock(amount_variation)
+    update_attribute(stock: self.stock - amount_variation)
   end
 
   private
