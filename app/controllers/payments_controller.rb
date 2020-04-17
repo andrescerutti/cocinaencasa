@@ -77,9 +77,6 @@ class PaymentsController < ApplicationController
     else
       redirect_to failed_path
     end
-<<<<<<< HEAD
 
-=======
->>>>>>> b0d1620752ea886f3e4e287cd86c86b40c6aba3f
   end
 end
