@@ -63,7 +63,7 @@ class KitsController < ApplicationController
   end
 
   def update_stock(amount_variation)
-    update_attribute(stock: self.stock - amount_variation)
+    update_attribute(:stock, self.stock - amount_variation)
   end
 
   private

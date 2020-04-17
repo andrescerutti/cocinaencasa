@@ -51,6 +51,7 @@ class PaymentsController < ApplicationController
     if payment_response["status"] == "201" && payment_response["response"]["status"] == "approved"
       # logger.debug "respuesta mp #{payment_response}"
       @payment.approved = true
+      @payment.order.kit.update_stock(@payment.order.amount)
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
       mail = PaymentMailer.with(payment: @payment).confirmed
       mail.deliver_now
