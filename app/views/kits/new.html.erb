@@ -1,4 +1,6 @@
-<%= simple_form_for [@kit] do |f| %>
+
+<div class="container mt-5">
+  <%= simple_form_for [@kit] do |f| %>
   <%= f.input :restaurant_id, collection: @user.restaurants, prompt: "Restaurant", label: false, required: true %>
   <%= f.input :name, label: false, placeholder: 'Nombre' %>
   <%= f.input :stock, as: :integer, label: false, placeholder: 'Stock' %>
@@ -11,4 +13,5 @@
   <div class="links">
     <%= f.button :submit, class:'btn btn-primary' %>
     <%= link_to 'Index', root_path, class: "bootstrapbutton" %>
-<% end %>
+    <% end %>
+</div>
