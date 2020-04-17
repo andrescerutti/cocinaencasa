@@ -51,7 +51,6 @@ class PaymentsController < ApplicationController
     if payment_response["status"] == "201" && payment_response["response"]["status"] == "approved"
       # logger.debug "respuesta mp #{payment_response}"
       @payment.approved = true
-      @payment.order.kit.stock -= @payment.order.amount
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
       mail = PaymentMailer.with(payment: @payment).confirmed
       mail.deliver_now
@@ -78,6 +77,9 @@ class PaymentsController < ApplicationController
     else
       redirect_to failed_path
     end
+<<<<<<< HEAD
 
+=======
+>>>>>>> b0d1620752ea886f3e4e287cd86c86b40c6aba3f
   end
 end
