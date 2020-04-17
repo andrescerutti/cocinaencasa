@@ -58,7 +58,7 @@
                       <div >
                         <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
                         <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %></p>
-                        <p class="card-title mb-1"><%= payment.order.user.first_name  %> <%= payment.order.user.last_name  %></p>
+                        <p class="card-title mb-1">Platos: <%= payment.order.amount  %></p>
                         <p class="card-title mb-1"><%= payment.order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %></p>
                         <%= link_to "Receta", guide_path(payment.order.kit.guide), class: "btn btn-outline-primary", style: "width: 120px; margin-left: 65px;" %>
                       </div>
