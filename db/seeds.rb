@@ -781,8 +781,8 @@ BRANDS = [
     kits: [
             { general_information: {
                                       name: 'Pastel de Platano y Carne de Cerdo',
-                                      stock: 0,
-                                      price: 490,
+                                      stock: 20,
+                                      price: 2,
                                       size: 1,
                                       preparation_time: 80,
                                       description: 'Un auténtico Pastel de Plátano con Carne, Frijoles y Queso.',
