@@ -1,6 +1,7 @@
 class Kit < ApplicationRecord
   belongs_to :restaurant
-
+  # accepts_nested_attributes_for :guides
+  # accepts_nested_attributes_for :steps
 
   include PgSearch::Model
   pg_search_scope :search,

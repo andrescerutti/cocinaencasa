@@ -7,7 +7,7 @@ class KitPolicy < ApplicationPolicy
 
 
   def create?
-    true
+    !user.restaurants.count.zero?
   end
 
   def show?
@@ -15,11 +15,11 @@ class KitPolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    allow_user?
   end
 
   def destroy?
-    true
+    allow_user?
   end
 
   def category?
@@ -29,6 +29,6 @@ class KitPolicy < ApplicationPolicy
   private
 
   def allow_user?
-    record.user == user
+    record.restaurant.user == user
   end
 end
