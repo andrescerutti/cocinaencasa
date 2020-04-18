@@ -53,7 +53,7 @@ class PaymentsController < ApplicationController
       @payment.update_approved(true)
       @payment.order.kit.update_stock(@payment.order.amount)
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
-      mail = PaymentMailer.with(payment: @payment).confirmed
+      mail = PaymentMailer.with(user: current_user.email, payment: @payment).confirmed
       mail.deliver_now
 
       if !search_customer["response"]["results"].empty?
