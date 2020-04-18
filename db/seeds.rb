@@ -333,7 +333,7 @@ USERS = [
     last_name: 'Chaves',
     permision_level: 5,
     email: 'alejo@easychef.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image: 'https://ca.slack-edge.com/T02NE0241-UNDMY14Q5-3615c3435408-512'
   },
 
@@ -342,7 +342,7 @@ USERS = [
     last_name: 'Llapur',
     permision_level: 5,
     email: 'santiago@easychef.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image: 'https://ca.slack-edge.com/T02NE0241-UNDKPE0D6-3ae91634e71a-72'
   },
 
@@ -351,7 +351,7 @@ USERS = [
     last_name: 'Monteverdi',
     permision_level: 5,
     email: 'enzo@easychef.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UNDJE9Y1J-2cd2134f004a-72'
   },
 
@@ -360,7 +360,7 @@ USERS = [
     last_name: 'Cerutti',
     permision_level: 5,
     email: 'andres@easychef.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UNDCB0BTN-6e9c411fc926-512'
   },
 
@@ -369,7 +369,7 @@ USERS = [
     last_name: 'Buffo',
     permision_level: 1,
     email: 'sebastian@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-U56TR1Q0M-fef167a62a5a-72'
   },
 
@@ -378,7 +378,7 @@ USERS = [
     last_name: 'Silva',
     permision_level: 1,
     email: 'fernando@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UK7E344JG-407beaec7aee-72'
   },
 
@@ -387,7 +387,7 @@ USERS = [
     last_name: 'Varela',
     permision_level: 1,
     email: 'guillermo@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UD4D68QS0-591cb8267b1c-72'
   },
 
@@ -396,7 +396,7 @@ USERS = [
     last_name: 'Hernandez',
     permision_level: 1,
     email: 'felipe@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UP3R424M7-0dc8c8f737e5-512'
   },
 
@@ -405,7 +405,7 @@ USERS = [
     last_name: 'Zhang',
     permision_level: 1,
     email: 'luis@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UK84XQMRN-c12de7874ee2-512'
   },
 
@@ -414,7 +414,7 @@ USERS = [
     last_name: 'Raiden',
     permision_level: 1,
     email: 'gerardo@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UKCMT2EHY-f941ee395885-512'
   },
   {
@@ -422,7 +422,7 @@ USERS = [
     last_name: 'Pinto',
     permision_level: 1,
     email: 'magali@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://media.licdn.com/dms/image/C5603AQEnNutafbuCIw/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=cu0Sr4GREXoTsnf6aEEFeTZkbJl5UTNM8OFf7uOMTfY'
   },
   {
@@ -430,7 +430,7 @@ USERS = [
     last_name: 'Mori',
     permision_level: 1,
     email: 'natalia@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://media.licdn.com/dms/image/C4D03AQFSjBw42GW_Yg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=40QOkGKTLBzqRGxgU_L0Ipn15OPBcfwqri15rgBhzjw'
   },
   {
@@ -438,7 +438,7 @@ USERS = [
     last_name: 'FoodTrack',
     permision_level: 1,
     email: 'catalina@gmail.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://icon-library.net/images/no-profile-picture-icon-female/no-profile-picture-icon-female-3.jpg'
   }
 ]
@@ -469,10 +469,10 @@ BRANDS = [
     kits: [
             { general_information: {
                 name: 'Pollo relleno de queso fundido y chorizo',
-                stock: 10,
-                price: 1,
+                stock: 0,
+                price: 425,
                 size: 1,
-                preparation_time: 25,
+                preparation_time: 45,
                 description: 'Pollo relleno de una combinación entre Queso derretido y Chorizo.',
                 remote_image_url: 'https://i.ytimg.com/vi/7yyIEA3h62Y/maxresdefault.jpg',
               },
@@ -529,7 +529,7 @@ BRANDS = [
             },
             { general_information: {
                                       name: 'Risotto de hongos',
-                                      stock: 10,
+                                      stock: 0,
                                       price: 350,
                                       size: 1,
                                       preparation_time: 60,
@@ -603,10 +603,10 @@ BRANDS = [
     kits: [
             { general_information: {
                                       name: 'Costillar de cerdo',
-                                      stock: 15,
-                                      price: 1,
+                                      stock: 0,
+                                      price: 567,
                                       size: 1,
-                                      preparation_time: 50,
+                                      preparation_time: 90,
                                       description: 'Costillar de cerdo asado a fuego lento, aderezado con salsa barbacoa, acompañado de papas fritas.',
                                       remote_image_url: 'https://www.traegergrills.com/images/en-us/Recipes/2019/Feb%202019/20190116_BBQ-Ribs-By-Amanda-Haas_RE_HE_M.jpg'
                                     },
@@ -695,10 +695,10 @@ BRANDS = [
             },
             { general_information: {
                                       name: 'Croquetas de Pollo y Brócoli',
-                                      stock: 10,
-                                      price: 1,
+                                      stock: 0,
+                                      price: 245,
                                       size: 1,
-                                      preparation_time: 55,
+                                      preparation_time: 30,
                                       description: 'Exquisitas Croquetas de Brócoli',
                                       remote_image_url: 'https://truffle-assets.imgix.net/916a7d40-croquetas-de-brocoli-con-pollo-l.jpg'
                                     },
@@ -781,10 +781,10 @@ BRANDS = [
     kits: [
             { general_information: {
                                       name: 'Pastel de Platano y Carne de Cerdo',
-                                      stock: 10,
-                                      price: 2,
+                                      stock: 0,
+                                      price: 490,
                                       size: 1,
-                                      preparation_time: 60,
+                                      preparation_time: 80,
                                       description: 'Un auténtico Pastel de Plátano con Carne, Frijoles y Queso.',
                                       remote_image_url: 'https://i.imgur.com/eHiJ90R.jpg'
                                     },
@@ -833,10 +833,10 @@ BRANDS = [
             },
             { general_information: {
                                       name: 'Spaghetti con Salsa de Remolacha',
-                                      stock: 10,
-                                      price: 1,
+                                      stock: 0,
+                                      price: 360,
                                       size: 1,
-                                      preparation_time: 60,
+                                      preparation_time: 55,
                                       description: 'Con un poco de Nuez y toda la nutrición de la Remolacha, estos Spaghettis son la forma más saludable para disfrutar de una buena pasta.',
                                       remote_image_url: 'https://i.imgur.com/khcIO2Y.png'
                                     },
@@ -940,7 +940,7 @@ BRANDS = [
                     prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
                     prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
                     email: "asdad@asdas.com",
-                    remote_image_url: 'https://i.imgur.com/ZuopTOE.png',
+                    remote_image_url: 'https://www.xn--ministeriodediseo-uxb.com/ministerio2/wp-content/uploads/2018/03/SPAZIO-Milano_Sala-Bifore1-Brambilla-Serrani-Photographers-1-e1447782553348.jpg',
                     address_attributes: {
                                           address: "Paraguay 3857, Buenos Aires, Ciudad Autónoma de Buenos Aires",
                                           latitude: -34.590727,
@@ -951,8 +951,8 @@ BRANDS = [
     kits: [
             { general_information: {
                 name: 'Sandwich de Espinaca',
-                stock: 10,
-                price: 1,
+                stock: 0,
+                price: 260,
                 size: 1,
                 preparation_time: 20,
                 description: 'Una opción saludable y deliciosa.',
