@@ -53,8 +53,8 @@ class PaymentsController < ApplicationController
       @payment.update_approved(true)
       @payment.order.kit.update_stock(@payment.order.amount)
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
-      #mail = PaymentMailer.with(payment: @payment).confirmed
-      #mail.deliver_now
+      mail = PaymentMailer.with(payment: @payment).confirmed
+      mail.deliver_now
 
       if !search_customer["response"]["results"].empty?
         current_user.mpcard_id = search_customer["response"]["results"][0]["cards"][0]["id"]
