@@ -6,7 +6,7 @@
       <h2 class='kitrest' style="color: grey">Un producto de <strong style=" color: black"><%= @kit.restaurant.name %></strong> </h2>
       <div class="product-kit">
         <img class="d-md-none w-100 mb-4 position-relative rounded" src="<%= @kit.image %>" alt="imagen del plato de comida">
-        <p class="text-white d-md-none mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de cocción <%= @kit.preparation_time %> min. aprox.  </p>
+        <p class="text-white d-md-none mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparación aprox. <%= @kit.preparation_time %> min.   </p>
       </div>
       <p class="text-success m-0 kitrat mb-2 "> <strong>El <%= ((@kit.average_rating.to_i)*100)/5 %>% volvería a cocinarlo </strong> </p>
       <%= simple_form_for([@kit, @order])  do |f| %>
@@ -16,16 +16,19 @@
           <div class=" d-flex justify-content-between">
             <div class="">
               <p>Un kit rinde <%= @kit.size %> porciones <i style="font-size: 20;" class="fas fa-user"></i></p>
+              <p>Seleccioná la cantidad de kits</p>
+
+              <span class="d-none" id="price"><%= @kit.price %></span>
+
             </div>
 
-            <div style="width: 120px;">
+            <div class= 'mt-4' style="width: 120px;">
               <%= f.input :amount, collection: 2..@kit.stock, label: false %>
-              <span class="d-none" id="price"><%= @kit.price %></span>
             </div>
           </div>
           <div class="date_delivery d-flex">
             <div class="mr-2">
-              <p style="font-size: 20px;">Día y hora estimada de entrega  <i class="fas fa-calendar-alt"></i></p>
+              <p style="font-size: 20px;">Seleccioná la fecha de entrega  <i class="fas fa-calendar-alt"></i></p>
             </div>
 
             <div style="width: 120px;">
@@ -86,7 +89,7 @@
 
       <div class="product-kit">
         <img class=" w-100 mb-4 position-relative rounded" src="<%= @kit.image %>" alt="imagen del plato de comida">
-        <p class="text-white .d-none .d-sm-block mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de cocción <%= @kit.preparation_time %> min. aprox. </p>
+        <p class="text-white .d-none .d-sm-block mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparación aprox. <%= @kit.preparation_time %> min.  </p>
       </div>
     </div>
   </div>
