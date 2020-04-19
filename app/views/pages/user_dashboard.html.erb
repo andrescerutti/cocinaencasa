@@ -10,9 +10,9 @@
     <li class="nav-item">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="Historial de ordenes" aria-selected="false">Historial de ordenes</a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="Favoritos" aria-selected="false">Destacados</a>
-    </li>
+    </li> -->
   </ul>
     <div class="tab-content" id="myTabContent">
 
@@ -23,12 +23,12 @@
             <% if  payment.approved == true %>
 
               <% if payment.order.date_delivery > Date.today %>
-                  <div class="card-kit border mx-auto" style=" width: 300px">
+                  <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
                     <div>
                       <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
                       <img class="rounded-circle position-relative" style="width: 50px; height: 50px" src=<%= payment.order.kit.restaurant.brand.logo %>  />
                     </div>
-                    <div class="card-body position-relative" style="top: 145px;" >
+                    <div class="card-body position-relative" style="top: 170px;" >
                       <div >
                         <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
                         <p class="card-title mb-1"><%= payment.order.user.first_name  %> <%= payment.order.user.last_name  %></p>
@@ -49,12 +49,12 @@
           <% @payments.each do |payment| %>
             <% if  payment.approved == true %>
               <% if payment.order.date_delivery < Date.today %>
-                  <div class="card-kit border mx-auto" style=" width: 300px">
+                  <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
                     <div>
                       <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
                       <img class="rounded-circle position-relative" style="width: auto; height: 50px" src=<%= payment.order.kit.restaurant.brand.logo %>  />
                     </div>
-                    <div class="card-body position-relative" style="top: 145px;" >
+                    <div class="card-body position-relative" style="top: 170px;" >
                       <div >
                         <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
                         <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %></p>
