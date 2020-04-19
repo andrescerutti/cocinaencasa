@@ -6,24 +6,24 @@
 
     <div class="form-inputs">
       <%= f.input :email, required: true, autofocus: true %>
-      <%= f.input :first_name %>
-      <%= f.input :last_name %>
-      <%= f.input :avatar_image, required: true %>
+      <%= f.input :first_name, label: "Nombre" %>
+      <%= f.input :last_name , label: "Apellido"%>
+      <%= f.input :avatar_image, required: true , label: "Imagen de perfil" %>
       <%= f.input :avatar_image_cache, required: true, as: :hidden %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
       <% end %>
 
-      <%= f.input :password,
-                  hint: "dejar en blanco si no queres cambiarla",
+      <%= f.input :password, label: "Contraseña",
+                  hint: "Dejar en blanco si no queres cambiarla",
                   required: false,
                   input_html: { autocomplete: "nueva contraseña" } %>
-      <%= f.input :password_confirmation,
+      <%= f.input :password_confirmation,label: "Confirmar contraseña",
                   required: false,
                   input_html: { autocomplete: "nueva contraseña" } %>
-      <%= f.input :current_password,
-                  hint: "necesitamos tu contraseña actual para confirmar los cambios",
+      <%= f.input :current_password, label: "Contraseña actual",
+                  hint: "Necesitamos tu contraseña actual para confirmar los cambios",
                   input_html: { autocomplete: "contraseña actual" } %>
     </div>
     <div class="form-actions mb-3">
