@@ -373,7 +373,7 @@ BRANDS = [
     kits: [
             { general_information: {
                 name: 'Pollo relleno de queso fundido y chorizo',
-                stock: 0,
+                stock: 10,
                 price: 425,
                 size: 1,
                 preparation_time: 45,
