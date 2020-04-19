@@ -2,7 +2,7 @@
   <div class="d-flex flex-column justify-content-center my-3">
     <div class="d-flex flex-column shadow justify-content-center my-3 border border-primary rounded">
       <h3 class="pt-4 text-primary text-center">Donde la magia comienza</h3>
-      <p class="text-secondary text-center">Estas a punto de convertirte en chef! Segui el paso a paso...</p>
+      <p class="text-secondary text-center">Estas a punto de convertirte en chef! Seguí el paso a paso...</p>
     </div>
     <h4 class="pt-4 mb-4 text-secondary text-center"><%= @kit.name %></h4>
 
@@ -14,7 +14,7 @@
 
   <div class="description-container mt-5">
     <h4 class="ingredients-title"><strong>Ingredientes:</strong></h4>
-    <p class="text-secondary">No te olvides de tener todos antes de empezar</p>
+    <p class="text-secondary">Esto encontrarás en tu kit.</p>
   </div>
   <div class="image-container d-md-block">
     <div class="cards-scroll">
@@ -36,8 +36,8 @@
   </div>
 
    <div class="carrousel my-5">
-    <h4><strong>Ultensillos:</strong></h4>
-    <p class="text-secondary">Ideal poder conseguirlos</p>
+    <h4><strong>Utensilios que vas a necesitar:</strong></h4>
+    <p class="text-secondary">Para que vayas ganando tiempo te decimos que vas a necesitar.</p>
     <div class="cards-scroll">
       <div class="cards-scroll mt-3">
         <% @kit.cookware.each do |kit| %>
@@ -64,12 +64,7 @@
       </div>
     <% end %>
   </div>
-  <br>
-  <br>
-  <div>
-    <h2 class="font-weight-bold text-center">Et Voilà!</h2>
   </div>
-</div>
 <br>
 <br>
 <br>
