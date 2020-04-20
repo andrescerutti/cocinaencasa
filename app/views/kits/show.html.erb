@@ -30,6 +30,8 @@
             </div>
           </div>
 
+            <h5>Cronograma de entregas</h5>
+          <p><%= @kit.restaurant.opening %></p>
           <div class="date_delivery d-flex">
             <div class="mr-2">
               <p style="font-size: 20px;">Seleccioná la fecha de entrega  <i class="fas fa-calendar-alt"></i></p>
@@ -77,7 +79,7 @@
           </div>
 
           <div id="instructions" style="display: none">
-            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail confirmando que tu orden esta lista deberás enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> ,<%=  @kit.restaurant.address.address %> </p>
+            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail confirmando que tu orden esta lista, deberás enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> ,<%=  @kit.restaurant.address.address %> </p>
           </div>
 
         <% end %>
