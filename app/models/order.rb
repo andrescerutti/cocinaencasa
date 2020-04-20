@@ -13,4 +13,8 @@ class Order < ApplicationRecord
   scope :deliverable, -> { where(delivery_provider: "Glovo") }
   PROVIDER2 = ["Glovo", "Retirar por el local"]
   PROVIDER = ["Envio a domicilio", "Retirar por el local"]
+
+  def order_ready
+    OrderReadyMailer.with(user: self).order_ready.deliver_now
+  end
 end
