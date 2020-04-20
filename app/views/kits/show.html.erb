@@ -9,17 +9,11 @@
         <p class="text-white d-md-none mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparación aprox. <%= @kit.preparation_time %> min.</p>
       </div>
       <p class="text-success m-0 kitrat mb-2 "> <strong>El
-  <% if @kit.average_rating == 0 %>
-90% volvería a cocinarlo </strong> </p>
-<% else %>
-       <%= ((@kit.average_rating.to_i)*100)/5 %>% volvería a cocinarlo </strong> </p>
-
-<% end %>
-
-      <h4><span class="badge badge-light">$<%= @kit.price %></span></h4>
-
-
-
+      <% if @kit.average_rating == 0 %>
+      90% volvería a cocinarlo </strong> </p>
+      <% else %>
+      <%= ((@kit.average_rating.to_i)*100)/5 %>% volvería a cocinarlo </strong> </p>
+      <% end %>
       <%= simple_form_for([@kit, @order])  do |f| %>
       <div class="d-flex justify-content-between mt-1">
 
