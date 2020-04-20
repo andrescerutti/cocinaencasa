@@ -6,8 +6,7 @@ class OrderReadyMailer < ApplicationMailer
   #   en.order_ready_mailer.order_ready.subject
   #
   def order_ready
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+    @order = params[:order]
+    mail(to: @order.user.email, subject: 'Tu kit ya esta listo para ser retirado!')
   end
 end

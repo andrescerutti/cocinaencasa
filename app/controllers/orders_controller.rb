@@ -47,13 +47,9 @@ class OrdersController < ApplicationController
     @order.update(orders_params) if params[:order].present?
     if @order.save
       flash[:notice] = "La orden a sido asignada a #{@order.delivery_provider} statisfactoriamente."
+      mail = OrderReadyMailer.with(user: current_user.email, order: @order).order_ready
+      mail.deliver_now
       return redirect_to admin_dashboard_path
-
-      if @order.status == :on_transit
-        mail = OrderReadyMailer.with(user: current_user.email, order: @order).order_ready
-        mail.deliver_now
-
-      end
     end
     flash[:alert] = "La orden no pudo ser sido asignada a #{@order.delivery_provider}."
     return redirect_to admin_dashboard_path

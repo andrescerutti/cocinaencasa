@@ -1,5 +1,1023 @@
-<h1>OrderReady#order_ready</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html data-editor-="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charsetutf-8" />
+    <meta name="viewport" content="widthdevice-width, initial-scale1, minimum-scale1, maximum-scale1" /><!--[if !mso]><!-->
+    <meta http-equiv="X-UA-Compatible" content="IEEdge" /><!--<![endif]-->
+    <!--[if (gte mso 9)|(IE)]>
+    <xml>
+    <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    <!--[if (gte mso 9)|(IE)]>
+    <style type"text/css">
+      body {width: 600px;margin: 0 auto;}
+      table {border-collapse: collapse;}
+      table, td {mso-table-lspace: 0pt;mso-table-rspace: 0pt;}
+      img {-ms-interpolation-mode: bicubic;}
+    </style>
+    <![endif]-->
 
-<p>
-  <%= @greeting %>, find me in app/views/order_ready_mailer/order_ready.html.erb
-</p>
+    <style type="text/css">
+      body, p, div {
+        font-family: arial;
+        font-size: 14px;
+      }
+      body {
+        color: #000000;
+      }
+      body a {
+        color: #1188E6;
+        text-decoration: none;
+      }
+      p { margin: 0; padding: 0; }
+      table.wrapper {
+        width:100% !important;
+        table-layout: fixed;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+      img.max-width {
+        max-width: 100% !important;
+      }
+      .column.of-2 {
+        width: 50%;
+      }
+      .column.of-3 {
+        width: 33.333%;
+      }
+      .column.of-4 {
+        width: 25%;
+      }
+      @media screen and (max-width:480px) {
+        .preheader .rightColumnContent,
+        .footer .rightColumnContent {
+            text-align: left !important;
+        }
+        .preheader .rightColumnContent div,
+        .preheader .rightColumnContent span,
+        .footer .rightColumnContent div,
+        .footer .rightColumnContent span {
+          text-align: left !important;
+        }
+        .preheader .rightColumnContent,
+        .preheader .leftColumnContent {
+          font-size: 80% !important;
+          padding: 5px 0;
+        }
+        table.wrapper-mobile {
+          width: 100% !important;
+          table-layout: fixed;
+        }
+        img.max-width {
+          height: auto !important;
+          max-width: 480px !important;
+        }
+        a.bulletproof-button {
+          display: block !important;
+          width: auto !important;
+          font-size: 80%;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+        }
+        .columns {
+          width: 100% !important;
+        }
+        .column {
+          display: block !important;
+          width: 100% !important;
+          padding-left: 0 !important;
+          padding-right: 0 !important;
+          margin-left: 0 !important;
+          margin-right: 0 !important;
+        }
+      }
+    </style>
+    <!--user entered Head Start-->
+    <style>
+  body{
+    background-color: #F5F5F5 !important;
+    font-family: Arial, Sans-Serif !important;
+  }
+  h1{
+    font-size: 40px !important;
+    font-weight: bold !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
+    color: #303336 !important;
+    margin: 0 0 0 0;
+  }
+  h2{
+    font-size: 18px !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
+    color: #9fa2a2 !important;
+    margin: 0 0 0 0;
+  }
+  h2 span{
+    font-size: 18px !important;
+    letter-spacing: -0.5px !important;
+    line-height: 1.2 !important;
+    color: #9fa2a2 !important;
+    margin: 0 0 0 0;
+  }
+  h3{
+    font-size: 12px !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-stretch: normal !important;
+    line-height: 1.83 !important;
+    letter-spacing: -0.5px !important;
+    color: #b5b4d8 !important;
+    margin: 0 0 0 0;
+  }
+  h3 span{
+    font-size: 28px !important;
+    font-weight: bold !important;
+    font-style: normal !important;
+    font-stretch: normal !important;
+    line-height: normal !important;
+    letter-spacing: -0.5px !important;
+    color: #ffffff !important;
+  }
+  h4{
+    font-weight: normal !important;
+    font-size: 12px !important;
+    color: #6b6f72 !important;
+    line-height: 1.56 !important;
+    letter-spacing: -0.5 !important;
+    margin: 10px 0 0 0 !important;
+  }
+  h5{
+    font-weight: normal !important;
+    font-size: 14px !important;
+    color: #303336 !important;
+    font-style: bold !important;
+    font-stretch: normal !important;
+    line-height: normal !important;
+    letter-spacing: -0.5px !important;
+    margin: 10px 0 0 0;
+  }
+  h5 span{
+    font-size: 40px !important;
+    font-weight: bold !important;
+    line-height: normal !important;
+    letter-spacing: -0.5px !important;
+  }
+  h6{
+    color: #9fa2a2 !important;
+    line-height: 1.56 !important;
+    letter-spacing: -0.5px !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    margin: 0;
+  }
+  h6 span{
+    font-size: 12px !important;
+    color: #15b597 !important;
+  }
+  h6 a{
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  p{
+    font-size: 18px !important;
+    color: #303336 !important;
+    line-height: 1.56 !important;
+    letter-spacing: -0.5px !important;
+  }
+  p span{
+    font-size: 18px !important;
+    color: #303336 !important;
+    line-height: 1.56 !important;
+    letter-spacing: -0.5px !important;
+    white-space: normal !important;
+  }
+  a.main{
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    background-color: #ff7174 !important;
+    border: none !important;
+    border-radius: 25px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+  }
+  a.restaurant{
+    color: #ff7174 !important;
+    font-size: 12px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #ff7174 !important;
+    border-radius: 25px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+  }
+  .Unsubscribe--addressLine p{
+    font-size: 10px !important;
+  }
+  .Unsubscribe--addressLine p span{
+    font-size: 10px !important;
+  }
+  a.Unsubscribe--unsubscribeLink{
+    font-size: 10px !important;
+    color: #15b597;
+  }
+  a.Unsubscribe--unsubscribePreferences{
+    font-size: 10px !important;
+    color: #15b597;
+  }
+  </style>
+     <!--End Head user entered-->
+  </head>
+  <body>
+    <center class="wrapper" data-link-color: #1188E6; data-body-style; font-size: 14px; font-family: arial; color: #000000; background-color: #F5F5F5;>
+      <div class="webkit">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" class="wrapper" bgcolor="#F5F5F5">
+          <tr>
+            <td valign="top" bgcolor="#F5F5F5" width="100%">
+              <table width="100%" role="content-container" class="router" align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td width: 100%>
+                    <table width= 100% cellpadding="0"cellspacing="0" border="0">
+                      <tr>
+                        <td>
+                          <!--[if mso]>
+                          <center>
+                          <table><tr><td width="600">
+                          <![endif]-->
+                          <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width:600px;" align="center">
+                            <tr>
+                              <td role="modules-container" style="padding: 0px 0px 0px 0px; color: #000000; text-align: left;" bgcolor="#ffffff" width="100%" align="left">
+
+
+    <table class="module preheader preheader-hide" role="module" data-type="preheader" border="0" cellpadding="0" cellspacing="0" width="100%"
+           style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
+      <tr>
+        <td role="module-content">
+          <p>Ya esta listo tu kit para ser retirado</p>
+        </td>
+      </tr>
+    </table>
+
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;background-color:#ffffff;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="#ffffff">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="30px"
+                 style="line-height:30px; font-size:30px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 30px 0px;"
+                bgcolor="#fdfdfd"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table  border="0"
+            cellpadding="0"
+            cellspacing="0"
+            align="center"
+            width="100%"
+            role="module"
+            data-type="columns"
+            data-version="2"
+            style="padding:0px 20px 0px 20px;box-sizing:border=-box;"
+            bgcolor="">
+      <tr role='module-content'>
+        <td height="100%" valign="top">
+            <!--[if (gte mso 9)|(IE)]>
+              <center>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border=-spacing:0;border=-collapse:collapse;table-layout: fixed;" >
+                  <tr>
+            <![endif]-->
+
+    <!--[if (gte mso 9)|(IE)]>
+      <td width="520.000px" valign="top" style="padding: 0px 0px 0px 0px;border=-collapse: collapse;" >
+    <![endif]-->
+
+    <table  width="520.000"
+            style="width:520.000px;border=-spacing:0;border=-collapse:collapse;margin:0px 20px 0px 20px;"
+            cellpadding="0"
+            cellspacing="0"
+            align="left"
+            border="0"
+            bgcolor=""
+            class="column column-0 of-1
+                  empty"
+      >
+      <tr>
+        <td style="padding:0px;margin:0px;border=-spacing:0;">
+            <table class="module" role="module" data-type="code" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td height="100%" valign="top" style="">
+          <img src="https://www.easychef.xyz/assets/logo-ac853275e0b71f9a3f081325dda06759af6f04b9cd5053555b1e95ad5b125d79.png" alt="" height="40px" width="190px">
+        </td>
+      </tr>
+    </table>
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  <table class="module" role="module" data-type="code" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td height="100%" valign="top" margin-bottom="80px;">
+              <%= image_tag('https://i.imgur.com/XxxUaFB.png' , style: "display:block;  max-height:120px; margin-left: auto; margin-right: auto; max-width: 170%; margin-bottom: 30px margin-top 30px;") %>
+
+        </td>
+      </tr>
+    </table>
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <br />
+    <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 40px 0px;line-height:22px;text-align:inherit;"
+            height="100%"
+            valign="top"
+            bgcolor="">
+            <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre; margin-top: 60px;">            <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;"><%= @order.user.first_name.capitalize %> <%= @order.user.last_name.capitalize %>,</span></p>
+
+            </span></p>
+        </td>
+      </tr>
+    </table>
+
+    <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 40px 0px;line-height:22px;text-align:inherit;"
+            height="100%"
+            valign="top"
+            bgcolor="">
+            <p> Tu kit ya esta listo!</p>
+            <br />
+            <p></p>
+            <br />
+            <p> Cada vez falta menos para que puedas cocinar el <strong> <%= @order.kit.name %> </strong> y convertirte en tu propio cheff.</p>
+            <br />
+            <p>Información logistica de tu pedido:</p>
+            <br />
+            <p>- El medio de envio que seleccionaste es <strong>
+              <strong> <%= @order.delivery_provider %> </strong>
+              <br />
+              <br />
+              <%= if @order.delivery_provider == "Glovo"
+
+                "La direccion de #{@order.kit.restaurant.name} donde debes mandar tu glovo es #{@order.kit.restaurant.address.address}
+               "
+              elsif @order.delivery_provider == "Envio a domicilio"
+              "-La gente de #{@order.kit.restaurant.name} se ocupara de hacer el envio a tu domicilio en los proximos minutos"
+              else
+              "- Take away es una gran opción para despejarse, no olvides de tomar los recaudos necesarios por el covid-19. La direccion de #{@order.kit.restaurant.name} es #{@order.kit.restaurant.address.address}"
+              end
+             %>
+
+             </strong></p>
+            <br />
+            <br />
+            <p>- Numero de referencia: <strong><%= @order.code %> </strong></p>
+            <p>(no te olvides de mandarselo a tu glovo o presentarlo para retirar tu pedido)</p>
+        </td>
+      </tr>
+    </table>
+
+        </td>
+      </tr>
+    </table>
+
+
+    <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+            <!--[if (gte mso 9)|(IE)]>
+                  <tr>
+                </table>
+              </center>
+            <![endif]-->
+        </td>
+      </tr>
+    </table>
+
+    <table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td style="font-size:6px;line-height:10px;padding:0px 0px 0px 0px;" valign="top" align="center">
+          <a href="https://www.cocinaencasa.com.ar"><img class="max-width=" border="0" style="display:block;color:#000000;text-decoration:none;font-family:Helvetica, arial, sans-serif;font-size:16px;max-width:100% !important;width:100%;height:auto !important;" src="<%= @order.kit.image %>" alt="Cocina" width="600"></a>
+        </td>
+      </tr>
+    </table>
+
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table  border="0"
+            cellpadding="0"
+            cellspacing="0"
+            align="center"
+            width="100%"
+            role="module"
+            data-type="columns"
+            data-version="2"
+            style="padding:0px 20px 0px 20px;box-sizing:border=-box;"
+            bgcolor="">
+      <tr role='module-content'>
+        <td height="100%" valign="top">
+            <!--[if (gte mso 9)|(IE)]>
+              <center>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border=-spacing:0;border=-collapse:collapse;table-layout: fixed;" >
+                  <tr>
+            <![endif]-->
+
+    <!--[if (gte mso 9)|(IE)]>
+      <td width="520.000px" valign="top" style="padding: 0px 0px 0px 0px;border=-collapse: collapse;" >
+    <![endif]-->
+
+    <table  width="520.000"
+            style="width:520.000px;border=-spacing:0;border=-collapse:collapse;margin:0px 20px 0px 20px;"
+            cellpadding="0"
+            cellspacing="0"
+            align="left"
+            border="0"
+            bgcolor=""
+            class="column column-0 of-1
+                  empty"
+      >
+      <tr>
+        <td style="padding:0px;margin:0px;border=-spacing:0;">
+
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  <table class="module" role="module" data-type="code" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td height="100%" valign="top">
+<!--           <img src="https://image.flaticon.com/icons/svg/2785/2785819.svg" width="150"  height="150">
+ -->
+          <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;"></p>
+        </td>
+      </tr>
+    </table>
+        </td>
+      </tr>
+    </table>
+
+    <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+            <!--[if (gte mso 9)|(IE)]>
+                  <tr>
+                </table>
+              </center>
+            <![endif]-->
+        </td>
+      </tr>
+    </table>
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px; margin-top: 50px;"
+                bgcolor="#ffffff"></td>
+              <td align="center">
+                      <br />
+                      <br />
+                      <a href="https://www.cocinaencasa.com.ar" target="_blank"
+                       style="color: #ffffff; font-size: 13px; padding: 15px 0px;text-decoration: none;display: block;text-align: center; width: 220px; background-color: #0B60C4; border-radius: 50px; font-weight: bold; cursor: pointer;">Entra al tutorial de tu receta</a>
+                </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 0px 0px;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table  border="0"
+            cellpadding="0"
+            cellspacing="0"
+            align="center"
+            width="100%"
+            role="module"
+            data-type="columns"
+            data-version="2"
+            style="padding:40px 40px 0px 40px;box-sizing:border=-box;"
+            bgcolor="">
+      <tr role='module-content'>
+        <td height="100%" valign="top">
+            <!--[if (gte mso 9)|(IE)]>
+              <center>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border=-spacing:0;border=-collapse:collapse;table-layout: fixed;" >
+                  <tr>
+            <![endif]-->
+
+    <!--[if (gte mso 9)|(IE)]>
+      <td width="240.000px" valign="top" style="padding: 0px 0px 0px 0px;border=-collapse: collapse;" >
+    <![endif]-->
+
+    <table  width="240.000"
+            style="width:240.000px;border=-spacing:0;border=-collapse:collapse;margin:0px 20px 0px 0px;"
+            cellpadding="0"
+            cellspacing="0"
+            align="left"
+            border="0"
+            bgcolor=""
+            class="column column-0 of-2
+                  empty"
+      >
+      <tr>
+        <td style="padding:0px;margin:0px;border=-spacing:0;">
+
+
+
+
+
+    <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+    <!--[if (gte mso 9)|(IE)]>
+      <td width="240.000px" valign="top" style="padding: 0px 0px 0px 0px;border=-collapse: collapse;" >
+    <![endif]-->
+
+
+
+    <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+            <!--[if (gte mso 9)|(IE)]>
+                  <tr>
+                </table>
+              </center>
+            <![endif]-->
+        </td>
+      </tr>
+    </table>
+
+    <table class="module"
+           role="module"
+           data-type="divider"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:10px 0px 010px 0px;background-color:#ffffff;"
+            role="module-content"
+            height="100%"
+            valign="top"
+            bgcolor="#ffffff">
+          <table border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 align="center"
+                 width="100%"
+                 height="10px"
+                 style="line-height:10px; font-size:10px;">
+            <tr>
+              <td
+                style="padding: 0px 0px 10px 0px;"
+                bgcolor="#ffffff"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <table  border="0"
+            cellpadding="0"
+            cellspacing="0"
+            align="center"
+            width="100%"
+            role="module"
+            data-type="columns"
+            data-version="2"
+            style="padding:0px 20px 0px 20px;background-color:#ffffff;box-sizing:border=-box;"
+            bgcolor="#ffffff">
+      <tr role='module-content'>
+        <td height="100%" valign="top">
+            <!--[if (gte mso 9)|(IE)]>
+              <center>
+                <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border=-spacing:0;border=-collapse:collapse;table-layout: fixed;" >
+                  <tr>
+            <![endif]-->
+
+    <!--[if (gte mso 9)|(IE)]>
+      <td width="520.000px" valign="top" style="padding: 0px 0px 0px 0px;border=-collapse: collapse;" >
+    <![endif]-->
+
+    <table  width="520.000"
+            style="width:520.000px;border=-spacing:0;border=-collapse:collapse;margin:0px 20px 0px 20px;"
+            cellpadding="0"
+            cellspacing="0"
+            align="left"
+            border="0"
+            bgcolor="#ffffff"
+            class="column column-0 of-1
+                  empty"
+      >
+      <tr>
+        <td style="padding:0px;margin:0px;border=-spacing:0;">
+
+    <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td style="padding:20px 0px 40px 0px;line-height:22px;text-align:inherit;"
+            height="100%"
+            valign="top"
+            bgcolor="">
+            <h6 style="text-align: center;">*Valido para&nbsp;<span style="color: rgb(0, 0, 0); font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: center; white-space: pre;"><%= @order.user.email %></span></h6>
+        </td>
+      </tr>
+    </table>
+  <table class="module" role="module" data-type="code" border="0" cellpadding="0" cellspacing="=0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td height="100%" valign="top">
+          <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" bgcolor="#0B60C4" style="text-align: center; padding: 10px 0 20px 0;">
+  <tbody>
+    <tr>
+      <td width="100%" style="text-align: center;">
+        <a href="" target="_blank" style="width: 36px; height: 22px; margin: 0 10px 0 10px; display: inline-table;">
+          <img class="max-width=" border="0" src="https://img.rappi.com/web/mailing-order/instagram-white.png" alt="" width="45px">
+        </a>
+        <a href="https://www.facebook.com/Cocina-en-casa-100104138340496/?modal=admin_todo_tour" target="_blank" style="width: 36px; height: 22px; margin: 0 10px 0 10px; display: inline-table;">
+          <img class="max-width=" border="0" src="https://marketing-image-production.s3.amazonaws.com/uploads/df1925db6d7faab3cda3537e4ade8c24527000e0a87c6497bf16f659777db523ff43e1110c3b8b5c19b0792167ecf06a1fa381880fd44b5bd14d6555be4f263b.png" alt="" width="45px">
+        </a>
+         <a href="" target="_blank" style="width: 36px; height: 22px; margin: 0 10px 0 10px; display: inline-table;">
+          <img class="max-width=" border="0" src="https://marketing-image-production.s3.amazonaws.com/uploads/bd307526340c78a611b3a064eceafc2a8148ced190a293876f3fa895102faa23fd7f9f4567378d026c0f5f0728f00446e9dc9413a82b0b6c160ede4c2bd4d2b7.png" alt="" width="45px">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+        </td>
+      </tr>
+    </table>
+        </td>
+      </tr>
+    </table>
+
+    <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+            <!--[if (gte mso 9)|(IE)]>
+                  <tr>
+                </table>
+              </center>
+            <![endif]-->
+        </td>
+      </tr>
+    </table>
+
+  <!--   <table class="module"
+           role="module"
+           data-type="spacer"
+           border=="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 30px 0px;"
+            role="module-content"
+            bgcolor="">
+        </td>
+      </tr>
+    </table>
+
+    <table  border=="0"
+            cellpadding="0"
+            cellspacing="0"
+            align="center"
+            width="100%"
+            role="module"
+            data-type="columns"
+            data-version="2"
+            style="padding:40px 20px 40px 20px;background-color:#a6cdea;box-sizing:border-box;"
+            bgcolor="#303336">
+      <tr role='module-content'>
+        <td height="100%" valign="top">
+            if (gte mso 9)|(IE)]>
+              <center>
+                <table cellpadding"0" cellspacing="0" border"0" width="100%" style="border-spacing:0;border-collapse:collapse;table-layout: fixed;" >
+                  <tr>
+            <![endif]-->
+
+    <!--[if (gte mso 9)|(IE)]>
+      <td width="520.000px" valign="top" style="padding: 0px 0px 0px 0px;border-collapse: collapse;" >
+    <![endif]-->
+
+   <!--  <table  width="520.000"
+            style="width:520.000px;border-spacing:0;border-collapse:collapse;margin:0px 20px 0px 20px;"
+            cellpadding="0"
+            cellspacing="0"
+            align="left"
+            border="0"
+            bgcolor="#303336"
+            class="column column-0 of-1
+                  empty"
+      >
+      <tr>
+        <td style="padding:0px;margin:0px;border-spacing:0;">
+
+    <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td style="background-color:#a6cdea;padding:0px 0px 0px 0px;line-height:22px;text-align:inherit;"
+            height="100%"
+            valign="top"
+            bgcolor="#303336">
+            <h2>Equipo Cociná En Casa</h2>
+        </td>
+      </tr>
+    </table>
+  <table class="module" role="module" data-type="code" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+      <tr>
+        <td heigh="100%" valign="top">
+          <br><h6>Si tenes alguna duda o queja, estamos para ayudarte. Contactanos a traves de nuestro  <a href="">Centro de ayuda</a>. Gracias, Equipo Cociná En Casa.</h6>
+
+<br><br><h6>TERMINOS Y CONDICIONES<br></h6>Promociones validas desde el 01/12/2019 al 15/12/2019 en Buenos Aires en la zona de cobertura de Easychef, hasta agotar stock. Ver terminos y condiciones <a href="">aca</a>
+        </td>
+      </tr>
+    </table>
+        </td>
+      </tr>
+    </table>
+ -->
+    <!--[if (gte mso 9)|(IE)]>
+      </td>
+    <![endif]-->
+            <!--[if (gte mso 9)|(IE)]>
+                  <tr>
+                </table>
+              </center>
+            <![endif]-->
+        </td>
+      </tr>
+    </table>
+  <div data-role="module-unsubscribe" class="module unsubscribe-css__unsubscribe___2CDlR" role="module" data-type="unsubscribe" style="color:#444444;font-size:12px;line-height:20px;padding:16px 16px 16px 16px;text-align:center"><div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-family:Arial,Helvetica, sans-serif;font-size:12px;line-height:20px">Cociná En Casa Info</p><p style="font-family:Arial,Helvetica, sans-serif;font-size:12px;line-height:20px"><span class="Unsubscribe--senderAddress">Cociná En Casa</span>, <span class="Unsubscribe--senderCity">Buenos Aires</span>, <span class="Unsubscribe--senderZip">C1414AXB</span> </p></div><p style="font-family:Arial,Helvetica, sans-serif;font-size:12px;line-height:20px"><a class="Unsubscribe--unsubscribeLink" href="">Unsubscribe</a> - <a class="Unsubscribe--unsubscribePreferences" href="">Unsubscribe Preferences</a></p></div>
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if mso]>
+                          </td></tr></table>
+                          </center>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </center>
+
+<img src="http://links.news.rappi.com.ar/wf/open?upn8-2F-2BIS3kVKuBxKLiUuOupDcr-2F19jmwrGYH-2BweVI4cvqDkJnnz-2FUFdB2jjr5YHhmJxK0bPnqOGP3eJOgRgk4mNwXeD0TAk0oCehhhqkOPbN7I-2Bum68Hhi0iiSh6pz-2FHvteivZqjchzmTNaIONTSzOGmsLsiQyzJHeT7M8Ndp1mq7HebxNCjKAdrUXEe6JixOOY2gbkmgu7vUKwjwkvlEvh0w7f42XQNLXeFMZ96IwjvZxPCSHdl-2FpMrf9RtvpU-2Fyoy-2B-2Fho70XkVeTXct2Oh3YJFx0AwrGcZHR5bA66TncUwUWCnpy5-2BVUlew2Fzj-2FTZE-2BF" alt="" width="1" height="1" border="0" style="height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;"/>
+</body>
+</html>
