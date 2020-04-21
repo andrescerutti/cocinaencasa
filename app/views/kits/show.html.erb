@@ -24,8 +24,9 @@
               <p>Seleccioná la cantidad de kits</p>
             </div>
 
-            <div class= 'mt-4' style="width: 120px;">
-              <%= f.input :amount, collection: 2..@kit.stock, label: false %>
+            <div style="width: 120px;">
+              <%= f.input :amount, collection: 1..@kit.stock, label: false %>
+
               <span class="d-none" id="price"><%= @kit.price %></span>
             </div>
           </div>
@@ -153,7 +154,7 @@
       <h2 class="mb-3">También podrían gustarte</h2>
       <div class="row">
         <% @kits.limit(3).each do |kit| %>
-          <div class="col-md-6">
+          <div class="col-md-6 shadow my-2">
             <%= render 'shared/card_show_index', kit: kit %>
           </div>
         <% end %>
