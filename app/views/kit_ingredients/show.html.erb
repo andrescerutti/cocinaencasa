@@ -1,0 +1,22 @@
+<h2>Ingredients del kit</h2>
+<% @kit.ingredients.each do |ingredient| %>
+          <div class="card-scroll col-md-4">
+          <div class="card-kit-showkit border">
+            <img src=<%= ingredient.image %>  />
+            <div class="card-body">
+              <div>
+                <h5 class="card-title mb-1"><%= ingredient.name %></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+  <%= simple_form_for(@kit_ingredient) do |f| %>
+    <div class="d-row align-items-center">
+      <%= f.simple_fields_for :ingredient do |a| %>
+        <%= a.input :name, placeholder: "Nombre", label: false %>
+        <%= a.input :image, placeholder: "Imagen", label: false %>
+      <%= f.input :quantity, label: "Cantidad" %>
+      <%= f.input :unit, label: "Unidad" %>
+    </div>
+    <%= f.submit "Agregar Ingrediente", class: "btn btn-primary"%>
+  <% end %>

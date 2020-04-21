@@ -57,11 +57,39 @@
   </div>
   <div class="steps">
     <h4 class="mb-3 mt-5">Pasos a seguir:</h4>
-    <% @guide.steps.each do |step| %>
-      <div class="d-flex align-items-center">
-        <p class="stepnumber mr-3 my-4" style="font-size: 25px"><%= step.order %>.</p>
-        <p class="text-muted my-4"><%= step.content %></p>
-      </div>
+    <% @guide.steps.order(order: :asc).each_with_index do |step, index| %>
+
+      <% if @kit.restaurant.user == current_user %>
+          <div class="m-4" >
+            <p>Paso <%= index + 1 %></p>
+            <%= simple_form_for (step) do |f| %>
+            <div class="d-row align-items-center">
+              <%= f.input :order, label: "Orden" %>
+              <%= f.input :content, label: "Descripción" %>
+            </div>
+            <div class="d-flex">
+              <%= f.submit "Actualizar", class: "btn btn-primary"%>
+            <% end %>
+                <%= link_to "Eliminar", step_path(step), class: "ml-4 btn btn-outline-danger",method: :delete, data: {confirm: "¿Estas seguro que queres borrar este paso?"} %>
+            </div>
+          </div>
+
+      <% else %>
+        <div class="d-flex align-items-center">
+          <p class="stepnumber mr-3 my-4" style="font-size: 25px">Paso<%= index + 1 %>.</p>
+          <p class="text-muted my-4"><%= step.content %></p>
+        </div>
+      <% end %>
+    <% end %>
+    <% if @kit.restaurant.user == current_user %>
+    <p>Crear un nuevo paso</p>
+        <%= simple_form_for [@guide, @step] do |f| %>
+          <div class="d-row align-items-center">
+            <%= f.input :order, label: "Orden" %>
+            <%= f.input :content, label: "Descripción" %>
+          </div>
+            <%= f.submit "Agregar nuevo paso", class: "btn btn-primary"%>
+        <% end %>
     <% end %>
   </div>
   <br>

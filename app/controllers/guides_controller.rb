@@ -4,6 +4,8 @@ class GuidesController < ApplicationController
   def show
     @kit = @guide.kit
     @review = Review.new
+    @guide = Guide.find(params[:id])
+    @step = Step.new
   end
 
   def new

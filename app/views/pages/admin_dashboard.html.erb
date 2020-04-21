@@ -33,9 +33,7 @@
                   <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
                  <% end %>
                  <% if order.address.present? %>
-                  <p class="font-weight-light"><%= order.address.city %>, <%= order.address.state %>, <%= order.address.street %>, <%= order.address.flat_number %></p>
-                  <% else %>
-                  <p>Retira por el local</p>
+                    <p class="font-weight-light"><%= order.address.city %>, <%= order.address.state %>, <%= order.address.street %>, <%= order.address.flat_number %></p>
                  <% end %>
                  <p><%= order.kit.name %></p>
                  <p><%= order.kit.restaurant.name %> </p>
@@ -200,29 +198,33 @@
     </div>
 </div>
     <div class="col-12 col-lg-6 text-center">
-      <h2 class="">Todos mis kits</h2>
-      <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary" %>
-      <div class="">
+      <div class="position-relative">
+        <h2 >Todos mis kits</h2>
+        <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary position-absolute", style: "top: 50px; right: 10px" %>
+      </div>
+      <div>
         <% @kits.each do |kit| %>
-      <% link_to "Nuevo Kit", new_kit_path(kit), class: "btn btn-primary", style: "width: 120px; margin-left: 50px;" %>
+          <%= link_to kit_path(kit) do  %>
             <div class="card-scroll pr-0 pl-2 mr-3 col-lg-6">
-             <div class="card-kit mt-1" style="width: 400px; height: 550px; margin-left: 160px;">
-              <%= cl_image_tag kit.image, class: "rounded"%>
-               <div class="card-body">
-                 <div>
-                   <p class="card-title mb-1 text-wrap text-truncate" style="height: 45px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></p>
-                   <p class="card-text overflow-ellipsis card-description" style=""><%= kit.description %></p>
-                   <p class="card-text card-price">$ <%= kit.price %></p>
-                 </div>
-                 <div class="d-flex justify-content-between mt-2">
-                   <%= link_to "Show", kit_path(kit), class: "btn btn-primary", style: "width: 120px; margin-left: 50px;" %>
-                   <%= link_to "Edit", edit_kit_path(kit), class: "btn btn-outline-primary", style: "width: 120px; margin-right: 50px;" %>
+              <div class="card-kit mt-1" style="width: 400px; height: 550px; margin-left: 160px;">
+                <%= cl_image_tag kit.image, class: "rounded"%>
+                <div class="card-body position-relative">
+                  <div class="">
+                    <%= link_to "Editar", edit_kit_path(kit), class: "btn btn-outline-primary position-absolute", style: " top: 14px; right: 14px" %>
+                    <p class="card-title mb-1 text-wrap text-truncate" style="height: 45px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></p>
+                    <p class="card-text overflow-ellipsis card-description" style=""><%= kit.description %></p>
+                    <p class="card-text card-price">$ <%= kit.price %></p>
+                  </div>
+                  <div class="d-flex justify-content-between mt-2">
+                    <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-primary", style: "width: 120px; margin: auto;" %>
+                    <%= link_to 'Paso a paso',  guide_path(kit), class: "btn btn-primary" %>
 
-                 </div>
-               </div>
+                  </div>
+                </div>
               </div>
-              </div>
+            </div>
           <% end %>
+        <% end %>
       </div>
 
     </div>

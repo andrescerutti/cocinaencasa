@@ -1,0 +1,11 @@
+<h2>Agregar o editar paso a paso</h2>
+
+<%= simple_form_for (@guide) do |guide| %>
+    <%= step.input :order, prompt: "Numero", label: false, required: true %> - <%= s.input :content, prompt: "Descripción", label: false, required: true %>
+
+  <div class="links">
+    <%= f.button :submit, class:'btn btn-primary' %>
+    <%= link_to 'Index', root_path, class: "bootstrapbutton" %>
+
+    <% end %>
+</div>

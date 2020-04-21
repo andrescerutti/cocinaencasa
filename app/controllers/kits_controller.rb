@@ -41,6 +41,7 @@ class KitsController < ApplicationController
 
   def create
     @kit = Kit.new(kit_params)
+    @guide = Kit.new(kit: @kit)
     authorize @kit
     return redirect_to @kit if @kit.save!
 
