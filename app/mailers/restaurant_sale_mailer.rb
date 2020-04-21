@@ -6,6 +6,8 @@ class RestaurantSaleMailer < ApplicationMailer
   #   en.restaurant_sale_mailer.new_sale.subject
   #
   def new_sale
+    @order = params[:order]
+    @user = params[:user]
     @restaurant = params[:restaurant]
     mail(to: @restaurant.email, subject: 'Realizaste una nueva venta!')
   end
