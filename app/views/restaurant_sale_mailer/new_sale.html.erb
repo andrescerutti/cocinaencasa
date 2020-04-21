@@ -117,6 +117,7 @@
                                 <tr align="center">
                                     <td>
 
+                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
@@ -127,7 +128,7 @@
                                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
                                             <tr>
                                               <img height="90px"
-                                                                                <%= image_tag('https://i.imgur.com/XxxUaFB.png' , style: "display:block;  max-height:120px; margin-left: auto; margin-right: auto; max-width: 170%; margin-bottom: 60px;") %>
+                                                                                <%= cl_image_tag(@restaurant.image , style: "display:block;  max-height:120px; margin-left: auto; margin-right: auto; max-width: 170%; margin-bottom: 60px;") %>
                                                 <td width="40"></td>
                                                 <td>
                                                     <table border="0" cellpadding="0" cellspacing="0" align="center"
@@ -137,7 +138,7 @@
                                                             <td>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.2; letter-spacing: -0.5; font-size: 40px; font-weight: bold;">
-                                                                    Hola <%= @payment.order.user.first_name.capitalize %> <%= @payment.order.user.last_name.capitalize %>,
+                                                                    <%= @restaurant.name.split(" ").map { |s| s.capitalize }.join(' ') %>,
 
 
                                                                 </p>
@@ -153,9 +154,10 @@
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 18px;">
 
-                                                                    Gracias por tu pedido de
-                                                                    <%= @payment.order.kit.name %>
-
+                                                                    Vendiste <%= @order.amount %> kit´s de
+                                                                    <strong>
+                                                                    <%= @order.kit.name %>
+                                                                    </strong>
                                                                 </p>
 
                                                             </td>
@@ -190,10 +192,10 @@
                                                             <td style="padding: 15px;">
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; padding: 0 0 10px 0; font-size: 14px; font-weight:600">
-                                                                    TOTAL </p>
+                                                                    TOTAL COBRADO</p>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 30px; font-weight: bold;">
-                                                                    $ <%= @payment.order.amount * @payment.order.kit.price %></p>
+                                                                    $ <%= @order.amount * @order.kit.price %></p>
                                                                 <p
                                                                     style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
                                                                     Metodo
@@ -236,16 +238,27 @@
                                                             <td style="padding: 15px;">
                                                                 <p
                                                                     style="color: #6b6f72; line-height: 0.5; letter-spacing: -0.5; padding: 0 0 10px 0; font-size: 14px;">
-                                                                    TU
-                                                                     TIPO DE ENTREGA</p>
+
+                                                                     TIPO DE ENTREGA ELEGIDA POR EL CLIENTE</p>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 22px; font-weight: bold;">
-                                                                    <%= @payment.order.delivery_provider %></p><span
+                                                                    <%= @order.delivery_provider %></p><span
                                                                     style="display:;">
-                                                                    <p
-                                                                        style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                        Dirección: <%= @payment.order.kit.restaurant.address.address %>
+
+                                                                        <% if @order.delivery_provider == "Envio a domicilio" %>
+                                                                        <p
+                                                                          style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
+                                                                          Dirección: <%= @order.address.street %> <%= @order.address.flat_number %>, <%= @order.address.state %>, <%= @order.address.city %>
                                                                         </p>
+                                                                        <% else %>
+
+                                                                        <p style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
+                                                                          DIRECCIÓN CLIENTE
+
+                                                                        </p>
+
+
+                                                                        <% end %>
                                                                 </span>
 
                                                             </td>
@@ -305,22 +318,31 @@
                                                             <td>
                                                             <td>
                                                                 <p style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                    Fecha y hora programada
+                                                                    <%= @restaurant.name %>
                                                                 </p>
                                                                 <p
                                                                     style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                    <%= @payment.order.date_delivery %>
+
                                                                     <br />
                                                                     <span
-                                                                        style="color: #303336;"> <%= @payment.order.kit.restaurant.address.address %></span>
+                                                                        style="color: #303336;"></span>
                                                                 </p>
                                                                 <br>
-                                                                <p
-                                                                    style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                    <br />
-                                                                    <span
-                                                                        style="color: #303336;">Tu casa </span>
-                                                                </p>
+
+                                                                        <% if @order.delivery_provider == "Envio a domicilio" %>
+                                                                        <p
+                                                                          style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
+                                                                          Dirección: <%= @order.address.street %> <%= @order.address.flat_number %>, <%= @order.address.state %>, <%= @order.address.city %>
+                                                                        </p>
+                                                                        <% else %>
+
+                                                                        <p style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
+                                                                          CLIENTE
+
+                                                                        </p>
+
+
+                                                                        <% end %>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -351,17 +373,18 @@
                                                                         <td width="50">
 
                                                                             <img height="60px"
-                                                                                src="<%= @payment.order.kit.image %>" alt=""
-                                                                                style="display:block;  max-height:100px; margin-left: auto; margin-right: auto; max-width: 140%;">
+                                                                                src="<%= @order.kit.image %>" alt=""
+                                                                                style="display:block;  max-height:100px; margin-left: auto; margin-right: auto; max-width: 110%;">
                                                                         </td>
                                                                         <td width="20px"></td>
                                                                         <td>
                                                                             <p
                                                                                 style="color: #303336; line-height: 1.5; letter-spacing: -0.5; font-size: 14px; text-decoration: ">
-                                                                                <%= @payment.order.kit.name %></p>
+                                                                                <%= @order.kit.name %></p>
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.5; letter-spacing: -0.5; font-size: 14px;">
-                                                                                <%= @payment.order.amount %>
+                                                                                <%= @order.amount %>
+
                                                                                 kits</p>
                                                                             <p
                                                                                 style="display:none; color: #6b6f72; line-height: 1.5; letter-spacing: -0.5; font-size: 14px; ">
@@ -379,10 +402,10 @@
                                                                         <td align="right">
                                                                             <p
                                                                                 style="color: #303336; line-height: 1.5; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $ <%= @payment.order.amount * @payment.order.kit.price %></p>
+                                                                                $ <%= @order.amount * @order.kit.price %></p>
                                                                             <p
                                                                                 style="color: #9fa2a2; line-height: 1.5; letter-spacing: -0.5; font-size: 14px;">
-                                                                                $ <%= @payment.order.amount * @payment.order.kit.price %>
+                                                                                $ <%= @order.amount * @order.kit.price %>
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -414,7 +437,7 @@
                                                             <td style="padding: 15px;">
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; padding: 0 0 10px 0; font-size: 14px; font-weight:600">
-                                                                    DETALLE PARA RETIRAR TU PEDIDO</p>
+                                                                    DETALLE PARA QUE EL CLIENTE RECIBA SU PEDIDO </p>
                                                                 <table width="100%">
 
 
@@ -429,7 +452,7 @@
                                                                         <td align="right">
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                            <%= @payment.order.delivery_provider %>
+                                                                            <%= @order.delivery_provider %>
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -444,7 +467,7 @@
                                                                         <td align="right">
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                <%= @payment.order.code %></p>
+                                                                                <%= @order.code %></p>
                                                                         </td>
                                                                     </tr>
 
@@ -453,7 +476,7 @@
                                                                         <td>
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                (Con el numero de referencia podras retirar tu pedido)</p>
+                                                                                (El cliente/glovo debera presentar el numero de referencia)</p>
                                                                         </td>
                                                                         <td align="right">
                                                                             <p
@@ -538,14 +561,14 @@
                                                                         <td>
                                                                             <p
                                                                                 style="color: #303336; line-height: 1.8; letter-spacing: -0.5; padding: 0 0 10px 0; font-size: 14px; font-weight:600">
-                                                                                Total
-                                                                                pagado
+                                                                                FACTURACIÓN TOTAL
+
                                                                                 </p>
                                                                         </td>
                                                                         <td align="right">
                                                                             <p
                                                                                 style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 16px; font-weight:600">
-                                                                                $ <%= @payment.order.amount * @payment.order.kit.price %>
+                                                                                $ <%= @order.amount * @order.kit.price %>
                                                                             </p>
                                                                         </td>
                                                                     </tr>
@@ -772,7 +795,7 @@
                                                 <td width="40"></td>
                                                 <td align="center">
                                                     <a href="https://www.cocinaencasa.com.ar/" target="_blank"
-                                                        style="color: #ffffff; font-size: 13px; padding: 15px 0px;text-decoration: none;display: block;text-align: center; width: 220px; background-color: #0B60C4; border-radius: 50px; font-weight: bold; cursor: pointer;">PEDI TU PROXIMO KIT</a>
+                                                        style="color: #ffffff; font-size: 13px; padding: 15px 0px;text-decoration: none;display: block;text-align: center; width: 220px; background-color: #0B60C4; border-radius: 50px; font-weight: bold; cursor: pointer;">GESTIONÁ TUS VENTAS</a>
                                                 </td>
                                                 <td width="40"></td>
                                             </tr>
@@ -908,3 +931,4 @@
 </body>
 
 </html>
+
