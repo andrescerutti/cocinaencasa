@@ -6,6 +6,7 @@ class RestaurantSaleMailer < ApplicationMailer
   #   en.restaurant_sale_mailer.new_sale.subject
   #
   def new_sale
+    @payment = params[:payment]
     @order = params[:order]
     @user = params[:user]
     @restaurant = params[:restaurant]
