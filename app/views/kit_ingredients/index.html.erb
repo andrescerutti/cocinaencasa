@@ -1,6 +1,10 @@
-<h2>Ingredients del kit</h2>
-<% @kit.ingredients.each do |ingredient| %>
-          <div class="card-scroll col-md-4">
+<div class="container">
+  <h2 class="mt-5 mb-2 text-center">Ingredients del kit</h2>
+  <div class="image-container d-md-block">
+    <div class="cards-scroll">
+      <div class="cards-scroll mt-2 mb-5">
+        <% @kit.ingredients.each do |ingredient| %>
+        <div class="card-scroll col-md-4">
           <div class="card-kit-showkit border">
             <img src=<%= ingredient.image %>  />
             <div class="card-body">
@@ -10,15 +14,19 @@
             </div>
           </div>
         </div>
-<% end %>
-  <%= simple_form_for([@kit, @ingredient]) do |f| %>
-    <div class="d-row align-items-center">
-      <%= f.input :name, placeholder: "Nombre", label: false %>
-      <%= f.input :image, placeholder: "Imagen", label: false %>
-      <%= f.simple_fields_for :kit_ingredient do |a| %>
-        <%= a.input :quantity, label: "Cantidad" %>
-        <%= a.input :unit, label: "Unidad" %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-    <%= f.submit "Agregar Ingrediente", class: "btn btn-primary"%>
+
+  <%= simple_form_for([@kit, @ingredient]) do |f| %>
+  <div class="d-row align-items-center mb-5">
+    <%= f.input :name, placeholder: "Nombre", label: false %>
+    <%= f.input :image, placeholder: "Imagen", label: false %>
+    <%= f.simple_fields_for :kit_ingredient do |a| %>
+    <%= a.input :quantity, label: "Cantidad" %>
+    <%= a.input :unit, label: "Unidad" %>
+    <% end %>
+  </div>
+  <%= f.submit "Agregar Ingrediente", class: "btn btn-primary mb-5"%>
   <% end %>
+</div>
