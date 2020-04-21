@@ -141,10 +141,10 @@ ActiveRecord::Schema.define(version: 2020_04_20_232605) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date_delivery"
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.string "delivery_provider"
+    t.datetime "date_delivery"
     t.integer "status", default: 0
     t.string "reference_number"
     t.string "reason"
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_232605) do
     t.text "test_mp_private_key_ciphertext"
     t.text "prod_mp_public_key_ciphertext"
     t.text "prod_mp_private_key_ciphertext"
-    t.boolean "own_delivery", default: false
+    t.boolean "own_delivery"
     t.string "day_open"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
