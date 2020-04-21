@@ -55,7 +55,7 @@ class PaymentsController < ApplicationController
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
       mail = PaymentMailer.with(user: current_user.email, payment: @payment).confirmed
       mail.deliver_now
-      resto_mail = RestaurantSaleMailer.with(order: @order, restaurant: @restaurant).new_sale
+      resto_mail = RestaurantSaleMailer.with(order: @order, restaurant: @restaurant, payment: @payment).new_sale
       resto_mail.deliver_now
 
       if !search_customer["response"]["results"].empty?
