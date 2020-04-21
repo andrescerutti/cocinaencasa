@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'ingredients/show'
+  get 'ingredients/new'
+  get 'ingredients/create'
+  get 'ingredients/edit'
+  get 'ingredients/update'
+  get 'ingredients/destroy'
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'pages#home'
@@ -8,10 +14,11 @@ Rails.application.routes.draw do
     resources :orders, only: [:index]
   end
   resources :kits, only: [:index, :show, :new, :create, :edit, :update] do
-    resources :guides, only: [:new, :create ,:edit, :update]
-    resources :kit_ingredients, only: [:create]
-    resources :kit_cookwares, only: [:create]
+    resources :guides, only: [:new, :create]
+    resources :kit_ingredients, only: [:index, :new, :create]
+    resources :kit_cookwares, only: [:create, :new]
     resources :orders, only: [:create, :new]
+    resources :ingredients, only: [:create]
     collection do
       get "category"
     end
@@ -21,7 +28,16 @@ Rails.application.routes.draw do
     resources :payments, only: [:create, :show, :new]
     resources :reviews, only: [:new, :create]
   end
-  resources :guides, only: [:show]
+  resources :guides, only: [:show, :edit, :update] do
+    resources :steps, only: [:new, :create]
+  end
+  resources :steps, only: [:update, :destroy]
+  resources :kit_ingredients, only: [:show, :edit, :update] do
+    resources :ingredients, only: [:new, :create]
+  end
+  resources :kit_cookwares, only: [:show, :edit, :update]
+
+  resources :ingredients, only: [:update, :destroy]
 
   get "/failed/", to: "payments#failed", as: :failed
   get "/components/", to: "pages#components", as: :components

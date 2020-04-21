@@ -1,8 +1,10 @@
 class Ingredient < ApplicationRecord
-  has_many :kit_ingredient
+  has_many :kit_ingredients, inverse_of: :ingredient
+  accepts_nested_attributes_for :kit_ingredients
   mount_uploader :image, ImageUploader
 
-  validates :name, presence: true, uniqueness: true
+
+  validates :name, presence: true
   validates :image, presence: true
 
 end
