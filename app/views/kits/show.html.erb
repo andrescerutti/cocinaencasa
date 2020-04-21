@@ -6,33 +6,41 @@
       <h2 class='kitrest' style="color: grey">Un producto de <strong style=" color: black"><%= @kit.restaurant.name %></strong> </h2>
       <div class="product-kit">
         <img class="d-md-none w-100 mb-4 position-relative rounded" src="<%= @kit.image %>" alt="imagen del plato de comida">
-        <p class="text-white d-md-none mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparacion <%= @kit.preparation_time %> min </p>
+        <p class="text-white d-md-none mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparación aprox. <%= @kit.preparation_time %> min.</p>
       </div>
-      <p class="text-success m-0 kitrat mb-2 "> <strong>El <%= ((@kit.average_rating.to_i)*100)/5 %>% volveria a cocinarlo </strong> </p>
+      <p class="text-success m-0 kitrat mb-2 "> <strong>El
+      <% if @kit.average_rating == 0 %>
+      90% volvería a cocinarlo </strong> </p>
+      <% else %>
+      <%= ((@kit.average_rating.to_i)*100)/5 %>% volvería a cocinarlo </strong> </p>
+      <% end %>
       <%= simple_form_for([@kit, @order])  do |f| %>
       <div class="d-flex justify-content-between mt-1">
 
         <div class="align-items-center mt-2 ">
           <div class=" d-flex justify-content-between">
             <div class="">
-              Cantidad de personas <i style="font-size: 20;" class="fas fa-user"></i>
+              <p>Un kit rinde <%= @kit.size %> porciones <i style="font-size: 20;" class="fas fa-utensils"></i></p>
+              <p>Seleccioná la cantidad de kits</p>
             </div>
 
             <div style="width: 120px;">
               <%= f.input :amount, collection: 1..@kit.stock, label: false %>
+
               <span class="d-none" id="price"><%= @kit.price %></span>
             </div>
           </div>
+
+            <h5>Cronograma de entregas</h5>
+          <p><%= @kit.restaurant.day_open %></p>
           <div class="date_delivery d-flex">
             <div class="mr-2">
-              <p style="font-size: 20px;">Día y hora estimada de entrega  <i class="fas fa-calendar-alt"></i></p>
+              <p style="font-size: 20px;">Seleccioná la fecha de entrega  <i class="fas fa-calendar-alt"></i></p>
             </div>
-
             <div style="width: 120px;">
               <%= f.input :date_delivery, as: :string, required: false, input_html: {class: "datepicker"}, label:false %>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -44,7 +52,7 @@
         </div>
 
         <div id="pickup" style="display: none">
-          <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
+          <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberás retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
         </div>
 
         <!-- form direccion  -->
@@ -53,7 +61,7 @@
             <%= a.input :state, placeholder: "Provincia", label: false %>
             <%= a.input :city, placeholder: "Localidad", label: false %>
             <%= a.input :street, placeholder: "Calle", label: false %>
-            <%= a.input :cp, placeholder: "Codigo Postal", label: false %>
+            <%= a.input :cp, placeholder: "Código Postal", label: false %>
             <%= a.input :flat_number, placeholder: "Lote/Numero", label: false %>
 
             <% end %>
@@ -68,11 +76,11 @@
           </div>
 
           <div id="pickup" style="display: none">
-            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberas retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
+            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail deberás retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
           </div>
 
           <div id="instructions" style="display: none">
-            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail confirmando que tu orden esta lista deberas enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> (<%=  @kit.restaurant.address.address %>) </p>
+            <p class="alert-primary rounded w-100 p-2"> Cuando recibas un mail confirmando que tu orden esta lista, deberás enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> ,<%=  @kit.restaurant.address.address %> </p>
           </div>
 
         <% end %>
@@ -86,7 +94,7 @@
 
       <div class="product-kit">
         <img class=" w-100 mb-4 position-relative rounded" src="<%= @kit.image %>" alt="imagen del plato de comida">
-        <p class="text-white .d-none .d-sm-block mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparacion <%= @kit.preparation_time %> min </p>
+        <p class="text-white .d-none .d-sm-block mr-2 rounded"> <i class="far fa-clock text-white"></i> Tiempo de preparación aprox. <%= @kit.preparation_time %> min.  </p>
       </div>
     </div>
   </div>
@@ -114,7 +122,7 @@
   </div>
 
   <div class="carrousel my-5">
-    <h4><strong>Cookwares:</strong></h4>
+    <h4><strong>Utensilios necesarios para esta preparación:</strong></h4>
     <div class="cards-scroll">
       <div class="cards-scroll mt-3">
         <% @kit.cookware.each do |kit| %>
@@ -135,7 +143,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h2 class="mb-3">Opiniones</h2>
+      <h2 class="mb-3">Opiniones:</h2>
       <div class="mb-4">
         <% @kit.reviews.limit(4).each do |review| %>
           <%= render 'shared/card_recomendation', review: review %>

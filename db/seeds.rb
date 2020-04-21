@@ -333,26 +333,8 @@ USERS = [
     last_name: 'Chaves',
     permision_level: 5,
     email: 'alejo@easychef.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image: 'https://ca.slack-edge.com/T02NE0241-UNDMY14Q5-3615c3435408-512'
-  },
-
-  {
-    first_name: 'Santiago',
-    last_name: 'Llapur',
-    permision_level: 5,
-    email: 'santiago@easychef.com',
-    password: 'asdasd',
-    avatar_image: 'https://ca.slack-edge.com/T02NE0241-UNDKPE0D6-3ae91634e71a-72'
-  },
-
-  {
-    first_name: 'Enzo',
-    last_name: 'Monteverdi',
-    permision_level: 5,
-    email: 'enzo@easychef.com',
-    password: 'asdasd',
-    avatar_image:'https://ca.slack-edge.com/T02NE0241-UNDJE9Y1J-2cd2134f004a-72'
   },
 
   {
@@ -360,86 +342,8 @@ USERS = [
     last_name: 'Cerutti',
     permision_level: 5,
     email: 'andres@easychef.com',
-    password: 'asdasd',
+    password: 'Easychef2020',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UNDCB0BTN-6e9c411fc926-512'
-  },
-
-  {
-    first_name: 'Sebastian',
-    last_name: 'Buffo',
-    permision_level: 1,
-    email: 'sebastian@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://ca.slack-edge.com/T02NE0241-U56TR1Q0M-fef167a62a5a-72'
-  },
-
-  {
-    first_name: 'Fernando',
-    last_name: 'Silva',
-    permision_level: 1,
-    email: 'fernando@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://ca.slack-edge.com/T02NE0241-UK7E344JG-407beaec7aee-72'
-  },
-
-  {
-    first_name: 'Guillermo',
-    last_name: 'Varela',
-    permision_level: 1,
-    email: 'guillermo@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://ca.slack-edge.com/T02NE0241-UD4D68QS0-591cb8267b1c-72'
-  },
-
-  {
-    first_name: 'Felipe',
-    last_name: 'Hernandez',
-    permision_level: 1,
-    email: 'felipe@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://ca.slack-edge.com/T02NE0241-UP3R424M7-0dc8c8f737e5-512'
-  },
-
-  {
-    first_name: 'Luis',
-    last_name: 'Zhang',
-    permision_level: 1,
-    email: 'luis@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://ca.slack-edge.com/T02NE0241-UK84XQMRN-c12de7874ee2-512'
-  },
-
-  {
-    first_name: 'Gerardo',
-    last_name: 'Raiden',
-    permision_level: 1,
-    email: 'gerardo@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://ca.slack-edge.com/T02NE0241-UKCMT2EHY-f941ee395885-512'
-  },
-  {
-    first_name: 'Magali',
-    last_name: 'Pinto',
-    permision_level: 1,
-    email: 'magali@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://media.licdn.com/dms/image/C5603AQEnNutafbuCIw/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=cu0Sr4GREXoTsnf6aEEFeTZkbJl5UTNM8OFf7uOMTfY'
-  },
-  {
-    first_name: 'Natalia',
-    last_name: 'Mori',
-    permision_level: 1,
-    email: 'natalia@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://media.licdn.com/dms/image/C4D03AQFSjBw42GW_Yg/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=40QOkGKTLBzqRGxgU_L0Ipn15OPBcfwqri15rgBhzjw'
-  },
-  {
-    first_name: 'Catalina',
-    last_name: 'FoodTrack',
-    permision_level: 1,
-    email: 'catalina@gmail.com',
-    password: 'asdasd',
-    avatar_image:'https://icon-library.net/images/no-profile-picture-icon-female/no-profile-picture-icon-female-3.jpg'
   }
 ]
 
@@ -457,6 +361,7 @@ BRANDS = [
                     test_mp_private_key: "TEST-5497686852257892-041221-d6bb381c98ee79cdcd0872704a705297-168219137",
                     prod_mp_public_key: "APP_USR-d47234f2-9c8d-40d2-89a8-654125e5cf47",
                     prod_mp_private_key: "APP_USR-5497686852257892-041221-f838a8d921fa05cb3f14f83f25464505-168219137",
+                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://tendencias.tv/wp-content/uploads/2016/07/MANO-ROTA.jpg',
                     address_attributes: {
@@ -470,9 +375,9 @@ BRANDS = [
             { general_information: {
                 name: 'Pollo relleno de queso fundido y chorizo',
                 stock: 10,
-                price: 1,
+                price: 425,
                 size: 1,
-                preparation_time: 25,
+                preparation_time: 45,
                 description: 'Pollo relleno de una combinación entre Queso derretido y Chorizo.',
                 remote_image_url: 'https://i.ytimg.com/vi/7yyIEA3h62Y/maxresdefault.jpg',
               },
@@ -529,7 +434,7 @@ BRANDS = [
             },
             { general_information: {
                                       name: 'Risotto de hongos',
-                                      stock: 10,
+                                      stock: 0,
                                       price: 350,
                                       size: 1,
                                       preparation_time: 60,
@@ -592,6 +497,8 @@ BRANDS = [
                     prod_mp_public_key: "APP_USR-516eb105-81a6-4e01-8566-75fe8fb966e3",
                     prod_mp_private_key: "APP_USR-5189200031208569-041221-e925141c98437e21acad9c43384276cd-125522072",
                     email: "asdad@asdas.com",
+                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
+
                     remote_image_url: 'https://www.diariodesevilla.es/2019/09/17/con_cuchillo_y_tenedor/cosas_de_come/mesa-junto-cocina_1392470814_107011889_1994x1024.jpg',
                     address_attributes: {
                                           address: "Soler 4202",
@@ -603,10 +510,10 @@ BRANDS = [
     kits: [
             { general_information: {
                                       name: 'Costillar de cerdo',
-                                      stock: 15,
-                                      price: 1,
+                                      stock: 0,
+                                      price: 567,
                                       size: 1,
-                                      preparation_time: 50,
+                                      preparation_time: 90,
                                       description: 'Costillar de cerdo asado a fuego lento, aderezado con salsa barbacoa, acompañado de papas fritas.',
                                       remote_image_url: 'https://www.traegergrills.com/images/en-us/Recipes/2019/Feb%202019/20190116_BBQ-Ribs-By-Amanda-Haas_RE_HE_M.jpg'
                                     },
@@ -695,10 +602,10 @@ BRANDS = [
             },
             { general_information: {
                                       name: 'Croquetas de Pollo y Brócoli',
-                                      stock: 10,
-                                      price: 1,
+                                      stock: 0,
+                                      price: 245,
                                       size: 1,
-                                      preparation_time: 55,
+                                      preparation_time: 30,
                                       description: 'Exquisitas Croquetas de Brócoli',
                                       remote_image_url: 'https://truffle-assets.imgix.net/916a7d40-croquetas-de-brocoli-con-pollo-l.jpg'
                                     },
@@ -768,6 +675,8 @@ BRANDS = [
                     test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
                     prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
                     prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
+                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
+
                     phone: "123123123123123",
                     email: "asdad@asdas.com",
                     remote_image_url: 'https://i.imgur.com/VdMltvq.png',
@@ -781,10 +690,10 @@ BRANDS = [
     kits: [
             { general_information: {
                                       name: 'Pastel de Platano y Carne de Cerdo',
-                                      stock: 10,
+                                      stock: 20,
                                       price: 2,
                                       size: 1,
-                                      preparation_time: 60,
+                                      preparation_time: 80,
                                       description: 'Un auténtico Pastel de Plátano con Carne, Frijoles y Queso.',
                                       remote_image_url: 'https://i.imgur.com/eHiJ90R.jpg'
                                     },
@@ -833,10 +742,10 @@ BRANDS = [
             },
             { general_information: {
                                       name: 'Spaghetti con Salsa de Remolacha',
-                                      stock: 10,
-                                      price: 1,
+                                      stock: 0,
+                                      price: 360,
                                       size: 1,
-                                      preparation_time: 60,
+                                      preparation_time: 55,
                                       description: 'Con un poco de Nuez y toda la nutrición de la Remolacha, estos Spaghettis son la forma más saludable para disfrutar de una buena pasta.',
                                       remote_image_url: 'https://i.imgur.com/khcIO2Y.png'
                                     },
@@ -939,8 +848,10 @@ BRANDS = [
                     test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
                     prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
                     prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
+                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs Sabados 13:00 a 15:00 hs",
+
                     email: "asdad@asdas.com",
-                    remote_image_url: 'https://i.imgur.com/ZuopTOE.png',
+                    remote_image_url: 'https://www.xn--ministeriodediseo-uxb.com/ministerio2/wp-content/uploads/2018/03/SPAZIO-Milano_Sala-Bifore1-Brambilla-Serrani-Photographers-1-e1447782553348.jpg',
                     address_attributes: {
                                           address: "Paraguay 3857, Buenos Aires, Ciudad Autónoma de Buenos Aires",
                                           latitude: -34.590727,
@@ -951,8 +862,8 @@ BRANDS = [
     kits: [
             { general_information: {
                 name: 'Sandwich de Espinaca',
-                stock: 10,
-                price: 1,
+                stock: 0,
+                price: 260,
                 size: 1,
                 preparation_time: 20,
                 description: 'Una opción saludable y deliciosa.',

@@ -265,7 +265,7 @@
            style="display: none !important; mso-hide: all; visibility: hidden; opacity: 0; color: transparent; height: 0; width: 0;">
       <tr>
         <td role="module-content">
-          <p>Disfruta de tu experiencia Cocina En Casa y cocina con quien quieras!</p>
+          <p>Ya esta listo tu kit para ser retirado</p>
         </td>
       </tr>
     </table>
@@ -472,20 +472,16 @@
         </td>
       </tr>
     </table>
-
+    <br />
+    <br />
     <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
       <tr>
         <td style="padding:0px 0px 40px 0px;line-height:22px;text-align:inherit;"
             height="100%"
             valign="top"
             bgcolor="">
-            <br />
-            <br />
-            <br />
-            <p><span><p><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>,</p>
-              <br />
-              <br />
-               Hoy convertite en tu propio chef y disfruta de quedarte en casa!
+            <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre; margin-top: 60px;">            <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;"><%= @order.user.first_name.capitalize %> <%= @order.user.last_name.capitalize %>,</span></p>
+
             </span></p>
         </td>
       </tr>
@@ -497,7 +493,34 @@
             height="100%"
             valign="top"
             bgcolor="">
-            <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;"><strong>El virus lo frenamos entre todos!</strong></span></p>
+            <p> Tu kit ya esta listo!</p>
+            <br />
+            <p></p>
+            <br />
+            <p> Cada vez falta menos para que puedas cocinar el <strong> <%= @order.kit.name %> </strong> y convertirte en tu propio cheff.</p>
+            <br />
+            <p>Información logistica de tu pedido:</p>
+            <br />
+            <p>- El medio de envio que seleccionaste es <strong>
+              <strong> <%= @order.delivery_provider %> </strong>
+              <br />
+              <br />
+              <%= if @order.delivery_provider == "Glovo"
+
+                "La direccion de #{@order.kit.restaurant.name} donde debes mandar tu glovo es #{@order.kit.restaurant.address.address}
+               "
+              elsif @order.delivery_provider == "Envio a domicilio"
+              "-La gente de #{@order.kit.restaurant.name} se ocupara de hacer el envio a tu domicilio en los proximos minutos"
+              else
+              "- Take away es una gran opción para despejarse, no olvides de tomar los recaudos necesarios por el covid-19. La direccion de #{@order.kit.restaurant.name} es #{@order.kit.restaurant.address.address}"
+              end
+             %>
+
+             </strong></p>
+            <br />
+            <br />
+            <p>- Numero de referencia: <strong><%= @order.code %> </strong></p>
+            <p>(no te olvides de mandarselo a tu glovo o presentarlo para retirar tu pedido)</p>
         </td>
       </tr>
     </table>
@@ -505,6 +528,7 @@
         </td>
       </tr>
     </table>
+
 
     <!--[if (gte mso 9)|(IE)]>
       </td>
@@ -521,7 +545,7 @@
     <table class="wrapper" role="module" data-type="image" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
       <tr>
         <td style="font-size:6px;line-height:10px;padding:0px 0px 0px 0px;" valign="top" align="center">
-          <a href="https://www.cocinaencasa.com.ar"><img class="max-width=" border="0" style="display:block;color:#000000;text-decoration:none;font-family:Helvetica, arial, sans-serif;font-size:16px;max-width:100% !important;width:100%;height:auto !important;" src="https://i.imgur.com/FTPelzl.png" alt="Cocina" width="600"></a>
+          <a href="https://www.cocinaencasa.com.ar"><img class="max-width=" border="0" style="display:block;color:#000000;text-decoration:none;font-family:Helvetica, arial, sans-serif;font-size:16px;max-width:100% !important;width:100%;height:auto !important;" src="<%= @order.kit.image %>" alt="Cocina" width="600"></a>
         </td>
       </tr>
     </table>
@@ -627,16 +651,7 @@
         <td height="100%" valign="top">
 <!--           <img src="https://image.flaticon.com/icons/svg/2785/2785819.svg" width="150"  height="150">
  -->
-          <br />
-          <br />
-          <br />
-          <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;">Cocina en casa es una experiencia gourmet y diferente: </span></p>
-            <br />
-            <p>
-              Podes cocinar los platos de los mejores restaurants de la ciudad en tu propia casa. De esta forma ayudar a la causa y quedandote en casa fomentando que la cocina sea un lugar distentido de disfrute </strong>.
-          </p>
-          <br />
-          <p> <strong>Te lo vas a perder?</p>
+          <p><span style="font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; white-space: pre;"></p>
         </td>
       </tr>
     </table>
@@ -683,13 +698,8 @@
               <td align="center">
                       <br />
                       <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <a href="https://www.cocinaencasa.com.ar/" target="_blank"
-                       style="color: #ffffff; font-size: 13px; padding: 15px 0px;text-decoration: none;display: block;text-align: center; width: 220px; background-color: #0B60C4; border-radius: 50px; font-weight: bold; cursor: pointer;">PEDI TU PRIMER KIT</a>
+                      <a href="https://www.cocinaencasa.com.ar" target="_blank"
+                       style="color: #ffffff; font-size: 13px; padding: 15px 0px;text-decoration: none;display: block;text-align: center; width: 220px; background-color: #0B60C4; border-radius: 50px; font-weight: bold; cursor: pointer;">Entra al tutorial de tu receta</a>
                 </td>
             </tr>
           </table>
@@ -860,7 +870,7 @@
             height="100%"
             valign="top"
             bgcolor="">
-            <h6 style="text-align: center;">*Valido para&nbsp;<span style="color: rgb(0, 0, 0); font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: center; white-space: pre;"><%= @user.email %></span></h6>
+            <h6 style="text-align: center;">*Valido para&nbsp;<span style="color: rgb(0, 0, 0); font-family: Colfax, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; text-align: center; white-space: pre;"><%= @order.user.email %></span></h6>
         </td>
       </tr>
     </table>
