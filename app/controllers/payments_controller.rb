@@ -16,6 +16,7 @@ class PaymentsController < ApplicationController
     require 'mercadopago'
     @order = Order.find(params[:order_id])
 
+
     restaurant_mepa_private_key = @order.kit.restaurant.test_mp_private_key
 
     Rails.logger.info("The restaurant_mepa_private_key class is : #{restaurant_mepa_private_key.class}")
@@ -55,7 +56,9 @@ class PaymentsController < ApplicationController
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
       mail = PaymentMailer.with(user: current_user.email, payment: @payment).confirmed
       mail.deliver_now
-      resto_mail = RestaurantSaleMailer.with(order: @order, restaurant: @restaurant, payment: @payment).new_sale
+
+      @restaurant = @payment.order.kit.restaurant
+      resto_mail = RestaurantSaleMailer.with(restaurant: @restaurant, order: @order, payment: @payment).new_sale
       resto_mail.deliver_now
 
       if !search_customer["response"]["results"].empty?
