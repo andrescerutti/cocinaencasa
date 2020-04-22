@@ -1,5 +1,6 @@
 
 <div class="container mt-5">
+<%= link_to "", :back, class: "fas fa-arrow-left my-2", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
   <%= simple_form_for [@kit] do |f| %>
   <%= f.input :restaurant_id, collection: @user.restaurants, prompt: "Restaurant", label: false, required: true %>
   <%= f.input :name, label: false, placeholder: 'Nombre' %>

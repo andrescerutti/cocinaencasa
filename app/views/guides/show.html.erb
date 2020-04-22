@@ -1,5 +1,6 @@
 <div class="container px-5">
   <div class="d-flex flex-column justify-content-center my-3">
+    <%= link_to "", :back, class: "fas fa-arrow-left mt-2", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
     <div class="d-flex flex-column shadow justify-content-center my-3 border border-primary rounded">
       <h3 class="pt-4 text-primary text-center">Donde la magia comienza</h3>
       <p class="text-secondary text-center">Estas a punto de convertirte en chef! Seguí el paso a paso...</p>
@@ -61,7 +62,7 @@
 
       <% if @kit.restaurant.user == current_user %>
           <div class="m-4" >
-            <p>Paso <%= index + 1 %></p>
+            <p>Paso  <%= index + 1 %></p>
             <%= simple_form_for (step) do |f| %>
             <div class="d-row align-items-center">
               <%= f.input :order, label: "Orden" %>

@@ -1,7 +1,7 @@
-<h2 class="text-center  mb-5 mt-4">Todas las ordenes</h2>
+<h2 class="text-center  mb-5 mt-5" style="margin-bottom: 60px !important;">Todas las ordenes</h2>
 <div class="container-fluid">
-  <div class="row">
-  <div class="col-12 col-lg-6">
+  <div class="">
+  <div class="">
     <ul class="list-inline tabs-underlined">
       <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
         <li class="nav-item" style="border-top: 3px solid #fd1015">
@@ -51,7 +51,7 @@
             </div>
           <% end %>
         <% else %>
-          <p>No hay ordenes pendientes</p>
+          <p class="mt-5 text-center">No hay ordenes pendientes</p>
         <% end %>
       </div>
 
@@ -86,7 +86,7 @@
             </div>
           <% end %>
         <% else %>
-          <p>No hay ordenes en entrega</p>
+          <p class="mt-5 text-center">No hay ordenes en entrega</p>
         <% end %>
 
 
@@ -197,34 +197,47 @@
       </div>
     </div>
 </div>
-    <div class="col-12 col-lg-6 text-center">
-      <div class="position-relative">
+    <div class="text-center">
+      <div class="" style="margin-bottom: 45px; margin-top: 35px;">
         <h2 >Todos mis kits</h2>
-        <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-primary position-absolute", style: "top: 50px; right: 10px" %>
+        <div class="">
+        <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-outline-primary", style: "" %>
       </div>
-      <div>
+    </div>
+
+  <div>
+  <div class="image-container d-md-block ">
+    <div class="cards-scroll">
+      <div class="cards-scroll mt-2 mb-5">
         <% @kits.each do |kit| %>
-          <%= link_to kit_path(kit) do  %>
-            <div class="card-scroll pr-0 pl-2 mr-3 col-lg-6">
-              <div class="card-kit mt-1" style="width: 400px; height: 550px; margin-left: 160px;">
-                <%= cl_image_tag kit.image, class: "rounded"%>
+        <%= link_to kit_path(kit) do  %>
+        <div class="card-scroll col-md-4">
+          <div class="card-kit-showkit text-center border">
+            <img style="height: 220px;" src=<%= kit.image %>  />
+            <div class="card-body">
+              <div>
+                <p class="card-title text-truncate mb-1" style="font-size: 14px; box-sizing: ;"><%= kit.name %></p>
+              </div>
                 <div class="card-body position-relative">
                   <div class="">
-                    <%= link_to "Editar", edit_kit_path(kit), class: "btn btn-outline-primary position-absolute", style: " top: 14px; right: 14px" %>
+                    <%= link_to "Editar", edit_kit_path(kit), class: "btn btn-primary position-absolute", style: " top: -95px; right: 1px" %>
                     <p class="card-title mb-1 text-wrap text-truncate" style="height: 45px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></p>
                     <p class="card-text overflow-ellipsis card-description" style=""><%= kit.description %></p>
                     <p class="card-text card-price">$ <%= kit.price %></p>
                   </div>
-                  <div class="d-flex justify-content-between mt-2">
-                    <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-primary", style: "width: 120px; margin: auto;" %>
-                    <%= link_to 'Paso a paso',  guide_path(kit.guide), class: "btn btn-primary" %>
+
+                  <div class="d-flex justify-content-between mt-2" style="margin-left: -13px;">
+                    <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-outline-primary", style: "margin-right: 0px;" %>
+                    <%= link_to 'Paso a paso',  guide_path(kit), class: "btn btn-primary", style: "margin-left: 4px;" %>
 
                   </div>
                 </div>
-              </div>
             </div>
-          <% end %>
+          </div>
+        </div>
+        <% end %>
         <% end %>
       </div>
+    </div>
 
     </div>
