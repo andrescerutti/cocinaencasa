@@ -18,4 +18,8 @@ class IngredientPolicy < ApplicationPolicy
     user?
   end
 
+  def destroy?
+    true
+  end
+
 end

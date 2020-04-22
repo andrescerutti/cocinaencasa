@@ -1,17 +1,18 @@
-<h2>Ingredients del kit</h2>
+<h2 class="my-4 justify-content-center">Ingredients del kit</h2>
+          <div class="justify-content-around  ">
 <% @kit.ingredients.each do |ingredient| %>
-          <div class="card-scroll col-md-4">
-          <div class="card-kit-showkit border">
+          <div class="card-kit-showkit border m-4" style=" width: 200px; ">
             <img src=<%= ingredient.image %>  />
             <div class="card-body">
               <div>
                 <h5 class="card-title mb-1"><%= ingredient.name %></h5>
+                <%= link_to "", ingredient, method: "delete", confirm: "¿Estas Seguro?", class: "fas fa-trash-alt" %>
               </div>
             </div>
           </div>
-        </div>
 <% end %>
-  <%= simple_form_for([@kit, @ingredient]) do |f| %>
+        </div>
+  <%= simple_form_for([@kit, @ingredient], method: :post, url: kit_ingredients_path) do |f| %>
     <div class="d-row align-items-center">
       <%= f.input :name, placeholder: "Nombre", label: false %>
       <%= f.input :image, placeholder: "Imagen", label: false %>
