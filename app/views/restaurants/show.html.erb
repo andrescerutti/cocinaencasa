@@ -6,6 +6,13 @@
       <div class="restaurant-info">
         <h4>Dirección</h4>
         <p class="border "><%= @restaurant.address.address %> </p>
+        <!-- <h4>Opiniones</h4> -->
+        <!-- <p>@restaurant.kits.reviews </p>
+        <h4>Recomendaciones</h4>
+        <p>@restaurant.kits.reviews </p> -->
+
+
+
       </div>
     </div>
     <div class="p-2 text-right w-sm-100 w-md-50 rounded"style="background-image: url(<%= @restaurant.image %>); background-size: cover; background-position: top; min-height: 400px; width:50%; box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);">
@@ -15,54 +22,27 @@
   <div class="container mt-3">
     <div class="cards-scroll">
       <h2 class="font-weight-bold w-100">Kits disponibles</h2>
-
-  <div class="cards-scroll">
-    <div class="cards-scroll mt-3" >
-      <% @restaurant.kits.each do |kit| %>
-        <% if kit.stock < 1 %>
-            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4 position-relative" >
-              <div class="w-25 position-absolute" style="z-index: 1; top: 34px; right: 20px" >
-                <p class="bg-primary bold text-white p-2 rounded">Sin stock</p>
-              </div>
-             <div class="card-kit" style="opacity:0.6">
-
+      <div class="cards-scroll p-3" >
+        <% @restaurant.kits.each do |kit| %>
+          <%= link_to kit_path(kit) do  %>
+            <div class="card-scroll mx-2 col-md-4">
+             <div class="card-kit">
               <%= cl_image_tag kit.image, class: "rounded"%>
                <div class="card-body">
                  <div>
-                   <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small> </h5>
-                   <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
+                   <h5 class="card-title mb-1 text-wrap" style="height: 50px"><%= kit.name %></h5>
+                   <p class="card-text overflow-ellipsis card-description"><%= kit.description %></p>
                  </div>
-                 <div class="d-flex justify-content-between">
-                   <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
+                 <div class="d-flex justify-content-between mt-3">
+                   <p class="card-text card-address"><i class="fas fa-map-marker-alt"></i> A 1.3km</p>
                    <p class="card-text card-price">$ <%= kit.price %></p>
-
                  </div>
                </div>
-              </div>
-            </div>
-        <% else %>
-          <%= link_to kit_path(kit) do  %>
-            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4">
-              <div class="card-kit">
-                <%= cl_image_tag kit.image, class: "rounded"%>
-                <div class="card-body">
-                  <div>
-                    <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></h5>
-                    <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
-                    <p class="card-text card-price">$ <%= kit.price %></p>
-                  </div>
-                </div>
-              </div>
+             </div>
             </div>
           <% end %>
         <% end %>
-      <% end %>
-  </div>
-</div>
-
-
+      </div>
+    </div>
   </div>
 </div>
