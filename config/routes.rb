@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'cookware/index'
+  get 'cookware/create'
+  get 'cookware/update'
+  get 'cookware/destroy'
   get 'ingredients/show'
   get 'ingredients/new'
   get 'ingredients/create'
@@ -16,7 +20,8 @@ Rails.application.routes.draw do
   resources :kits, only: [:index, :show, :new, :create, :edit, :update] do
     resources :guides, only: [:new, :create]
     resources :kit_ingredients, only: [:index, :new, :create]
-    resources :kit_cookwares, only: [:create, :new]
+    resources :kit_cookwares, only: [:index, :create, :new]
+    resources :cookwares, only: [:index, :create]
     resources :orders, only: [:create, :new]
     resources :ingredients, only: [:create]
     collection do
@@ -36,6 +41,7 @@ Rails.application.routes.draw do
     resources :ingredients, only: [:new, :create]
   end
   resources :kit_cookwares, only: [:show, :edit, :update]
+  resources :cookwares, only: [:update, :destroy]
 
   resources :ingredients, only: [:update, :destroy]
 
