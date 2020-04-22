@@ -14,7 +14,6 @@ class KitIngredientsController < ApplicationController
   def create
     @kit_ingredient = KitIngredient.new(kit_ingredient_params)
     redirect_to  if @kit_ingredient.save
-
   end
 
   def edit
@@ -26,11 +25,15 @@ class KitIngredientsController < ApplicationController
   private
 
   def set_kit_ingredients
-    @kit_ingredients = KitIngredient.find(params[:id])
+    @kit_ingredient = KitIngredient.find(params[:id])
     authorize @kit_ingredients
   end
 
   def kit_ingredient_params
     params.require(:kit_ingredients).permit(:quantity, :unit)
+  end
+
+  def ingredient_params
+    params.require(:ingredients).permit(:image, :name)
   end
 end

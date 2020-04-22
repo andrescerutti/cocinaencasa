@@ -225,6 +225,7 @@
                     <p class="card-text overflow-ellipsis card-description" style=""><%= kit.description %></p>
                     <p class="card-text card-price">$ <%= kit.price %></p>
                   </div>
+
                   <div class="d-flex justify-content-between mt-2" style="margin-left: -13px;">
                     <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-outline-primary", style: "margin-right: 0px;" %>
                     <%= link_to 'Paso a paso',  guide_path(kit), class: "btn btn-primary", style: "margin-left: 4px;" %>
