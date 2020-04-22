@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_232605) do
+
+ActiveRecord::Schema.define(version: 2020_04_22_180218) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_232605) do
     t.string "logo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "open"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -176,6 +179,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_232605) do
     t.text "prod_mp_private_key_ciphertext"
     t.boolean "own_delivery", default: false
     t.string "day_open"
+    t.string "open"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
