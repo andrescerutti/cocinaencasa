@@ -36,7 +36,7 @@ Address.destroy_all
 User.destroy_all
 
 puts 'creating categories'
-["Los más pedidos", "Comida rápida", "Opciones Saludables", "Pollo", "Pescado", "Carne", "Vegetariano"].each do |name|
+["Los más pedidos", "Americana", "Postres", "Italiana", "Internacional", "Saludable", "Asiática","Panadería", "Árabe", "Carnes", "Argentina", "Mexicana", "Latina", "Peruana"].each do |name|
   Category.create!(name: name)
 end
 
@@ -144,7 +144,7 @@ INGREDIENTS = [
   },
 
   {
-    name: "Platanos maduros",
+    name: "Plátanos maduros",
     remote_image_url:"https://assets.bonappetit.com/photos/5b7efb0334b974168939a33a/1:1/h_276,c_limit/basically-bananas.png"
   },
 
@@ -285,7 +285,7 @@ INGREDIENTS = [
     remote_image_url: "https://i.imgur.com/X99twmu.png"
   },
   {
-    name: "Brocoli",
+    name: "Brócoli",
     remote_image_url: "https://cdn.imgbin.com/13/20/21/imgbin-broccoli-wPFYcbT7JadCG940pF0bJfsvZ.jpg"
   },
   {
@@ -332,8 +332,8 @@ USERS = [
     first_name: 'Alejo',
     last_name: 'Chaves',
     permision_level: 5,
-    email: 'alejo@easychef.com',
-    password: 'Easychef2020',
+    email: 'alejoagchaves@gmail.com',
+    password: 'elturrodealverti',
     avatar_image: 'https://ca.slack-edge.com/T02NE0241-UNDMY14Q5-3615c3435408-512'
   },
 
@@ -341,9 +341,41 @@ USERS = [
     first_name: 'Andres',
     last_name: 'Cerutti',
     permision_level: 5,
-    email: 'andres@easychef.com',
-    password: 'Easychef2020',
+    email: 'cerutti_andres@hotmail.com',
+    password: 'ningun',
     avatar_image:'https://ca.slack-edge.com/T02NE0241-UNDCB0BTN-6e9c411fc926-512'
+  },
+  {
+    first_name: 'Gaspar',
+    last_name: 'Baldunciel',
+    permision_level: 5,
+    email: 'gasparbaldunciel@gmail.com',
+    password: 'gas321',
+    avatar_image: 'https://ca.slack-edge.com/T02NE0241-UNFJ1HF0F-08f9f98b0ab4-512'
+  },
+  {
+    first_name: 'Romina',
+    last_name: 'Baldunciel',
+    permision_level: 1,
+    email: 'romina@gmaail.com',
+    password: 'faqe111as',
+    avatar_image: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80'
+  },
+  {
+   first_name: 'Lucia',
+   last_name: 'Fernandez',
+   permision_level: 1,
+   email: 'lucia-fernandez@gmaail.com',
+   password: 'faqe11123434as',
+   avatar_image: 'https://images.unsplash.com/photo-1546961329-78bef0414d7c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'
+  },
+   {
+  first_name: 'Lucas',
+  last_name: 'Sanchez',
+  permision_level: 1,
+  email: 'lucas.sanchez@gmaail.com',
+  password: 'faqe11123434as',
+  avatar_image: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80'
   }
 ]
 
@@ -356,13 +388,13 @@ BRANDS = [
     restaurants: [
                   {
                     name: 'Mano Rota',
-                    phone: "123123123123123",
+                    phone: "+54926058752",
                     test_mp_public_key: "TEST-97be680b-9143-4d57-80bf-50ae0576c5f2",
                     test_mp_private_key: "TEST-5497686852257892-041221-d6bb381c98ee79cdcd0872704a705297-168219137",
                     prod_mp_public_key: "APP_USR-d47234f2-9c8d-40d2-89a8-654125e5cf47",
                     prod_mp_private_key: "APP_USR-5497686852257892-041221-f838a8d921fa05cb3f14f83f25464505-168219137",
-                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
-                    email: "asdad@asdas.com",
+                    day_open: "Lunes a Viernes de 8:30 a 16:00 hs",
+                    email: "info123@manorota.com",
                     remote_image_url: 'https://tendencias.tv/wp-content/uploads/2016/07/MANO-ROTA.jpg',
                     address_attributes: {
                                           address: "Paraguay 4801, Buenos Aires, Ciudad Autónoma de Buenos Aires",
@@ -376,7 +408,7 @@ BRANDS = [
                 name: 'Pollo relleno de queso fundido y chorizo',
                 stock: 10,
                 price: 425,
-                size: 1,
+                size: 3,
                 preparation_time: 45,
                 description: 'Pollo relleno de una combinación entre Queso derretido y Chorizo.',
                 remote_image_url: 'https://i.ytimg.com/vi/7yyIEA3h62Y/maxresdefault.jpg',
@@ -394,7 +426,7 @@ BRANDS = [
                                       { quantity: 0.5, unit: 'g', name: "Limon" },
                                     ],
               cooking_cookwares: ["Cuchillo de chef", "Tabla para cortar", "Bowl chico", "Bowl mediano", "Sarten"],
-              categories: ["Opciones Saludables", "Los más pedidos"],
+              categories: ["Americana", "Los más pedidos"],
               guides: { video: "_wU4o-WhNnQ",
                         steps: [
                                 { order: 1, content: "Pelar y cortan los champiñones." },
@@ -413,7 +445,7 @@ BRANDS = [
               kit_orders: [
                             {
                               kit_name: "Pollo relleno de queso fundido y chorizo",
-                              user_email: "natalia@gmail.com",
+                              user_email: "lucas.sanchez@gmaail.com",
                               check_out_session_id: "pending",
                               amount: 1,
                               status: 0,
@@ -425,7 +457,7 @@ BRANDS = [
                                                     longitude: -58.468190,
                                                   },
                               review: {
-                                        content: "Excelente calidad, pude comer muy bien",
+                                        content: "Excelente la calidad de los ingredientes, el plato quedo muy bien",
                                         rating: 5,
                                         remote_image_url: "https://www.te.gob.mx/blog/reyes/media/layout/images/img_no_disponible.png"
                                       }
@@ -463,7 +495,7 @@ BRANDS = [
               kit_orders: [
                             {
                               kit_name: "Risotto de hongos",
-                              user_email: "luis@gmail.com",
+                              user_email: "lucia-fernandez@gmaail.com",
                               check_out_session_id: "pending",
                               amount: 1,
                               status: 1,
@@ -491,13 +523,13 @@ BRANDS = [
     },
     restaurants: [ {
                     name: 'Abantal',
-                    phone: "123123123123123",
+                    phone: "+59265871554",
                     test_mp_public_key: "TEST-616e8f02-6dda-4804-a211-a8420a5b1dfc",
                     test_mp_private_key: "TEST-5189200031208569-041221-5d856d7977f9479b339288b6cf41e4ae-125522072",
                     prod_mp_public_key: "APP_USR-516eb105-81a6-4e01-8566-75fe8fb966e3",
                     prod_mp_private_key: "APP_USR-5189200031208569-041221-e925141c98437e21acad9c43384276cd-125522072",
-                    email: "asdad@asdas.com",
-                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
+                    email: "info12@abantal.com",
+                    day_open: "Lunes a Viernes de 8:30 a 14:00 hs",
 
                     remote_image_url: 'https://www.diariodesevilla.es/2019/09/17/con_cuchillo_y_tenedor/cosas_de_come/mesa-junto-cocina_1392470814_107011889_1994x1024.jpg',
                     address_attributes: {
@@ -541,7 +573,7 @@ BRANDS = [
               kit_orders: [
                               {
                                 kit_name: "Costillar de cerdo",
-                                user_email: "gerardo@gmail.com",
+                                user_email: "lucia-fernandez@gmaail.com",
                                 check_out_session_id: "pending",
                                 amount: 1,
                                 status: 3,
@@ -554,7 +586,7 @@ BRANDS = [
                                                     },
                                 review: {
                                           content: "Buenisimo!",
-                                          rating: 3,
+                                          rating: 4,
                                           remote_image_url: "https://www.recipetineats.com/wp-content/uploads/2016/01/Oven-Pork-Ribs-with-Barbecue-Sauce_4.jpg"
                                         }
                               },
@@ -610,7 +642,7 @@ BRANDS = [
                                       remote_image_url: 'https://truffle-assets.imgix.net/916a7d40-croquetas-de-brocoli-con-pollo-l.jpg'
                                     },
               cooking_ingredients: [
-                                      { quantity: 1, unit: 'u', name: "Brocoli" },
+                                      { quantity: 1, unit: 'u', name: "Brócoli" },
                                       { quantity: 0.5, unit: 'u', name: "Cebolla" },
                                       { quantity: 1, unit: 'u', name: "Diente de ajo" },
                                       { quantity: 1, unit: 'u', name: "Pechuga de pollo" },
@@ -641,7 +673,7 @@ BRANDS = [
               kit_orders: [
                               {
                                 kit_name: "Croquetas de Pollo y Brócoli",
-                                user_email: "magali@gmail.com",
+                                user_email: "romina@gmaail.com",
                                 check_out_session_id: "pending",
                                 amount: 1,
                                 status: 0,
@@ -678,7 +710,7 @@ BRANDS = [
                     day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
 
                     phone: "123123123123123",
-                    email: "asdad@asdas.com",
+                    email: "lapiñeta2@gmail.com",
                     remote_image_url: 'https://i.imgur.com/VdMltvq.png',
                     address_attributes: {
                                           address: "Aráoz 2499",
@@ -795,7 +827,7 @@ BRANDS = [
                               },
                               {
                                 kit_name: "Spaghetti con Salsa de Remolacha",
-                                user_email: "guillermo@gmail.com",
+                                user_email: "lucia-fernandez@gmaail.com",
                                 check_out_session_id: "pending",
                                 amount: 1,
                                 status: 0,
@@ -814,7 +846,7 @@ BRANDS = [
                               },
                               {
                                 kit_name: "Spaghetti con Salsa de Remolacha",
-                                user_email: "sebastian@gmail.com",
+                                user_email: "romina@gmaail.com",
                                 check_out_session_id: "pending",
                                 amount: 1,
                                 status: 3,
@@ -848,9 +880,9 @@ BRANDS = [
                     test_mp_private_key: "TEST-3734607708209553-120722-b85c11a9716448fb713c3faee5bc9ad9-89640039",
                     prod_mp_public_key: "APP_USR-d8af2308-9b7f-44ef-832a-bbec7b2f12c8",
                     prod_mp_private_key: "APP_USR-3734607708209553-120722-88210b387e49699c64b06a5866b5bd77-89640039",
-                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs Sabados 13:00 a 15:00 hs",
+                    day_open: "Lunes a Viernes de 8:30 a 12:00 hs Sábados 13:00 a 15:00 hs",
 
-                    email: "asdad@asdas.com",
+                    email: "buenosairesrock@bsasrock.com",
                     remote_image_url: 'https://www.xn--ministeriodediseo-uxb.com/ministerio2/wp-content/uploads/2018/03/SPAZIO-Milano_Sala-Bifore1-Brambilla-Serrani-Photographers-1-e1447782553348.jpg',
                     address_attributes: {
                                           address: "Paraguay 3857, Buenos Aires, Ciudad Autónoma de Buenos Aires",
