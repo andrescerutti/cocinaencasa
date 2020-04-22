@@ -228,7 +228,8 @@
 
                   <div class="d-flex justify-content-between mt-2" style="margin-left: -13px;">
                     <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-outline-primary", style: "margin-right: 0px;" %>
-                    <%= link_to 'Paso a paso',  guide_path(kit), class: "btn btn-primary", style: "margin-left: 4px;" %>
+                    <%= link_to 'Utensillos',  kit_kit_cookwares_path(kit), class: "btn btn-outline-primary", style: "margin-left: 4px;" %>
+                    <%= link_to 'Paso a paso',  guide_path(kit.guide), class: "btn btn-outline-primary", style: "margin-left: 4px;" %>
 
                   </div>
                 </div>
