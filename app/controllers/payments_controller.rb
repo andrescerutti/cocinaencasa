@@ -17,7 +17,7 @@ class PaymentsController < ApplicationController
     @order = Order.find(params[:order_id])
 
 
-    restaurant_mepa_private_key = @order.kit.restaurant.test_mp_private_key
+    restaurant_mepa_private_key = @order.kit.restaurant.prod_mp_private_key
 
     Rails.logger.info("The restaurant_mepa_private_key class is : #{restaurant_mepa_private_key.class}")
     if restaurant_mepa_private_key.class == String

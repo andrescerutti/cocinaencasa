@@ -26,7 +26,7 @@
             src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
             data-elements-color="#0B5FC4"
             data-header-color="#0B5FC4"
-            data-public-key="<%= @order.kit.restaurant.test_mp_public_key %>"
+            data-public-key="<%= @order.kit.restaurant.prod_mp_public_key %>"
             data-transaction-amount="<%= @order.kit.price * @order.amount %>"
             data-button-label="Confirmar y pagar"
             <% if current_user.mpcustomer_id? %>
