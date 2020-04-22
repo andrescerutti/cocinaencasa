@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(version: 2020_04_22_174628) do
     t.text "test_mp_private_key_ciphertext"
     t.text "prod_mp_public_key_ciphertext"
     t.text "prod_mp_private_key_ciphertext"
-    t.boolean "own_delivery", default: false
+    t.boolean "own_delivery"
     t.string "day_open"
     t.string "open"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
