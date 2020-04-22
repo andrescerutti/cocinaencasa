@@ -2,6 +2,7 @@
     <div class="container">
     <div class="form-new ">
       <div class="title">
+        <%= link_to "", :back, class: "fas fa-arrow-left mb-2", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
         <h1>Set a new brand</h1>
       </div>
       <%= simple_form_for [@user, @brand] do |f| %>
