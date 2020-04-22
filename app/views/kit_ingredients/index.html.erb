@@ -2,7 +2,6 @@
 <div class="container">
   <%= link_to "", :back, class: "fas fa-arrow-left mt-3", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
   <h2 class="mt-3 mb-2 text-center">Ingredients del kit</h2>
-
   <div class="image-container d-md-block">
     <div class="cards-scroll">
       <div class="cards-scroll mt-2 mb-5">
@@ -17,8 +16,11 @@
               </div>
             </div>
           </div>
-<% end %>
         </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
   <%= simple_form_for([@kit, @ingredient], method: :post, url: kit_ingredients_path) do |f| %>
     <div class="d-row align-items-center">
       <%= f.input :name, placeholder: "Nombre", label: false %>
