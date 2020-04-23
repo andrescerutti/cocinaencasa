@@ -3,5 +3,5 @@ class Guide < ApplicationRecord
 
   has_many :steps
 
-  validates :video, presence: true
+  # validates :video, presence: true
 end
