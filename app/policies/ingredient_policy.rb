@@ -5,7 +5,6 @@ class IngredientPolicy < ApplicationPolicy
     end
   end
 
-
   def create?
     true
   end
@@ -21,5 +20,4 @@ class IngredientPolicy < ApplicationPolicy
   def destroy?
     true
   end
-
 end
