@@ -41,10 +41,15 @@ class KitsController < ApplicationController
 
   def create
     @kit = Kit.new(kit_params)
-    @guide = Kit.new(kit: @kit)
+    @kit_ingredient = KitIngredient.new(kit_id: @kit)
+    @kit_cookware = KitCookware.new(kit_id: @kit)
     authorize @kit
-    return redirect_to @kit if @kit.save!
-
+    @guide = Guide.new(video: "PeFJlk8eOhQ")
+    if @kit.save!
+      @guide.kit = @kit
+      @guide.save
+      return redirect_to @kit
+    end
     render :new
   end
 
