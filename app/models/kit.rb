@@ -15,10 +15,10 @@ class Kit < ApplicationRecord
 
   mount_uploader :image, ImageUploader # carrierwave para subir fotos
 
-  has_many :kit_cookwares
-  has_many :kit_ingredients
-  has_many :kit_categories
-  has_one :guide
+  has_many :kit_cookwares, dependent: :destroy
+  has_many :kit_ingredients, dependent: :destroy
+  has_many :kit_categories, dependent: :destroy
+  has_one :guide, dependent: :destroy
   has_many :orders
   has_many :favourites
   has_many :ingredients, through: :kit_ingredients

@@ -68,6 +68,11 @@ class KitsController < ApplicationController
     @category = params["name"]
   end
 
+   def destroy
+    @kit.destroy
+    redirect_to admin_dashboard_path
+  end
+
 
 
   private

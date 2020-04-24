@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :restaurants do
     resources :orders, only: [:index]
   end
-  resources :kits, only: [:index, :show, :new, :create, :edit, :update] do
+  resources :kits, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :guides, only: [:new, :create]
     resources :kit_ingredients, only: [:index, :new, :create]
     resources :kit_cookwares, only: [:index, :create, :new]
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     resources :payments, only: [:create, :show, :new]
     resources :reviews, only: [:new, :create]
   end
-  resources :guides, only: [:show, :edit, :update] do
+  resources :guides, only: [:show, :edit, :update, :destroy] do
     resources :steps, only: [:new, :create]
   end
   resources :steps, only: [:update, :destroy]
@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   get "/wrong_address/", to: "pages#wrong_address", as: :wrong_address
   get "/contact/", to: "pages#contact", as: :contact
   patch "/orders/:id/order_assignment/", to: "orders#order_assignment", as: :order_assignment
+  delete 'kits/:id', to: "kits#destroy"
 
 
   # /dashboard/orders
