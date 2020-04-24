@@ -2,22 +2,50 @@
   <%= link_to "", :back, class: "fas fa-arrow-left mt-3", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
   <h1 class="mt-4"><%= @category %></h1>
   <div class="row">
-    <% @kits.each do |kit| %>
-      <%= link_to kit_path(kit), class: "col-md-6 text-decoration-none"   do %>
-         <div class="card-kit ">
-          <%= cl_image_tag kit.image, class: "rounded"%>
-           <div class="card-body">
-             <div>
-               <h5 class="card-title mb-1 text-wrap" style="height: 50px"><%= kit.name %></h5>
-               <p class="card-text overflow-ellipsis card-description"><%= kit.description %></p>
-             </div>
-             <div class="d-flex justify-content-between mt-3">
-               <p class="card-text card-address"><i class="fas fa-map-marker-alt"></i> A 1.3km</p>
-               <p class="card-text card-price">$ <%= kit.price %></p>
-             </div>
-           </div>
-         </div>
+
+   <% @kits.each do |kit| %>
+        <% if kit.stock < 1 %>
+            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4 position-relative" >
+              <div class="w-25 position-absolute" style="z-index: 1; top: 34px; right: 20px" >
+                <p class="bg-primary bold text-white p-2 rounded">Sin stock</p>
+              </div>
+             <div class="card-kit" style="opacity:0.6">
+
+              <%= cl_image_tag kit.image, class: "rounded"%>
+               <div class="card-body">
+                 <div>
+                   <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small> </h5>
+                   <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
+                 </div>
+                 <div class="d-flex justify-content-between">
+                   <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
+                   <p class="card-text card-price">$ <%= kit.price %></p>
+
+                 </div>
+               </div>
+              </div>
+            </div>
+        <% else %>
+          <%= link_to kit_path(kit) do  %>
+            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4">
+              <div class="card-kit">
+                <%= cl_image_tag kit.image, class: "rounded"%>
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></h5>
+                    <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
+                    <p class="card-text card-price">$ <%= kit.price %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
-    <% end %>
+
+
   </div>
 </div>
