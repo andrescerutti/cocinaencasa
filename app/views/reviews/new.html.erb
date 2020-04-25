@@ -1,10 +1,10 @@
 <div style="background-image: url(<%= image_url('orders-bg.jpg') %>); background-size: cover; background-position: top; min-height: 500px; ">
   <div class="container bg-light position-relative pb-5">
-    <h2 class="text-center p-3">Dejanos tu comentario sobre la experiencia vivida</h2>
+    <h2 class="text-center p-3">Dejanos tu comentario sobre que te pareció el plato y como fue tu experiencia</h2>
     <%= simple_form_for [@order, @review] do |f| %>
-      <%= f.input :content, as: :text, html_options: { rows: 10 }, label: false, placeholder: "Describinos tu expreiencia" %>
-      <%= f.input :rating, collection: [0, 1, 2, 3, 4, 5] %>
-      <%= f.input :image, label: false %>
+      <%= f.input :content, as: :text, html_options: { rows: 10 }, label: false, placeholder: "Describinos tu experiencia" %>
+      <%= f.input :rating, collection: [1, 2, 3, 4, 5], label: "¿Del 1 al 5 cuanto le pondrías?" %>
+      <%= f.input :image, label: false, label: "Subí la imagen de como quedo tu plato" %>
       <%= f.input :image_cache, as: :hidden %>
       <%= f.submit 'Dejar comentario', class: "btn btn-primary" %>
     <% end %>
