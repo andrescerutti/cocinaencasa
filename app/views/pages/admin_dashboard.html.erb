@@ -24,41 +24,43 @@
       <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
         <% if !@orders.pending.empty? %>
           <% @orders.pending.order(created_at: :desc).each do |order| %>
-          <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
-          <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
-              <div class="p-2 w-75">
-                 <% if order.user.first_name == nil && order.user.last_name == nil%>
-                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
-                 <% else %>
-                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
-                 <% end %>
-                 <% if order.address.present? %>
-                    <p class="font-weight-light"><%= order.address.city %>, <%= order.address.state %>, <%= order.address.street %>, <%= order.address.flat_number %></p>
-                 <% end %>
-                 <p><%= order.kit.name %></p>
-                 <p><%= order.kit.restaurant.name %> </p>
-                 <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
-              </div>
-             <div class="p-2 w-25 d-flex flex-column justify-content-center">
-                <p>Metodo de envío: <%= order.delivery_provider %></p>
-                <p>Nº referencia: <%= order.code %></p>
-                <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
-                <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar inicio de envio." } do |f| %>
-                  <%= f.hidden_field :status, value: :on_transit %>
-                  <%= f.submit 'Solicitar', class: 'btn btn-primary p-1 w-100'  %>
-                <% end %>
+          <% if order.payment.approved == true %>
+            <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
+            <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
+                <div class="p-2 w-75">
+                   <% if order.user.first_name == nil && order.user.last_name == nil%>
+                    <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
+                   <% else %>
+                    <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
+                   <% end %>
+                   <% if order.address.present? %>
+                      <p class="font-weight-light"><%= order.address.city %>, <%= order.address.state %>, <%= order.address.street %>, <%= order.address.flat_number %></p>
+                   <% end %>
+                   <p><%= order.kit.name %></p>
+                   <p><%= order.kit.restaurant.name %> </p>
+                   <span>Fecha de entrega: <%= order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %> </span>
+                </div>
+               <div class="p-2 w-25 d-flex flex-column justify-content-center">
+                  <p>Metodo de envío: <%= order.delivery_provider %></p>
+                  <p>Nº referencia: <%= order.code %></p>
+                  <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
+                  <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar inicio de envio." } do |f| %>
+                    <%= f.hidden_field :status, value: :on_transit %>
+                    <%= f.submit 'Solicitar', class: 'btn btn-primary p-1 w-100'  %>
+                  <% end %>
               </div>
             </div>
+          <% end %>
           <% end %>
         <% else %>
           <p class="mt-5 text-center">No hay ordenes pendientes</p>
         <% end %>
       </div>
 
-
       <div class="tab-pane fade" id="on_transit" role="tabpanel" aria-labelledby="on_transit-tab">
         <% if !@orders.on_transit.empty? %>
           <% @orders.on_transit.order(updated_at: :desc).each do |order| %>
+          <% if order.payment.approved == true %>
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
@@ -85,6 +87,7 @@
               </div>
             </div>
           <% end %>
+          <% end %>
         <% else %>
           <p class="mt-5 text-center">No hay ordenes en entrega</p>
         <% end %>
@@ -95,6 +98,7 @@
       <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
         <% if !@orders.delivered.empty? %>
           <% @orders.delivered.order(updated_at: :desc).each do |order| %>
+          <% if order.payment.approved == true %>
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
@@ -123,6 +127,7 @@
               </div>
             </div>
           <% end %>
+          <% end %>
         <% else %>
           <p class="mt-5 text-center">No hay ordenes entregadas</p>
         <% end %>
@@ -131,6 +136,7 @@
       <div class="tab-pane fade" id="canceled" role="tabpanel" aria-labelledby="canceled-tab">
         <% if !@orders.canceled.order(updated_at: :desc).empty? %>
           <% @orders.canceled.each do |order| %>
+          <% if order.payment.approved == true %>
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
@@ -159,6 +165,7 @@
               </div>
             </div>
           <% end %>
+          <% end %>
         <% else %>
           <p class="mt-5 text-center">No hay ordenes canceladas</p>
         <% end %>
@@ -167,6 +174,7 @@
       <div class="tab-pane fade" id="refunded" role="tabpanel" aria-labelledby="refunded-tab">
         <% if !@orders.refunded.order(updated_at: :desc).empty? %>
           <% @orders.refunded.each do |order| %>
+          <% if order.payment.approved == true %>
             <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
             <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
               <div class="p-2 w-75">
@@ -190,6 +198,7 @@
                 <% end %>
               </div>
             </div>
+          <% end %>
           <% end %>
         <% else %>
           <p class="mt-5 text-center">No hay ordenes reembolsadas</p>

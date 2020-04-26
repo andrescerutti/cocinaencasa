@@ -43,7 +43,6 @@
           <% end %>
         <% end %>
       </div>
-      <%= raise %>
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="col-12">
@@ -65,10 +64,10 @@
                         <%= link_to "Receta", guide_path(payment.order.kit.guide), class: "btn btn-outline-primary", style: "width: 120px; margin-left: 65px;" %>
                       </div>
                       <div class="mt-3 text-center">
-                        <% if order.review.nil? %>
-                          <%= link_to 'Dejar tu comentario', new_order_review_path(order), class: "btn-primary p-2 w-100" %>
+                        <% if payment.order.review.nil? %>
+                          <%= link_to 'Dejar tu comentario', new_order_review_path(payment.order), class: "btn-primary p-2 w-100" %>
                         <% else %>
-                          <%= link_to 'Gracias por dejar tu comentario', new_order_review_path(order), class: " btn btn-primary p-2 w-100 disabled"%>
+                          <%= link_to 'Gracias por dejar tu comentario', new_order_review_path(payment.order), class: " btn btn-primary p-2 w-100 disabled"%>
                         <% end %>
                       </div>
                     </div>

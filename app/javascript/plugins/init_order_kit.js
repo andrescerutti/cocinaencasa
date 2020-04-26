@@ -1,5 +1,6 @@
 const calculateKit = () => {
   const amount = document.querySelector("#order_amount")
+  const delivery = document.querySelector("#order_delivery_provider_envio_a_domicilio")
   const city = document.querySelector("#order_addresses_city")
   const state = document.querySelector("#order_addresses_state")
   const street = document.querySelector("#order_addresses_street")
