@@ -19,8 +19,8 @@ class Kit < ApplicationRecord
   has_many :kit_ingredients, dependent: :destroy
   has_many :kit_categories, dependent: :destroy
   has_one :guide, dependent: :destroy
-  has_many :orders
-  has_many :favourites
+  has_many :orders, dependent: :destroy
+  has_many :favourites, dependent: :destroy
   has_many :ingredients, through: :kit_ingredients
   has_many :cookware, through: :kit_cookwares
   has_many :categories, through: :kit_categories

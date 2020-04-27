@@ -21,9 +21,8 @@
       <div class="d-flex flex-wrap mx-3" >
 
           <% @payments.each do |payment| %>
-            <% if  payment.approved == true %>
-
-              <% if payment.order.date_delivery > Date.today %>
+            <% if  payment.approved %>
+              <% if payment.order.status == "pending" %>
                   <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
                     <div>
                       <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
