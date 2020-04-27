@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
-  before_action :set_guide, only: [:create, :update, :destroy]
+  before_action :set_guide, only: [:create, :update]
+  before_action :set_step, only: [:destroy]
 
   def show
   end
@@ -34,6 +35,11 @@ class StepsController < ApplicationController
   def set_guide
     @guide = Guide.find(params[:guide_id])
     authorize @guide
+  end
+
+  def set_step
+    @step = Step.find(params[:id])
+    authorize @step
   end
 
   def step_params

@@ -2,9 +2,9 @@
 <%= link_to "", :back, class: "fas fa-arrow-left mb-2", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
 <%= simple_form_for [@kit] do |f| %>
   <%= f.input :name, label: 'Nombre', placeholder: 'Name' %>
-  <%= f.input :stock, as: :integer, 'Stock': false, placeholder: 'Stock' %>
-  <%= f.input :price, as: :integer, 'Precio': false, placeholder: 'Price' %>
-  <%= f.input :size, as: :integer, 'Cantidad de comensales': false, placeholder: 'Size' %>
+  <%= f.input :stock, as: :integer, label: 'Stock', placeholder: 'Stock' %>
+  <%= f.input :price, as: :integer, label: 'Precio', placeholder: 'Price' %>
+  <%= f.input :size, as: :integer, label: 'Cantidad de comensales', placeholder: 'Size' %>
   <%= f.input :preparation_time, label: 'Tiempo de preparación', placeholder: 'Preparation time' %>
   <%= f.input :description, as: :text, label: 'Descripción', placeholder: 'Description' %>
   <div class="links">

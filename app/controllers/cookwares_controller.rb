@@ -1,4 +1,5 @@
-class CookwareController < ApplicationController
+class CookwaresController < ApplicationController
+  before_action :set_destroy_cookware, only: [:destroy]
 
  def create
     @kits = policy_scope(KitCookware).where(kit: @kit)
@@ -19,7 +20,7 @@ class CookwareController < ApplicationController
   end
 
   def destroy
-    @cookware.kit_ingredients.destroy
+    @cookware.kit_cookwares.destroy
     @cookware.destroy
     redirect_to '/admin_dashboard'
   end
@@ -31,8 +32,8 @@ class CookwareController < ApplicationController
     authorize @cookware
   end
 
-  def set_destroy_ingredient
-    @cookware = cookware.find(params[:id])
+  def set_destroy_cookware
+    @cookware = Cookware.find(params[:id])
     authorize @cookware
   end
 
@@ -46,6 +47,6 @@ class CookwareController < ApplicationController
   end
 
   def kit_cookware_params
-    params.require(:cookware).require(:kit_cookware)
+    params.require(:cookware).permit(:kit_cookware)
   end
 end
