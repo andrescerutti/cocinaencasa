@@ -25,6 +25,7 @@ class PaymentsController < ApplicationController
     end
     $mp = MercadoPago.new(restaurant_mepa_private_key)
 
+
     @payment = Payment.new
 
     token = params[:token]
