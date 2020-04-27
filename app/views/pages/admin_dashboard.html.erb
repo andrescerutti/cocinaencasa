@@ -5,7 +5,7 @@
     <ul class="list-inline tabs-underlined">
       <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
         <li class="nav-item" style="border-top: 3px solid #fd1015">
-          <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="Pendientes" aria-selected="true">Pendientes (<%= @orders.pending.count %>)</a>
+          <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="Pendientes" aria-selected="true">Pendientes (<%= @valid_order.count %>)</a>
         </li>
         <li class="nav-item" style="border-top: 3px solid #eeff00">
           <a class="nav-link" id="on_transit-tab" data-toggle="tab" href="#on_transit" role="tab" aria-controls="Entregando" aria-selected="false">Entregando (<%= @orders.on_transit.count %>)</a>

@@ -26,6 +26,12 @@ class PagesController < ApplicationController
     status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' }
     @orders = Order.joins(kit: { restaurant: :user }).where(users: { id: current_user.id })
     @kits = Kit.joins(restaurant: :user).where(users: { id: current_user.id })
+    @valid_order = []
+    @orders.each do |order|
+      @valid_order << order if order.payment == true || order.status == 0
+    end
+
+
 
     # @markers = @orders.map do |order|
     #   {
