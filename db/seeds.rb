@@ -36,7 +36,7 @@ Address.destroy_all
 User.destroy_all
 
 puts 'creating categories'
-["Los más pedidos", "Comida rápida", "Opciones Saludables", "Pollo", "Pescado", "Carne", "Vegetariano"].each do |name|
+["Los más pedidos", "Americana", "Opciones Saludables", "Pollo", "Pescado", "Carne", "Vegetariano", "Vinos"].each do |name|
   Category.create!(name: name)
 end
 
