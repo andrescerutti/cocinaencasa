@@ -3,7 +3,7 @@
   <div class="cards-scroll mt-5">
     <% @categories.each do |category| %>
       <div class="card-scroll mx-2">
-        <%= link_to category_kits_path(name: category.name), class: "text-decoration-none" do  %>
+        <%= link_to category_kits_path(name: category.name params[:query][:address]), class: "text-decoration-none" do  %>
           <%= render("components/card-category-1", {category: "#{category.name}", img: "#{category.name.downcase.tr(' ',"_")}.jpg"}) %>
         <% end %>
       </div>
@@ -29,7 +29,7 @@
                    <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
                  </div>
                  <div class="d-flex justify-content-between">
-                   <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
+                   <p class="card-text card-address"> prep <i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
                    <p class="card-text card-price">$ <%= kit.price %></p>
 
                  </div>
@@ -47,7 +47,7 @@
                     <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
                   </div>
                   <div class="d-flex justify-content-between">
-                    <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
+                    <p class="card-text card-address"> prep <i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
                     <p class="card-text card-price">$ <%= kit.price %></p>
                   </div>
                 </div>

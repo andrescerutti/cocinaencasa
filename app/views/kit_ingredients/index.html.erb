@@ -27,7 +27,7 @@
       <%= f.input :image, placeholder: "Imagen", label: false %>
       <%= f.simple_fields_for :kit_ingredient do |a| %>
         <%= a.input :quantity, label: "Cantidad" %>
-        <%= a.input :unit, label: "Unidad" %>
+        <%= a.input :unit, label: "Unidad de medida" %>
       <% end %>
   </div>
   <%= f.submit "Agregar Ingrediente", class: "btn btn-primary mb-5"%>
