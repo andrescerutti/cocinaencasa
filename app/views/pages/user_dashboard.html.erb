@@ -15,96 +15,97 @@
       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="Favoritos" aria-selected="false">Destacados</a>
     </li> -->
   </ul>
-    <div class="tab-content" id="myTabContent">
+  <div class="tab-content" id="myTabContent">
 
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="d-flex flex-wrap mx-3" >
 
-          <% @payments.each do |payment| %>
-            <% if  payment.approved %>
-              <% if payment.order.status == "pending" %>
-                  <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
-                    <div>
-                      <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
-                      <img class="rounded-circle position-relative" style="width: 50px; height: 50px" src=<%= payment.order.kit.restaurant.brand.logo %>  />
-                    </div>
-                    <div class="card-body position-relative" style="top: 170px;" >
-                      <div >
-                        <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
-                        <p class="card-title mb-1"><%= payment.order.user.first_name  %> <%= payment.order.user.last_name  %></p>
-                        <p class="card-title mb-1"><%= payment.order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %></p>
-                        <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %></p>
-                        <%= link_to "Receta", guide_path(payment.order.kit.guide), class: "btn btn-outline-primary", style: "width: 120px; margin-left: 65px;" %>
-                      </div>
-                    </div>
-                  </div>
+        <% @payments.each do |payment| %>
+        <% if  payment.approved %>
+        <% if payment.order.status == "pending" %>
+        <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
+          <div>
+            <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
+            <img class="rounded-circle position-relative" style="width: 50px; height: 50px" src=<%= payment.order.kit.restaurant.brand.logo %>  />
+          </div>
+          <div class="card-body position-relative" style="top: 170px;" >
+            <div >
+              <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
+              <p class="card-title mb-1"><%= payment.order.user.first_name  %> <%= payment.order.user.last_name  %></p>
+              <p class="card-title mb-1"><%= payment.order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %></p>
+              <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %>
+              </p>
+             <%= link_to "Receta", guide_path(payment.order.kit.guide), class: "btn btn-outline-primary", style: "width: 120px; margin-left: 65px;" %>
+           </div>
+         </div>
+       </div>
+       <% end %>
+       <% end %>
+       <% end %>
+     </div>
+   </div>
+   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="col-12">
+      <div class="d-flex flex-wrap mx-3">
+        <% @payments.each do |payment| %>
+        <% if  payment.approved == true %>
+        <% if payment.order.status == "delivered" %>
+        <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
+          <div>
+            <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
+            <img class="rounded-circle position-relative" style="width: auto; height: 50px" src=<%= payment.order.kit.restaurant.brand.logo %>  />
+            <div class="d-flex position-absolute" style="top: 40%; right: 10px;">
+              <% if payment.order.review.nil? %>
+              <%= link_to 'Comentario', new_order_review_path(payment.order), class: "btn-primary p-2 w-100" %>
+              <% else %>
+              <%= link_to 'Gracias por tu opinion', new_order_review_path(payment.order), class: " btn btn-primary p-2 w-100 disabled"%>
               <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <div class="col-12">
-          <div class="d-flex flex-wrap mx-3">
-          <% @payments.each do |payment| %>
-            <% if  payment.approved == true %>
-              <% if payment.order.date_delivery < Date.today %>
-                  <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
-                    <div>
-                      <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
-                      <img class="rounded-circle position-relative" style="width: auto; height: 50px" src=<%= payment.order.kit.restaurant.brand.logo %>  />
-                    </div>
-                    <div class="card-body position-relative" style="top: 170px;" >
-                      <div >
-                        <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
-                        <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %></p>
-                        <p class="card-title mb-1">Platos: <%= payment.order.amount  %></p>
-                        <p class="card-title mb-1"><%= payment.order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %></p>
-                        <%= link_to "Receta", guide_path(payment.order.kit.guide), class: "btn btn-outline-primary", style: "width: 120px; margin-left: 65px;" %>
-                      </div>
-                      <div class="mt-3 text-center">
-                        <% if payment.order.review.nil? %>
-                          <%= link_to 'Dejar tu comentario', new_order_review_path(payment.order), class: "btn-primary p-2 w-100" %>
-                        <% else %>
-                          <%= link_to 'Gracias por dejar tu comentario', new_order_review_path(payment.order), class: " btn btn-primary p-2 w-100 disabled"%>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
-              <% end %>
-            <% end %>
-          <% end %>
-
+            </div>
+          </div>
+          <div class="card-body position-relative" style="top: 170px;" >
+            <div >
+              <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
+              <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %>              <a href="https://api.whatsapp.com/send?phone=+549<%= payment.order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; font-size: 30px; color: #47E463;"></i></a></p>
+              <p class="card-title mb-1">Platos: <%= payment.order.amount  %></p>
+              <p class="card-title mb-1"><%= payment.order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %></p>
+              <%= link_to "Receta", guide_path(payment.order.kit.guide), class: "btn btn-outline-primary", style: "width: 120px; margin-left: 65px;" %>
+            </div>
           </div>
         </div>
-      </div>
+        <% end %>
+        <% end %>
+        <% end %>
 
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-        <div class="col-12">
-        <div class="d-flex flex-wrap mx-3 justify-content-around">
-          <% @kits.each do |kit| %>
-            <%= link_to kit_path(kit) do  %>
-              <div class="card-kit mx-auto" style="width: 300px">
-                <%= cl_image_tag kit.image, class: "rounded"%>
-                <%= link_to "Favorito", kit_path(kit), class: "btn btn-success border border-light text-light", style: "position: absolute; left: 215px; bottom: 160px;" %>
-                 <div class="card-body">
-                   <div>
-                     <h5 class="card-title mb-1 text-wrap" style="height: 50px"><%= kit.name %></h5>
-                     <p class="card-text overflow-ellipsis card-description"><%= kit.description %></p>
-                   </div>
-                   <div class="d-flex justify-content-between mt-3">
-                     <p class="card-text card-address"><i class="fas fa-map-marker-alt"></i> A 1.3km</p>
-                     <p class="card-text card-price">$ <%= kit.price %></p>
-                   </div>
-                 </div>
-               </div>
-            <% end %>
-          <% end %>
-        </div>
       </div>
-    </div>
     </div>
   </div>
+
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <div class="col-12">
+      <div class="d-flex flex-wrap mx-3 justify-content-around">
+        <% @kits.each do |kit| %>
+        <%= link_to kit_path(kit) do  %>
+        <div class="card-kit mx-auto" style="width: 300px">
+          <%= cl_image_tag kit.image, class: "rounded"%>
+          <%= link_to "Favorito", kit_path(kit), class: "btn btn-success border border-light text-light", style: "position: absolute; left: 215px; bottom: 160px;" %>
+          <div class="card-body">
+           <div>
+             <h5 class="card-title mb-1 text-wrap" style="height: 50px"><%= kit.name %></h5>
+             <p class="card-text overflow-ellipsis card-description"><%= kit.description %></p>
+           </div>
+           <div class="d-flex justify-content-between mt-3">
+             <p class="card-text card-address"><i class="fas fa-map-marker-alt"></i> A 1.3km</p>
+             <p class="card-text card-price">$ <%= kit.price %></p>
+           </div>
+         </div>
+       </div>
+       <% end %>
+       <% end %>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
 </div>
 
 
