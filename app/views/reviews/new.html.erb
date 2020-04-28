@@ -1,5 +1,6 @@
-<div style="background-image: url(<%= image_url('orders-bg.jpg') %>); background-size: cover; background-position: top; min-height: 500px; ">
-  <div class="container bg-light position-relative pb-5">
+<div style="background-image: url(<%= image_url('orders-bg.jpg') %>); background-size: cover; background-position: top; min-height: 700px; ">
+  <div class="container bg-light position-relative pb-5 mt-3">
+  <%= link_to "", :back, class: "fas fa-arrow-left mt-3", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
     <h2 class="text-center p-3">Dejanos tu comentario sobre que te pareció el plato y como fue tu experiencia</h2>
     <%= simple_form_for [@order, @review] do |f| %>
       <%= f.input :content, as: :text, html_options: { rows: 10 }, label: false, placeholder: "Describinos tu experiencia" %>
@@ -9,5 +10,6 @@
       <%= f.submit 'Dejar comentario', class: "btn btn-primary" %>
     <% end %>
   </div>
+
 </div>
 
