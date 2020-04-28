@@ -50,7 +50,7 @@ class PaymentsController < ApplicationController
 
     if payment_response["status"] == "201" && payment_response["response"]["status"] == "approved"
       # logger.debug "respuesta mp #{payment_response}"
-      @payment.update_approved(true)
+      @payment.approved = true
       @payment.save
       @payment.order.kit.update_stock(@payment.order.amount)
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
