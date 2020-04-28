@@ -30,7 +30,7 @@
           </div>
           <div class="card-body position-relative" style="top: 170px;" >
             <div >
-              <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
+              <h5 class="card-title mb-1"><%= payment.order.kit.name  %><a href="https://api.whatsapp.com/send?phone=<%= order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; margin-top: 10px;font-size: 30px; color: #47E463;"></i></a></h5>
               <p class="card-title mb-1"><%= payment.order.user.first_name  %> <%= payment.order.user.last_name  %></p>
               <p class="card-title mb-1"><%= payment.order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %></p>
               <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %>
@@ -65,7 +65,7 @@
           <div class="card-body position-relative" style="top: 170px;" >
             <div >
               <h5 class="card-title mb-1"><%= payment.order.kit.name  %></h5>
-              <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %>              <a href="https://api.whatsapp.com/send?phone=+549<%= payment.order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; font-size: 30px; color: #47E463;"></i></a></p>
+              <p class="card-text overflow-ellipsis"><%= payment.order.kit.restaurant.name %><a href="https://api.whatsapp.com/send?phone=+549<%= payment.order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; font-size: 30px; color: #47E463;"></i></a></p>
               <p class="card-title mb-1">Platos: <%= payment.order.amount  %></p>
               <p class="card-title mb-1"><%= payment.order.date_delivery.strftime("%A, %d %b %Y %l:%M %p") %></p>
               <%= link_to "Receta", guide_path(payment.order.kit.guide), class: "btn btn-outline-primary", style: "width: 120px; margin-left: 65px;" %>
