@@ -48,10 +48,9 @@ class PaymentsController < ApplicationController
     payment_response = $mp.post("/v1/payments", payment)
     # ask for the customer, if not exists the create a new one, else get the customer_id and the card_id
 
-      # raise
     if payment_response["status"] == "201" && payment_response["response"]["status"] == "approved"
       # logger.debug "respuesta mp #{payment_response}"
-      @payment.update_approved(true)
+      @payment.approved = true
       @payment.save
       @payment.order.kit.update_stock(@payment.order.amount)
       search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
@@ -61,6 +60,7 @@ class PaymentsController < ApplicationController
       @restaurant = @payment.order.kit.restaurant
       resto_mail = RestaurantSaleMailer.with(restaurant: @restaurant, order: @order, payment: @payment).new_sale
       resto_mail.deliver_now
+
 
       if !search_customer["response"]["results"].empty?
         current_user.mpcard_id = search_customer["response"]["results"][0]["cards"][0]["id"]
