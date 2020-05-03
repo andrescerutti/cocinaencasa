@@ -1,4 +1,3 @@
-import { countDown } from "../plugins/count_down";
 import { validateAddress } from "../plugins/init_validate_address";
 import { calculateKit } from "../plugins/init_order_kit";
 import { initAutocomplete } from "../plugins/init_autocomplete";
@@ -16,4 +15,3 @@ calculateKit();
 initAutocomplete();
 initMapbox();
 checkDisabledButton();
-countDown();
