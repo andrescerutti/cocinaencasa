@@ -9,7 +9,7 @@ Rails.application.configure do
     :user_name            => ENV['GMAIL_ADDRESS'],
     :password             => ENV['GMAIL_APP_PASSWORD'],
     :authentication       => "plain",
-    :enable_starttls_auto => true
+    # :enable_starttls_auto => true
   }
 
   # Code is not reloaded between requests.
