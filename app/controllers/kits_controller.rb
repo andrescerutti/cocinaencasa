@@ -9,27 +9,19 @@ class KitsController < ApplicationController
     # @restaurants = Restaurant.geocoded
     @user = current_user
     @search = params[:query][:address]
-    addresses = Address.restaurants.near(@search, 8)
-    return redirect_to wrong_address_path(query: @search) if addresses.empty?
-    @restaurants = addresses.map do |address|
-      address.addressable
-    end
-    @kits = @restaurants.map do |restaurant|
-      restaurant.kits
-    end.flatten
-    # return redirect_to wrong_address_path if
-    # @kits = if params[:query].present?
-    #           Kit.search(params[:query])
-    #         else
-    #           Kit.all
-    #         end
+    session[:address] = params[:query][:address]
+    @kits = Kit.near(@search, 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address})
+    return redirect_to wrong_address_path(query: @search) if @kits.empty?
+    @stores = Store.near(@search, 8, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
   end
 
   def show
-    @kits = Kit.all
+    @kits = Kit.near(session[:address], 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address})
     @kit = Kit.find(params[:id])
+    @store = Store.near(session[:address], 8, select: "addresses.*, stores.*").joins(:restaurant).joins(:address).where(restaurant: @kit.restaurant).first
     @order = Order.new
     @order.build_address
+    @disable_days = @store.disabled
   end
 
   def new # SOLO LOS ADMINS PUEDE CREAR
@@ -72,8 +64,6 @@ class KitsController < ApplicationController
     @kit.destroy
     redirect_to admin_dashboard_path
   end
-
-
 
   private
 

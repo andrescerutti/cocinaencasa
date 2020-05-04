@@ -32,9 +32,10 @@
           </div>
 
             <h5>Cronograma de entregas</h5>
-          <p><%= @kit.restaurant.day_open %></p>
+          <p><%= @store.available %> (<%= @kit.restaurant.day_open %>)</p>
           <div class="date_delivery d-flex">
             <div class="mr-2">
+              <span id="disabled_dates" data-delivery=<%= @store.disabled.to_json %>></span>
               <p style="font-size: 20px;">Seleccioná la fecha de entrega  <i class="fas fa-calendar-alt"></i></p>
             </div>
             <div style="width: 120px;">
@@ -77,11 +78,11 @@
           </div>
 
           <div id="pickup" style="display: none">
-            <p class="shadow bg-primary text-white rounded w-100 p-3 mb-4"> Cuando recibas un mail deberás retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
+            <p class="shadow bg-primary text-white rounded w-100 p-3 mb-4"> Cuando recibas un mail deberás retirar el pedido por <%= @kit.restaurant.name %>, <%=  @store.address.address %> </p>
           </div>
 
           <div id="instructions" style="display: none">
-            <p class="shadow bg-primary text-white rounded w-100 p-3 mb-4"> Cuando recibas un mail confirmando que tu orden esta lista, deberás enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> ,<%=  @kit.restaurant.address.address %> </p>
+            <p class="shadow bg-primary text-white rounded w-100 p-3 mb-4"> Cuando recibas un mail confirmando que tu orden esta lista, deberás enviar un Glovo para retirar el pedido por <%= @kit.restaurant.name %> ,<%=  @store.address.address %> </p>
           </div>
 
         <% end %>

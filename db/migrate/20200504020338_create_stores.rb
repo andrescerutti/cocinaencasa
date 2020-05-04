@@ -3,13 +3,13 @@ class CreateStores < ActiveRecord::Migration[5.2]
     create_table :stores do |t|
       t.references :restaurant, foreign_key: true
       t.string :name
-      t.boolean :sunday, default: false
-      t.boolean :monday, default: false
-      t.boolean :tuesday, default: false
-      t.boolean :wednesday, default: false
-      t.boolean :thursday, default: false
-      t.boolean :friday, default: false
-      t.boolean :saturday, default: false
+      t.boolean :sunday, default: true
+      t.boolean :monday, default: true
+      t.boolean :tuesday, default: true
+      t.boolean :wednesday, default: true
+      t.boolean :thursday, default: true
+      t.boolean :friday, default: true
+      t.boolean :saturday, default: true
 
       t.timestamps
     end

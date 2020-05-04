@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
   belongs_to :addressable, polymorphic: true
+  belongs_to :store, optional: true
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
   belongs_to :restaurant, optional: true
@@ -11,5 +12,5 @@ class Address < ApplicationRecord
   # validates :cp, presence: true
   # validates :latitude, numericality: true
   # validates :longitude, numericality: true
-  scope :restaurants, -> { where(addressable_type: 'Restaurant') }
+  scope :restaurants, -> { where(addressable_type: 'Store') }
 end

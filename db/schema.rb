@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_184121) do
+ActiveRecord::Schema.define(version: 2020_05_04_020924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,24 @@ ActiveRecord::Schema.define(version: 2020_05_03_184121) do
     t.index ["guide_id"], name: "index_steps_on_guide_id"
   end
 
+  create_table "stores", force: :cascade do |t|
+    t.bigint "restaurant_id"
+    t.string "name"
+    t.boolean "sunday", default: false
+    t.boolean "monday", default: false
+    t.boolean "tuesday", default: false
+    t.boolean "wednesday", default: false
+    t.boolean "thursday", default: false
+    t.boolean "friday", default: false
+    t.boolean "saturday", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "addressable_type"
+    t.bigint "addressable_id"
+    t.index ["addressable_type", "addressable_id"], name: "index_stores_on_addressable_type_and_addressable_id"
+    t.index ["restaurant_id"], name: "index_stores_on_restaurant_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -241,4 +259,5 @@ ActiveRecord::Schema.define(version: 2020_05_03_184121) do
   add_foreign_key "restaurants", "users"
   add_foreign_key "reviews", "orders"
   add_foreign_key "steps", "guides"
+  add_foreign_key "stores", "restaurants"
 end
