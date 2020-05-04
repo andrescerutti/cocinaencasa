@@ -159,7 +159,6 @@ ActiveRecord::Schema.define(version: 2020_05_03_184121) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
-    t.string "cash_amount"
     t.boolean "cash", default: false
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
