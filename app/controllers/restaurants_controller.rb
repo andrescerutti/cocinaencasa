@@ -1,6 +1,6 @@
 class RestaurantsController < ApplicationController
- before_action :set_brand, only: [:show, :edit, :update, :destroy]
-skip_before_action :authenticate_user!, only: [:show]
+  before_action :set_brand, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show]
 
 
   def index
@@ -8,6 +8,7 @@ skip_before_action :authenticate_user!, only: [:show]
   end
 
   def show
+    raise
   end
 
   def new

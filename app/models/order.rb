@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :kit
-  belongs_to :user
+  belongs_to :user, optional: true
 
   has_one :review, dependent: :destroy
   has_one :payment, dependent: :destroy

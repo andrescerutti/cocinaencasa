@@ -29,8 +29,9 @@ const calculateKit = () => {
 
   if (amount) {
     amount.addEventListener("change", event => updatePrice())
-    cp.addEventListener("keyup", event => updatePrice())
-
+    if (cp) {
+      cp.addEventListener("keyup", event => updatePrice())
+    }
   }
 }
 

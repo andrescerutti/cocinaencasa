@@ -1,0 +1,78 @@
+<div style="">
+  <div class="container pt-3 d-md-flex justify-content-between">
+      <%= link_to "", :back, class: "fas fa-arrow-left back-button", style: "text-decoration: none;" %>
+    <div class="mr-3 w-sm-100 w-md-50 flex-grow-1">
+      <h2 class="mb-5 w-100 text-center"><%= @restaurant.name %></h2>
+      <div class="d-flex flex-row bd-highlight mb-3">
+        <i class="fas fa-map-marker-alt mr-3" style="color: #2a94e7; font-size: 25px;"></i>
+        <p class="ml-4 text-secondary"><%= @store.address.address %> </p>
+      </div>
+      <div class="d-flex flex-row bd-highlight mb-3">
+        <i class="fas fa-motorcycle mr-1" style="color: #2a94e7; font-size: 25px;"></i>
+      <% if @restaurant.own_delivery.present? %>
+        <p class="ml-4 text-secondary">Posee delivery propio</p>
+      <% else %>
+        <p class="ml-4 text-secondary">No posée delivery propio - Podras hacer TAKE AWAY o enviar un glovo</p>
+      <% end %>
+      </div>
+      <div class="d-flex flex-row bd-highlight mb-3">
+        <i class="far fa-clock mr-2" style="color: #2a94e7; font-size: 25px;"></i>
+        <p class="ml-3 text-secondary">Días abiertos: <%= @store.available %> </p>
+      </div>
+    </div>
+    <div class="p-2 text-right w-sm-100 w-md-50 rounded"style="background-image: url(<%= @restaurant.image %>);background-repeat: no-repeat; background-size: cover; background-position: top; min-height: 25vh; min-width: 35vw; max-width: 50vw; box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);">
+      <%= cl_image_tag( @restaurant.brand.logo , class:"mb-4 rounded w-25 ")%>
+    </div>
+  </div>
+  <div class="container mt-5">
+    <div class="cards-scroll">
+      <h2 class="w-100">Kits disponibles</h2>
+ <div class="cards-scroll">
+    <div class="cards-scroll mt-3" >
+      <% @restaurant.kits.each do |kit| %>
+        <% if kit.stock < 1 %>
+            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4 position-relative" >
+              <div class="w-25 position-absolute" style="z-index: 1; top: 34px; right: 20px" >
+                <p class="bg-primary bold text-white p-2 rounded">Sin stock</p>
+              </div>
+             <div class="card-kit" style="opacity:0.6">
+
+              <%= cl_image_tag kit.image, class: "rounded"%>
+               <div class="card-body">
+                 <div>
+                   <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small> </h5>
+                   <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
+                 </div>
+                 <div class="d-flex justify-content-between">
+                   <p class="card-text card-address"><i class="far fa-clock"></i>preparación <%= kit.preparation_time %> minutos</p>
+                   <p class="card-text card-price">$ <%= kit.price %></p>
+
+                 </div>
+               </div>
+              </div>
+            </div>
+        <% else %>
+          <%= link_to kit_path(kit) do  %>
+            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4">
+              <div class="card-kit">
+                <%= cl_image_tag kit.image, class: "rounded"%>
+                <div class="card-body">
+                  <div>
+                    <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></h5>
+                    <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
+                    <p class="card-text card-price">$ <%= kit.price %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+  </div>
+</div>
+    </div>
+  </div>
+</div>

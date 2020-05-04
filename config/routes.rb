@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :stores, only: :show
+
   resources :orders, only: [:index, :show, :edit, :update] do
     resources :payments, only: [:create, :show, :new]
     resources :reviews, only: [:new, :create]

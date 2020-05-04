@@ -2,6 +2,7 @@ class Kit < ApplicationRecord
   belongs_to :restaurant
   # accepts_nested_attributes_for :guides
   # accepts_nested_attributes_for :steps
+  reverse_geocoded_by "addresses.latitude", "addresses.longitude"
 
   include PgSearch::Model
   pg_search_scope :search,
