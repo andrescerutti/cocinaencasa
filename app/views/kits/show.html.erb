@@ -52,9 +52,9 @@
             <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
         </div>
 
-        <div id="pickup" style="display: none">
-          <p class="shadow bg-primary text-white rounded w-100 p-4 mb-4"> Cuando recibas un mail deberás retirar el pedido por <%= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
-        </div>
+       <!--  <div id="pickup" style="display: none">
+          <p class="shadow bg-primary text-white rounded w-100 p-4 mb-4"> Cuando recibas un mail deberás retirar el pedido por <%#= @kit.restaurant.name %>, <%=  @kit.restaurant.address.address %> </p>
+        </div> -->
 
         <!-- form direccion  -->
           <div style="display: none" id="address_form">
