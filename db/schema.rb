@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.text "test_mp_private_key_ciphertext"
     t.text "prod_mp_public_key_ciphertext"
     t.text "prod_mp_private_key_ciphertext"
-    t.boolean "own_delivery"
+    t.boolean "own_delivery", default: false
     t.string "day_open"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
@@ -204,13 +204,13 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
   create_table "stores", force: :cascade do |t|
     t.bigint "restaurant_id"
     t.string "name"
-    t.boolean "sunday", default: false
-    t.boolean "monday", default: false
-    t.boolean "tuesday", default: false
-    t.boolean "wednesday", default: false
-    t.boolean "thursday", default: false
-    t.boolean "friday", default: false
-    t.boolean "saturday", default: false
+    t.boolean "sunday", default: true
+    t.boolean "monday", default: true
+    t.boolean "tuesday", default: true
+    t.boolean "wednesday", default: true
+    t.boolean "thursday", default: true
+    t.boolean "friday", default: true
+    t.boolean "saturday", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "addressable_type"
