@@ -23,6 +23,7 @@ class KitsController < ApplicationController
     @kits = Kit.near(session[:address], 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address})
     @kit = Kit.find(params[:id])
     @store = Store.near(session[:address], 8, select: "addresses.*, stores.*").joins(:restaurant).joins(:address).where(restaurant: @kit.restaurant).first
+    @store = @kit.restaurant.stores.first if @store.nil?
     @order = Order.new
     @order.build_address
     @disable_days = @store.disabled
