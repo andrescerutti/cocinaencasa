@@ -24,6 +24,7 @@ gem 'mercadopago-sdk', '~> 1.1.0'
 gem 'pg_search', '~> 2.3.0'
 gem 'letter_opener', group: :development
 gem 'lockbox'
+gem 'appsignal'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
