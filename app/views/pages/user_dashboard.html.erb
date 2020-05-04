@@ -22,7 +22,7 @@
 
         <% @payments.each do |payment| %>
         <% if  payment.approved %>
-        <% if payment.order.status == "pending" %>
+        <% if payment.order.status == "pending" || payment.order.status == "on_transit" %>
         <div class="card-kit border mx-auto" style=" width: 300px; height:450px">
           <div>
             <img class="rounded position-absolute"  style="height: 50%" src=<%= payment.order.kit.image %>  />
