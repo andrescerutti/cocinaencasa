@@ -9,7 +9,11 @@ class KitsController < ApplicationController
     # @restaurants = Restaurant.geocoded
     @user = current_user
     @search = params[:query][:address]
-    session[:address] = params[:query][:address]
+    if @search.present?
+      session[:address] = params[:query][:address]
+    else
+      @search = session[:address]
+    end
     @kits = Kit.near(@search, 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address})
     return redirect_to wrong_address_path(query: @search) if @kits.empty?
     @stores = Store.near(@search, 8, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
