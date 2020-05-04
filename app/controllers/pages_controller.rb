@@ -46,7 +46,7 @@ class PagesController < ApplicationController
       @markers = [{
         lat: coordinates.first.latitude,
         lng: coordinates.first.longitude,
-        color: '#0A60C4'
+        color: '#4C9E7D'
       }]
     end
   end
