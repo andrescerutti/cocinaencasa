@@ -503,12 +503,12 @@
               <br />
               <%= if @order.delivery_provider == "Glovo"
 
-                "La direccion de #{@order.kit.restaurant.name} donde debes mandar tu glovo es #{@order.kit.restaurant.address.address}
+                "La direccion de #{@order.kit.restaurant.name} donde debes mandar tu glovo es #{@order.kit.restaurant.name}
                "
               elsif @order.delivery_provider == "Envio a domicilio"
-              "-La gente de #{@order.kit.restaurant.name} se ocupara de hacer el envio a tu domicilio en los proximos minutos"
+              "-La gente de #{@order.kit.restaurant.name} se ocupara de hacer el envio a tu domicilio"
               else
-              "- Take away es una gran opción para despejarse, no olvides de tomar los recaudos necesarios por el covid-19. La direccion de #{@order.kit.restaurant.name} es #{@order.kit.restaurant.address.address}"
+              "- Take away es una gran opción para despejarse, no olvides de tomar los recaudos necesarios por el covid-19. La direccion de #{@order.kit.restaurant.name} es #{@order.kit.restaurant.name}"
               end
              %>
 
