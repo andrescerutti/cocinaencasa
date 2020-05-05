@@ -1,16 +1,16 @@
 
 <div class="container mt-5">
 
-<%= link_to "", :back, class: "fas fa-arrow-left my-2", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
+<%= link_to "", :back, class: "fas fa-arrow-left my-2", style: "text-decoration: none; color: #2f9b7a; width: 200px; font-size: 30px;" %>
   <%= simple_form_for [@kit] do |f| %>
     <%= f.input :restaurant_id, collection: @user.restaurants, prompt: "Restaurant", label: false, required: true, error: "no dejar blancos" %>
-    <%= f.input :name, label: false, placeholder: 'Nombre', required: true %>
+    <%= f.input :name, label: false, placeholder: 'Nombre del kit', required: true, hint: 'Junto con la foto es lo primero que veran los clientes en el buscador' %>
     <%= f.input :stock, as: :integer, label: false, placeholder: 'Stock', default: 0 %>
     <%= f.input :price, as: :integer, label: false, placeholder: 'Precio', required: true %>
-    <%= f.input :size, as: :integer, label: false, placeholder: 'Comenzales', default: 1 %>
-    <%= f.input :preparation_time, label: false, placeholder: 'Tiempo de preparacion', required: true %>
-    <%= f.input :description, as: :text, label: false, placeholder: 'Description' %>
-    <%= f.input :image, label: false, required: true %>
+    <%= f.input :size, as: :integer, label: false, placeholder: 'Comenzales', default: 1, hint: 'Cantidad de personas que pueden comer con el kit'  %>
+    <%= f.input :preparation_time, label: false, placeholder: 'Tiempo de preparacion', required: true, hint: 'Solo el número en minutos'%>
+    <%= f.input :description, as: :text, label: false, placeholder: 'Description del kit', hint: 'Breve descripcion de lo que contiene, ingredientes, salsas, etc' %>
+    <%= f.input :image, label: 'Foto del kit', required: true, hint: 'La mejor foto que tengas, al cliente le entrara el producto por lo ojos'  %>
 
   <div class="links">
     <%= f.button :submit, class:'btn btn-primary' %>
