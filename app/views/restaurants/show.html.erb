@@ -25,9 +25,7 @@
     </div>
   </div>
   <div class="container mt-5">
-    <div class="cards-scroll">
       <h2 class="w-100">Kits disponibles</h2>
- <div class="cards-scroll">
     <div class="cards-scroll mt-3" >
       <% @restaurant.kits.each do |kit| %>
         <% if kit.stock < 1 %>
@@ -72,7 +70,5 @@
         <% end %>
       <% end %>
   </div>
-</div>
-    </div>
   </div>
 </div>
