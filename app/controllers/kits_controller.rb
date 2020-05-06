@@ -6,6 +6,9 @@ class KitsController < ApplicationController
     # 2. Si hay restaurants, proceso normal, sino redirect to wrong_address
     policy_scope(Kit)
     @categories = Category.all
+    if params[:query][:category]
+      return @categories = Kit.near(@search, 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:query][:category])
+    end
     # @restaurants = Restaurant.geocoded
     @user = current_user
     @search = params[:query][:address]
