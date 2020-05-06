@@ -8,9 +8,9 @@
       </div>
     <#% end %>
   </div> -->
+    <h2 class="mt-3">Sugerencias</h2>
   <% unless @kits.empty? %>
   <div class="cards-scroll">
-    <h2 class="mt-3">Sugerencias</h2>
     <div class=" mt-3" >
       <% @kits.each do |kit| %>
         <% if kit.stock < 1 %>
@@ -56,8 +56,8 @@
       <% end %>
   </div>
 </div>
-  <div class="cards-scroll">
     <h2 class="mt-3">Restaurantes</h2>
+  <div class="cards-scroll">
     <div class=" mt-3">
       <% @stores.each do |store| %>
         <%= link_to store_path(store) do %>
