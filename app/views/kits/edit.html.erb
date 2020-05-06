@@ -1,12 +1,14 @@
 <div class="container mt-3">
-<%= link_to "", :back, class: "fas fa-arrow-left mb-2", style: "text-decoration: none; color: #2a94e7; width: 200px; font-size: 30px;" %>
+<%= link_to "", :back, class: "fas fa-arrow-left mb-2", style: "text-decoration: none; color: #2f9b7a; width: 200px; font-size: 30px;" %>
 <%= simple_form_for [@kit] do |f| %>
-  <%= f.input :name, label: 'Nombre', placeholder: 'Name' %>
+  <%= f.input :name, label: 'Nombre del kit', placeholder: 'Nombre', hint: 'Es lo primero que veran los clientes en el buscador' %>
   <%= f.input :stock, as: :integer, label: 'Stock', placeholder: 'Stock' %>
   <%= f.input :price, as: :integer, label: 'Precio', placeholder: 'Price' %>
   <%= f.input :size, as: :integer, label: 'Cantidad de comensales', placeholder: 'Size' %>
-  <%= f.input :preparation_time, label: 'Tiempo de preparación', placeholder: 'Preparation time' %>
-  <%= f.input :description, as: :text, label: 'Descripción', placeholder: 'Description' %>
+  <%= f.input :preparation_time, label: 'Tiempo de preparación', placeholder: 'Tiempo de preparacion', hint: 'Solo el en número en minutos' %>
+  <%= f.input :description, as: :text, label: 'Descripción del kit', placeholder: 'Description', hint: 'Breve descripcion de lo que contiene, ingredientes, salsas, etc' %>
+  <%= f.input :image, label: false%>
+
   <div class="links">
     <%= f.button :submit, class: "btn btn-primary" %>
     <%= link_to 'Index', root_path, class: "btn btn-outline-primary" %>
