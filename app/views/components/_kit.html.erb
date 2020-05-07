@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="chef-box-image">
-          <div style="background-image: url(<%= image_url('americana.jpg') %>);">
+          <div style="background-image: url(<%= cl_image_path(kit.image) %>);">
             <span class="difficulty">fácil</span>
           </div>
         </div>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div>
-          <span class="text-bold"><b>$ kit.price</b></span>
+          <span class="text-bold"><b>$ <%= kit.price %></b></span>
         </div>
       </div>
     </div>
