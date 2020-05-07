@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
+    t.string "cash_amount"
     t.boolean "cash", default: false
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
@@ -176,7 +177,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.text "test_mp_private_key_ciphertext"
     t.text "prod_mp_public_key_ciphertext"
     t.text "prod_mp_private_key_ciphertext"
-    t.boolean "own_delivery"
+    t.boolean "own_delivery", default: false
     t.string "day_open"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
