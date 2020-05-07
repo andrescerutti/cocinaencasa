@@ -1,0 +1,125 @@
+.kits-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 32px;
+}
+
+.kits-wrapper a:hover {
+  text-decoration: none;
+}
+
+.chef-box {
+  border-radius: 8px;
+  background: $soul-green;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.03);
+  transition: 0.4s ease;
+  h2 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  h3 {
+    font-size: 14px;
+    font-weight: lighter;
+  }
+  p {
+    font-size: 14px;
+    font-weight: lighter;
+    color: #808080;
+  }
+  &:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.chef-box-main {
+  border-bottom: 1px solid white;
+  border-radius: 7px;
+  background-color: white;
+}
+
+.chef-box-image {
+  min-width: 125px;
+  > div {
+    background-size: cover;
+    background-position: center;
+    height: 100px;
+    border-radius: 8px;
+    position: relative;
+    .difficulty {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      padding: 2px 12px;
+      color: white;
+      font-size: 10px;
+      background-color: red;
+      border-radius: 15px 0px 4px 0px;
+    }
+  }
+}
+
+.chef-box-details {
+  color: white;
+  padding: 0px 15px;
+  text-weight: bold;
+  &:first-child {
+    text-weight: lighter
+  }
+}
+
+.tag {
+  padding: 1px 10px 2px 10px;
+  color: white;
+  background-color: purple;
+  font-size: 9px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.kit-status {
+  position: relative;
+  overflow: hidden;
+}
+
+.no-stock {
+  position: absolute;
+  background-color: black;
+  z-index: 1;
+  color: white;
+  padding: 2px 45px;
+  transform: rotate(-35deg);
+  top: 35px;
+  left: -30px;
+}
+
+.out-of-stock {
+  opacity: 0.4;
+}
+
+.scroll-down {
+  width: 80%;
+  padding: 5px 0px;
+  background-color: $soul-green;
+  border-radius: 25px;
+  margin: 0 auto;
+  margin-top: 15px;
+  color: white;
+  display: none;
+  text-align: center;
+  border: 1px solid white;
+}
+
+span a#restaurants:hover {
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .kits-wrapper {
+    grid-template-columns: 1fr;
+    grid-gap: 16px;
+  }
+  .scroll-down {
+    display: block;
+  }
+}
