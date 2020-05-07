@@ -49,7 +49,7 @@
         <div class="input-group mb-3">
           <div class="input-group-prepend">
           </div>
-            <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons%>
+            <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: "Metodo de envío", required: true, as: :radio_buttons%>
         </div>
 
         <div id="pickup" style="display: none">
