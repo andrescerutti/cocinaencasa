@@ -253,7 +253,8 @@
                                                                         <% else %>
 
                                                                         <p style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                          DIA DE ENTREGA: <strong><%= l(@order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></strong>
+
+                                                                          DIA DE ENTREGA: <strong><%= l(@order.date_delivery.time) %></strong>
 
                                                                         </p>
 
