@@ -25,6 +25,7 @@ Ingredient.destroy_all
 puts 'Erasing kits...'
 Kit.destroy_all
 puts 'Erasing restaurants...'
+Store.destroy_all
 Restaurant.destroy_all
 puts 'Erasing brands...'
 Brand.destroy_all
@@ -363,12 +364,7 @@ BRANDS = [
                     prod_mp_private_key: "APP_USR-5497686852257892-041221-f838a8d921fa05cb3f14f83f25464505-168219137",
                     day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
                     email: "asdad@asdas.com",
-                    remote_image_url: 'https://tendencias.tv/wp-content/uploads/2016/07/MANO-ROTA.jpg',
-                    address_attributes: {
-                                          address: "Paraguay 4801, Buenos Aires, Ciudad Autónoma de Buenos Aires",
-                                          latitude: -34.582034,
-                                          longitude: -58.427546,
-                                        }
+                    remote_image_url: 'https://tendencias.tv/wp-content/uploads/2016/07/MANO-ROTA.jpg'
                   },
                 ],
     kits: [
@@ -499,12 +495,7 @@ BRANDS = [
                     email: "asdad@asdas.com",
                     day_open: "Lunes a Viernes de 8:30 a 12:00 hs",
 
-                    remote_image_url: 'https://www.diariodesevilla.es/2019/09/17/con_cuchillo_y_tenedor/cosas_de_come/mesa-junto-cocina_1392470814_107011889_1994x1024.jpg',
-                    address_attributes: {
-                                          address: "Soler 4202",
-                                          latitude: -34.589695,
-                                          longitude: -58.421230,
-                                        }
+                    remote_image_url: 'https://www.diariodesevilla.es/2019/09/17/con_cuchillo_y_tenedor/cosas_de_come/mesa-junto-cocina_1392470814_107011889_1994x1024.jpg'
                   },
                 ],
     kits: [
@@ -679,12 +670,7 @@ BRANDS = [
 
                     phone: "123123123123123",
                     email: "asdad@asdas.com",
-                    remote_image_url: 'https://i.imgur.com/VdMltvq.png',
-                    address_attributes: {
-                                          address: "Aráoz 2499",
-                                          latitude: -34.585781,
-                                          longitude: -58.415291,
-                                        }
+                    remote_image_url: 'https://i.imgur.com/VdMltvq.png'
                   },
                 ],
     kits: [
@@ -851,12 +837,7 @@ BRANDS = [
                     day_open: "Lunes a Viernes de 8:30 a 12:00 hs Sabados 13:00 a 15:00 hs",
 
                     email: "asdad@asdas.com",
-                    remote_image_url: 'https://www.xn--ministeriodediseo-uxb.com/ministerio2/wp-content/uploads/2018/03/SPAZIO-Milano_Sala-Bifore1-Brambilla-Serrani-Photographers-1-e1447782553348.jpg',
-                    address_attributes: {
-                                          address: "Paraguay 3857, Buenos Aires, Ciudad Autónoma de Buenos Aires",
-                                          latitude: -34.590727,
-                                          longitude: -58.415909,
-                                        }
+                    remote_image_url: 'https://www.xn--ministeriodediseo-uxb.com/ministerio2/wp-content/uploads/2018/03/SPAZIO-Milano_Sala-Bifore1-Brambilla-Serrani-Photographers-1-e1447782553348.jpg'
                   },
                 ],
     kits: [
