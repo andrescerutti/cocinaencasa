@@ -307,7 +307,7 @@
                                                             <td>
                                                             <td>
                                                                 <p style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                    Fecha: <strong><%= l(@payment.order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></strong>
+                                                                    Fecha: <strong><%= l(@payment.order.date_delivery.time) %></strong>
                                                                 </p>
                                                                     <span
                                                                         style="color: #303336;"> <%= @payment.order.kit.restaurant.name%></span>
