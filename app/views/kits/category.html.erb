@@ -1,9 +1,6 @@
 <div class="container">
   <%= link_to "", :back, class: "fas fa-arrow-left mt-3", style: "text-decoration: none; color: #2f9b7a; width: 200px; font-size: 30px;" %>
   <h1 class="mt-4"><%= @category %></h1>
-
-
-
   <div class="cards-scroll">
     <div class="mx-0 mt-3" >
       <% @kits.each do |kit| %>
