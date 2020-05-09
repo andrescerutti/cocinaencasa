@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy, :order_assignment]
 
   def index
@@ -6,6 +7,13 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order.user = current_user
+    @order.save
+    if session[:address].present? || session[:flat_number].present?
+      @order.address = Address.create(address: session[:address], flat_number: session[:flat_number])
+      current_user.addresses << @order.address unless current_user.addresses.include?(@order.address)
+      current_user.save
+    end
   end
 
   def new
@@ -18,12 +26,10 @@ class OrdersController < ApplicationController
     @order = Order.new(orders_params)
     @order.user = current_user
     @order.kit = Kit.find(params[:kit_id])
-    @order.code = "#{@order.kit_id}-#{@order.user_id}-#{rand(0..1000000)}"
+    @order.code = "#{@order.kit_id}-#{rand(0..1000000)}"
     if params[:order][:addresses].present?
-      order_address = Address.new(address_params)
-      @order.address = order_address
-      current_user.addresses << Address.new(address_params) unless current_user.addresses.find_by(city: order_address.city, street: order_address.street, state: order_address.state, flat_number: order_address.flat_number)
-      current_user.save
+      session[:address] = params[:order][:addresses][:address]
+      session[:flat_number] = params[:order][:addresses][:flat_number]
     end
     @payment = Payment.new
     @payment.order = @order
@@ -48,10 +54,10 @@ class OrdersController < ApplicationController
     if @order.save
       flash[:notice] = "La orden a sido asignada a #{@order.delivery_provider} statisfactoriamente."
 
-        if @order.status == "on_transit"
-          mail = OrderReadyMailer.with(user: current_user.email, order: @order).order_ready
-          mail.deliver_now
-        end
+      if @order.status == "on_transit"
+        mail = OrderReadyMailer.with(user: current_user.email, order: @order).order_ready
+        mail.deliver_now
+      end
 
       return redirect_to admin_dashboard_path
     end
@@ -71,6 +77,6 @@ class OrdersController < ApplicationController
   end
 
   def address_params
-    params[:order][:addresses].permit(:city, :street, :state, :flat_number, :cp)
+    params[:order][:addresses].permit(:address, :city, :street, :state, :flat_number, :cp)
   end
 end

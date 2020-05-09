@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_020924) do
+ActiveRecord::Schema.define(version: 2020_05_09_081858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "cookwares", force: :cascade do |t|
@@ -129,6 +130,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.bigint "restaurant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "priority", default: 0
     t.index ["restaurant_id"], name: "index_kits_on_restaurant_id"
   end
 
@@ -149,6 +151,7 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.string "reference_number"
     t.string "reason"
     t.boolean "paid_delivery", default: false
+    t.string "comment"
     t.index ["addressable_type", "addressable_id"], name: "index_orders_on_addressable_type_and_addressable_id"
     t.index ["kit_id"], name: "index_orders_on_kit_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -159,7 +162,6 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
-    t.string "cash_amount"
     t.boolean "cash", default: false
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
@@ -179,6 +181,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.text "prod_mp_private_key_ciphertext"
     t.boolean "own_delivery", default: false
     t.string "day_open"
+    t.string "emoji"
+    t.string "hq_address"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
@@ -216,6 +220,8 @@ ActiveRecord::Schema.define(version: 2020_05_04_020924) do
     t.datetime "updated_at", null: false
     t.string "addressable_type"
     t.bigint "addressable_id"
+    t.float "next_day_hour", default: 0.0
+    t.float "day_for_order", default: 0.0
     t.index ["addressable_type", "addressable_id"], name: "index_stores_on_addressable_type_and_addressable_id"
     t.index ["restaurant_id"], name: "index_stores_on_restaurant_id"
   end

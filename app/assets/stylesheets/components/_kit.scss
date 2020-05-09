@@ -33,6 +33,7 @@
 .chef-box {
   border-radius: 8px;
   background: #63b0c0;
+  font-family: 'Galindo', cursive;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.03);
   transition: 0.4s ease;
   h2 {
@@ -57,15 +58,16 @@
   border-bottom: 1px solid white;
   border-radius: 7px;
   background-color: white;
+  min-height: 150px;
   padding: 15px 10px;
 }
 
 .chef-box-image {
-  min-width: 125px;
+  min-width: 150px;
   > div {
     background-size: cover;
     background-position: center;
-    height: 100px;
+    height: 120px;
     border-radius: 8px;
     position: relative;
     .difficulty {
@@ -121,6 +123,29 @@
   left: -30px;
 }
 
+.no-stock {
+  position: absolute;
+  background-color: coral;
+  z-index: 1;
+  color: white;
+  padding: 2px 60px;
+  transform: rotate(-35deg);
+  top: 28px;
+  left: -30px;
+}
+
+.few-stock {
+  position: absolute;
+  background-color: #E91E63;
+  z-index: 1;
+  color: white;
+  padding: 2px 60px;
+  transform: rotate(-35deg);
+  top: 28px;
+  left: -30px;
+  padding-left: 35px;
+}
+
 .out-of-stock {
   opacity: 0.4;
 }
@@ -143,6 +168,32 @@
 span a#restaurants:hover {
   text-decoration: none;
 }
+
+// Show
+
+.kit-sm-show {
+  width: 45%;
+  position: relative;
+  background-size: cover;
+  border-radius: 4px;
+  margin-right: 35px;
+  span {
+    width: 35%;
+    padding-right: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: #e1ecba;
+    position: absolute;
+    top: 15px;
+    transform: rotate(-6deg);
+    font-size: 14px;
+    padding: 1px 0px;
+    text-align: center;
+    border-radius: 4px 0px 0px 4px;
+    right: -5px;
+  }
+}
+
 
 @media only screen and (max-width: 600px) {
   .kits-wrapper {

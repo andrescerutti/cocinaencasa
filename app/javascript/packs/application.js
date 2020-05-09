@@ -1,5 +1,4 @@
 import { validateAddress } from "../plugins/init_validate_address";
-import { calculateKit } from "../plugins/init_order_kit";
 import { initAutocomplete } from "../plugins/init_autocomplete";
 import { initMapbox } from '../plugins/init_mapbox';
 import { checkDisabledButton } from '../plugins/disable_button';
@@ -12,7 +11,6 @@ import { autocomplete } from '../plugins/init_autocomplete';
 
 initFormToggler();
 validateAddress();
-calculateKit();
 initMapbox();
 checkDisabledButton();
 autocomplete();
