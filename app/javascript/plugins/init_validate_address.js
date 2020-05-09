@@ -6,8 +6,6 @@ const validateAddress = () => {
   const submit = document.querySelector("#submit_order_kit")
   const addressFields = document.querySelector("#address_fields")
   const storeAddress = document.querySelector("#store_address")
-  const ingredientsTrigger = document.querySelector("#ingredients-trigger")
-  const ingredients = document.querySelector("#ingredients")
 
   const displayStoreAddress = () => {
     if (pickUp.checked) {
@@ -22,10 +20,6 @@ const validateAddress = () => {
     if (!delivery.checked) {
       addressFields.classList.add("hide-field-address")
     }
-  }
-
-  const displayIngredients = () => {
-    ingredients.classList.toggle("d-none")
   }
 
   const invalidArea = () => {
@@ -65,7 +59,6 @@ const validateAddress = () => {
     delivery.addEventListener("change", event => updateOrderButton())
     delivery.addEventListener("change", event => displayStoreAddress())
     amount.addEventListener("change", event => updateOrderButton())
-    ingredientsTrigger.addEventListener("click", event => displayIngredients())
   }
 
 }

@@ -14,6 +14,10 @@ class OrdersController < ApplicationController
       current_user.addresses << @order.address unless current_user.addresses.include?(@order.address)
       current_user.save
     end
+    @kit = @order.kit
+    @store = Store.find(@order.store_id)
+    @ingredients = Ingredient.joins(kit_ingredients: :kit).where("kits.id = ?", @kit.id)
+    @cookwares = Cookware.joins(kit_cookwares: :kit).where("kits.id = ?", @kit.id)
   end
 
   def new
@@ -73,7 +77,7 @@ class OrdersController < ApplicationController
   end
 
   def orders_params
-    params.require(:order).permit(:amount, :delivery_provider, :status, :date_delivery, :code, :reason, :reference_number, addresses_atributes: [:address])
+    params.require(:order).permit(:store_id, :amount, :delivery_provider, :status, :date_delivery, :code, :reason, :reference_number, addresses_atributes: [:address])
   end
 
   def address_params

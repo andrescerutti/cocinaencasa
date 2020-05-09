@@ -1,88 +1,142 @@
-<!-- <div style="background-image: url(<%= image_url('orders-bg.jpg') %>); background-size: cover; background-position: top; min-height: 500px; "> -->
-  <div class="container d-flex bg-light mt-4 px-4 py-2 rounded" >
-    <div  class="flex-grow-1 mt-3 h-100">
-      <h2 class="my-4 "><strong> Resumen de compra </strong></h2>
-
-      <div class="card-product  d-md-none">
-        <img src=<%= @order.kit.image %> />
-        <div class="d-flex flex-column p-3 w-100">
-          <%  %>
-          <h1 style="font-size: 15px"><strong> <%= @order.kit.name %> </strong></h1 style="">
-          <p><%= @order.kit.restaurant.name %></p>
-          <span class="d-flex justify-content-between align-items-center mt-3"><p>x <%= @order.amount %></p><p>$ <%= @order.kit.price * @order.amount %></p></span>
+<div class="container mt-3">
+  <div class="d-flex">
+    <div class="mt-3 kit-information w-100">
+      <h1><%= @kit.name %></h1>
+      <p><%= @kit.description %></p>
+      <div class="d-none d-sm-flex kit-show-store-main-information-sm" style="margin-bottom: 15px;">
+        <div style="background-image: url(<%= @store.restaurant.brand.logo %>);" class="kit-store-square-logo"></div>
+        <div class="store-address">
+          <h1><%= @store.restaurant.name %></h1>
+          <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
         </div>
       </div>
-    <div class="mr-md-3 bg-white rounded p-3 mt-3 h-100" style="box-shadow:  0px 0px 10px 2px rgba(0, 0, 0, 0.4);">
-      <h4 class="mt-2 mb-4 font-weight-bold">Detalles del envío</h4>
-        <p><strong>Metodo de Envío:</strong> <%= @order.delivery_provider %></p>
-      <% if  @order.address.present? %>
-        <p><strong>Lugar de entrega:</strong><%= @order.address.street %> <%= @order.address.flat_number %>, <%= @order.address.state %>, <%= @order.address.city %></p>
-      <% end %>
-      <%= l(@order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %>
-
-<div class="mt-3">
-        <form action="<%= order_payments_path(@order) %>" method="POST">
-          <script
-            src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
-            data-elements-color="#2F9B7A"
-            data-header-color="#2F9B7A"
-            data-public-key="<%= @order.kit.restaurant.prod_mp_public_key %>"
-            data-transaction-amount="<%= @order.kit.price * @order.amount %>"
-            data-button-label="Confirmar y pagar"
-            <% if current_user.mpcustomer_id? %>
-              data-customer-id="<%= current_user.mpcustomer_id %>"
-              data-card-ids="<%= current_user.mpcard_id %>">
+      <div class="d-none d-sm-block w-100 mt-0 pl-0">
+        <div>
+          <h5 class="mt-4" style="font-size: 18px;">Ingredientes</h5>
+          <ul class="mb-0">
+            <% @ingredients.each do |ingredient| %>
+            <li class="m-0 element"><%= ingredient.name %></li>
             <% end %>
-            >
-          </script>
-        </form>
-</div>
-
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Confirmar y Pagar
-</button> -->
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Disculpa las molestias</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-          <span aria-hidden="true">&times;</span>
-        </button>
+          </ul>
+        </div>
+        <div>
+          <h5 class="mt-3" style="font-size: 18px;">Utencillos requeridos</h5>
+          <ul class="mb-0">
+            <% if @cookwares.empty? %>
+            <li>No especificados.</li>
+            <% end %>
+            <% @cookwares.each do |cookware| %>
+            <li class="m-0 element"><%= cookware.name %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-      <div class="modal-body">
-        Lo sentimos, por el momento nuestras publicaciones se encuentran pausadas. Estamos trabajando para agregar nuevos platos a nuestra pagina. Cuando estemos nuevamente online nos pondremos en contacto con vos!!!
-      </div> -->
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Cerrar</button>
+      <div style="background-image: url(<%= @kit.image %>);" class="d-block d-sm-none kit-show-image">
+        <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
+        <span>popular</span>
+      </div>
+      <div class="d-flex kit-store d-block d-sm-none">
+        <div id="left" class="ojito"></div>
+        <div id="right" class="ojito"></div>
+        <div id="right" class="ojito"></div>
+        <div style="background-image: url(<%= @kit.restaurant.brand.logo %>);" class="kit-store-logo"></div>
+        <div>
+          <div class="kit-store-address">
+            <h2><%= @kit.restaurant.name %></h2>
+            <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
+          </div>
+        </div>
+        <div class="d-none d-sm-block map-zone">⚠ Ver zona de envío</div>
+      </div>
+      <div class="d-block d-sm-none mt-3 map-zone">⚠ Ver zona de envío</div>
+      <div class="d-block d-sm-none mt-1 map-zone"  id="ingredients-trigger">Ver ingredientes y utencillos</div>
+
+      <div class="kit-information-disclaimer d-none" id="ingredients" >
+        <div>
+          <h5>Ingredientes</h5>
+          <ul class="mb-0">
+            <% @ingredients.each do |ingredient| %>
+            <li class="m-0 element"><%= ingredient.name %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div>
+          <h5>Utencillos requeridos</h5>
+          <ul class="mb-0">
+            <% if @cookwares.empty? %>
+            <li>No especificados.</li>
+            <% end %>
+            <% @cookwares.each do |cookware| %>
+            <li class="m-0 element"><%= cookware.name %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
+    <div style="background-image: url(<%= @kit.image %>);" class="d-none d-sm-block kit-show-sm-image">
+      <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
+      <span>popular</span>
+    </div>
   </div>
-</div> -->
 
-
-
-
+  <div class="d-flex mt-3 mt-sm-5">
+    <div class="w-100 w-sm-50 p-0">
+      <h2 class="mb-3 mt-4 section-secondary checkout-header">Detalle de compra</h2>
+      <div>
+        <div class="checkout-group checkout-first">
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Cantidad</div>
+            <div class="w-50 checkout-data"><%= @kit.size %> Chef Boxes (ARS $<%= @order.kit.price %> c/u)</div>
+          </div>
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Fecha de entrega</div>
+            <div class="w-50 checkout-data"><%= l(@order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></div>
+          </div>
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Dirección</div>
+            <div class="w-50 checkout-data"><%= @order.address.address %></div>
+          </div>
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Forma de entrega</div>
+            <div class="w-50 checkout-data"><%= "Delivery" %></div>
+          </div>
+        </div>
+        <div class="checkout-group">
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Costo Chef Boxes</div>
+            <div class="w-50 checkout-data">ARS $<%= @order.kit.price * @order.amount %></div>
+          </div>
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Costo de envío</div>
+            <div class="w-50 checkout-data"><%= "00" %></div>
+          </div>
+        </div>
+        <div class="checkout-group checkout-total">
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Costo total</div>
+            <div class="w-50 checkout-data">ARS $<%= "00" %></div>
+          </div>
+        </div>
       </div>
+      <p class="w-100 mx-auto mt-3 text-center" style="font-family: 'Galindo', cursive;">👩‍🍳👨‍🍳 ¡Preparate para esta aventura!</p>
+      <div class="mt-3 checkout-payment d-flex">
+        <form class="w-100" action="<%= order_payments_path(@order) %>" method="POST">
+          <script
+          src="https://www.mercadopago.com.ar/integrations/v1/web-tokenize-checkout.js"
+          data-elements-color="#2F9B7A"
+          data-header-color="#2F9B7A"
+          data-public-key="<%= @order.kit.restaurant.prod_mp_public_key %>"
+          data-transaction-amount="<%= @order.kit.price * @order.amount %>"
+          data-button-label="Pagar"
+          <% if current_user.mpcustomer_id? %>
+          data-customer-id="<%= current_user.mpcustomer_id %>"
+          data-card-ids="<%= current_user.mpcard_id %>">
+          <% end %>
+          >
+        </script>
+      </form>
+    </div>
   </div>
-   <div class="card-kit d-xs-none d-none d-md-block h-100" style=" width: 40%;">
-     <img src=<%= @order.kit.image %>  />
-     <div class="card-body">
-       <div>
-         <h5 class="card-title mb-1"><%= @order.kit.name %></h5>
-         <p class="card-text overflow-ellipsis card-description"><%= @order.kit.restaurant.name %></p>
-         <div class="d-flex justify-content-between mt-3">
-           <p class="card-text card-price"><%= @order.delivery_provider %></p>
-         </div>
-       </div>
-       <div class="d-flex justify-content-between my-3">
-         <h2 class="card-text card-address" style="font-size: 20px"><strong> Total </strong></h2>
-         <h2 class="card-text card-price" style="font-size: 20px"><strong> $ <%= @order.kit.price * @order.amount %> </strong></h2>
-       </div>
-     </div>
-   </div>
-  </div>
-
+</div>
+</div>
+</div>
