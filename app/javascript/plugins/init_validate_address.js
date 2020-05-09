@@ -4,6 +4,29 @@ const validateAddress = () => {
   const pickUp = document.querySelector("#order_delivery_provider_retirar_por_el_local")
   const amount = document.querySelector("#order_amount")
   const submit = document.querySelector("#submit_order_kit")
+  const addressFields = document.querySelector("#address_fields")
+  const storeAddress = document.querySelector("#store_address")
+  const ingredientsTrigger = document.querySelector("#ingredients-trigger")
+  const ingredients = document.querySelector("#ingredients")
+
+  const displayStoreAddress = () => {
+    if (pickUp.checked) {
+      storeAddress.classList.remove("hide-store-address")
+    }
+    if (!pickUp.checked) {
+      storeAddress.classList.add("hide-store-address")
+    }
+    if (delivery.checked) {
+      addressFields.classList.remove("hide-field-address")
+    }
+    if (!delivery.checked) {
+      addressFields.classList.add("hide-field-address")
+    }
+  }
+
+  const displayIngredients = () => {
+    ingredients.classList.toggle("d-none")
+  }
 
   const invalidArea = () => {
     return false;
@@ -38,8 +61,11 @@ const validateAddress = () => {
   if (submit) {
     address.addEventListener("change", event => updateOrderButton())
     pickUp.addEventListener("change", event => updateOrderButton())
+    pickUp.addEventListener("change", event => displayStoreAddress())
     delivery.addEventListener("change", event => updateOrderButton())
+    delivery.addEventListener("change", event => displayStoreAddress())
     amount.addEventListener("change", event => updateOrderButton())
+    ingredientsTrigger.addEventListener("click", event => displayIngredients())
   }
 
 }

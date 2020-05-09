@@ -194,6 +194,73 @@ span a#restaurants:hover {
   }
 }
 
+.hide-field-address {
+  display: none;
+}
+
+#store_address {
+  border: 1px solid #00788c;
+  padding: 10px 10px;
+  border-radius: 4px;
+  color: #00788c;
+  font-weight: bold;
+  background-color: #01788c0d;
+}
+
+.hide-store-address {
+  display: none;
+}
+
+.kit-show-sm-input {
+  width: 100% !important;
+}
+
+.kit-show-xs-input {
+  width: 45% !important;
+}
+
+.kit-disclaimer-sm {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  i {
+    margin-bottom: 15px;
+  }
+}
+
+.kit-information-disclaimer-sm {
+  border-radius: 4px;
+  color: black;
+  width: 95%;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.kit-show-store-main-information-sm {
+  margin: 20px 0px;
+  margin-bottom: 40px;
+  padding: 15px 30px;
+  border-top: 4px solid #2c9c7c;
+  border-bottom: 4px solid #2c9c7c;
+  width: 95%;
+  h4 {
+    font-size: 15px;
+    color: rgba(0,0,0,0.85);
+  }
+  h1 {
+    font-size: 22px;
+  }
+}
+
+.kit-store-square-logo {
+  width: 75px;
+  height: 75px;
+  border: 1px solid rgba(0,0,0,0.3);
+  background-size: contain;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 @media only screen and (max-width: 600px) {
   .kits-wrapper {
@@ -206,4 +273,5 @@ span a#restaurants:hover {
     justify-content: center;
     padding: 3px 6px;
   }
+
 }
