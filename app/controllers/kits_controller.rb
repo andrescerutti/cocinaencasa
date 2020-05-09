@@ -12,16 +12,16 @@ class KitsController < ApplicationController
       @search = session[:address]
     end
     if params[:category]
-      return @kits = Kit.near(@search, 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).order(priority: :desc)
+      return @kits = Kit.near(@search, 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).where("kits.stock > ?", 0).order(priority: :desc)
     end
-    @kits = Kit.near(@search, 5, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc)
+    @kits = Kit.near(@search, 5, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0)
     return redirect_to wrong_address_path(query: @search) if @kits.empty?
     @stores = Store.near(@search, 5, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
   end
 
   def show
     @kit = Kit.find(params[:id])
-    @kits = @kit.restaurant.kits.where.not(id: @kit.id)
+    @kits = @kit.restaurant.kits.where.not(id: @kit.id).where("kits.stock > ?", 0)
     @store = Store.near(session[:address], 5, select: "addresses.*, stores.*").joins(:restaurant).joins(:address).where(restaurant: @kit.restaurant).first
     @store = @kit.restaurant.stores.first if @store.nil?
     @order = Order.new
