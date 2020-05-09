@@ -5,7 +5,7 @@
       <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
     <% end %>
     </div>
-    <div class="flex-grow-0 flex-sm-grow-1">
+    <div class="flex-grow-1 flex-sm-grow-1">
       <div class="d-flex">
         <div style="background-image: url(<%= @store.restaurant.brand.logo %>);" class="store-square-logo"></div>
         <div class="store-address">
@@ -22,7 +22,7 @@
       <div class="m-0 mt-sm-3 d-block d-sm-flex delivery-information">
         <div class="my-2 mb-sm-0 mr-0 mr-sm-5">
           <h3 class="mb-0 mb-sm-2">Días de entregas</h3>
-          <div class="d-flex">
+          <div class="d-flex" style="flex-wrap: wrap;">
             <% @store.available.each do |day| %>
               <p class="mt-2 mt-sm-0"><%= day %></p>
             <% end %>

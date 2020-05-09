@@ -27,7 +27,7 @@ const validateAddress = () => {
   };
 
   const updateOrderButton = () => {
-    if (address.value !== "" && (pickUp.checked || delivery.checked) && amount.value > 0 && !invalidArea()) {
+    if (((address.value !== "" && delivery.checked) || pickUp.checked) && amount.value > 0 && !invalidArea()) {
       submit.classList.remove("disabled")
       submit.disabled = ""
       const s = amount.value > 1 ? "s" : ""
