@@ -2,6 +2,7 @@ require_relative 'boot'
 
 require 'rails/all'
 
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -17,7 +18,11 @@ module Easychef
     config.load_defaults 5.2
     I18n.config.available_locales = :es
     config.i18n.default_locale = :es
+<<<<<<< HEAD
     config.time_zone = "America/Buenos_Aires"
+=======
+    config.i18n.locale = :es
+>>>>>>> master
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

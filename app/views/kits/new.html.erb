@@ -7,9 +7,9 @@
     <%= f.input :name, label: false, placeholder: 'Nombre del kit', required: true, hint: 'Junto con la foto es lo primero que veran los clientes en el buscador' %>
     <%= f.input :stock, as: :integer, label: false, placeholder: 'Stock', default: 0 %>
     <%= f.input :price, as: :integer, label: false, placeholder: 'Precio', required: true %>
-    <%= f.input :size, as: :integer, label: false, placeholder: 'Comenzales', default: 1, hint: 'Cantidad de personas que pueden comer con el kit'  %>
+    <%= f.input :size, as: :integer, label: false, placeholder: 'Comensales', default: 1, hint: 'Cantidad de personas que pueden comer con el kit'  %>
     <%= f.input :preparation_time, label: false, placeholder: 'Tiempo de preparacion', required: true, hint: 'Solo el número en minutos'%>
-    <%= f.input :description, as: :text, label: false, placeholder: 'Description del kit', hint: 'Breve descripcion de lo que contiene, ingredientes, salsas, etc' %>
+    <%= f.input :description, as: :text, label: false, placeholder: 'Description del kit', hint: 'Breve descripción de lo que contiene, ingredientes, salsas, etc' %>
     <%= f.input :image, label: 'Foto del kit', required: true, hint: 'La mejor foto que tengas, al cliente le entrara el producto por lo ojos'  %>
 
   <div class="links">
