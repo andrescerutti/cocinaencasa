@@ -1,78 +1,51 @@
-<div style="">
-  <div class="container pt-3 d-md-flex justify-content-between">
-      <%= link_to "", :back, class: "fas fa-arrow-left back-button", style: "text-decoration: none; color: #2f9b7a;" %>
-    <div class="mr-3 w-sm-100 w-md-50 flex-grow-1">
-      <h2 class="mb-5 w-100 text-center"><%= @restaurant.name %></h2>
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <i class="fas fa-map-marker-alt mr-3" style="color: #2f9b7a; font-size: 25px;"></i>
-        <p class="ml-4 text-secondary"><%= @store.address.address %> </p>
-      </div>
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <i class="fas fa-motorcycle mr-1" style="color: #2f9b7a; font-size: 25px;"></i>
-      <% if @restaurant.own_delivery.present? %>
-        <p class="ml-4 text-secondary">Posee delivery propio</p>
-      <% else %>
-        <p class="ml-4 text-secondary">No posée delivery propio - Podras hacer TAKE AWAY o enviar un glovo</p>
-      <% end %>
-      </div>
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <i class="far fa-clock mr-2" style="color: #2f9b7a; font-size: 25px;"></i>
-        <p class="ml-3 text-secondary">Días abiertos: <%= @store.available %> </p>
-      </div>
+<div class="container">
+  <div class="d-flex mt-4 store-information">
+    <div style="background-image: url(<%= @store.restaurant.image %>);" class="d-none d-sm-block store-sm-show">
+    <% @store.flags.split(", ").each_with_index do |flag, index| %>
+      <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+    <% end %>
     </div>
-    <div class="p-2 text-right w-sm-100 w-md-50 rounded"style="background-image: url(<%= @restaurant.image %>);background-repeat: no-repeat; background-size: cover; background-position: top; min-height: 25vh; min-width: 35vw; max-width: 50vw; box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);">
-      <%= cl_image_tag( @restaurant.brand.logo , class:"mb-4 rounded w-25 ")%>
-    </div>
-  </div>
-  <div class="container mt-5">
-    <div class="cards-scroll">
-      <h2 class="w-100">Kits disponibles</h2>
- <div class="cards-scroll">
-    <div class="cards-scroll mt-3" >
-      <% @restaurant.kits.each do |kit| %>
-        <% if kit.stock < 1 %>
-            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4 position-relative" >
-              <div class="w-25 position-absolute" style="z-index: 1; top: 34px; right: 20px" >
-                <p class="bg-primary bold text-white p-2 rounded">Sin stock</p>
-              </div>
-             <div class="card-kit" style="opacity:0.6">
-
-              <%= cl_image_tag kit.image, class: "rounded"%>
-               <div class="card-body">
-                 <div>
-                   <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small> </h5>
-                   <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
-                 </div>
-                 <div class="d-flex justify-content-between">
-                   <p class="card-text card-address"><i class="far fa-clock"></i>preparación <%= kit.preparation_time %> minutos</p>
-                   <p class="card-text card-price">$ <%= kit.price %></p>
-
-                 </div>
-               </div>
-              </div>
-            </div>
-        <% else %>
-          <%= link_to kit_path(kit) do  %>
-            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4">
-              <div class="card-kit">
-                <%= cl_image_tag kit.image, class: "rounded"%>
-                <div class="card-body">
-                  <div>
-                    <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></h5>
-                    <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
-                    <p class="card-text card-price">$ <%= kit.price %></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
+    <div class="flex-grow-0 flex-sm-grow-1">
+      <div class="d-flex">
+        <div style="background-image: url(<%= @store.restaurant.brand.logo %>);" class="store-square-logo"></div>
+        <div class="store-address">
+          <h1><%= @store.restaurant.name %></h1>
+          <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
+        </div>
+      </div>
+      <p class="delivery-limit">Podés hacer tu pedido <%= @store.next_available_time %></p>
+      <div style="background-image: url(<%= @store.restaurant.image %>);" class="d-block d-sm-none store-show">
+        <% @store.flags.split(", ").each_with_index do |flag, index| %>
+          <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
         <% end %>
-      <% end %>
-  </div>
-</div>
+      </div>
+      <div class="m-0 mt-sm-3 d-block d-sm-flex delivery-information">
+        <div class="my-2 mb-sm-0 mr-0 mr-sm-5">
+          <h3 class="mb-0 mb-sm-2">Días de entregas</h3>
+          <div class="d-flex">
+            <% @store.available.each do |day| %>
+              <p class="mt-2 mt-sm-0"><%= day %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="my-2 mb-sm-0">
+          <h3 class="mb-0 mb-sm-2">Método de entrega</h3>
+          <div class="d-flex">
+            <p class="mt-2 mt-sm-0">take away</p>
+            <p class="mt-2 mt-sm-0">delivery</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <h2 class="mb-4 section-secondary store-show-kit-offer">Elejí tu Chef Box</h2>
+  <div class="kits-wrapper">
+    <% @kits.each do |kit| %>
+    <%= render "components/kit", kit: kit, kits: @kits %>
+    <% end %>
+  </div>
+
+  <h2 class="mb-4 section-secondary store-show-kit-offer">Otros restaurants similares</h2>
+
 </div>

@@ -1,0 +1,238 @@
+.restaurant-holder {
+  border-radius: 6px;
+  margin-bottom: 25px;
+  a:hover {
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  }
+  a {
+    text-decoration: none;
+    border-radius: 6px;
+    > div {
+      height: 160px;
+      position: relative;
+      border-radius: 6px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      .store-circle-logo {
+        height: 45px;
+        width: 45px;
+        position: absolute;
+        top: 10px;
+        border: 1px solid white;
+        left: 10px;
+        z-index: 1;
+        box-shadow: 0 0 3px white;
+        border-radius: 50%;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      span {
+        width: 35%;
+        padding-right: 10px;
+        color: black;
+        font-weight: bold;
+        background-color: #e1ecba;
+        position: absolute;
+        top: 15px;
+        transform: rotate(-6deg);
+        font-size: 14px;
+        padding: 1px 0px;
+        text-align: center;
+        border-radius: 4px 0px 0px 4px;
+        right: -5px;
+      }
+      .restaurant-name {
+        width: 80%;
+        position: absolute;
+        bottom: -16px;
+        border: 2px solid whitesmoke;
+        background-color: #01788c;
+        border-radius: 30px;
+      }
+      h2 {
+        margin: 0;
+        font-size: 16px;
+        color: white;
+        font-weight: bold;
+        font-family: 'Galindo', cursive;
+        text-align: center;
+        padding: 5px 10px;
+      }
+    }
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.ojito {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.restaurant-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 32px;
+}
+
+// Show
+.store-information {
+  h1 {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Galindo', cursive;
+  }
+  h4 {
+    font-size: 20px;
+    color: #414042;
+    font-weight: normal;
+  }
+}
+.delivery-information {
+  border-radius: 0;
+  border: none;
+  margin-top: 10px;
+  h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  p {
+    background-color: $soul-green;
+    color: white;
+    padding: 3px 22px;
+    font-size: 13px;
+    border-radius: 18px;
+    margin: 0;
+    margin-right: 10px;
+  }
+}
+
+.store-show {
+  height: 30vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  border: 1px solid $soul-green;
+  border-radius: 6px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom: none;
+  span {
+    width: 35%;
+    padding-right: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: #e1ecba;
+    position: absolute;
+    top: 15px;
+    transform: rotate(-6deg);
+    font-size: 14px;
+    padding: 1px 0px;
+    text-align: center;
+    border-radius: 4px 0px 0px 4px;
+    right: -5px;
+  }
+}
+
+.store-sm-show {
+  width: 35%;
+  position: relative;
+  background-size: cover;
+  border-radius: 4px;
+  margin-right: 35px;
+  span {
+    width: 35%;
+    padding-right: 10px;
+    color: black;
+    font-weight: bold;
+    background-color: #e1ecba;
+    position: absolute;
+    top: 15px;
+    transform: rotate(-6deg);
+    font-size: 14px;
+    padding: 1px 0px;
+    text-align: center;
+    border-radius: 4px 0px 0px 4px;
+    right: -5px;
+  }
+}
+
+.store-address {
+  width: 60%;
+  margin-top: 6px;
+  margin-left: 20px;
+}
+
+.delivery-limit {
+  border-radius: 4px;
+  border: 1px solid $soul-green;
+  padding: 6px 10px;
+  background-color: $soul-green;
+  margin-bottom: 4px;
+  margin-top: 15px;
+  color: white;
+}
+
+.store-square-logo {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+}
+
+.store-show-kit-offer {
+  font-size: 24px;
+  margin-top: 36px;
+  font-weight: bold;
+}
+
+.second-category {
+  top: 45px !important;
+  background-color: #fefaf0 !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .restaurant-list {
+    overflow-x: scroll;
+    display: flex;
+    > div {
+      margin-right: 20px;
+    }
+    h2 {
+      font-size: 14px;
+    }
+    .restaurant-name {
+      bottom: -14px;
+    }
+    .restaurant-holder a > div {
+      width: 70vw;
+      height: 135px;
+      span {
+        font-size: 10px;
+        padding: 0;
+        top: 22px;
+      }
+    }
+  }
+  .delivery-information {
+    margin-top: 0;
+    border: 1px solid $soul-green;
+    border-radius: 6px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top: none;
+    background-color: #03788c0f;
+    margin-top: 5px;
+    padding: 5px 15px;
+  }
+
+}

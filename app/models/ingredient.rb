@@ -3,8 +3,6 @@ class Ingredient < ApplicationRecord
   accepts_nested_attributes_for :kit_ingredients
   mount_uploader :image, ImageUploader
 
-
   validates :name, presence: true
   validates :image, presence: true
-
 end

@@ -4,6 +4,7 @@ class StoresController < ApplicationController
   def show
     @store = Store.find(params[:id])
     @restaurant = @store.restaurant
+    @kits = @store.restaurant.kits
     authorize @store
   end
 end

@@ -1,5 +1,8 @@
 class Kit < ApplicationRecord
   belongs_to :restaurant
+  has_many :kit_cookwares
+  has_many :ingredients
+  # has_many :cookwares, through: :kit_cookwares
   # accepts_nested_attributes_for :guides
   # accepts_nested_attributes_for :steps
   reverse_geocoded_by "addresses.latitude", "addresses.longitude"
@@ -37,6 +40,10 @@ class Kit < ApplicationRecord
 
   def average_rating
     reviews.average(:rating).to_f.round(1)
+  end
+
+  def few?
+    stock < 5
   end
 
   def update_stock(amount_variation)

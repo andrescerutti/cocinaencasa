@@ -1,0 +1,49 @@
+<div class="kit-status">
+  <% if kit.stock.zero? %>
+  <span class="no-stock">AGOTADO</span>
+  <% elsif kit.few? %>
+  <span class="few-stock">ÚLTIMOS KITS</span>
+  <% end %>
+  <div class="<%= 'out-of-stock' if kit.stock.zero? %>">
+    <%= link_to kit do %>
+    <div class="chef-box" id="<%= 'restaurants' if kit == kits.last  %>">
+      <div class="d-flex chef-box-main">
+        <div class="d-flex flex-column justify-content-between">
+          <div>
+            <h2 class="mt-0 mb-0 pr-3"><%= truncate(kit.name, length: 30, separator: " ") %></h2>
+            <% if kit.tags != "" %>
+              <span class="m-0 tag"><%= kit.tags.upcase %></span>
+            <% end %>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-utensils"></i>
+            <h3 class="mt-0 mb-0 ml-2"><%= truncate(kit.restaurant.name.upcase, length: 18) %></h3>
+          </div>
+        </div>
+        <div class="chef-box-image">
+          <div style="background-image: url(<%= cl_image_path(kit.image) %>);">
+            <% if kit.difficulty != "" %>
+            <span class="difficulty"><%= kit.difficulty %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center chef-box-details">
+        <div class="d-flex my-2">
+          <div class="d-flex align-items-center">
+            <i class="fas fa-user-friends"></i>
+            <span class="mx-2"><%= kit.size %> pers</span>
+          </div>
+          <div class="d-flex align-items-center ml-2">
+            <i class="fas fa-utensils"></i>
+            <span class="mx-2"><%= kit.preparation_time %> min</span>
+          </div>
+        </div>
+        <div>
+          <span class="text-bold"><b>$ <%= kit.price %></b></span>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
