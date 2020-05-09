@@ -1,17 +1,19 @@
 <div class="kit-status">
   <% if kit.stock.zero? %>
-    <span class="no-stock">AGOTADO</span>
+  <span class="no-stock">AGOTADO</span>
   <% elsif kit.few? %>
-    <span class="few-stock">ÚLTIMOS KITS</span>
+  <span class="few-stock">ÚLTIMOS KITS</span>
   <% end %>
   <div class="<%= 'out-of-stock' if kit.stock.zero? %>">
-  <%= link_to kit do %>
+    <%= link_to kit do %>
     <div class="chef-box" id="<%= 'restaurants' if kit == kits.last  %>">
       <div class="d-flex chef-box-main">
         <div class="d-flex flex-column justify-content-between">
           <div>
             <h2 class="mt-0 mb-0 pr-3"><%= truncate(kit.name, length: 30, separator: " ") %></h2>
-            <span class="m-0 tag"><%= "popular".upcase %></span>
+            <% if kit.tags != "" %>
+              <span class="m-0 tag"><%= kit.tags.upcase %></span>
+            <% end %>
           </div>
           <div class="d-flex align-items-center">
             <i class="fas fa-utensils"></i>
@@ -20,7 +22,9 @@
         </div>
         <div class="chef-box-image">
           <div style="background-image: url(<%= cl_image_path(kit.image) %>);">
-            <span class="difficulty">fácil</span>
+            <% if kit.difficulty != "" %>
+            <span class="difficulty"><%= kit.difficulty %></span>
+            <% end %>
           </div>
         </div>
       </div>
@@ -40,6 +44,6 @@
         </div>
       </div>
     </div>
-  <% end %>
+    <% end %>
   </div>
 </div>

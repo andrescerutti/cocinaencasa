@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_210612) do
+ActiveRecord::Schema.define(version: 2020_05_09_214005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(version: 2020_05_09_210612) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "priority", default: 0
+    t.string "tags", default: ""
+    t.string "difficulty", default: ""
     t.index ["restaurant_id"], name: "index_kits_on_restaurant_id"
   end
 
@@ -223,6 +225,7 @@ ActiveRecord::Schema.define(version: 2020_05_09_210612) do
     t.bigint "addressable_id"
     t.float "next_day_hour", default: 0.0
     t.float "day_for_order", default: 0.0
+    t.string "flags", default: ""
     t.index ["addressable_type", "addressable_id"], name: "index_stores_on_addressable_type_and_addressable_id"
     t.index ["restaurant_id"], name: "index_stores_on_restaurant_id"
   end

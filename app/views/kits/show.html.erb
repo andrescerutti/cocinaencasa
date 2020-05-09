@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-3 mt-sm-5">
   <div class="d-flex">
     <div class="mt-3 kit-information w-100">
       <h1><%= @kit.name %></h1>
@@ -11,8 +11,9 @@
         </div>
       </div>
       <div style="background-image: url(<%= @kit.image %>);" class="d-block d-sm-none kit-show-image">
-        <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
-        <span>popular</span>
+        <% @store.flags.split(", ").each_with_index do |flag, index| %>
+        <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+        <% end %>
       </div>
       <div class="d-flex kit-store d-block d-sm-none">
         <div id="left" class="ojito"></div>
@@ -74,14 +75,14 @@
       </div>
 
       <div class="disclaimer kit-information-disclaimer-sm kit-details d-none d-sm-flex">
-          <div class="kit-disclaimer kit-disclaimer-sm">
-            <i class="fas fa-utensils"></i>
-            <span><%= @kit.size %> personas</span>
-          </div>
-          <div class="kit-disclaimer kit-disclaimer-sm">
-            <i class="fas fa-utensils"></i>
-            <span><%= @kit.preparation_time %> minutos</span>
-          </div>
+        <div class="kit-disclaimer kit-disclaimer-sm">
+          <i class="fas fa-utensils"></i>
+          <span><%= @kit.size %> personas</span>
+        </div>
+        <div class="kit-disclaimer kit-disclaimer-sm">
+          <i class="fas fa-utensils"></i>
+          <span><%= @kit.preparation_time %> minutos</span>
+        </div>
         <div class="kit-disclaimer kit-disclaimer-sm">
           <i class="fas fa-utensils"></i>
           <span><%= @store.days_in_text %></span>
@@ -93,8 +94,9 @@
       </div>
     </div>
     <div style="background-image: url(<%= @kit.image %>);" class="d-none d-sm-block kit-show-sm-image">
-      <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
-      <span>popular</span>
+    <% @store.flags.split(", ").each_with_index do |flag, index| %>
+      <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+    <% end %>
     </div>
   </div>
 
@@ -175,13 +177,13 @@
       </div>
     </div>
 
-  <h2 class="mb-4 section-secondary store-show-kit-offer">Otros Chef Boxes</h2>
-  <div class="kits-wrapper">
-    <% @kits.each do |kit| %>
-    <%= render "components/kit", kit: kit, kits: @kits %>
-    <% end %>
+    <h2 class="mb-4 section-secondary store-show-kit-offer">Otros Chef Boxes</h2>
+    <div class="kits-wrapper">
+      <% @kits.each do |kit| %>
+      <%= render "components/kit", kit: kit, kits: @kits %>
+      <% end %>
+    </div>
+
+    <h2 class="mb-4 section-secondary store-show-kit-offer">Otros restaurants similares</h2>
+
   </div>
-
-  <h2 class="mb-4 section-secondary store-show-kit-offer">Otros restaurants similares</h2>
-
-</div>

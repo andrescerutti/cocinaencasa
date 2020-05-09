@@ -1,8 +1,9 @@
 <div class="container">
   <div class="d-flex mt-4 store-information">
     <div style="background-image: url(<%= @store.restaurant.image %>);" class="d-none d-sm-block store-sm-show">
-      <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
-      <span>popular</span>
+    <% @store.flags.split(", ").each_with_index do |flag, index| %>
+      <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+    <% end %>
     </div>
     <div class="flex-grow-0 flex-sm-grow-1">
       <div class="d-flex">
@@ -14,8 +15,9 @@
       </div>
       <p class="delivery-limit">Podés hacer tu pedido <%= @store.next_available_time %></p>
       <div style="background-image: url(<%= @store.restaurant.image %>);" class="d-block d-sm-none store-show">
-        <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
-        <span>popular</span>
+        <% @store.flags.split(", ").each_with_index do |flag, index| %>
+          <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+        <% end %>
       </div>
       <div class="m-0 mt-sm-3 d-block d-sm-flex delivery-information">
         <div class="my-2 mb-sm-0 mr-0 mr-sm-5">

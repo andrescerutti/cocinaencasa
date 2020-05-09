@@ -2,12 +2,13 @@
   <%= link_to store_path(store), class:"" do %>
   <div style="background-image: url(<%= store.restaurant.image %>);">
     <div style="background-image: url(<%= store.restaurant.brand.logo %>);" class="store-circle-logo"></div>
-    <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
-    <span>popular</span>
+    <% store.flags.split(", ").each_with_index do |flag, index| %>
+      <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+    <% end %>
     <div class="d-flex justify-content-between align-items-center restaurant-name">
       <div class="ojito ml-2"></div>
-        <h2 class="d-none d-sm-block"><%= store.restaurant.name %></h2>
-        <h2 class="d-block d-sm-none"><%= truncate(store.restaurant.name, length: 15) %></h2>
+      <h2 class="d-none d-sm-block"><%= store.restaurant.name %></h2>
+      <h2 class="d-block d-sm-none"><%= truncate(store.restaurant.name, length: 15) %></h2>
       <div class="ojito mr-2"></div>
     </div>
   </div>

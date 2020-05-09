@@ -32,8 +32,9 @@
         </div>
       </div>
       <div style="background-image: url(<%= @kit.image %>);" class="d-block d-sm-none kit-show-image">
-        <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
-        <span>popular</span>
+        <% @store.flags.split(", ").each_with_index do |flag, index| %>
+          <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+        <% end %>
       </div>
       <div class="d-flex kit-store d-block d-sm-none">
         <div id="left" class="ojito"></div>
@@ -74,8 +75,9 @@
       </div>
     </div>
     <div style="background-image: url(<%= @kit.image %>);" class="d-none d-sm-block kit-show-sm-image">
-      <span style="top: 45px; background-color: #fefaf0 ">free delivery</span>
-      <span>popular</span>
+        <% @store.flags.split(", ").each_with_index do |flag, index| %>
+          <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
+        <% end %>
     </div>
   </div>
 
