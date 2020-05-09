@@ -6,6 +6,7 @@ const validateAddress = () => {
   const submit = document.querySelector("#submit_order_kit")
   const addressFields = document.querySelector("#address_fields")
   const storeAddress = document.querySelector("#store_address")
+  const deliveryDate = document.querySelector("#order_date_delivery")
 
   const displayStoreAddress = () => {
     if (pickUp.checked) {
@@ -27,7 +28,7 @@ const validateAddress = () => {
   };
 
   const updateOrderButton = () => {
-    if (((address.value !== "" && delivery.checked) || pickUp.checked) && amount.value > 0 && !invalidArea()) {
+    if (((address.value !== "" && delivery.checked) || pickUp.checked) && deliveryDate.value !== "" && amount.value > 0 && !invalidArea()) {
       submit.classList.remove("disabled")
       submit.disabled = ""
       const s = amount.value > 1 ? "s" : ""
@@ -59,6 +60,7 @@ const validateAddress = () => {
     delivery.addEventListener("change", event => updateOrderButton())
     delivery.addEventListener("change", event => displayStoreAddress())
     amount.addEventListener("change", event => updateOrderButton())
+    deliveryDate.addEventListener("change", event => updateOrderButton())
   }
 
 }
