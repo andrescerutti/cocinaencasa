@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get 'ingredients/edit'
   get 'ingredients/update'
   get 'ingredients/destroy'
-  devise_for :users
+  devise_for :users do
+    get 'sign_out', to: 'devise/sessions#destroy'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'pages#home'
   resources :brands

@@ -1,5 +1,5 @@
 <%= link_to category_kits_path(name: category.name), class: "text-decoration-none mr-3" do  %>
-  <div class="card-category-1" style="background-image: url(<%= image_url(category.name.downcase.tr(' ',"_") + '.jpg') %>)">
+  <div class="card-category-1" style="background-image: url(<%= image_url(category.image) %>)">
     <h3><%= category.name %></h3>
   </div>
 <% end %>

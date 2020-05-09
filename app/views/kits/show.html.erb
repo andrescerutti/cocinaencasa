@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-5">
   <div class="d-flex">
     <div class="mt-3 kit-information w-100">
       <h1><%= @kit.name %></h1>
@@ -124,8 +124,8 @@
           <%= f.input :store_id, input_html: { value: @store.id }, as: :hidden %>
         </div>
         <%= f.simple_fields_for :addresses do |a| %>
-        <% address = user_signed_in? ? current_user.addresses.last.address : nil %>
-        <% flat_number = user_signed_in? ? current_user.addresses.last.flat_number : nil %>
+        <% address = user_signed_in? && !current_user.addresses.last.nil? ? current_user.addresses.last.address : nil %>
+        <% flat_number = user_signed_in? && !current_user.addresses.last.nil? ? current_user.addresses.last.flat_number : nil %>
         <div class="justify-content-between hide-field-address" id="address_fields">
           <div class="kit-input-group kit-show-sm-input">
             <label for="amount">Dirección de Entrega</label>

@@ -12,9 +12,9 @@ class KitsController < ApplicationController
       @search = session[:address]
     end
     if params[:category]
-      return @kits = Kit.near(@search, 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category])
+      return @kits = Kit.near(@search, 8, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).order(priority: :desc)
     end
-    @kits = Kit.near(@search, 5, select: "addresses.*, kits.*").joins(restaurant: {stores: :address})
+    @kits = Kit.near(@search, 5, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc)
     return redirect_to wrong_address_path(query: @search) if @kits.empty?
     @stores = Store.near(@search, 5, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
   end
