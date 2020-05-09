@@ -7,7 +7,7 @@
     <% end %>
     <div class="d-flex justify-content-between align-items-center restaurant-name">
       <div class="ojito ml-2"></div>
-      <h2 class="d-none d-sm-block"><%= store.restaurant.name %></h2>
+      <h2 class="d-none d-sm-block"><%= store.restaurant.name %> (<%= store.name != "" ? store.name : "" %>)</h2>
       <h2 class="d-block d-sm-none"><%= truncate(store.restaurant.name, length: 15) %></h2>
       <div class="ojito mr-2"></div>
     </div>
