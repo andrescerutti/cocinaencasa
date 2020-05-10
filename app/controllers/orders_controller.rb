@@ -9,7 +9,12 @@ class OrdersController < ApplicationController
   def show
     @order.user = current_user
     @order.save
-    if session[:address].present? || session[:flat_number].present?
+    if @order.pick_up
+      @address = Address.new(address: @order.store.address.address)
+      @order.address = @address
+      @order.save
+      @address.save
+    elsif session[:address].present? || session[:flat_number].present?
       @address = Address.new(address: session[:address], flat_number: session[:flat_number])
       @order.address = @address
       @order.save
