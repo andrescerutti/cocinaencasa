@@ -15,7 +15,7 @@
           <h5 class="mt-4" style="font-size: 18px;">Ingredientes</h5>
           <ul class="mb-0">
             <% @ingredients.each do |ingredient| %>
-            <li class="m-0 element"><%= ingredient.name %></li>
+            <li class="m-0 element"><%= ingredient.name.downcase %></li>
             <% end %>
           </ul>
         </div>
@@ -26,7 +26,7 @@
             <li>No especificados.</li>
             <% end %>
             <% @cookwares.each do |cookware| %>
-            <li class="m-0 element"><%= cookware.name %></li>
+            <li class="m-0 element"><%= cookware.name.downcase %></li>
             <% end %>
           </ul>
         </div>
@@ -57,7 +57,7 @@
           <h5>Ingredientes</h5>
           <ul class="mb-0">
             <% @ingredients.each do |ingredient| %>
-            <li class="m-0 element"><%= ingredient.name %></li>
+            <li class="m-0 element"><%= ingredient.name.downcase %></li>
             <% end %>
           </ul>
         </div>
@@ -68,7 +68,7 @@
             <li>No especificados.</li>
             <% end %>
             <% @cookwares.each do |cookware| %>
-            <li class="m-0 element"><%= cookware.name %></li>
+            <li class="m-0 element"><%= cookware.name.downcase %></li>
             <% end %>
           </ul>
         </div>
