@@ -98,7 +98,7 @@ body{
 .information-content {
   width: 348px;
   height: 289px;
-  padding: 50px;
+  padding: 35px;
 }
 
 .information-title {
@@ -135,12 +135,16 @@ body{
     height: 250px;
     margin-left: 32px;
     width: 290px;
+    object-fit: contain;
+    object-position: center;
   }
 
   .landing-image-reverse {
     height: 250px;
     width: 235px;
     margin-right: 0px;
+    object-fit: contain;
+    object-position: center;
     margin-left: 67px;
   }
 
@@ -179,7 +183,7 @@ body{
 #landing-background {
   background-position: center;
   background-size: cover;
-  height: 75vh;
+  height: 65vh;
   margin-bottom: 5vh;
   h1 {
     font-size: 45px;
@@ -191,8 +195,42 @@ body{
   font-weight: bold;
 }
 
+.story {
+  margin: 50px 0;
+}
+
+.last-story {
+  margin-top: 125px;
+}
+
 @media only screen and (max-width: 600px) {
-  #landing-background h1 {
-    font-size: 35px;
+  #landing-background {
+    h1 {
+      font-size: 35px;
+    }
+    height: 75vh;
+  }
+  .landing-image {
+    margin: 0 auto;
+  }
+  .landing-image-reverse {
+    margin: 0 auto;
+  }
+  .story {
+    margin: 0;
+  }
+  .last-story {
+    margin: 0;
+  }
+  #info-header {
+    padding: 20px 0px;
+    background-color: #2f9b79;
+    color: white;
+  }
+  #info-header-wrapper {
+    padding: 5px 0px;
+    border-top: 5px solid #2f9b78;
+    border-bottom: 5px solid #2f9b78;
+    margin-bottom: 30px;
   }
 }
