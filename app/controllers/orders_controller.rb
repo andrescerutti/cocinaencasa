@@ -10,9 +10,11 @@ class OrdersController < ApplicationController
     @order.user = current_user
     @order.save
     if session[:address].present? || session[:flat_number].present?
-      @order.address = Address.new(address: session[:address], flat_number: session[:flat_number])
+      @address = Address.new(address: session[:address], flat_number: session[:flat_number])
+      @order.address = @address
       @order.save
-      current_user.addresses << @order.address unless current_user.addresses.include?(@order.address)
+      @address.save
+      current_user.addresses << Address.new(address: session[:address], flat_number: session[:flat_number])
       current_user.save
     end
     @kit = @order.kit
