@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
   def show
     @order.user = current_user
     @order.save
+    raise
     if session[:address].present? || session[:flat_number].present?
       @order.address = Address.create(address: session[:address], flat_number: session[:flat_number])
       current_user.addresses << @order.address unless current_user.addresses.include?(@order.address)
