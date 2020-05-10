@@ -1,24 +1,20 @@
 <div class="container">
-  <div class="" id="search-restaurant">
-    <a href="#restaurants" class="scroll-down"><span>buscar por restaurant</span></a>
-  </div>
-
   <h2 class="mt-3 mb-4 section-secondary">Categorías</h2>
   <div class="cards-scroll d-flex">
     <% @categories.each do |category| %>
     <%= render "components/category", category: category %>
     <% end %>
   </div>
-  <h2 class="mt-5 mb-4 section-secondary">Kit Chef Box</h2>
-  <div class="kits-wrapper">
-    <% @kits.each do |kit| %>
-    <%= render "components/kit", kit: kit, kits: @kits %>
-    <% end %>
-  </div>
   <h2 class="mt-5 mb-4 section-secondary">Restaurantes</h2>
   <div class="restaurant-list">
     <% @stores.each do |store| %>
     <%= render "components/store", store: store %>
+    <% end %>
+  </div>
+  <h2 class="mt-5 mb-4 section-secondary">Kit Chef Box</h2>
+  <div class="kits-wrapper">
+    <% @kits.each do |kit| %>
+    <%= render "components/kit", kit: kit, kits: @kits %>
     <% end %>
   </div>
   <h2 class="text-center mt-3">Tu restaurant favorito en casa</h2>

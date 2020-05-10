@@ -9,17 +9,21 @@ const validateAddress = () => {
   const deliveryDate = document.querySelector("#order_date_delivery")
 
   const displayStoreAddress = () => {
-    if (pickUp.checked) {
-      storeAddress.classList.remove("hide-store-address")
+    if (pickUp) {
+      if (pickUp.checked) {
+        storeAddress.classList.remove("hide-store-address")
+      }
+      if (!pickUp.checked) {
+        storeAddress.classList.add("hide-store-address")
+      }
     }
-    if (!pickUp.checked) {
-      storeAddress.classList.add("hide-store-address")
-    }
-    if (delivery.checked) {
-      addressFields.classList.remove("hide-field-address")
-    }
-    if (!delivery.checked) {
-      addressFields.classList.add("hide-field-address")
+    if (delivery) {
+      if (delivery.checked) {
+        addressFields.classList.remove("hide-field-address")
+      }
+      if (!delivery.checked) {
+        addressFields.classList.add("hide-field-address")
+      }
     }
   }
 
@@ -27,8 +31,24 @@ const validateAddress = () => {
     return false;
   };
 
+  const checkPickUp = () => {
+    if (pickUp) {
+      return pickUp.checked;
+    } else {
+      true
+    }
+  }
+
+  const checkDelivery = () => {
+    if (delivery) {
+      return delivery.checked;
+    } else {
+      true
+    }
+  }
+
   const updateOrderButton = () => {
-    if (((address.value !== "" && delivery.checked) || pickUp.checked) && deliveryDate.value !== "" && amount.value > 0 && !invalidArea()) {
+    if (((address.value !== "" && checkDelivery) || checkPickUp) && deliveryDate.value !== "" && amount.value > 0 && !invalidArea()) {
       submit.classList.remove("disabled")
       submit.disabled = ""
       const s = amount.value > 1 ? "s" : ""
@@ -55,10 +75,14 @@ const validateAddress = () => {
 
   if (submit) {
     address.addEventListener("change", event => updateOrderButton())
-    pickUp.addEventListener("change", event => updateOrderButton())
-    pickUp.addEventListener("change", event => displayStoreAddress())
-    delivery.addEventListener("change", event => updateOrderButton())
-    delivery.addEventListener("change", event => displayStoreAddress())
+    if (pickUp) {
+      pickUp.addEventListener("change", event => updateOrderButton())
+      pickUp.addEventListener("change", event => displayStoreAddress())
+    }
+    if (delivery) {
+      delivery.addEventListener("change", event => updateOrderButton())
+      delivery.addEventListener("change", event => displayStoreAddress())
+    }
     amount.addEventListener("change", event => updateOrderButton())
     deliveryDate.addEventListener("change", event => updateOrderButton())
   }

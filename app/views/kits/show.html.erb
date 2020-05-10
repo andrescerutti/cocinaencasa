@@ -122,7 +122,7 @@
         <% if @kit.restaurant.own_delivery %>
         <div class="d-flex align-items-center delivery-options mb-3">
           <div style="background-image: url(<%= @kit.restaurant.brand.logo %>);" class="kit-store-logo mr-3" style="width: 50px; height: 50px;"></div>
-          <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons, id: "order_delivery_provider"%>
+          <%= f.input :delivery_provider, collection: @store.pick_up_providers, prompt: "Metodo de envío", label: false, required: true, as: :radio_buttons, id: "order_delivery_provider"%>
           <%= f.input :store_id, input_html: { value: @store.id }, as: :hidden %>
         </div>
         <%= f.simple_fields_for :addresses do |a| %>
@@ -144,7 +144,7 @@
         <% end %>
         <% else %>
         <div class="d-flex">
-          <%= f.input :delivery_provider, collection: Order::PROVIDER2, label: "Metodo de envío", required: true, as: :radio_buttons%>
+          <%= f.input :delivery_provider, collection: @store.pick_up_providers, label: "Metodo de envío", required: true, as: :radio_buttons%>
           <% end %>
           <div>
             <p id="store_address" class="hide-store-address">Lo notificaremos por teléfono o email para su retiro del pedido en nuestro restaurant (<%= @store.address.address %>)</p>

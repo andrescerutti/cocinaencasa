@@ -23,6 +23,14 @@ class Store < ApplicationRecord
     days
   end
 
+  def pick_up_providers
+    if pick_up
+      return ["Envio a domicilio", "Retirar por el local"]
+    else
+      return ["Envio a domicilio"]
+    end
+  end
+
   def days_in_text
     if available.count == 1
       return available.first
