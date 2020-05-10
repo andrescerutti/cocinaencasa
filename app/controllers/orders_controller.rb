@@ -10,8 +10,7 @@ class OrdersController < ApplicationController
     @order.user = current_user
     @order.save
     if session[:address].present? || session[:flat_number].present?
-      address_instance = Address.create(address: session[:address], flat_number: session[:flat_number])
-      @order.address = address_instance
+      @order.address = Address.new(address: session[:address], flat_number: session[:flat_number])
       @order.save
       current_user.addresses << @order.address unless current_user.addresses.include?(@order.address)
       current_user.save
