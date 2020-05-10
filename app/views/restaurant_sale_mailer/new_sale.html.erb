@@ -248,7 +248,7 @@
                                                                         <% if @order.delivery_provider == "Envio a domicilio" %>
                                                                         <p
                                                                           style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                          Dirección: <%= @order.address.street %> <%= @order.address.flat_number %>, <%= @order.address.state %>, <%= @order.address.city %>
+                                                                          Dirección: <%= @order.address.address %>
                                                                         </p>
                                                                         <% else %>
 
@@ -335,7 +335,7 @@
                                                                         <% if @order.delivery_provider == "Envio a domicilio" %>
                                                                         <p
                                                                           style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                          Dirección: <%= @order.address.street %> <%= @order.address.flat_number %>, <%= @order.address.state %>, <%= @order.address.city %>
+                                                                          Dirección: <%= @order.address.address %>
                                                                         </p>
                                                                         <% else %>
 
