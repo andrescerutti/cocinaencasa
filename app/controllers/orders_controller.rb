@@ -8,9 +8,9 @@ class OrdersController < ApplicationController
 
   def show
     @order.user = current_user
-    @order.save
+    @store = Store.find(@order.store_id)
     if @order.pick_up
-      @address = Address.new(address: @order.store.address.address)
+      @address = Address.new(address: @store.address.address)
       @order.address = @address
       @order.save
       @address.save
