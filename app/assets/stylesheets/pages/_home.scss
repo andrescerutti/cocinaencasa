@@ -4,7 +4,7 @@
 }
 
 body{
-  background-color: white !important;
+  background-color: #f5f5f5 !important;
 }
 
 
@@ -87,6 +87,7 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   padding: 50px 140px;
+  margin-top: 120px;
 }
 
 #information-container {
@@ -172,5 +173,26 @@ body{
   #information-container {
     background-color: #FAFAFA;
     padding: 0px;
+  }
+}
+
+#landing-background {
+  background-position: center;
+  background-size: cover;
+  height: 75vh;
+  margin-bottom: 5vh;
+  h1 {
+    font-size: 45px;
+    font-weight: bold;
+  }
+}
+
+#order_address_address {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  #landing-background h1 {
+    font-size: 35px;
   }
 }

@@ -17,4 +17,12 @@ class Order < ApplicationRecord
   def order_ready
     OrderReadyMailer.with(user: self).order_ready.deliver_now
   end
+
+  def pick_up
+    delivery_provider == "Retirar por el local"
+  end
+
+  def delivery
+    delivery_provider == "Envio a domicilio"
+  end
 end
