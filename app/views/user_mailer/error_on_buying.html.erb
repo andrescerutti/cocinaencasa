@@ -1,0 +1,34 @@
+<p>Error en la compra, a continuación la información:</p>
+
+<h4>Información del Restaurant</h4>
+<ul>
+  <li><b>Restaurant:</b> <%= @order.kit.restaurant.name %></li>
+  <li>Store: <%= @store.name %></li>
+  <li><b>Kit:</b> <%= @order.kit.name %></li>
+  <li><b>Cantidad:</b> <%= @order.amount %></li>
+  <li><b>Intento de compra:</b> <%= l(@order.created_at.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></li>
+  <li></li>
+
+</ul>
+
+<h4>Información sobrre la compra</h4>
+<ul>
+  <li><b>Usuario:</b> <%= @order.user.full_name %></li>
+  <li><b>Telefono:</b> <%= @order.user.phone %></li>
+  <li><b>Email:</b> <%= @order.user.email %></li>
+  <li><b>Fecha para delivery:</b> <%= l(@order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></li>
+</ul>
+
+<h4>Información sobre pago</h4>
+<% if @payment.present? %>
+<ul>
+  <li>Id: <%= @payment.id %></li>
+  <li><b>Pago:</b> <%= @payment.status %></li>
+  <li><b>Status detail</b> <%= @payment.status_detail %></li>
+  <li><b>External ID:</b> <%= @payment.external_id %></li>
+  <li><b>Operation Type:</b> <%= @payment.operation_type %></li>
+  <li><b>Payment method:</b> <%= @payment.payment_type_id %></li>
+</ul>
+<% else %>
+<p>No hay información sobre el pago</p>
+<% end %>
