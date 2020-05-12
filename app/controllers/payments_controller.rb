@@ -13,77 +13,15 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    require 'mercadopago'
-    @order = Order.find(params[:order_id])
-
-
-    restaurant_mepa_private_key = @order.kit.restaurant.prod_mp_private_key
-
-    Rails.logger.info("The restaurant_mepa_private_key class is : #{restaurant_mepa_private_key.class}")
-    if restaurant_mepa_private_key.class == String
-      Rails.logger.info("Its last 4 chars are : #{restaurant_mepa_private_key[-4..-1]}")
-    end
-    $mp = MercadoPago.new(restaurant_mepa_private_key)
-
-
-    @payment = Payment.new
-
-    token = params[:token]
-    payment_method_id = params[:payment_method_id]
-    installments = 1
-    issuer_id = params[:issuer_id]
-
-    payment = {}
-    payment[:transaction_amount] = (@order.kit.price * @order.amount)
-    payment[:token] = token
-    payment[:description] = @order.kit.name
-    payment[:installments] = installments
-    payment[:issuer_id] = issuer_id
-    payment[:payer] = {
-      email: current_user.email
-    }
-    @payment.order = @order
+    @order = Order.find(params["order_id"])
+    @restaurant = @order.kit.restaurant
+    @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
     @payment.save
     authorize @payment
-    payment_response = $mp.post("/v1/payments", payment)
-    # ask for the customer, if not exists the create a new one, else get the customer_id and the card_id
-
-    if payment_response["status"] == "201" && payment_response["response"]["status"] == "approved"
-      # logger.debug "respuesta mp #{payment_response}"
-      @payment.approved = true
-      @payment.save
-      @payment.order.kit.update_stock(@payment.order.amount)
-      search_customer = $mp.get("/v1/customers/search", { email: current_user.email })
-      mail = PaymentMailer.with(user: current_user.email, payment: @payment).confirmed
-      mail.deliver_now
-
-      @restaurant = @payment.order.kit.restaurant
-      resto_mail = RestaurantSaleMailer.with(restaurant: @restaurant, order: @order, payment: @payment).new_sale
-      resto_mail.deliver_now
-
-
-      if !search_customer["response"]["results"].empty?
-        current_user.mpcard_id = search_customer["response"]["results"][0]["cards"][0]["id"]
-        current_user.mpcustomer_id = search_customer["response"]["results"][0]["id"]
-        current_user.save
-        # redirect_to order_payment_path(@order, @payment)
-      else
-        # create a customer
-        customer_response = $mp.post("/v1/customers", {email: current_user.email})
-
-        # save customer_id to user
-        current_user.mpcustomer_id = customer_response["response"]["id"]
-
-        # add a card to the customer
-        card_response = $mp.post("/v1/customers/#{customer_response['response']['id']}/cards", {token: token})
-
-        current_user.mpcard_id = card_response["response"]["id"]
-        current_user.save!
-      end
+    if @payment.status == "approved"
       redirect_to order_payment_path(@order, @payment)
     else
       redirect_to failed_path
     end
-
   end
 end
