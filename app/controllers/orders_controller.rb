@@ -14,6 +14,8 @@ class OrdersController < ApplicationController
       @order.address = @address
       @order.save
       @address.save
+      current_user.addresses << Address.new(address: @store.address.address)
+      current_user.save
     elsif session[:address].present? || session[:flat_number].present?
       @address = Address.new(address: session[:address], flat_number: session[:flat_number])
       @order.address = @address
