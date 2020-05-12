@@ -5,7 +5,7 @@ module MercadoPagoHelper
     headers = { 'accept': 'application/json', 'content-type': 'application/json' }
     url = "https://api.mercadopago.com/v1/payments?access_token=#{key}"
 
-    payment_attempt = JSON.parse(RestClient.post(url, payload.to_json, headers))
+    payment_attempt = JSON.parse(RestClient.post(url, payload.to_json, headers).body)
     if payment_attempt["status"] == "approved"
       return MercadoPagoHelper::create_payment(order, payment_attempt)
     elsif payment_attempt["status"] == "in_process"
@@ -18,6 +18,7 @@ module MercadoPagoHelper
       @payment.order = @order
       @payment.approved = "rejected"
       @payment.save
+      return @payment
     end
   end
 
