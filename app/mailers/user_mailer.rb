@@ -5,7 +5,10 @@ class UserMailer < ApplicationMailer
   end
   def error_on_buying
     @user = params[:payment]
-    @order = order[:order]
+    @order = params[:order]
+    @store = params[:store]
+    @payment = params[:payment]
+    @data = params[:data]
     mail(to: "ceruttiandres@gmail.com", subject: '¡Error en una venta!')
   end
 end

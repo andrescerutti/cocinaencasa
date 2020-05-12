@@ -13,7 +13,7 @@
 
 <h4>Información sobrre la compra</h4>
 <ul>
-  <li><b>Usuario:</b> <%= @order.user.full_name %></li>
+  <li><b>Usuario:</b> <%= @order.user.first_name %> <%= @order.user.last_name %></li>
   <li><b>Telefono:</b> <%= @order.user.phone %></li>
   <li><b>Email:</b> <%= @order.user.email %></li>
   <li><b>Fecha para delivery:</b> <%= l(@order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></li>
@@ -32,3 +32,15 @@
 <% else %>
 <p>No hay información sobre el pago</p>
 <% end %>
+
+<h4>Información sobre Mercado Pago</h4>
+<ul>
+  <li><b>Status:</b> <%= @data["status"] %></li>
+  <li><b>Status detail:</b> <%= @data["status_detail"] %></li>
+  <li><b>External_id:</b> <%= @data["id"] %></li>
+  <li><b>Date Approved:</b> <%= @data["date_approved"] %></li>
+  <li><b>Operation Type:</b> <%= @data["operation_type"] %></li>
+  <li><b>Payment method id:</b> <%= @data["payment_method_id"] %></li>
+  <li><b>Payment type id:</b> <%= @data["payment_type_id"] %></li>
+</ul>
+

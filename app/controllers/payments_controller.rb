@@ -5,7 +5,8 @@ class PaymentsController < ApplicationController
     @order = Order.find(params[:id])
     @store = Store.find(@order.store_id)
     @kit = @order.kit
-    authorize :payment, :failed?
+    @payment = Payment.new
+    authorize @payment
   end
 
   def show
@@ -20,13 +21,26 @@ class PaymentsController < ApplicationController
     @store = Store.find(@order.store_id)
     @restaurant = @order.kit.restaurant
     @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
-    @payment.save
-    authorize @payment
-    if @payment.status == "approved"
-      redirect_to order_payment_path(@order, @payment)
+    if @payment.save
+      authorize @payment
+      if @payment.status == "approved"
+        redirect_to order_payment_path(@order, @payment)
+      else
+        authorize @payment
+        UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store).error_on_buying.deliver_now
+        redirect_to failed_path(@order.id)
+      end
     else
-      UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store).error_on_buying.deliver_now
+      authorize @payment
+      @data = {"issuer_id"=> payment_params["issuer_id"], "installments"=> payment_params["installments"], "payment_method_id"=> payment_params["payment_method_id"], "payer_id"=> payment_params["payer_id"], "payer_type"=> payment_params["payer_type"]}
+      UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store, data: @data).error_on_buying.deliver_now
       redirect_to failed_path(@order.id)
     end
+  end
+
+  private
+
+  def payment_params
+    params.permit("issuer_id", "installments", "payment_method_id", "payer_id", "payer_type")
   end
 end
