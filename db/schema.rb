@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_10_162334) do
+ActiveRecord::Schema.define(version: 2020_05_12_015750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,8 +165,14 @@ ActiveRecord::Schema.define(version: 2020_05_10_162334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
-    t.string "cash_amount"
     t.boolean "cash", default: false
+    t.string "status"
+    t.string "external_id"
+    t.string "date_approved"
+    t.string "operation_type"
+    t.string "payment_method_id"
+    t.string "payment_type_id"
+    t.string "status_detail"
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
