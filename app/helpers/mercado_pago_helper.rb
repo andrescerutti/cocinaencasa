@@ -32,6 +32,7 @@ module MercadoPagoHelper
     @payment.payment_method_id = payment_attempt["payment_method_id"]
     @payment.payment_type_id = payment_attempt["payment_type_id"]
     @payment.status_detail = payment_attempt["status_detail"]
+    raise
     @payment.save
     return @payment
   end
