@@ -15,7 +15,11 @@ class PaymentsController < ApplicationController
   def create
     @order = Order.find(params["order_id"])
     @restaurant = @order.kit.restaurant
-    payment_attempt = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
-
+    @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
+    if @payment.status == "approved"
+      redirect_to order_payment_path(@order, @payment)
+    else
+      redirect_to failed_path
+    end
   end
 end
