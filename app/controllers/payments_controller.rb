@@ -18,12 +18,15 @@ class PaymentsController < ApplicationController
 
   def create
     @order = Order.find(params["order_id"])
+    @kit = @order.kit
     @store = Store.find(@order.store_id)
     @restaurant = @order.kit.restaurant
     @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
     if @payment.save
       authorize @payment
       if @payment.status == "approved"
+        @kit.stock -= @order.amount
+        @kit.save
         redirect_to order_payment_path(@order, @payment)
       else
         authorize @payment
