@@ -1,17 +1,19 @@
-<h1>Lista de ofertas para <%= @stores.first.name %></h1>
-<div>
-  <% @stores.each do |store| %>
-  <div>
-    <h2><%= store.id %><%= store.name %></h2>
-    <div class="map-wrapper">
-      <div class="map-canvas" data-polygon="<%= store.polygon.to_json %>" ></div>
-      <%= simple_form_for store do |f| %>
-      <%= f.input :polygon, as: :hidden %>
-      <%= f.button :submit %>
-      <% end %>
+<div class="container">
+  <h1 class="stores-header">Ubicaciones definidas para <span class="category-selected"><%= @stores.first.restaurant.name %></span></h1>
+  <div class="stores-wrapper">
+    <% @stores.each do |store| %>
+    <div class="store-card">
+      <h2><%= store.id %><%= store.name %></h2>
+      <div class="map-wrapper">
+        <div class="map-canvas" data-polygon="<%= store.polygon.to_json %>" ></div>
+        <%= simple_form_for store do |f| %>
+        <%= f.input :polygon, as: :hidden %>
+        <%= f.submit "Actualizar área", class:"btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
+    <% end %>
   </div>
-  <% end %>
 </div>
 <script>
 
