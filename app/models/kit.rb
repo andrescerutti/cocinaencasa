@@ -2,6 +2,9 @@ class Kit < ApplicationRecord
   belongs_to :restaurant
   has_many :kit_cookwares
   has_many :ingredients
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   # has_many :cookwares, through: :kit_cookwares
   # accepts_nested_attributes_for :guides
   # accepts_nested_attributes_for :steps

@@ -20,7 +20,7 @@ class KitsController < ApplicationController
   end
 
   def show
-    @kit = Kit.find(params[:id])
+    @kit = Kit.friendly.find(params[:id])
     @kits = @kit.restaurant.kits.where.not(id: @kit.id).where("kits.stock > ?", 0)
     @store = Store.near(session[:address], 5, select: "addresses.*, stores.*").joins(:restaurant).joins(:address).where(restaurant: @kit.restaurant).first
     @store = @kit.restaurant.stores.first if @store.nil?
@@ -81,7 +81,7 @@ class KitsController < ApplicationController
   private
 
   def set_kit
-    @kit = Kit.find(params[:id])
+    @kit = Kit.friendly.find(params[:id])
     authorize @kit
   end
 

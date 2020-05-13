@@ -5,7 +5,7 @@
   <span class="few-stock">ÚLTIMOS KITS</span>
   <% end %>
   <div class="<%= 'out-of-stock' if kit.stock.zero? %>">
-    <%= link_to kit do %>
+    <%= link_to kit_path(store: ) do %>
     <div class="chef-box" id="<%= 'restaurants' if kit == kits.last  %>">
       <div class="d-flex chef-box-main">
         <div class="d-flex flex-column justify-content-between">

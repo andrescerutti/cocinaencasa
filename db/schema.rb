@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_015750) do
+ActiveRecord::Schema.define(version: 2020_05_13_233130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(version: 2020_05_12_015750) do
     t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
   create_table "guides", force: :cascade do |t|
     t.string "video"
     t.bigint "kit_id"
@@ -133,7 +144,9 @@ ActiveRecord::Schema.define(version: 2020_05_12_015750) do
     t.integer "priority", default: 0
     t.string "tags", default: ""
     t.string "difficulty", default: ""
+    t.string "slug"
     t.index ["restaurant_id"], name: "index_kits_on_restaurant_id"
+    t.index ["slug"], name: "index_kits_on_slug", unique: true
   end
 
   create_table "orders", force: :cascade do |t|
@@ -193,7 +206,9 @@ ActiveRecord::Schema.define(version: 2020_05_12_015750) do
     t.string "day_open"
     t.string "emoji"
     t.string "hq_address"
+    t.string "slug"
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
+    t.index ["slug"], name: "index_restaurants_on_slug", unique: true
     t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
 
@@ -234,6 +249,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_015750) do
     t.float "day_for_order", default: 0.0
     t.string "flags", default: ""
     t.boolean "pick_up", default: false
+    t.text "polygon", default: "[]"
     t.index ["addressable_type", "addressable_id"], name: "index_stores_on_addressable_type_and_addressable_id"
     t.index ["restaurant_id"], name: "index_stores_on_restaurant_id"
   end
