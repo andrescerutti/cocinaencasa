@@ -8,6 +8,7 @@ class UserMailer < ApplicationMailer
     @order = params[:order]
     @store = params[:store]
     @payment = params[:payment]
+    @payment = Payment.new if params[:payment].nil?
     @data = params[:data]
     mail(to: "ceruttiandres@gmail.com", subject: '¡Error en una venta!')
   end

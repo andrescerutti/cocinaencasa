@@ -19,28 +19,4 @@
   <li><b>Fecha para delivery:</b> <%= l(@order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></li>
 </ul>
 
-<h4>Información sobre pago</h4>
-<% if @payment.present? %>
-<ul>
-  <li>Id: <%= @payment.id %></li>
-  <li><b>Pago:</b> <%= @payment.status %></li>
-  <li><b>Status detail</b> <%= @payment.status_detail %></li>
-  <li><b>External ID:</b> <%= @payment.external_id %></li>
-  <li><b>Operation Type:</b> <%= @payment.operation_type %></li>
-  <li><b>Payment method:</b> <%= @payment.payment_type_id %></li>
-</ul>
-<% else %>
-<p>No hay información sobre el pago</p>
-<% end %>
-
-<h4>Información sobre Mercado Pago</h4>
-<ul>
-  <li><b>Status:</b> <%= @data["status"] %></li>
-  <li><b>Status detail:</b> <%= @data["status_detail"] %></li>
-  <li><b>External_id:</b> <%= @data["id"] %></li>
-  <li><b>Date Approved:</b> <%= @data["date_approved"] %></li>
-  <li><b>Operation Type:</b> <%= @data["operation_type"] %></li>
-  <li><b>Payment method id:</b> <%= @data["payment_method_id"] %></li>
-  <li><b>Payment type id:</b> <%= @data["payment_type_id"] %></li>
-</ul>
 

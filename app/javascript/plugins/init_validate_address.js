@@ -7,6 +7,31 @@ const validateAddress = () => {
   const addressFields = document.querySelector("#address_fields")
   const storeAddress = document.querySelector("#store_address")
   const deliveryDate = document.querySelector("#order_date_delivery")
+  const poligono = document.querySelector("#poligono")
+
+  if (address) {
+    const autocomplete = new google.maps.places.Autocomplete(address, { types: [ 'geocode' ]});
+    const geocoder = new google.maps.Geocoder();
+  }
+
+  function addressIsValid() {
+    return new Promise(resolve => {
+      const polygonCoords = JSON.parse(poligono.dataset.coordinates);
+      if (polygonCoords.length === 0) {
+        resolve(true)
+      } else {
+        geocoder.geocode( { 'address': address.value}, function(results, status) {
+          if (status == 'OK') {
+            const restrictedArea = new google.maps.Polygon({paths: polygonCoords});
+            const result = google.maps.geometry.poly.containsLocation(results[0].geometry.location, restrictedArea) ? true : false;
+            resolve(result);
+          } else {
+            resolve(false);
+          }
+        })
+      }
+    });
+  }
 
   const displayStoreAddress = () => {
     if (pickUp) {
@@ -27,10 +52,6 @@ const validateAddress = () => {
     }
   }
 
-  const invalidArea = () => {
-    return false;
-  };
-
   const checkPickUp = () => {
     if (pickUp) {
       return pickUp.checked;
@@ -41,7 +62,6 @@ const validateAddress = () => {
 
   const checkDelivery = () => {
     if (delivery) {
-      console.log(delivery.checked)
       return delivery.checked;
     } else {
       return false
@@ -49,12 +69,29 @@ const validateAddress = () => {
   }
 
   const updateOrderButton = () => {
-    if (((address.value !== "" && checkDelivery()) || checkPickUp()) && deliveryDate.value !== "" && amount.value > 0 && !invalidArea()) {
-      submit.classList.remove("disabled")
-      submit.disabled = ""
-      const s = amount.value > 1 ? "s" : ""
-      const price = Number.parseInt(document.querySelector("#price").dataset.price, 10)
-      submit.value = `Pedir ${amount.value} kit${s} por ARS $${amount.value * price}`
+    if (((address.value !== "" && checkDelivery()) || checkPickUp()) && deliveryDate.value !== "" && amount.value > 0) {
+      if (checkPickUp()) {
+        submit.classList.remove("disabled")
+        submit.disabled = ""
+        const s = amount.value > 1 ? "s" : ""
+        const price = Number.parseInt(document.querySelector("#price").dataset.price, 10)
+        submit.value = `Pedir ${amount.value} kit${s} por ARS $${amount.value * price}`
+      } else {
+        addressIsValid().then((response) => {
+          if (response) {
+            submit.classList.remove("disabled")
+            submit.disabled = ""
+            const s = amount.value > 1 ? "s" : ""
+            const price = Number.parseInt(document.querySelector("#price").dataset.price, 10)
+            submit.value = `Pedir ${amount.value} kit${s} por ARS $${amount.value * price}`
+          }
+          else {
+            submit.classList.add("disabled")
+            submit.disabled = "disabled"
+            submit.value = `¡Revise la zona y días habilitados!`
+          }
+        })
+      }
     } else {
       submit.classList.add("disabled")
       submit.disabled = "disabled"
@@ -64,18 +101,14 @@ const validateAddress = () => {
       else if (amount.value < 1) {
         submit.value = `Ingresar cantidad de Chef Box`
       }
-      else if (invalidArea()) {
-        alert("Usted a ingresado una direeción fuera de la zona de envío.")
-        submit.value = `Fuera de la zona de envíos.`
-      }
-       else {
+      else {
         submit.value = `¡Por favor revise los datos ingresados!`
       }
     }
   }
 
   if (submit) {
-    address.addEventListener("change", event => updateOrderButton())
+    address.addEventListener("blur", event => updateOrderButton())
     if (pickUp) {
       pickUp.addEventListener("change", event => updateOrderButton())
       pickUp.addEventListener("change", event => displayStoreAddress())

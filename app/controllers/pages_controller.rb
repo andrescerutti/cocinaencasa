@@ -38,6 +38,10 @@ class PagesController < ApplicationController
     # end
   end
 
+  def stores_admin
+    @stores = Store.joins(:restaurant).where("restaurants.user_id = ?", current_user.id).order("stores.id ASC")
+  end
+
   def wrong_address
     coordinates = Geocoder.search(params[:query])
     if coordinates.empty?
