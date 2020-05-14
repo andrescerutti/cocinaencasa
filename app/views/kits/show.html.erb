@@ -25,6 +25,10 @@
             <h2><%= @kit.restaurant.name %></h2>
             <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
           </div>
+<<<<<<< HEAD
+            <%= f.input :delivery_provider, collection: Order::PROVIDER, prompt: "Metodo de envío", label: "Metodo de envío", required: true, as: :radio_buttons%>
+=======
+>>>>>>> c6e42fe4a78de94d1088897d85a71523b60bd68b
         </div>
         <div class="d-none d-sm-block map-zone" id="poligono" data-coordinates=<%= @coordinates.to_json %>>⚠ Ver zona de envío</div>
       </div>

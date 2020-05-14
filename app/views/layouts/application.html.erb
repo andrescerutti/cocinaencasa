@@ -5,21 +5,21 @@
   <link rel="icon" type="image/png" href="<%= image_path('logo.ico') %>">
 
   <!-- Primary Meta Tags -->
-  <title>Cociná en casa | Tus restaurantes favoritos en tu casa</title>
+  <title>Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa</title>
   <meta name="title" content="Cocina en casa | Tus restaurantes favoritos en tu casa">
   <meta name="description" content="¡Cocina en Casa te trae tus restaurantes favoritos a tu cocina! .">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.cocinaencasa.com.ar/">
-  <meta property="og:title" content="Cociná en casa | Viví la experiencia de cocinar.">
+  <meta property="og:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
   <meta property="og:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
   <meta property="og:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://www.cocinaencasa.com.ar/">
-  <meta property="twitter:title" content="Cociná en casa | Viví la experiencia de cocinar.">
+  <meta property="twitter:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
   <meta property="twitter:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
   <meta property="twitter:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
 
@@ -29,9 +29,7 @@
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_pack_tag 'application', media: 'all' %>
-  <%#= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places,geometrykey=#{ENV['GOOGLE_API_KEY']}" %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=geometry,places">
-  </script>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&libraries=geometry,places" %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -61,38 +59,26 @@
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1102854696738268');
-      fbq('track', 'PageView');
-    </script>
-
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-165662050-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-
-
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1102854696738268&ev=PageView&noscript=1"
-      /></noscript>
-    </head>
-    <body>
-      <%= render 'shared/navbar' %>
-      <%= render 'shared/flashes' %>
-      <%= yield %>
-      <div id="map"></div>
-      <%= javascript_include_tag 'application' %>
-      <%= javascript_pack_tag 'application' %>
-      <%= render 'shared/footer' %>
-    </body>
-    </html>
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1102854696738268');
+  </script>
+  <%= yield :fb_track %>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1102854696738268&ev=PageView&noscript=1"
+  /></noscript>
+</head>
+  <body>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+    <%= yield %>
+    <div id="map"></div>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= render 'shared/footer' %>
+  </body>
+</html>
