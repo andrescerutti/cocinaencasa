@@ -5,8 +5,6 @@ class PaymentsController < ApplicationController
     @order = Order.find(params[:id])
     @store = Store.find(@order.store_id)
     @kit = @order.kit
-    @payment = Payment.new
-    authorize @payment
   end
 
   def show
