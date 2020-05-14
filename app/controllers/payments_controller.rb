@@ -22,13 +22,14 @@ class PaymentsController < ApplicationController
     @store = Store.find(@order.store_id)
     @restaurant = @order.kit.restaurant
     @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
-    if @payment.save
+    if @payment
       authorize @payment
       if @payment.status == "approved"
         @kit.stock -= @order.amount
         @kit.save
         redirect_to order_payment_path(@order, @payment)
       else
+        @payment.save
         authorize @payment
         UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store).error_on_buying.deliver_now
         redirect_to failed_path(@order.id)
