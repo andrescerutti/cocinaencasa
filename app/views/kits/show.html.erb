@@ -26,7 +26,7 @@
             <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
           </div>
         </div>
-        <div class="d-none d-sm-block map-zone">⚠ Ver zona de envío</div>
+        <div class="d-none d-sm-block map-zone" id="poligono" data-coordinates=<%= @coordinates.to_json %>>⚠ Ver zona de envío</div>
       </div>
       <div class="d-block d-sm-none mt-3 map-zone">⚠ Ver zona de envío</div>
       <div class="d-block d-sm-none mt-1 map-zone"  id="ingredients-trigger">Ver ingredientes y utencillos</div>

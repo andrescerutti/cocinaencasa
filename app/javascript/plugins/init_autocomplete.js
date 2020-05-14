@@ -21,16 +21,6 @@ function autocomplete() {
         }
       });
     }
-
-    if (orderAddressInput) {
-      var autocomplete = new google.maps.places.Autocomplete(orderAddressInput, { types: [ 'geocode' ], componentRestrictions: {country: "ar"} });
-      google.maps.event.addDomListener(orderAddressInput, 'keydown', function(e) {
-        if (e.key === "Enter") {
-          e.preventDefault();
-        }
-      });
-    }
-
   });
 }
 

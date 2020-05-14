@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :stores, only: :show
+  resources :stores, only: [:show, :update]
 
   resources :orders, only: [:index, :show, :edit, :update] do
     resources :payments, only: [:create, :show, :new]
@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   get "/contact/", to: "pages#contact", as: :contact
   patch "/orders/:id/order_assignment/", to: "orders#order_assignment", as: :order_assignment
   delete 'kits/:id', to: "kits#destroy"
-
+  get "/stores_admin", to: "pages#stores_admin", as: :stores_admin
 
   # /dashboard/orders
   # orders [index ]
