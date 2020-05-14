@@ -35,9 +35,8 @@ class PaymentsController < ApplicationController
         redirect_to failed_path(@order.id)
       end
     else
-      authorize @payment
       @data = {"issuer_id"=> payment_params["issuer_id"], "installments"=> payment_params["installments"], "payment_method_id"=> payment_params["payment_method_id"], "payer_id"=> payment_params["payer_id"], "payer_type"=> payment_params["payer_type"]}
-      UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store, data: @data).error_on_buying.deliver_now
+      UserMailer.with(user: current_user, order: @order, store: @store, data: @data).error_on_buying.deliver_now
       redirect_to failed_path(@order.id)
     end
   end
