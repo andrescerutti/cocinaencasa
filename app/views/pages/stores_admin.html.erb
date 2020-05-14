@@ -3,7 +3,7 @@
   <div class="stores-wrapper">
     <% @stores.each do |store| %>
     <div class="store-card">
-      <h2><%= store.id %><%= store.name %></h2>
+      <h2><%= store.name %></h2>
       <div class="map-wrapper">
         <div class="map-canvas" data-polygon="<%= store.polygon.to_json %>" ></div>
         <%= simple_form_for store do |f| %>

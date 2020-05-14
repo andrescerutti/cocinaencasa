@@ -16,6 +16,7 @@ class PaymentPolicy < ApplicationPolicy
   def failed?
     true
   end
+
   private
 
   def allow_user?
