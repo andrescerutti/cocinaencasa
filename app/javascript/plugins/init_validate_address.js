@@ -98,10 +98,6 @@ const validateAddress = () => {
       else if (amount.value < 1) {
         submit.value = `Ingresar cantidad de Chef Box`
       }
-      else if (invalidArea()) {
-        alert("Usted a ingresado una direeción fuera de la zona de envío.")
-        submit.value = `Fuera de la zona de envíos.`
-      }
       else {
         submit.value = `¡Por favor revise los datos ingresados!`
       }
