@@ -7,7 +7,7 @@
   <div class="<%= 'out-of-stock' if kit.stock.zero? %>">
     <%= link_to kit do %>
     <div class="chef-box" id="<%= 'restaurants' if kit == kits.last  %>">
-      <div class="d-flex chef-box-main">
+      <div class="d-flex justify-content-between chef-box-main">
         <div class="d-flex flex-column justify-content-between">
           <div>
             <h2 class="mt-0 mb-0 pr-3"><%= truncate(kit.name, length: 30, separator: " ") %></h2>

@@ -33,7 +33,10 @@
                     <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
                    <% end %>
                    <% if order.address.present? %>
-                      <p class="font-weight-light"><%= order.address.city %>, <%= order.address.state %>, <%= order.address.street %>, <%= order.address.flat_number %></p>
+                      <p class="font-weight-light"><%= order.address.address %> - Piso/Lote <%= order.address.flat_number %></p>
+                   <% end %>
+                   <% if order.comment != "" %>
+                    <p>Comentario: <%= order.comment %></p>
                    <% end %>
                    <p><%= order.kit.name %></p>
                    <p>Cantidad de kits: <%= order.amount %></p>

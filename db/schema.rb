@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_214005) do
+ActiveRecord::Schema.define(version: 2020_05_13_153817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,6 +166,13 @@ ActiveRecord::Schema.define(version: 2020_05_09_214005) do
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
     t.boolean "cash", default: false
+    t.string "status"
+    t.string "external_id"
+    t.string "date_approved"
+    t.string "operation_type"
+    t.string "payment_method_id"
+    t.string "payment_type_id"
+    t.string "status_detail"
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
@@ -226,6 +233,8 @@ ActiveRecord::Schema.define(version: 2020_05_09_214005) do
     t.float "next_day_hour", default: 0.0
     t.float "day_for_order", default: 0.0
     t.string "flags", default: ""
+    t.boolean "pick_up", default: false
+    t.text "polygon", default: "[]"
     t.index ["addressable_type", "addressable_id"], name: "index_stores_on_addressable_type_and_addressable_id"
     t.index ["restaurant_id"], name: "index_stores_on_restaurant_id"
   end

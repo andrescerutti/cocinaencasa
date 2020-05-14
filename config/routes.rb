@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :stores, only: :show
+  resources :stores, only: [:show, :update]
 
   resources :orders, only: [:index, :show, :edit, :update] do
     resources :payments, only: [:create, :show, :new]
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
 
   resources :ingredients, only: [:update, :destroy]
 
-  get "/failed/", to: "payments#failed", as: :failed
+  get "/failed/:id", to: "payments#failed", as: :failed
   get "/components/", to: "pages#components", as: :components
   get "/user_dashboard/", to: "pages#user_dashboard", as: :user_dashboard
   get "/admin_dashboard/", to: "pages#admin_dashboard", as: :admin_dashboard
@@ -57,7 +57,7 @@ Rails.application.routes.draw do
   get "/contact/", to: "pages#contact", as: :contact
   patch "/orders/:id/order_assignment/", to: "orders#order_assignment", as: :order_assignment
   delete 'kits/:id', to: "kits#destroy"
-
+  get "/stores_admin", to: "pages#stores_admin", as: :stores_admin
 
   # /dashboard/orders
   # orders [index ]

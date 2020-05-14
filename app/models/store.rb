@@ -1,6 +1,7 @@
 class Store < ApplicationRecord
   belongs_to :restaurant
   has_one :address, as: :addressable, :dependent => :destroy
+  serialize :hash
 
   reverse_geocoded_by "addresses.latitude", "addresses.longitude"
 
@@ -23,6 +24,14 @@ class Store < ApplicationRecord
     days
   end
 
+  def pick_up_providers
+    if pick_up
+      return ["Envio a domicilio", "Retirar por el local"]
+    else
+      return ["Envio a domicilio"]
+    end
+  end
+
   def days_in_text
     if available.count == 1
       return available.first
@@ -38,7 +47,7 @@ class Store < ApplicationRecord
   def next_available_time
     if day_for_order.positive?
       day_for_order > 1 ? "para el #{(Time.zone.now.to_datetime + day_for_order.days).strftime('%A')}" : "para mañana"
-    elsif next_day_hour < (Time.zone.now.hour + Time.zone.now.to_datetime.min.to_f / 60).round(1)
+    elsif (next_day_hour < (Time.zone.now.hour + Time.zone.now.to_datetime.min.to_f / 60).round(1)) || next_day_hour.zero?
       return "para mañana"
     else
       return "hasta las #{next_day_hour.to_i}:#{(next_day_hour % next_day_hour.to_i).zero? ? "00" : ((next_day_hour % next_day_hour.to_i) * 60).to_i}hs"

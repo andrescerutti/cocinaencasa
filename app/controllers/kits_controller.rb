@@ -29,6 +29,11 @@ class KitsController < ApplicationController
     @disable_days = @store.disabled
     @ingredients = Ingredient.joins(kit_ingredients: :kit).where("kits.id = ?", @kit.id)
     @cookwares = Cookware.joins(kit_cookwares: :kit).where("kits.id = ?", @kit.id)
+    if @store.polygon == ""
+      @coordinates = []
+    else
+      @coordinates = JSON.parse(@store.polygon)
+    end
   end
 
   def new

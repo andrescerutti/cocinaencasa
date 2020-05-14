@@ -199,6 +199,33 @@
   background-color: #fefaf0 !important;
 }
 
+// adm
+
+.stores-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 32px;
+  grid-row-gap: 20px;
+  .store-card {
+    h2 {
+      font-size: 20px;
+      padding-bottom: 5px;
+      border-bottom: 3px solid #2c9c7c;
+      margin-bottom: 15px;
+    }
+    form {
+      text-align: right;
+    }
+  }
+}
+
+.stores-header {
+  font-size: 25px;
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+
+
 
 @media only screen and (max-width: 600px) {
   .restaurant-list {
@@ -235,4 +262,10 @@
     padding: 5px 15px;
   }
 
+  .stores-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 32px;
+  }
 }
