@@ -21,10 +21,10 @@ class PaymentsController < ApplicationController
     @restaurant = @order.kit.restaurant
     @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
     if @payment
-      authorize @payment
       if @payment.status == "approved"
         @kit.stock -= @order.amount
         @kit.save
+        authorize @payment
         redirect_to order_payment_path(@order, @payment)
       else
         UserMailer.with(user: current_user, order: @order, store: @store).error_on_buying.deliver_now
