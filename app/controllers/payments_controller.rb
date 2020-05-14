@@ -27,9 +27,7 @@ class PaymentsController < ApplicationController
         @kit.save
         redirect_to order_payment_path(@order, @payment)
       else
-        @payment.save
-        authorize @payment
-        UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store).error_on_buying.deliver_now
+        UserMailer.with(user: current_user, order: @order, store: @store).error_on_buying.deliver_now
         redirect_to failed_path(@order.id)
       end
     else
