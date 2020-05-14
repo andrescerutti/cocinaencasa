@@ -67,8 +67,8 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1102854696738268');
-    fbq('track', 'PageView');
   </script>
+  <%= yield :fb_track %>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1102854696738268&ev=PageView&noscript=1"
   /></noscript>
