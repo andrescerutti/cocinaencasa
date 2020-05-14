@@ -35,20 +35,21 @@ const validateAddress = () => {
     if (pickUp) {
       return pickUp.checked;
     } else {
-      true
+      return false
     }
   }
 
   const checkDelivery = () => {
     if (delivery) {
+      console.log(delivery.checked)
       return delivery.checked;
     } else {
-      true
+      return false
     }
   }
 
   const updateOrderButton = () => {
-    if (((address.value !== "" && checkDelivery) || checkPickUp) && deliveryDate.value !== "" && amount.value > 0 && !invalidArea()) {
+    if (((address.value !== "" && checkDelivery()) || checkPickUp()) && deliveryDate.value !== "" && amount.value > 0 && !invalidArea()) {
       submit.classList.remove("disabled")
       submit.disabled = ""
       const s = amount.value > 1 ? "s" : ""
@@ -57,7 +58,7 @@ const validateAddress = () => {
     } else {
       submit.classList.add("disabled")
       submit.disabled = "disabled"
-      if (address.value === "" || (pickUp.checked === false && delivery.checked === false)) {
+      if (address.value === "" || (checkPickUp() && checkDelivery())) {
         submit.value = `Ingrese dirección y método de envío`
       }
       else if (amount.value < 1) {

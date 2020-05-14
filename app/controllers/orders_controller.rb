@@ -14,6 +14,8 @@ class OrdersController < ApplicationController
       @order.address = @address
       @order.save
       @address.save
+      current_user.addresses << Address.new(address: @store.address.address)
+      current_user.save
     elsif session[:address].present? || session[:flat_number].present?
       @address = Address.new(address: session[:address], flat_number: session[:flat_number])
       @order.address = @address
@@ -23,7 +25,6 @@ class OrdersController < ApplicationController
       current_user.save
     end
     @kit = @order.kit
-    @store = Store.find(@order.store_id)
     @ingredients = Ingredient.joins(kit_ingredients: :kit).where("kits.id = ?", @kit.id)
     @cookwares = Cookware.joins(kit_cookwares: :kit).where("kits.id = ?", @kit.id)
   end
@@ -36,6 +37,8 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(orders_params)
+    @store = Store.find(orders_params[:store_id])
+    @order.store_id = @store.id
     @order.user = current_user
     @order.kit = Kit.find(params[:kit_id])
     @order.code = "#{@order.kit_id}-#{rand(0..1000000)}"
