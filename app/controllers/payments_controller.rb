@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   protect_from_forgery except: :create
+  skip_after_action :verify_authorized
 
   def failed
     @order = Order.find(params[:id])
