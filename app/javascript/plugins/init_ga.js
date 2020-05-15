@@ -4,14 +4,18 @@ const initGoogleAnalytics = () => {
 
   if (orderSubmit) {
     orderSubmit.addEventListener("click", (event) => {
-      ga('send', 'event', 'Ordenes', 'Creadas', 'Order Submit');
-    })
+      gtag('event', 'Creadas', {
+           'event_category': "Ordenes",
+           'event_label': 'Order Submit'
+          });
   }
 
   if (paymentButton) {
     paymentButton.addEventListener("click", (event) => {
-      ga('send', 'event', 'Ordenes', 'Pagadas', 'Payment Submit');
-    })
+      gtag('event', 'Pagadas', {
+           'event_category': 'Ordenes',
+           'event_label': 'Payment Submit'
+          });
   }
 }
 
