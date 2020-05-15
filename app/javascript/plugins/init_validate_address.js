@@ -20,6 +20,7 @@ const validateAddress = () => {
       if (polygonCoords.length === 0) {
         resolve(true)
       } else {
+        const geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address.value}, function(results, status) {
           if (status == 'OK') {
             const restrictedArea = new google.maps.Polygon({paths: polygonCoords});
