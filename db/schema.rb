@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_195602) do
+ActiveRecord::Schema.define(version: 2020_05_15_015940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 2020_05_14_195602) do
     t.string "emoji"
     t.string "hq_address"
     t.string "slug"
+    t.string "description", default: ""
     t.index ["brand_id"], name: "index_restaurants_on_brand_id"
     t.index ["slug"], name: "index_restaurants_on_slug", unique: true
     t.index ["user_id"], name: "index_restaurants_on_user_id"

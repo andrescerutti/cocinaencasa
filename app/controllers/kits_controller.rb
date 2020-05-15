@@ -22,8 +22,12 @@ class KitsController < ApplicationController
   def show
     @kit = Kit.friendly.find(params[:id])
     @kits = @kit.restaurant.kits.where.not(id: @kit.id).where("kits.stock > ?", 0)
-    @store = Store.near(session[:address], 10, select: "addresses.*, stores.*").joins(:restaurant).joins(:address).where(restaurant: @kit.restaurant).first
-    @store = @kit.restaurant.stores.first if @store.nil?
+    if params[:store].present?
+      @store = Store.find(params[:store])
+    else
+      @store = Store.near(session[:address], 10, select: "addresses.*, stores.*").joins(:restaurant).joins(:address).where(restaurant: @kit.restaurant).first
+      @store = @kit.restaurant.stores.first if @store.nil?
+    end
     @order = Order.new
     @order.build_address
     @disable_days = @store.disabled

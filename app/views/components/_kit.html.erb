@@ -5,14 +5,14 @@
   <span class="few-stock">ÚLTIMOS KITS</span>
   <% end %>
   <div class="<%= 'out-of-stock' if kit.stock.zero? %>">
-    <%= link_to kit do %>
+    <%= link_to kit_path(kit, store: @store) do %>
     <div class="chef-box" id="<%= 'restaurants' if kit == kits.last  %>">
       <div class="d-flex justify-content-between chef-box-main">
         <div class="d-flex flex-column justify-content-between">
           <div>
             <h2 class="mt-0 mb-0 pr-3"><%= truncate(kit.name, length: 30, separator: " ") %></h2>
             <% if kit.tags != "" %>
-              <span class="m-0 tag"><%= kit.tags.upcase %></span>
+            <span class="m-0 tag"><%= kit.tags.upcase %></span>
             <% end %>
           </div>
           <div class="d-flex align-items-center">

@@ -42,7 +42,7 @@
   <h2 class="mb-4 section-secondary store-show-kit-offer">Elejí tu Chef Box</h2>
   <div class="kits-wrapper">
     <% @kits.each do |kit| %>
-    <%= render "components/kit", kit: kit, kits: @kits %>
+    <%= render "components/kit", kit: kit, kits: @kits, store: @store %>
     <% end %>
   </div>
 
