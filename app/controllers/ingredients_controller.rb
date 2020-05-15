@@ -9,7 +9,7 @@ class IngredientsController < ApplicationController
 
   def create
     @kits = policy_scope(KitIngredient).where(kit: @kit)
-    @kit = Kit.find(params[:kit_id])
+    @kit = Kit.friendly.find(params[:kit_id])
     @ingredient = Ingredient.new(ingredient_params)
     @kit_ingredient = KitIngredient.new(kit_ingredient_params)
     @ingredient.save

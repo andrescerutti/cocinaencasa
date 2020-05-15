@@ -26,6 +26,8 @@ class PaymentsController < ApplicationController
         @kit.stock -= @order.amount
         @kit.save
         authorize @payment
+        PaymentMailer.with(user: current_user, payment: @payment, store: @store)
+        RestaurantSaleMailer.with(user: current_user, order: @order, payment: @payment, restaurant: @restaurant, store: @store)
         redirect_to order_payment_path(@order, @payment)
       else
         UserMailer.with(user: current_user, order: @order, store: @store).error_on_buying.deliver_now

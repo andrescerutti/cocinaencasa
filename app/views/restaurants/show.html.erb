@@ -1,74 +1,246 @@
-<div style="">
-  <div class="container pt-3 d-md-flex justify-content-between">
-      <%= link_to "", :back, class: "fas fa-arrow-left back-button", style: "text-decoration: none; color: #2F9B7A;" %>
-    <div class="mr-3 w-sm-100 w-md-50 flex-grow-1">
-      <h2 class="mb-5 w-100 text-center"><%= @restaurant.name %></h2>
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <i class="fas fa-map-marker-alt mr-3" style="color: #2F9B7A; font-size: 25px;"></i>
-        <p class="ml-4 text-secondary"><%= @restaurant.address.address %> </p>
-      </div>
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <i class="fas fa-motorcycle mr-1" style="color: #2F9B7A; font-size: 25px;"></i>
-      <% if @restaurant.own_delivery.present? %>
-        <p class="ml-4 text-secondary">Posee delivery propio</p>
-      <% else %>
-        <p class="ml-4 text-secondary">No posée delivery propio - Podras hacer TAKE AWAY o enviar un glovo</p>
-      <% end %>
-      </div>
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <i class="far fa-clock mr-2" style="color: #2f9b7a; font-size: 25px;"></i>
-        <p class="ml-3 text-secondary"><%= @restaurant.day_open %> </p>
+<div class="container">
+  <div class="d-flex mt-4 store-information">
+    <div style="background-image: url(<%= @restaurant.image %>);" class="d-none d-sm-block restaurant-sm-show">
+      <span class="second-category"><%= @restaurant.name %></span>
+    </div>
+    <div class="flex-grow-1 flex-sm-grow-1">
+      <div class="d-flex">
+        <div style="background-image: url(<%= @restaurant.brand.logo %>);" class="store-square-logo"></div>
+        <div class="store-address">
+          <h1><%= @restaurant.name %></h1>
+          <h4><%= @restaurant.description %></h4>
+        </div>
       </div>
     </div>
-    <div class="p-2 text-right w-sm-100 w-md-50 rounded"style="background-image: url(<%= @restaurant.image %>);background-repeat: no-repeat; background-size: cover; background-position: top; min-height: 25vh; min-width: 35vw; max-width: 50vw; box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);">
-      <%= cl_image_tag( @restaurant.brand.logo , class:"mb-4 rounded w-25 ")%>
+  </div>
+  <div style="background-image: url(<%= @restaurant.image %>);" class="d-block d-sm-none restaurant-xs-show"></div>
+  <h3 class="stores-header" style="font-size: 20px; line-height: 33px;">¡Elegí tu <span class="category-selected" style="background-color: #01788c">zona</span> y verifica si estas dentro del área del restaurant!</h3>
+    <div class="stores-wrapper" style="grid-row-gap: 60px;">
+      <% @restaurant.stores.each do |store| %>
+      <div class="store-card d-flex flex-column justify-content-between">
+        <div>
+          <div style="border-bottom: 3px solid #01788c;" class="mb-3 pb-2">
+            <%= link_to store, class:"d-flex justify-content-between align-items-center mb-0 text-decoration-none" do %>
+            <h2 style="border:none; font-size: 22px;" class="mb-0 pb-0"><%= store.name %></h2>
+            <p class="category-selected mb-0" style="background-color: #01788c">ELEGIR ZONA</p>
+            <% end %>
+          </div>
+          <div>
+            <div class="d-flex d-sm-block mb-1">
+              <h3 class="days-available">Días de entregas</h3>
+              <div class="d-flex" style="flex-wrap: wrap;">
+                <% store.available.each do |day| %>
+                <p class="day-available"><%= day %></p>
+                <% end %>
+              </div>
+            </div>
+            <p class="until-when"><i class="fas fa-utensils"></i> Podés hacer tu pedido <%= store.next_available_time %></p>
+          </div>
+        </div>
+        <div class="map-wrapper">
+          <div class="map-canvas" data-polygon="<%= store.polygon.to_json %>" ></div>
+        </div>
+      </div>
+      <% end %>
     </div>
   </div>
-  <div class="container mt-5">
-      <h2 class="w-100">Kits disponibles</h2>
-    <div class="cards-scroll mt-3" >
-      <% @restaurant.kits.each do |kit| %>
-        <% if kit.stock < 1 %>
-            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4 position-relative" >
-              <div class="w-25 position-absolute" style="z-index: 1; top: 34px; right: 20px" >
-                <p class="bg-primary bold text-white p-2 rounded">Sin stock</p>
-              </div>
-             <div class="card-kit" style="opacity:0.6">
 
-              <%= cl_image_tag kit.image, class: "rounded"%>
-               <div class="card-body">
-                 <div>
-                   <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small> </h5>
-                   <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
-                 </div>
-                 <div class="d-flex justify-content-between">
-                   <p class="card-text card-address"><i class="far fa-clock"></i>preparación <%= kit.preparation_time %> minutos</p>
-                   <p class="card-text card-price">$ <%= kit.price %></p>
 
-                 </div>
-               </div>
-              </div>
-            </div>
-        <% else %>
-          <%= link_to kit_path(kit) do  %>
-            <div class="card-scroll pr-0 pl-2 mr-3 col-md-4">
-              <div class="card-kit">
-                <%= cl_image_tag kit.image, class: "rounded"%>
-                <div class="card-body">
-                  <div>
-                    <h5 class="card-title mb-1 text-wrap text-truncate" style="height: 50px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></h5>
-                    <p class="card-text overflow-ellipsis card-description mt-3"><%= kit.description %></p>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                    <p class="card-text card-address"><i class="far fa-clock"></i> <%= kit.preparation_time %> minutos</p>
-                    <p class="card-text card-price">$ <%= kit.price %></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      <% end %>
-  </div>
-  </div>
-</div>
+  <script>
+
+    function buildMap(element) {
+
+      function createInitialPolygon() {
+        return new Promise(resolve => {
+          const standardData = [
+          new google.maps.LatLng(-34.55793, -58.37472),
+          new google.maps.LatLng(-34.58888, -58.34004),
+          new google.maps.LatLng(-34.63056, -58.32871),
+          new google.maps.LatLng(-34.62336, -58.36614),
+          new google.maps.LatLng(-34.62294, -58.38845),
+          new google.maps.LatLng(-34.63198, -58.44338),
+          new google.maps.LatLng(-34.61249, -58.48802),
+          new google.maps.LatLng(-34.55184, -58.51954),
+          new google.maps.LatLng(-34.5036, -58.59775),
+          new google.maps.LatLng(-34.52252, -58.74045),
+          new google.maps.LatLng(-34.47454, -58.81557),
+          new google.maps.LatLng(-34.48655, -58.93739),
+          new google.maps.LatLng(-34.46529, -58.99974),
+          new google.maps.LatLng(-34.41898, -58.80147),
+          new google.maps.LatLng(-34.34864, -58.66037),
+          new google.maps.LatLng(-34.43696, -58.5110)
+          ];
+          const initialPolygon = JSON.parse(JSON.parse(element.dataset.polygon));
+          const createPolygon = function(initialPolygon) {
+            return new Promise(resolve => {
+              const initialPolygonDB = initialPolygon.map((point) => {
+                return new google.maps.LatLng(point.lat,point.lng)
+              })
+              resolve(initialPolygonDB)
+            })
+          }
+          if (initialPolygon.length === 0) {
+            resolve(standardData);
+          } else {
+            return createPolygon(initialPolygon).then(data => resolve(data))
+          }
+        })
+      }
+
+      createInitialPolygon().then((drawPoligon) => {
+    // Map Center
+    var myLatLng = new google.maps.LatLng(-34.603722, -58.381592);
+    // General Options
+    var mapOptions = {
+      zoom: 11,
+      center: myLatLng,
+      mapTypeId: google.maps.MapTypeId.RoadMap,
+      zoomControl: true,
+      mapTypeControl: false,
+      streetViewControl: false,
+      rotateControl: true,
+    };
+
+    var map = new google.maps.Map(element, mapOptions);
+
+    function createDatabasePoligon(polygon) {
+      return new Promise(resolve => {
+        const updatedPolygon = polygon.map((data) => {
+          const latLng = {lat: eval(data.split(",")[0]), lng: eval(data.split(",")[1])}
+          return latLng
+        })
+        resolve(updatedPolygon)
+      })
+    }
+    // Styling & Controls
+    const myPolygon = new google.maps.Polygon({
+      paths: drawPoligon,
+      draggable: false,
+      editable: false,
+      strokeColor: '#01788c',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#01788c',
+      fillOpacity: 0.35
+    });
+    myPolygon.setMap(map);
+  }
+  )}
+
+      document.addEventListener("DOMContentLoaded", function() {
+        const maps = document.querySelectorAll(".map-wrapper")
+        maps.forEach((map) => {
+          buildMap(map.children[0])
+        })
+      })
+    </script>
+
+    <style>
+      .restaurant-xs-show {
+        width: 100%;
+        position: relative;
+        background-size: cover;
+        border-radius: 4px;
+        height: 35vh;
+        margin-top: 15px;
+        margin-right: 35px;
+      }
+      .restaurant-xs-show span {
+        width: 35%;
+        padding-right: 10px;
+        color: black;
+        font-weight: bold;
+        background-color: #e1ecba;
+        position: absolute;
+        top: 15px;
+        transform: rotate(-6deg);
+        font-size: 14px;
+        padding: 1px 0px;
+        text-align: center;
+        border-radius: 4px 0px 0px 4px;
+        right: -5px;
+      }
+      .restaurant-sm-show {
+        width: 50%;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        border-radius: 4px;
+        height: 45vh;
+        margin-right: 35px;
+      }
+      .restaurant-sm-show span {
+        width: 35%;
+        padding-right: 10px;
+        color: black;
+        font-weight: bold;
+        background-color: #e1ecba;
+        position: absolute;
+        top: 15px;
+        transform: rotate(-6deg);
+        font-size: 14px;
+        padding: 1px 0px;
+        text-align: center;
+        border-radius: 4px 0px 0px 4px;
+        right: -5px;
+      }
+      .map-wrapper {
+        padding-bottom: 10px;
+        border-bottom: 3px solid #01788c;
+      }
+      .map-canvas {
+        width: auto;
+        height: 35vh;
+      }
+      .info {
+        color: #222;
+      }
+      .lngLat {
+        color: #fff;
+        margin-bottom: 5px;
+      }
+      .lngLat .one {
+        padding-left: 250px;
+      }
+      .lngLat .two {
+        padding-left: 34px;
+      }
+      .info {
+        height: 140px;
+        float: left;
+        margin-bottom: 30px;
+        border: solid 2px #eee;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        -moz-box-shadow: inset 0 2px 5px #444;
+        -webkit-box-shadow: inset 0 2px 5px #444;
+        box-shadow: inset 0 2px 5px #444;
+      }
+      .info, .lngLat {
+        font-family: arial, sans-serif;
+        font-size: 12px;
+        padding-top: 10px;
+        width: 270px;
+      }
+      .day-available {
+        background-color: #01788c;
+        color: white;
+        padding: 3px 20px;
+        font-size: 14px;
+        border-radius: 18px;
+        margin: 0px;
+        margin-right: 8px;
+        margin-bottom: 7px;
+      }
+
+      .days-available {
+        font-size: 14px;
+        margin-right: 15px;
+      }
+
+      .until-when i {
+        color: #01788c;
+        margin-right: 5px;
+      }
+    </style>
