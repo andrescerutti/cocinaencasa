@@ -2,7 +2,7 @@ class KitIngredientsController < ApplicationController
   before_action :set_kit_ingredients, only: [:edit, :update]
 
   def index
-    @kit = Kit.find(params[:kit_id])
+    @kit = Kit.friendly.find(params[:kit_id])
     @kits = policy_scope(KitIngredient).where(kit: @kit)
     @ingredient = Ingredient.new
     @kit_ingredient = KitIngredient.new

@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @kit = Kit.find(params[:kit_id])
+    @kit = Kit.friendly.find(params[:kit_id])
     @order = Order.new(amount: params[:order][:amount])
     authorize @order
   end
@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
     @store = Store.find(orders_params[:store_id])
     @order.store_id = @store.id
     @order.user = current_user
-    @order.kit = Kit.find(params[:kit_id])
+    @order.kit = Kit.friendly.find(params[:kit_id])
     @order.code = "#{@order.kit_id}-#{rand(0..1000000)}"
     if params[:order][:addresses].present?
       session[:address] = params[:order][:addresses][:address]

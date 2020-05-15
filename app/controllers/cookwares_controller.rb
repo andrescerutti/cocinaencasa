@@ -3,7 +3,7 @@ class CookwaresController < ApplicationController
 
  def create
     @kits = policy_scope(KitCookware).where(kit: @kit)
-    @kit = Kit.find(params[:kit_id])
+    @kit = Kit.friendly.find(params[:kit_id])
     @cookware = Cookware.new(cookware_params)
     @kit_cookware = KitCookware.new(kit_cookware_params)
     @cookware.save
