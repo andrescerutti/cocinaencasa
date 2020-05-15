@@ -29,9 +29,7 @@
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_pack_tag 'application', media: 'all' %>
-  <%#= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places,geometrykey=#{ENV['GOOGLE_API_KEY']}" %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=geometry,places">
-  </script>
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&libraries=geometry,places" %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -61,27 +59,26 @@
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1102854696738268');
-      fbq('track', 'PageView');
-    </script>
-
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1102854696738268&ev=PageView&noscript=1"
-      /></noscript>
-    </head>
-    <body>
-      <%= render 'shared/navbar' %>
-      <%= render 'shared/flashes' %>
-      <%= yield %>
-      <div id="map"></div>
-      <%= javascript_include_tag 'application' %>
-      <%= javascript_pack_tag 'application' %>
-      <%= render 'shared/footer' %>
-    </body>
-    </html>
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1102854696738268');
+  </script>
+  <%= yield :fb_track %>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1102854696738268&ev=PageView&noscript=1"
+  /></noscript>
+</head>
+  <body>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flashes' %>
+    <%= yield %>
+    <div id="map"></div>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= render 'shared/footer' %>
+  </body>
+</html>

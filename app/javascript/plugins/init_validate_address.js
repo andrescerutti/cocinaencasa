@@ -7,9 +7,12 @@ const validateAddress = () => {
   const addressFields = document.querySelector("#address_fields")
   const storeAddress = document.querySelector("#store_address")
   const deliveryDate = document.querySelector("#order_date_delivery")
-  const autocomplete = new google.maps.places.Autocomplete(address, { types: [ 'geocode' ]});
-  const geocoder = new google.maps.Geocoder();
   const poligono = document.querySelector("#poligono")
+
+  if (address) {
+    const autocomplete = new google.maps.places.Autocomplete(address, { types: [ 'geocode' ]});
+    const geocoder = new google.maps.Geocoder();
+  }
 
   function addressIsValid() {
     return new Promise(resolve => {
