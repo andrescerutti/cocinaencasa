@@ -6,9 +6,11 @@ import "../plugins/flatpickr"
 import { initFormToggler } from '../plugins/form_toggler';
 import { autocomplete } from '../plugins/init_autocomplete';
 import { initIngredients } from '../plugins/init_ingredients';
+import { initGoogleAnalytics } from '../plugins/init_ga';
 
 initFormToggler();
 validateAddress();
 checkDisabledButton();
 autocomplete();
 initIngredients();
+initGoogleAnalytics();

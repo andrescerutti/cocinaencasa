@@ -1,12 +1,11 @@
 class PaymentsController < ApplicationController
   protect_from_forgery except: :create
+  skip_after_action :verify_authorized
 
   def failed
     @order = Order.find(params[:id])
     @store = Store.find(@order.store_id)
     @kit = @order.kit
-    @payment = Payment.new
-    authorize @payment
   end
 
   def show
@@ -23,21 +22,20 @@ class PaymentsController < ApplicationController
     @restaurant = @order.kit.restaurant
     @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
     if @payment
-      authorize @payment
       if @payment.status == "approved"
         @kit.stock -= @order.amount
         @kit.save
+        authorize @payment
+        PaymentMailer.with(user: current_user, payment: @payment, store: @store)
+        RestaurantSaleMailer.with(user: current_user, order: @order, payment: @payment, restaurant: @restaurant, store: @store)
         redirect_to order_payment_path(@order, @payment)
       else
-        @payment.save
-        authorize @payment
-        UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store).error_on_buying.deliver_now
+        UserMailer.with(user: current_user, order: @order, store: @store).error_on_buying.deliver_now
         redirect_to failed_path(@order.id)
       end
     else
-      authorize @payment
       @data = {"issuer_id"=> payment_params["issuer_id"], "installments"=> payment_params["installments"], "payment_method_id"=> payment_params["payment_method_id"], "payer_id"=> payment_params["payer_id"], "payer_type"=> payment_params["payer_type"]}
-      UserMailer.with(user: current_user, order: @order, payment: @payment, store: @store, data: @data).error_on_buying.deliver_now
+      UserMailer.with(user: current_user, order: @order, store: @store, data: @data).error_on_buying.deliver_now
       redirect_to failed_path(@order.id)
     end
   end

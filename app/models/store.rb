@@ -55,6 +55,8 @@ class Store < ApplicationRecord
   end
 
   def disabled
-    (Date.today..Date.today + 60).reject { |day| delivery_days[day.wday] }.map(&:to_s)
+    tomorrow = next_available_time == "para mañana" ? 1 : 0
+    first_day_open = day_for_order.positive? ? (Date.today + day_for_order.days) : (Date.today + tomorrow.days)
+    [(Date.today..Date.today + 60).reject { |day| delivery_days[day.wday] }.map(&:to_s), (Date.today...first_day_open).map(&:to_s)].flatten.uniq
   end
 end

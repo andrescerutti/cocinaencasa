@@ -7,9 +7,12 @@ const validateAddress = () => {
   const addressFields = document.querySelector("#address_fields")
   const storeAddress = document.querySelector("#store_address")
   const deliveryDate = document.querySelector("#order_date_delivery")
-  const autocomplete = new google.maps.places.Autocomplete(address, { types: [ 'geocode' ]});
-  const geocoder = new google.maps.Geocoder();
   const poligono = document.querySelector("#poligono")
+
+  if (address) {
+    const autocomplete = new google.maps.places.Autocomplete(address, { types: [ 'geocode' ]});
+    const geocoder = new google.maps.Geocoder();
+  }
 
   function addressIsValid() {
     return new Promise(resolve => {
@@ -17,6 +20,7 @@ const validateAddress = () => {
       if (polygonCoords.length === 0) {
         resolve(true)
       } else {
+        const geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address.value}, function(results, status) {
           if (status == 'OK') {
             const restrictedArea = new google.maps.Polygon({paths: polygonCoords});
@@ -97,10 +101,6 @@ const validateAddress = () => {
       }
       else if (amount.value < 1) {
         submit.value = `Ingresar cantidad de Chef Box`
-      }
-      else if (invalidArea()) {
-        alert("Usted a ingresado una direeción fuera de la zona de envío.")
-        submit.value = `Fuera de la zona de envíos.`
       }
       else {
         submit.value = `¡Por favor revise los datos ingresados!`
