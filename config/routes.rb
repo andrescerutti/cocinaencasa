@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'ingredients/edit'
   get 'ingredients/update'
   get 'ingredients/destroy'
+  get 'welcome', to: "kits#welcome", as: :welcome
   devise_for :users do
     get 'sign_out', to: 'devise/sessions#destroy'
   end
@@ -58,7 +59,6 @@ Rails.application.routes.draw do
   patch "/orders/:id/order_assignment/", to: "orders#order_assignment", as: :order_assignment
   delete 'kits/:id', to: "kits#destroy"
   get "/stores_admin", to: "pages#stores_admin", as: :stores_admin
-
   # /dashboard/orders
   # orders [index ]
   # favorites [index]
