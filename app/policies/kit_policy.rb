@@ -13,6 +13,10 @@ class KitPolicy < ApplicationPolicy
     true
   end
 
+  def welcome?
+    true
+  end
+
   def update?
     allow_user?
   end

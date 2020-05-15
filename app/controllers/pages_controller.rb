@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :wrong_address]
 
   def home
+    redirect_to welcome_path(query: {address: session[:address]}) if session[:address].present?
     @categories = Category.all
   end
 

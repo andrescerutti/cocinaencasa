@@ -1,6 +1,7 @@
 class KitsController < ApplicationController
   before_action :set_kit, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :show, :category, :new, :create, :update_stock]
+  skip_before_action :authenticate_user!, only: [:index, :show, :category, :new, :create, :update_stock, :welcome]
+  skip_after_action :verify_authorized, only: :welcome
   def index
     policy_scope(Kit)
     @categories = Category.all
@@ -82,9 +83,27 @@ class KitsController < ApplicationController
     @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(restaurant: {kits: {kit_categories: :category}}).joins(:address).uniq
   end
 
-   def destroy
+  def destroy
     @kit.destroy
     redirect_to admin_dashboard_path
+  end
+
+  def welcome
+    policy_scope(Kit)
+    @categories = Category.all
+    @user = current_user
+    @search = params[:query][:address]
+    if @search.present?
+      session[:address] = params[:query][:address]
+    else
+      @search = session[:address]
+    end
+    if params[:category]
+      return @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).where("kits.stock > ?", 0).order(priority: :desc)
+    end
+    @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0)
+    return redirect_to wrong_address_path(query: @search) if @kits.empty?
+    @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
   end
 
   private
