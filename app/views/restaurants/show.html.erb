@@ -16,7 +16,7 @@
   <div style="background-image: url(<%= @restaurant.image %>);" class="d-block d-sm-none restaurant-xs-show"></div>
   <h3 class="stores-header" style="font-size: 20px; line-height: 33px;">¡Elegí tu <span class="category-selected" style="background-color: #01788c">zona</span> y verifica si estas dentro del área del restaurant!</h3>
   <div class="stores-wrapper" style="grid-row-gap: 60px;">
-    <% @restaurant.stores.each do |store| %>
+    <% @stores.each do |store| %>
     <div class="store-card d-flex flex-column justify-content-between">
       <div>
         <div style="border-bottom: 3px solid #01788c;" class="mb-3 pb-2">
