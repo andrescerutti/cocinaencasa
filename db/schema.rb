@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_015940) do
+ActiveRecord::Schema.define(version: 2020_05_16_034401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_015940) do
     t.string "flags", default: ""
     t.boolean "pick_up", default: false
     t.text "polygon", default: "[]"
+    t.boolean "accepts_cash", default: false
     t.index ["addressable_type", "addressable_id"], name: "index_stores_on_addressable_type_and_addressable_id"
     t.index ["restaurant_id"], name: "index_stores_on_restaurant_id"
   end

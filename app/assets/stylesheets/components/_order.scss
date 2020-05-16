@@ -32,3 +32,30 @@
   font-size: 15px;
   font-family: 'Galindo', cursive;
 }
+
+.pay-cash button {
+  background-color: #2F9B7A;
+  color: white;
+  border: 1px solid #111;
+  cursor: pointer;
+  line-height: 2.7142857142857144;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.identity-validation {
+  padding: 5px 10px;
+  border-radius: 6px;
+  box-shadow: none;
+  &:focus {
+    outline: 1px solid #2F9B7A;
+  }
+}
