@@ -59,3 +59,19 @@
     outline: 1px solid #2F9B7A;
   }
 }
+
+#pay-cash-submit {
+  a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+  &:hover {
+    background-color: #2F9B7A;
+    color:white;
+    text-decoration: none;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
