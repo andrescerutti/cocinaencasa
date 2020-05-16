@@ -8,6 +8,7 @@ const initGoogleAnalytics = () => {
            'event_category': "Ordenes",
            'event_label': 'Order Submit'
           });
+    })
   }
 
   if (paymentButton) {
@@ -16,6 +17,7 @@ const initGoogleAnalytics = () => {
            'event_category': 'Ordenes',
            'event_label': 'Payment Submit'
           });
+    })
   }
 }
 

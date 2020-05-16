@@ -7,7 +7,7 @@
       <div class="d-flex">
         <div style="background-image: url(<%= @restaurant.brand.logo %>);" class="store-square-logo"></div>
         <div class="store-address">
-          <h1><%= @restaurant.name %></h1>
+          <h1 id="restaurant-show"><%= @restaurant.name %></h1>
           <h4><%= @restaurant.description %></h4>
         </div>
       </div>
@@ -15,84 +15,85 @@
   </div>
   <div style="background-image: url(<%= @restaurant.image %>);" class="d-block d-sm-none restaurant-xs-show"></div>
   <h3 class="stores-header" style="font-size: 20px; line-height: 33px;">¡Elegí tu <span class="category-selected" style="background-color: #01788c">zona</span> y verifica si estas dentro del área del restaurant!</h3>
-    <div class="stores-wrapper" style="grid-row-gap: 60px;">
-      <% @restaurant.stores.each do |store| %>
-      <div class="store-card d-flex flex-column justify-content-between">
-        <div>
-          <div style="border-bottom: 3px solid #01788c;" class="mb-3 pb-2">
-            <%= link_to store, class:"d-flex justify-content-between align-items-center mb-0 text-decoration-none" do %>
-            <h2 style="border:none; font-size: 22px;" class="mb-0 pb-0"><%= store.name %></h2>
-            <p class="category-selected mb-0" style="background-color: #01788c">ELEGIR ZONA</p>
-            <% end %>
-          </div>
-          <div>
-            <div class="d-flex d-sm-block mb-1">
-              <h3 class="days-available">Días de entregas</h3>
-              <div class="d-flex" style="flex-wrap: wrap;">
-                <% store.available.each do |day| %>
-                <p class="day-available"><%= day %></p>
-                <% end %>
-              </div>
-            </div>
-            <p class="until-when"><i class="fas fa-utensils"></i> Podés hacer tu pedido <%= store.next_available_time %></p>
-          </div>
+  <div class="stores-wrapper" style="grid-row-gap: 60px;">
+    <% @stores.each do |store| %>
+    <div class="store-card d-flex flex-column justify-content-between">
+      <div>
+        <div style="border-bottom: 3px solid #01788c;" class="mb-3 pb-2">
+          <%= link_to store, class:"d-flex justify-content-between align-items-center mb-0 text-decoration-none" do %>
+          <h2 style="border:none; font-size: 22px;" class="mb-0 pb-0"><%= store.name %></h2>
+          <p class="category-selected mb-0" style="background-color: #01788c">ELEGIR ZONA</p>
+          <% end %>
         </div>
-        <div class="map-wrapper">
-          <div class="map-canvas" data-polygon="<%= store.polygon.to_json %>" ></div>
+        <div>
+          <div class="d-flex d-sm-block mb-1">
+            <h3 class="days-available">Días de entregas</h3>
+            <div class="d-flex" style="flex-wrap: wrap;">
+              <% store.available.each do |day| %>
+              <p class="day-available"><%= day %></p>
+              <% end %>
+            </div>
+          </div>
+          <p class="until-when"><i class="fas fa-utensils"></i> Podés hacer tu pedido <%= store.next_available_time %></p>
+          <div class="map-zone mx-0" data-store="<%= store.id %>" id="poligono">⚠ Ver zona de envío</div>
         </div>
       </div>
-      <% end %>
+      <div class="map-wrapper">
+        <div class="map-canvas d-none" id="store-<%= store.id %>" data-polygon="<%= store.polygon.to_json %>"></div>
+      </div>
     </div>
+    <% end %>
   </div>
+</div>
 
 
-  <script>
+<script>
 
-    function buildMap(element) {
+  function buildMap(element) {
 
-      function createInitialPolygon() {
-        return new Promise(resolve => {
-          const standardData = [
-          new google.maps.LatLng(-34.55793, -58.37472),
-          new google.maps.LatLng(-34.58888, -58.34004),
-          new google.maps.LatLng(-34.63056, -58.32871),
-          new google.maps.LatLng(-34.62336, -58.36614),
-          new google.maps.LatLng(-34.62294, -58.38845),
-          new google.maps.LatLng(-34.63198, -58.44338),
-          new google.maps.LatLng(-34.61249, -58.48802),
-          new google.maps.LatLng(-34.55184, -58.51954),
-          new google.maps.LatLng(-34.5036, -58.59775),
-          new google.maps.LatLng(-34.52252, -58.74045),
-          new google.maps.LatLng(-34.47454, -58.81557),
-          new google.maps.LatLng(-34.48655, -58.93739),
-          new google.maps.LatLng(-34.46529, -58.99974),
-          new google.maps.LatLng(-34.41898, -58.80147),
-          new google.maps.LatLng(-34.34864, -58.66037),
-          new google.maps.LatLng(-34.43696, -58.5110)
-          ];
-          const initialPolygon = JSON.parse(JSON.parse(element.dataset.polygon));
-          const createPolygon = function(initialPolygon) {
-            return new Promise(resolve => {
-              const initialPolygonDB = initialPolygon.map((point) => {
-                return new google.maps.LatLng(point.lat,point.lng)
-              })
-              resolve(initialPolygonDB)
+    function createInitialPolygon() {
+      return new Promise(resolve => {
+        const standardData = [
+        new google.maps.LatLng(-34.55793, -58.37472),
+        new google.maps.LatLng(-34.58888, -58.34004),
+        new google.maps.LatLng(-34.63056, -58.32871),
+        new google.maps.LatLng(-34.62336, -58.36614),
+        new google.maps.LatLng(-34.62294, -58.38845),
+        new google.maps.LatLng(-34.63198, -58.44338),
+        new google.maps.LatLng(-34.61249, -58.48802),
+        new google.maps.LatLng(-34.55184, -58.51954),
+        new google.maps.LatLng(-34.5036, -58.59775),
+        new google.maps.LatLng(-34.52252, -58.74045),
+        new google.maps.LatLng(-34.47454, -58.81557),
+        new google.maps.LatLng(-34.48655, -58.93739),
+        new google.maps.LatLng(-34.46529, -58.99974),
+        new google.maps.LatLng(-34.41898, -58.80147),
+        new google.maps.LatLng(-34.34864, -58.66037),
+        new google.maps.LatLng(-34.43696, -58.5110)
+        ];
+        const initialPolygon = JSON.parse(JSON.parse(element.dataset.polygon));
+        const createPolygon = function(initialPolygon) {
+          return new Promise(resolve => {
+            const initialPolygonDB = initialPolygon.map((point) => {
+              return new google.maps.LatLng(point.lat,point.lng)
             })
-          }
-          if (initialPolygon.length === 0) {
-            resolve(standardData);
-          } else {
-            return createPolygon(initialPolygon).then(data => resolve(data))
-          }
-        })
-      }
+            resolve(initialPolygonDB)
+          })
+        }
+        if (initialPolygon.length === 0) {
+          resolve(standardData);
+        } else {
+          return createPolygon(initialPolygon).then(data => resolve(data))
+        }
+      })
+    }
 
-      createInitialPolygon().then((drawPoligon) => {
+    createInitialPolygon().then((drawPoligon) => {
     // Map Center
     var myLatLng = new google.maps.LatLng(-34.603722, -58.381592);
     // General Options
     var mapOptions = {
-      zoom: 11,
+      zoom: 10,
       center: myLatLng,
       mapTypeId: google.maps.MapTypeId.RoadMap,
       zoomControl: true,
@@ -127,120 +128,120 @@
   }
   )}
 
-      document.addEventListener("DOMContentLoaded", function() {
-        const maps = document.querySelectorAll(".map-wrapper")
-        maps.forEach((map) => {
-          buildMap(map.children[0])
-        })
+    document.addEventListener("DOMContentLoaded", function() {
+      const maps = document.querySelectorAll(".map-wrapper")
+      maps.forEach((map) => {
+        buildMap(map.children[0])
       })
-    </script>
+    })
+  </script>
 
-    <style>
-      .restaurant-xs-show {
-        width: 100%;
-        position: relative;
-        background-size: cover;
-        border-radius: 4px;
-        height: 35vh;
-        margin-top: 15px;
-        margin-right: 35px;
-      }
-      .restaurant-xs-show span {
-        width: 35%;
-        padding-right: 10px;
-        color: black;
-        font-weight: bold;
-        background-color: #e1ecba;
-        position: absolute;
-        top: 15px;
-        transform: rotate(-6deg);
-        font-size: 14px;
-        padding: 1px 0px;
-        text-align: center;
-        border-radius: 4px 0px 0px 4px;
-        right: -5px;
-      }
-      .restaurant-sm-show {
-        width: 50%;
-        position: relative;
-        background-size: cover;
-        background-position: center;
-        border-radius: 4px;
-        height: 45vh;
-        margin-right: 35px;
-      }
-      .restaurant-sm-show span {
-        width: 35%;
-        padding-right: 10px;
-        color: black;
-        font-weight: bold;
-        background-color: #e1ecba;
-        position: absolute;
-        top: 15px;
-        transform: rotate(-6deg);
-        font-size: 14px;
-        padding: 1px 0px;
-        text-align: center;
-        border-radius: 4px 0px 0px 4px;
-        right: -5px;
-      }
-      .map-wrapper {
-        padding-bottom: 10px;
-        border-bottom: 3px solid #01788c;
-      }
-      .map-canvas {
-        width: auto;
-        height: 35vh;
-      }
-      .info {
-        color: #222;
-      }
-      .lngLat {
-        color: #fff;
-        margin-bottom: 5px;
-      }
-      .lngLat .one {
-        padding-left: 250px;
-      }
-      .lngLat .two {
-        padding-left: 34px;
-      }
-      .info {
-        height: 140px;
-        float: left;
-        margin-bottom: 30px;
-        border: solid 2px #eee;
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        border-radius: 3px;
-        -moz-box-shadow: inset 0 2px 5px #444;
-        -webkit-box-shadow: inset 0 2px 5px #444;
-        box-shadow: inset 0 2px 5px #444;
-      }
-      .info, .lngLat {
-        font-family: arial, sans-serif;
-        font-size: 12px;
-        padding-top: 10px;
-        width: 270px;
-      }
-      .day-available {
-        background-color: #01788c;
-        color: white;
-        padding: 3px 20px;
-        font-size: 14px;
-        border-radius: 18px;
-        margin: 0px;
-        margin-right: 8px;
-        margin-bottom: 7px;
-      }
+  <style>
+    .restaurant-xs-show {
+      width: 100%;
+      position: relative;
+      background-size: cover;
+      border-radius: 4px;
+      height: 35vh;
+      margin-top: 15px;
+      margin-right: 35px;
+    }
+    .restaurant-xs-show span {
+      width: 35%;
+      padding-right: 10px;
+      color: black;
+      font-weight: bold;
+      background-color: #e1ecba;
+      position: absolute;
+      top: 15px;
+      transform: rotate(-6deg);
+      font-size: 14px;
+      padding: 1px 0px;
+      text-align: center;
+      border-radius: 4px 0px 0px 4px;
+      right: -5px;
+    }
+    .restaurant-sm-show {
+      width: 50%;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      border-radius: 4px;
+      height: 45vh;
+      margin-right: 35px;
+    }
+    .restaurant-sm-show span {
+      width: 35%;
+      padding-right: 10px;
+      color: black;
+      font-weight: bold;
+      background-color: #e1ecba;
+      position: absolute;
+      top: 15px;
+      transform: rotate(-6deg);
+      font-size: 14px;
+      padding: 1px 0px;
+      text-align: center;
+      border-radius: 4px 0px 0px 4px;
+      right: -5px;
+    }
+    .map-wrapper {
+      padding-bottom: 10px;
+      border-bottom: 3px solid #01788c;
+    }
+    .map-canvas {
+      width: auto;
+      height: 35vh;
+    }
+    .info {
+      color: #222;
+    }
+    .lngLat {
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    .lngLat .one {
+      padding-left: 250px;
+    }
+    .lngLat .two {
+      padding-left: 34px;
+    }
+    .info {
+      height: 140px;
+      float: left;
+      margin-bottom: 30px;
+      border: solid 2px #eee;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+      -moz-box-shadow: inset 0 2px 5px #444;
+      -webkit-box-shadow: inset 0 2px 5px #444;
+      box-shadow: inset 0 2px 5px #444;
+    }
+    .info, .lngLat {
+      font-family: arial, sans-serif;
+      font-size: 12px;
+      padding-top: 10px;
+      width: 270px;
+    }
+    .day-available {
+      background-color: #01788c;
+      color: white;
+      padding: 3px 20px;
+      font-size: 14px;
+      border-radius: 18px;
+      margin: 0px;
+      margin-right: 8px;
+      margin-bottom: 7px;
+    }
 
-      .days-available {
-        font-size: 14px;
-        margin-right: 15px;
-      }
+    .days-available {
+      font-size: 14px;
+      margin-right: 15px;
+    }
 
-      .until-when i {
-        color: #01788c;
-        margin-right: 5px;
-      }
-    </style>
+    .until-when i {
+      color: #01788c;
+      margin-right: 5px;
+    }
+  </style>
