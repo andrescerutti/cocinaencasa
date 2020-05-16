@@ -1,8 +1,9 @@
 const initRestaurant = () => {
+  const kitShow = document.querySelector("#kit-show")
   const restaurantShow = document.querySelector("#restaurant-show")
   const maps = document.querySelectorAll(".map-zone")
 
-  if (restaurantShow) {
+  if (restaurantShow || kitShow) {
     maps.forEach(map => {
       map.addEventListener("click", (event) => {
         const id = map.dataset.store;
