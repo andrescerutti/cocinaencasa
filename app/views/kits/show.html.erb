@@ -284,7 +284,14 @@
 
     createInitialPolygon().then((drawPoligon) => {
     // Map Center
-    var myLatLng = new google.maps.LatLng(-34.603722, -58.381592);
+    const polygon = JSON.parse(JSON.parse(document.querySelector(".map-canvas").dataset.polygon))
+
+    if (polygon.length === 0) {
+      var myLatLng = new google.maps.LatLng(-34.603722, -58.381592);
+    } else {
+      var myLatLng = new google.maps.LatLng(eval(polygon[0].lat), eval(polygon[0].lng));
+    }
+
     // General Options
     var mapOptions = {
       zoom: 10,
@@ -298,15 +305,6 @@
 
     var map = new google.maps.Map(element, mapOptions);
 
-    function createDatabasePoligon(polygon) {
-      return new Promise(resolve => {
-        const updatedPolygon = polygon.map((data) => {
-          const latLng = {lat: eval(data.split(",")[0]), lng: eval(data.split(",")[1])}
-          return latLng
-        })
-        resolve(updatedPolygon)
-      })
-    }
     // Styling & Controls
     const myPolygon = new google.maps.Polygon({
       paths: drawPoligon,
