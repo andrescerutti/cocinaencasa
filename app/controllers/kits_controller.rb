@@ -82,7 +82,7 @@ class KitsController < ApplicationController
     end
 
     @categories = Category.where.not("name ilike ?", "%#{@category}%")
-    @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(restaurant: {kits: {kit_categories: :category}}).joins(:address).uniq
+    @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(restaurant: {kits: {kit_categories: :category}}).joins(:address).where("categories.name = ?", params[:name]).uniq
   end
 
   def destroy
