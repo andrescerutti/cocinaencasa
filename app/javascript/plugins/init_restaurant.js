@@ -1,7 +1,7 @@
 const initRestaurant = () => {
   const kitShow = document.querySelector("#kit-show")
   const restaurantShow = document.querySelector("#restaurant-show")
-  const maps = document.querySelectorAll(".map-zone")
+  const maps = document.querySelectorAll(".map-zone.map-open")
 
   if (restaurantShow || kitShow) {
     maps.forEach(map => {

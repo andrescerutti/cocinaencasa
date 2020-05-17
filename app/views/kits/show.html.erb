@@ -48,7 +48,7 @@
 
         <div class="d-none d-sm-block map-zone" data-store="<%= @store.id %>" id="poligono" data-coordinates=<%= @coordinates.to_json %>>⚠ Ver zona de envío</div>
       </div>
-      <div class="d-block d-sm-none mt-3 map-zone" data-store="<%= @store.id %>">⚠ Ver zona de envío</div>
+      <div class="d-block d-sm-none mt-3 map-zone map-open" data-store="<%= @store.id %>">⚠ Ver zona de envío</div>
       <div class="map-wrapper">
         <div class="map-canvas d-none" id="store-<%= @store.id %>" data-polygon="<%= @store.polygon.to_json %>"></div>
       </div>
