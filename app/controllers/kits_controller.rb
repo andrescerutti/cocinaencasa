@@ -18,6 +18,7 @@ class KitsController < ApplicationController
       return @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).where("kits.stock > ?", 0).order(priority: :desc)
     end
     @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0)
+    @kits = Kit.near(Address.search(@search), 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0) if @kits.empty?
     return redirect_to wrong_address_path(query: @search) if @kits.empty?
     @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
   end
@@ -76,11 +77,9 @@ class KitsController < ApplicationController
     @kits = Kit.joins(kit_categories: :category).where("categories.name = ?", params[:name])
     authorize @kits
     @category = params["name"]
-
     if session[:address].present?
       @search = session[:address]
     end
-
     @categories = Category.where.not("name ilike ?", "%#{@category}%")
     @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(restaurant: {kits: {kit_categories: :category}}).joins(:address).where("categories.name = ?", params[:name]).uniq
   end
@@ -94,15 +93,15 @@ class KitsController < ApplicationController
     policy_scope(Kit)
     @categories = Category.all
     @user = current_user
-    if params[:query].present? && params[:query][:address].present?
+    if params[:query].present? && params[:query].is_a?(String)
+      @search = params[:query]
+    elsif params[:query].present? && params[:query][:address].present?
       @search = params[:query][:address]
     else
       @search = session[:address]
     end
-    if params[:category]
-      return @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).where("kits.stock > ?", 0).order(priority: :desc)
-    end
     @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0)
+    @kits = Kit.near(Address.search(@search), 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0) if @kits.empty?
     return redirect_to wrong_address_path(query: @search) if @kits.empty?
     @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
   end

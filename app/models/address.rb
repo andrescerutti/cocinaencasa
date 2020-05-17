@@ -13,4 +13,10 @@ class Address < ApplicationRecord
   # validates :latitude, numericality: true
   # validates :longitude, numericality: true
   scope :restaurants, -> { where(addressable_type: 'Store') }
+
+  def self.search(input)
+    Geocoder.search(input).first.coordinates
+  end
+
 end
+
