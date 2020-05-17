@@ -1,3 +1,22 @@
+<%= content_for :metadata do %>
+<title>Cociná en casa | <%= @kit.name %></title>
+<meta name="title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+<meta name="description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+
+<meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
+  <meta property="og:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+  <meta property="og:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+  <meta property="og:image" content="<%= @kit.image %>">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
+  <meta property="twitter:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+  <meta property="twitter:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+  <meta property="twitter:image" content="<%= @kit.image %>">
+<% end %>
+
 <div class="container mt-3 mt-sm-5">
   <div class="d-flex">
     <div class="mt-3 kit-information w-100">
