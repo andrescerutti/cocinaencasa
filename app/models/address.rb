@@ -15,7 +15,13 @@ class Address < ApplicationRecord
   scope :restaurants, -> { where(addressable_type: 'Store') }
 
   def self.search(input)
-    Geocoder.search(input).first.coordinates
+    begin
+      google_api_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{I18n.transliterate(input)}&key=#{ENV['GOOGLE_GEOCODER_API_KEY']}"
+      data = JSON.parse(open(google_api_url).read)["results"]
+      latLng = data.first["geometry"]["location"].values
+    rescue
+      [-34.5784991, -58.4046482]
+    end
   end
 
 end

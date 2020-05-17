@@ -18,9 +18,13 @@ class KitsController < ApplicationController
       return @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).where("kits.stock > ?", 0).order(priority: :desc)
     end
     @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0)
-    @kits = Kit.near(Address.search(@search), 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0) if @kits.empty?
+    if @kits.empty?
+      location = Address.search(@search)
+      @kits = Kit.near(location, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).order(priority: :desc).where("kits.stock > ?", 0)
+    end
     return redirect_to wrong_address_path(query: @search) if @kits.empty?
     @stores = Store.near(@search, 10, select: "addresses.*, stores.*").joins(:restaurant).joins(:address)
+    @stores = Store.near(location, 10, select: "addresses.*, stores.*").joins(:restaurant).joins(:address) if @stores.empty?
   end
 
   def show
