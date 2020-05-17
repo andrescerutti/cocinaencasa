@@ -9,8 +9,10 @@ class KitsController < ApplicationController
     @search = params[:query][:address]
     if @search.present?
       session[:address] = params[:query][:address]
-    else
+    elsif session[:address].present?
       @search = session[:address]
+    else
+      @search = "Palermo, CABA, Argentina"
     end
     if params[:category]
       return @kits = Kit.near(@search, 10, select: "addresses.*, kits.*").joins(restaurant: {stores: :address}).joins(kit_categories: :category).where('categories.name ilike ?', params[:category]).where("kits.stock > ?", 0).order(priority: :desc)
@@ -92,9 +94,8 @@ class KitsController < ApplicationController
     policy_scope(Kit)
     @categories = Category.all
     @user = current_user
-    @search = params[:query][:address]
-    if @search.present?
-      session[:address] = params[:query][:address]
+    if params[:query].present? && params[:query][:address].present?
+      @search = params[:query][:address]
     else
       @search = session[:address]
     end
