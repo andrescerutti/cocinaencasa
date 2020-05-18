@@ -9,6 +9,10 @@ class Store < ApplicationRecord
     [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
   end
 
+  def date_names
+    %w(domingo lunes martes miércoles jueves viernes sábado)
+  end
+
   def available
     days = {
       "lunes"  => monday,
@@ -50,7 +54,7 @@ class Store < ApplicationRecord
     wday = 0 if wday == 7
 
     7.times do |num|
-      return "para el #{Date::DAYNAMES[wday]}" if delivery_days[wday]
+      return "para el #{date_names[wday]}" if delivery_days[wday]
       if wday >= 6
         wday = 0
       else
