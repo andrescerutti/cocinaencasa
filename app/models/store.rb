@@ -45,13 +45,12 @@ class Store < ApplicationRecord
   end
 
   def next_available_day
-    # wday = Time.zone.now.to_datetime.wday + 1
-    wday = 6 + 1
+    wday = Time.zone.now.to_datetime.wday  + 1
     return "para mañana" if delivery_days[wday] || (delivery_days[0] && wday == 7)
     wday = 0 if wday == 7
 
-    7.times do
-      return Date::DAYNAMES[wday] if delivery_days[wday]
+    7.times do |num|
+      return "para el #{Date::DAYNAMES[wday]}" if delivery_days[wday]
       if wday >= 6
         wday = 0
       else
@@ -62,7 +61,7 @@ class Store < ApplicationRecord
 
   def next_available_time
     if day_for_order.positive?
-      day_for_order > 1 ? "para el #{(Time.zone.now.to_datetime + day_for_order.days).strftime('%A')}" : "para mañana"
+      day_for_order > 1 ? next_available_day : "para mañana"
     elsif (next_day_hour < (Time.zone.now.hour + Time.zone.now.to_datetime.min.to_f / 60).round(1)) || next_day_hour.zero?
       return next_available_day
     else
