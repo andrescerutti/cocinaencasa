@@ -1,0 +1,36 @@
+<% if !@orders.refunded.order(updated_at: :desc).empty? %>
+<% @orders.refunded.each do |order| %>
+<% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
+<div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
+  <div class="p-2 w-75">
+   <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
+   <% if order.address.present? %>
+   <p class="font-weight-light"><%= order.address.address %></p>
+   <% end %>
+   <p><%= order.kit.name %></p>
+   <p>Cantidad de kits: <%= order.amount %></p>
+   <p><%= order.kit.restaurant.name %> </p>
+   <span>Fecha de entrega: <%= l order.date_delivery.time %>  </span>
+
+   <div class="">
+    <h5>Contacto cliente:
+      <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; margin-top: 10px;font-size: 30px; color: #47E463;"></i></a>
+    </h5>
+  </div>
+</div>
+<div class="p-2 w-25 p-2 w-25 d-flex flex-column justify-content-end">
+  <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
+  <% if order.reason.nil? %>
+  <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar reembolso de orden." } do |f| %>
+  <%= f.input :reason, placeholder: "Motivo", label: false, required: true %>
+  <%= f.submit 'Confirmar motivo', class: 'btn btn-primary p-1 w-100'  %>
+  <% end %>
+  <% else %>
+  <p>Motivo: <%=order.reason %></p>
+  <% end %>
+</div>
+</div>
+<% end %>
+<% else %>
+<p class="mt-5 text-center">No hay órdenes reembolsadas</p>
+<% end %>
