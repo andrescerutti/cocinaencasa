@@ -61,7 +61,7 @@ class Store < ApplicationRecord
 
   def next_available_time
     if day_for_order.positive?
-      day_for_order > 1 ? next_available_day : "para mañana"
+      next_available_day
     elsif (next_day_hour < (Time.zone.now.hour + Time.zone.now.to_datetime.min.to_f / 60).round(1)) || next_day_hour.zero?
       return next_available_day
     else
