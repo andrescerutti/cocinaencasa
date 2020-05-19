@@ -25,4 +25,8 @@ class Order < ApplicationRecord
   def delivery
     delivery_provider == "Envio a domicilio"
   end
+
+  def client_comment
+    comment.nil? ? "Sin comentarios." : "'#{comment}'"
+  end
 end

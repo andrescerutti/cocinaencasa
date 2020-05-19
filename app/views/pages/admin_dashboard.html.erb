@@ -17,100 +17,46 @@
 <meta property="twitter:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
 <% end %>
 
-
-
-<div class="container-fluid">
-  <div class="">
-    <div class="">
-      <ul class="list-inline tabs-underlined">
-        <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-          <li class="nav-item" style="border-top: 3px solid #fd1015">
-            <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="Pendientes" aria-selected="true">Pendientes (<%= @orders.pending.count %>)</a>
-          </li>
-          <li class="nav-item" style="border-top: 3px solid #eeff00">
-            <a class="nav-link" id="on_transit-tab" data-toggle="tab" href="#on_transit" role="tab" aria-controls="Entregando" aria-selected="false">Entregando (<%= @orders.on_transit.count %>)</a>
-          </li>
-          <li class="nav-item" style="border-top: 3px solid #4dc433">
-            <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#delivered" role="tab" aria-controls="Entregadas" aria-selected="false">Entregadas (<%= @orders.delivered.count %>)</a>
-          </li>
-          <li class="nav-item" style="border-top: 3px solid #ff9900">
-            <a class="nav-link" id="canceled-tab" data-toggle="tab" href="#canceled" role="tab" aria-controls="Canceladas" aria-selected="false">Canceladas (<%= @orders.canceled.count %>)</a>
-          </li>
-          <li class="nav-item" style="border-top: 3px solid #23264D">
-            <a class="nav-link" id="refunded-tab" data-toggle="tab" href="#refunded" role="tab" aria-controls="Rembolsadas" aria-selected="false">Rembolso (<%= @orders.refunded.count %>)</a>
-          </li>
-        </ul>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-          <%= render "admin/kits_pending", orders: @orders %>
-        </div>
-        <div class="tab-pane fade" id="on_transit" role="tabpanel" aria-labelledby="on_transit-tab">
-          <%= render "admin/on_transit", orders: @orders %>
-        </div>
-        <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
-          <%= render "admin/delivered", orders: @orders %>
-        </div>
-        <div class="tab-pane fade" id="canceled" role="tabpanel" aria-labelledby="canceled-tab">
-          <%= render "admin/canceled", orders: @orders %>
-        </div>
-        <div class="tab-pane fade" id="refunded" role="tabpanel" aria-labelledby="refunded-tab">
-          <%= render "admin/refunded", orders: @orders %>
-        </div>
+<div class="container-fluid my-3">
+  <div class="row">
+    <div class="col-2" style="border-right: 3px solid #2c9c7c;">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">A PREPARAR</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">A ENTREGAR</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">ENTREGADOS</a>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">CANCELADOS</a>
+        <a class="nav-link" id="v-pills-test-tab" data-toggle="pill" href="#v-pills-test" role="tab" aria-controls="v-pills-test" aria-selected="false">REEMBOLSADOS</a>
       </div>
     </div>
-    <div class="text-center">
-      <div class="" style="margin-bottom: 45px; margin-top: 35px;">
-        <h2 >Todos mis kits</h2>
-        <div class="">
-          <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-outline-primary", style: "" %>
+    <div class="col-10">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <div class="container">
+            <%= render "admin/kits_pending", orders: @orders %>
+          </div>
         </div>
-      </div>
-      <div>
-        <div class="image-container d-md-block ">
-          <div class="cards-scroll">
-            <div class="cards-scroll mt-2 mb-5">
-              <% @kits.each do |kit| %>
-              <%= link_to kit_path(kit) do  %>
-              <div class="card-scroll col-md-4">
-                <div class="card-kit-showkit text-center border">
-                  <img style="height: 220px;" src=<%= kit.image %>  />
-                  <div class="card-body">
-                    <div>
-                      <p class="card-title text-truncate mb-1" style="font-size: 14px; box-sizing: ;"><%= kit.name %></p>
-                    </div>
-                    <div class="card-body position-relative">
-                      <div class="">
-                        <%= link_to "Editar", edit_kit_path(kit), class: "btn btn-primary position-absolute", style: " top: -95px; right: 1px" %>
-                        <p class="card-title mb-1 text-wrap text-truncate" style="height: 45px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></p>
-                        <p class="card-text overflow-ellipsis card-description" style=""><%= kit.description %></p>
-                        <p class="card-text card-price">$ <%= kit.price %></p>
-                      </div>
-
-                      <div class="d-flex justify-content-between mt-2" style="margin-left: -13px;">
-                        <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-outline-primary", style: "width: 130px;" %>
-                        <%= link_to 'Utensilios',  kit_kit_cookwares_path(kit), class: "btn btn-outline-primary", style: "width: 130px;" %>
-
-                      </div>
-                      <div class="d-flex justify-content-between mt-2" style="margin-left: -13px;">
-                        <%= link_to "Eliminar kit",
-                        kit_path(kit),
-                        method: :delete,
-                        data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger", style: "width: 130px;" %>
-
-                        <%= link_to 'Paso a paso',  guide_path(kit.guide), class: "btn btn-outline-primary", style: "width: 130px;" %>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <% end %>
-              <% end %>
-            </div>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <div class="container">
+            <%= render "admin/on_transit", orders: @orders %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <div class="container">
+            <%= render "admin/delivered", orders: @orders %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+          <div class="container">
+            <%= render "admin/canceled", orders: @orders %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-test" role="tabpanel" aria-labelledby="v-pills-test-tab">
+          <div class="container">
+            <%= render "admin/refunded", orders: @orders %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+

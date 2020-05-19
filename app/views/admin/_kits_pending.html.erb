@@ -1,40 +1,102 @@
-<div class="m-3 payment-card position-relative">
-  <div class="payment-order">
-    <h3 class="py-4 px-3">Spaghetti de Remolacha</h3>
-    <div class="payment-order-information position-absolute text-center">
-      <p>PAGO ACREDITADO</p>
-      <div><p>REF: 2931828118</p></div>
-    </div>
-  </div>
-  <div class="d-flex delivery-info">
-    <div class="text-center flex-grow-0 ">
-      <div class="delivery-amount">
-        <p class="amount">3</p>
-        <p>KITS</p>
+<% @orders.each do |order| %>
+<div class="mb-3 payment-card-wrapper position-relative">
+  <div class="payment-order" data-order=<%= order.id %>>
+    <h3 class="py-1 px-3"><%= order.kit.name %></h3>
+    <div class="payment-order-amount position-absolute text-center order-<%= order.id %> " data-toggle="tooltip" data-placement="top" title="<%= order.user.full_name %> (<%= order.user.phone %>)">
+      <p><%= order.amount %></p>
+      <div>
+        <p><%= pluralize(order.amount, "kit").split(" ").last.upcase %></p>
       </div>
     </div>
-    <div class="flex-grow-1 delivery-data d-flex p-3">
-      <%= render "components/delivery_moto" %>
-      <%= link_to root_path do %>
-      <div class="ml-3" style="background-color: red; height: 150px; width: 150px;"></div>
+    <div class="payment-order-address position-absolute text-center order-<%= order.id %> " data-toggle="tooltip" data-placement="top" title="<%= order.client_comment %>">
+      <% if order.payment.cash %>
+      <p>PICK UP</p>
+      <% else %>
+      <p><%= order.address.address %></p>
+      <div>
+        <p><%= order.address.flat_number %></p>
+      </div>
       <% end %>
-      <div class="ml-4">
-        <div></div>
-        <div><i class="fas fa-map-marker-alt mr-1"></i></i> San Martin de Tours 2908</div>
-        <div><i class="fas fa-building mr-1"></i>Piso 13</div>
-        <div class="client-comment">
-          <p>Comentario del cliente</p>
-          <p class="client-comment-text"><i>"Tocar timbre y esperar"</i></p>
+    </div>
+    <div class="payment-order-information position-absolute text-center" data-toggle="tooltip" data-placement="top" title="<%= order.payment.date_approved.to_datetime.in_time_zone("Buenos Aires").strftime("%a %d-%b %l:%M %p") %>">
+      <p>$<%= order.amount * order.kit.price %></p>
+      <div>
+        <% if order.payment.cash %>
+        <p>EFECTIVO</p>
+        <% else %>
+        <p><%= order.payment.card %> <%= order.payment.done_with.upcase %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="d-none order-<%= order.id %>">
+    <div class="d-flex delivery-info">
+      <div class="text-center flex-grow-0 delivery-amount-wrapper d-flex justify-content-center align-items-center">
+        <div class="delivery-amount d-flex justify-content-center align-items-center">
+          <div>
+            <p class="amount"><%= order.amount %></p>
+            <p>KITS</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-grow-1 delivery-data d-flex p-3">
+        <div class="position-relative">
+          <% if order.delivery %>
+          <%= render "components/delivery_moto" %>
+          <span class="position-absolute delivery-type">A DOMICILIO</span>
+          <% else %>
+          <%= render "components/pick_up" %>
+          <span class="position-absolute delivery-type">PICK UP</span>
+          <% end %>
+        </div>
+        <%= link_to root_path, class:"ml-5", style:"border: 1px solid #01788c" do %>
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=SanMartinDeTours2908,CABA,Argentina&zoom=17&size=250x150&key=<%= ENV['GOOGLE_STATIC_MAP_API_KEY'] %>" style="height: 150px; width: 250px;">
+        <% end %>
+        <div class="ml-4 d-flex flex-column justify-content-between">
+          <div>
+            <div class="mb-2" ><i class="fas fa-map-marker-alt mr-2" style="color: #01788c;"></i></i><%= order.address.address %></div>
+            <div class="mb-2" ><i class="fas fa-building mr-2" style="color: #01788c;"></i><%= order.address.flat_number %></div>
+          </div>
+          <div class="client-comment">
+            <p class="mb-2">Nota del cliente</p>
+            <p class="client-comment-text m-0"><i><%= order.client_comment %></i></p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-grow-0 client-information d-flex flex-column justify-content-around align-items-center">
+        <div class="client-information-details text-center">
+          <p class="m-0 name mb-2 text-bold"><%= order.user.full_name %></p>
+          <div class="d-flex justify-content-center align-items-center mb-2">
+            <a href="tel:<%= order.user.phone %>">
+              <p class="m-0 phone mb-0 mr-3"><%= order.user.phone %></p>
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=<%= order.user.phone %>&text=Hola, Te contacto desde <%= order.kit.restaurant.name %> por tu Chef Box <%= order.kit.name %>, pedido a través de CocinaEnCasa.com.ar." target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <a href="mailto:<%= order.user.email %>" class="m-0 email mb-2">
+              <%= order.user.email %>
+            </a>
+          </div>
+        </div>
+        <div class="cta-btn">
+          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como preparado?" }, class:"w-100" do |f| %>
+          <%= f.hidden_field :status, value: :on_transit %>
+          <div class="d-flex justify-content-center">
+            <%= f.submit "MARCAR PEDIDO COMO PREPARADO", class: 'btn text-center btn-primary p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
+          </div>
+          <% end %>
         </div>
       </div>
     </div>
-    <div class="flex-grow-0">
-      <p>Rodolfo Camara</p>
-      <p>+5491153191659</p>
-      <p>rodolfo@gmail.com</p>
-    </div>
-  </div>
-  <div>
-    MARCAR PEDIDO COMO PREPARADO
   </div>
 </div>
+
+<% end %>
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>

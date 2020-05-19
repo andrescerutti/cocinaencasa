@@ -8,4 +8,15 @@ class Payment < ApplicationRecord
   def update_approved(state)
     update(approved: state)
   end
+
+  def done_with
+    types = {"debit_card" => "Debito", "credit_card" => "Credito"}
+    types[payment_type_id]
+  end
+
+  def card
+    types = {"visa" => "VISA", "debvisa" => "VISA"}
+    types[payment_method_id]
+  end
+
 end

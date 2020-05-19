@@ -14,7 +14,6 @@ class PagesController < ApplicationController
   end
 
   def user_dashboard
-    # @brands = Brand.find(1..5)
     @restaurants = Restaurant.all
     @kits = Kit.all
     @orders = Order.where(user: current_user)
@@ -25,18 +24,9 @@ class PagesController < ApplicationController
 
   def admin_dashboard
     status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' }
-    @orders = Order.joins(kit: { restaurant: :user }).joins(:payment).where(users: { id: current_user.id }).where(payments: { approved: true })
-    @kits = Kit.joins(restaurant: :user).where(users: { id: current_user.id })
-
-    # @markers = @orders.map do |order|
-    #   {
-    #     lat: order.address.latitude,
-    #     lng: order.address.longitude,
-    #     # infoWindow: render_to_string(partial: "infowindow", locals: { order: order }),
-    #     color: status_color[order.status.to_sym]
-    #   }
-    # authorize :page, :admin_dashboard?
-    # end
+    @orders = Order.select("MAX(orders.id) as id, date_delivery").includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where(payments: { status: "approved" }).group("orders.date_delivery") #order("orders.date_delivery ASC")
+    # stores_ids = Order.select("MAX(stores.id) as id, stores.name").joins(:restaurant).where(restaurants: {id: @restaurant.id }).group("stores.name").having("count(*) > 0").map { |s| s.id }
+    # .where("orders.date_delivery > ?", Date.today - 1)
   end
 
   def stores_admin

@@ -21,13 +21,18 @@ class User < ApplicationRecord
 
   after_create :send_welcome_email
 
+  def full_name
+    "#{first_name.capitalize} #{last_name.capitalize}"
+  end
+
   private
 
   def send_welcome_email
     UserMailer.with(user: self).welcome.deliver_now
   end
 
-  def full_name
-    "#{order.user.first_name} #{order.user.last_name}"
+
+  def recurrent
+    orders.count.positive? ? "Conocido" : "Primera vez"
   end
 end
