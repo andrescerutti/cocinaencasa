@@ -24,7 +24,7 @@
 .payment-order-address {
   display: flex;
   flex-direction: column;
-  left: 515px;
+  left: 565px;
   top: 0;
   width: 375px;
   overflow: hidden;
@@ -168,7 +168,6 @@
   }
 }
 
-
 .cta-btn a {
   bottom: 20px;
   left: 0;
@@ -183,31 +182,43 @@
   }
 }
 
+.day-delivery-group {
+  font-size: 23px;
+  margin-bottom: 26px;
+  padding-bottom: 10px;
+  border-bottom: 4px solid #2c9c7c;
+}
 
+.summary {
+  padding: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  color: white;
+  td {
+    width: 150px;
+    padding: 5px 10px;
+    border: 1px solid white;
+    background-color: #63b0c0;
+  }
+  thead > tr > td {
+    background-color: #01788c;
+    font-weight: bold;
+    padding: 10px;
+  }
+}
 
+.dashboard-title {
+  font-size: 28px;
+}
 
+.payment-summary {
+  background-color: #666 !important;
+}
 
+.payment-summary-data {
+  background-color: #aaa !important;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.payment-total {
+  background-color: #01788c !important;
+}

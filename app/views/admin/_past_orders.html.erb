@@ -85,12 +85,7 @@
           </div>
         </div>
         <div class="cta-btn">
-          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como preparado?" }, class:"w-100" do |f| %>
-          <%= f.hidden_field :status, value: :on_transit %>
-          <div class="d-flex justify-content-center">
-            <%= f.submit "MARCAR PEDIDO COMO PREPARADO", class: 'btn text-center btn-primary p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
-          </div>
-          <% end %>
+          <p class="btn text-center btn-primary p-1 px-2 w-100" style="font-size: 10px !important;">BUTTON</p>
         </div>
       </div>
     </div>
