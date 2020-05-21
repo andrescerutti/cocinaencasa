@@ -9,6 +9,10 @@ class Store < ApplicationRecord
     [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
   end
 
+  def date_names
+    %w(domingo lunes martes miércoles jueves viernes sábado)
+  end
+
   def available
     days = {
       "lunes"  => monday,
@@ -44,11 +48,26 @@ class Store < ApplicationRecord
     end
   end
 
+  def next_available_day
+    wday = Time.zone.now.to_datetime.wday  + 1
+    return "para mañana" if delivery_days[wday] || (delivery_days[0] && wday == 7)
+    wday = 0 if wday == 7
+
+    7.times do |num|
+      return "para el #{date_names[wday]}" if delivery_days[wday]
+      if wday >= 6
+        wday = 0
+      else
+        wday += 1
+      end
+    end
+  end
+
   def next_available_time
     if day_for_order.positive?
-      day_for_order > 1 ? "para el #{(Time.zone.now.to_datetime + day_for_order.days).strftime('%A')}" : "para mañana"
+      next_available_day
     elsif (next_day_hour < (Time.zone.now.hour + Time.zone.now.to_datetime.min.to_f / 60).round(1)) || next_day_hour.zero?
-      return "para mañana"
+      return next_available_day
     else
       return "hasta las #{next_day_hour.to_i}:#{(next_day_hour % next_day_hour.to_i).zero? ? "00" : ((next_day_hour % next_day_hour.to_i) * 60).to_i}hs"
     end
