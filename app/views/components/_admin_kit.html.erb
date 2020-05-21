@@ -5,9 +5,8 @@
   <span class="few-stock">ÚLTIMOS KITS</span>
   <% end %>
   <div class="<%= 'out-of-stock' if kit.stock.zero? %>">
-    <%= link_to kit_path(kit, store: @store) do %>
     <div class="chef-box" id="<%= 'restaurants' if kit == kits.last  %>">
-      <div class="d-flex justify-content-between chef-box-main">
+      <div class="d-flex justify-content-between chef-box-main" style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">
         <div class="d-flex flex-column justify-content-between">
           <div>
             <h2 class="mt-0 mb-0 pr-3"><%= truncate(kit.name, length: 30, separator: " ") %></h2>
@@ -28,12 +27,15 @@
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-between">
-        <div class="">
-
+      <div class="admin-kit py-3">
+        <div class="d-flex justify-content-around">
+          <%= link_to "Editar", edit_kit_path(kit), class: "btn btn-primary" %>
+          <%= link_to "Eliminar kit", kit_path(kit), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
         </div>
-        <div class="">
-
+        <div class="d-flex justify-content-around mt-2">
+          <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-outline-primary" %>
+          <%= link_to 'Utensilios',  kit_kit_cookwares_path(kit), class: "btn btn-outline-primary" %>
+          <%= link_to 'Guía',  guide_path(kit.guide), class: "btn btn-outline-primary" %>
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center chef-box-details">
@@ -52,6 +54,5 @@
         </div>
       </div>
     </div>
-    <% end %>
   </div>
 </div>
