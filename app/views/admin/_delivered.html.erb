@@ -16,7 +16,7 @@
       <% if order.payment.cash %>
       <p>PICK UP</p>
       <% else %>
-      <p><%= order.address.address %></p>
+      <p><%= truncate(order.address.address, length: 30) %></p>
       <div>
         <p><%= order.address.flat_number %></p>
       </div>

@@ -15,7 +15,7 @@ class Payment < ApplicationRecord
   end
 
   def card
-    types = { "visa" => "VISA", "debvisa" => "VISA", "amex" => "AMEX", "master" => "MASTERCARD" }
+    types = { "visa" => "VISA", "debvisa" => "VISA", "amex" => "AMEX", "master" => "MASTER" }
     type = types[payment_method_id]
     type ||= payment_method_id
     return type
