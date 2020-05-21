@@ -1,0 +1,9 @@
+<h2 class="day-delivery-group">
+  Kits publicados
+</h2>
+
+<div class="kits-wrapper">
+  <% @restaurant_kits.each do |kit| %>
+  <%= render "components/admin_kit", kit: kit, kits: @restaurant_kits %>
+  <% end %>
+</div>
