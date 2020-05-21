@@ -4,7 +4,7 @@
 </h2>
 <% order_list.each do |order| %>
 <div class="mb-3 payment-card-wrapper position-relative">
-  <div class="payment-order" data-order=<%= order.id %>>
+  <div class="payment-order order-<%= order.status %>" data-order=<%= order.id %>>
     <h3 class="py-1 px-3"><%= order.kit.name %></h3>
     <div class="payment-order-amount position-absolute text-center order-<%= order.id %> " data-toggle="tooltip" data-placement="top" title="<%= order.user.full_name %> (<%= order.user.phone %>)">
       <p><%= pluralize(order.amount, "kit") %></p>
@@ -53,9 +53,9 @@
           <span class="position-absolute delivery-type">PICK UP</span>
           <% end %>
         </div>
-        <%= link_to root_path, class:"ml-5", style:"border: 1px solid #01788c" do %>
-        <img src="https://maps.googleapis.com/maps/api/staticmap?center=SanMartinDeTours2908,CABA,Argentina&zoom=17&size=250x150&key=<%= ENV['GOOGLE_STATIC_MAP_API_KEY'] %>" style="height: 150px; width: 250px;">
-        <% end %>
+        <a href="https://www.google.com.ar/maps/place/<%= I18n.transliterate(order.address.address) %>/" class="ml-5" style="border: 1px solid #01788c;">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= order.address.address %>&zoom=17&size=250x167&key=<%= ENV['GOOGLE_STATIC_MAP_API_KEY'] %>" style="height: 167px; width: 250px;">
+        </a>
         <div class="ml-4 d-flex flex-column justify-content-between">
           <div>
             <div class="mb-2" ><i class="fas fa-map-marker-alt mr-2" style="color: #01788c;"></i></i><%= order.address.address %></div>
@@ -85,7 +85,28 @@
           </div>
         </div>
         <div class="cta-btn">
-          <p class="btn text-center btn-primary p-1 px-2 w-100" style="font-size: 10px !important;">BUTTON</p>
+          <% if order.status == 'pending' %>
+          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como preparado?" }, class:"w-100" do |f| %>
+          <%= f.hidden_field :status, value: :on_transit %>
+          <div class="d-flex justify-content-center">
+            <%= f.submit "MARCAR PEDIDO COMO PREPARADO", class: 'btn text-center btn-primary p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
+          </div>
+          <% end %>
+          <% elsif order.status == 'on_transit' %>
+          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como entregado?" }, class:"w-100" do |f| %>
+          <%= f.hidden_field :status, value: :delivered %>
+          <div class="d-flex justify-content-center">
+            <%= f.submit "MARCAR PEDIDO COMO ENTREGADO", class: 'btn text-center btn-secondary p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
+          </div>
+          <% end %>
+          <% elsif order.status == 'delivered' %>
+          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como preparado?" }, class:"w-100" do |f| %>
+          <%= f.hidden_field :status, value: :canceled %>
+          <div class="d-flex justify-content-center">
+            <%= f.submit "MARCAR PEDIDO COMO CANCELADO", class: 'btn text-center btn-danger p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
+          </div>
+          <% end %>
+          <% end %>
         </div>
       </div>
     </div>
@@ -93,6 +114,17 @@
 </div>
 <% end %>
 <% end %>
+<% if orders.empty? %>
+<div class="w-100" >
+  <h2 class="day-delivery-group">
+    No has tenido pedidos en los últimos 5 días.
+  </h2>
+  <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
+    <%= render "components/waiting-ordered" %>
+  </div>
+</div>
+<% end %>
+
 
 <script>
   $(function () {

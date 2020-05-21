@@ -53,9 +53,9 @@
           <span class="position-absolute delivery-type">PICK UP</span>
           <% end %>
         </div>
-        <%= link_to root_path, class:"ml-5", style:"border: 1px solid #01788c" do %>
-        <img src="https://maps.googleapis.com/maps/api/staticmap?center=SanMartinDeTours2908,CABA,Argentina&zoom=17&size=250x150&key=<%= ENV['GOOGLE_STATIC_MAP_API_KEY'] %>" style="height: 150px; width: 250px;">
-        <% end %>
+        <a href="https://www.google.com.ar/maps/place/<%= I18n.transliterate(order.address.address) %>/" class="ml-5" style="border: 1px solid #01788c;">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= order.address.address %>&zoom=17&size=250x167&key=<%= ENV['GOOGLE_STATIC_MAP_API_KEY'] %>" style="height: 167px; width: 250px;">
+        </a>
         <div class="ml-4 d-flex flex-column justify-content-between">
           <div>
             <div class="mb-2" ><i class="fas fa-map-marker-alt mr-2" style="color: #01788c;"></i></i><%= order.address.address %></div>
@@ -97,6 +97,16 @@
   </div>
 </div>
 <% end %>
+<% end %>
+<% if orders.empty? %>
+<div class="w-100" >
+  <h2 class="day-delivery-group">
+    ¡Estamos esperando tus pedidos!
+  </h2>
+  <div class="d-flex justify-content-center align-items-center w-75 mx-auto">
+    <%= render "components/waiting-order" %>
+  </div>
+</div>
 <% end %>
 
 <script>
