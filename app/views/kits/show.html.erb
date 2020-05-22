@@ -1,3 +1,6 @@
+<% content_for :fb_track do %>
+  <script>fbq('track', 'ViewContent');</script>
+<% end %>
 <%= content_for :metadata do %>
 <title>Cociná en casa | <%= @kit.name %></title>
 <meta name="title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
