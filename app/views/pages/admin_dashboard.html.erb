@@ -1,288 +1,119 @@
-<h2 class="text-center  mb-5 mt-5" style="margin-bottom: 60px !important;">Todas las ordenes</h2>
-<div class="container-fluid">
-  <div class="">
-  <div class="">
-    <ul class="list-inline tabs-underlined">
-      <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
-        <li class="nav-item" style="border-top: 3px solid #fd1015">
-          <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="Pendientes" aria-selected="true">Pendientes (<%= @orders.pending.count %>)</a>
-        </li>
-        <li class="nav-item" style="border-top: 3px solid #eeff00">
-          <a class="nav-link" id="on_transit-tab" data-toggle="tab" href="#on_transit" role="tab" aria-controls="Entregando" aria-selected="false">Entregando (<%= @orders.on_transit.count %>)</a>
-        </li>
-        <li class="nav-item" style="border-top: 3px solid #4dc433">
-          <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#delivered" role="tab" aria-controls="Entregadas" aria-selected="false">Entregadas (<%= @orders.delivered.count %>)</a>
-        </li>
-        <li class="nav-item" style="border-top: 3px solid #ff9900">
-          <a class="nav-link" id="canceled-tab" data-toggle="tab" href="#canceled" role="tab" aria-controls="Canceladas" aria-selected="false">Canceladas (<%= @orders.canceled.count %>)</a>
-        </li>
-        <li class="nav-item" style="border-top: 3px solid #23264D">
-          <a class="nav-link" id="refunded-tab" data-toggle="tab" href="#refunded" role="tab" aria-controls="Rembolsadas" aria-selected="false">Rembolso (<%= @orders.refunded.count %>)</a>
-        </li>
-      </ul>
-    <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
-        <% if !@orders.pending.empty? %>
-          <% @orders.pending.order(created_at: :desc).each do |order| %>
-            <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
-            <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
-                <div class="p-2 w-75">
-                   <% if order.user.first_name.nil? && order.user.last_name.nil? %>
-                    <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
-                   <% else %>
-                    <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
-                   <% end %>
-                   <% if order.address.present? %>
-                      <p class="font-weight-light"><%= order.address.address %> - Piso/Lote <%= order.address.flat_number %></p>
-                   <% end %>
-                   <% if order.comment != "" %>
-                    <p>Comentario: <%= order.comment %></p>
-                   <% end %>
-                   <p><%= order.kit.name %></p>
-                   <p>Cantidad de kits: <%= order.amount %></p>
-                   <p><%= order.kit.restaurant.name %> </p>
-                   <span>Fecha de entrega: <%= l order.date_delivery.time %>  </span>
-                   <div class="">
-                     <h5>Contacto cliente:
-                     <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; margin-top: 10px;font-size: 30px; color: #47E463;"></i></a>
-                     </h5>
-                   </div>
+<% content_for :metadata do %>
+<title>Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa</title>
+<meta name="title" content="Cocina en casa | Tus restaurantes favoritos en tu casa">
+<meta name="description" content="¡Cocina en Casa te trae tus restaurantes favoritos a tu cocina! .">
 
-                </div>
-               <div class="p-2 w-25 d-flex flex-column justify-content-center">
-                  <p>Metodo de envío: <%= order.delivery_provider %></p>
-                  <p>Nº referencia: <%= order.code %></p>
-                  <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
-                  <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar inicio de envio." } do |f| %>
-                    <%= f.hidden_field :status, value: :on_transit %>
-                    <%= f.submit 'Solicitar', class: 'btn btn-primary p-1 w-100'  %>
-                  <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="mt-5 text-center">No hay ordenes pendientes</p>
-        <% end %>
-      </div>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.cocinaencasa.com.ar/">
+<meta property="og:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
+<meta property="og:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
+<meta property="og:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
 
-      <div class="tab-pane fade" id="on_transit" role="tabpanel" aria-labelledby="on_transit-tab">
-        <% if !@orders.on_transit.empty? %>
-          <% @orders.on_transit.order(updated_at: :desc).each do |order| %>
-            <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
-            <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
-              <div class="p-2 w-75">
-                <% if order.user.first_name == nil && order.user.last_name == nil%>
-                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
-                <% else %>
-                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
-                <% end %>
-                <% if order.address.present? %>
-                 <p class="font-weight-light">Direccion de entrega: <%= order.address.address %></p>
-                <% end %>
-                 <p><%= order.kit.name %></p>
-                 <p>Cantidad de kits: <%= order.amount %></p>
-                 <p><%= order.kit.restaurant.name %> </p>
-                 <span>Fecha de entrega: <%= l order.date_delivery.time %>  </span>
-                  <div class="">
-                    <h5>Contacto cliente:
-                      <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; margin-top: 10px;font-size: 30px; color: #47E463;"></i></a>
-                    </h5>
-                  </div>
-              </div>
-             <div class="p-2 w-25 d-flex flex-column justify-content-center">
-                <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
-                  <p>Metodo de envío: <%= order.delivery_provider %></p>
-                  <p>Nº referencia: <%= order.reference_number %></p>
-                  <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar entrega en domicilio." }, class:"w-100" do |f| %>
-                  <%= f.hidden_field :status, value: :delivered %>
-                  <%= f.submit 'Confirmar entrega', class: 'btn btn-primary p-1 w-100'  %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="mt-5 text-center">No hay ordenes en entrega</p>
-        <% end %>
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.cocinaencasa.com.ar/">
+<meta property="twitter:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
+<meta property="twitter:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
+<meta property="twitter:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
+<% end %>
 
 
-      </div>
-
-      <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
-        <% if !@orders.delivered.empty? %>
-          <% @orders.delivered.order(updated_at: :desc).each do |order| %>
-            <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
-            <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
-              <div class="p-2 w-75">
-                <% if order.user.first_name == nil && order.user.last_name == nil%>
-                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
-                <% else %>
-                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
-                <% end %>
-                <% if order.address.present?%>
-                  <p class="font-weight-light"><%= order.address.address %></p>
-                 <% end %>
-                 <p><%= order.kit.name %></p>
-                 <p>Cantidad de kits: <%= order.amount %></p>
-                 <p><%= order.kit.restaurant.name %> </p>
-                 <span>Fecha de entrega: <%= l order.date_delivery.time %> </span>
-
-                  <div class="">
-                    <h5>Contacto cliente:
-                      <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; margin-top: 10px;font-size: 30px; color: #47E463;"></i></a>
-                    </h5>
-                  </div>
-              </div>
-             <div class="p-2 w-25 p-2 w-25 d-flex flex-column justify-content-center">
-                <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
-                <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar cancelacion de ordern." } do |f| %>
-                  <%= f.hidden_field :status, value: :canceled %>
-                  <%= f.submit 'Cancelar', class: 'btn btn-danger p-1 w-100 mt-3'  %>
-                <% end %>
-                <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar reembolso de ordern." } do |f| %>
-                  <%= f.hidden_field :status, value: :refunded %>
-                  <%= f.submit 'Rembolsar', class: 'btn btn-primary p-1 w-100 mt-3'  %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="mt-5 text-center">No hay ordenes entregadas</p>
-        <% end %>
-      </div>
-
-      <div class="tab-pane fade" id="canceled" role="tabpanel" aria-labelledby="canceled-tab">
-        <% if !@orders.canceled.order(updated_at: :desc).empty? %>
-          <% @orders.canceled.each do |order| %>
-            <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
-            <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
-              <div class="p-2 w-75">
-                <% if order.user.first_name == nil && order.user.last_name == nil%>
-                  <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
-                <% else %>
-                  <h5><%= order.user.first_name %> <%= order.user.last_name %>(<%= order.user_id %>)</h5>
-                <% end %>
-                <% if order.address.present?%>
-                  <p class="font-weight-light"><%= order.address.address %></p>
-                 <% end %>
-                 <p><%= order.kit.name %></p>
-                 <p>Cantidad de kits: <%= order.amount %></p>
-                 <p><%= order.kit.restaurant.name %> </p>
-                 <span>Fecha de entrega: <%= l order.date_delivery.time %>  </span>
-
-                  <div class="">
-                    <h5>Contacto cliente:
-                      <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; margin-top: 10px;font-size: 30px; color: #47E463;"></i></a>
-                    </h5>
-                  </div>
-              </div>
-             <div class="p-2 w-25 p-2 w-25 d-flex flex-column justify-content-end">
-                <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
-                <% if order.reason.nil? %>
-                  <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar cancelación de orden." } do |f| %>
-                    <%= f.input :reason, placeholder: "Motivo", label: false, required: true %>
-                    <%= f.submit 'Confirmar motivo', class: 'btn btn-primary p-1 w-100'  %>
-                  <% end %>
-                <% else %>
-                  <p>Motivo: <%=order.reason %></p>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="mt-5 text-center">No hay ordenes canceladas</p>
-        <% end %>
-      </div>
-
-      <div class="tab-pane fade" id="refunded" role="tabpanel" aria-labelledby="refunded-tab">
-        <% if !@orders.refunded.order(updated_at: :desc).empty? %>
-          <% @orders.refunded.each do |order| %>
-            <% status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' } %>
-            <div class="d-flex p-3 mb-3 provider-card position-relative" style="border-left: 8px solid <%= status_color[order.status.to_sym]%>; box-shadow: 0 0 1px">
-              <div class="p-2 w-75">
-                 <h5><%= order.user.email %> (<%= order.user_id %>)</h5>
-                 <% if order.address.present? %>
-                  <p class="font-weight-light"><%= order.address.address %></p>
-                 <% end %>
-                 <p><%= order.kit.name %></p>
-                 <p>Cantidad de kits: <%= order.amount %></p>
-                 <p><%= order.kit.restaurant.name %> </p>
-                 <span>Fecha de entrega: <%= l order.date_delivery.time %>  </span>
-
-                  <div class="">
-                    <h5>Contacto cliente:
-                      <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>" target="_blank"><i class="fab fa-whatsapp" style="margin-left: 20px; margin-top: 10px;font-size: 30px; color: #47E463;"></i></a>
-                    </h5>
-                  </div>
-              </div>
-              <div class="p-2 w-25 p-2 w-25 d-flex flex-column justify-content-end">
-                <span class="position-absolute" style="top: 10px; right: 10px;"> # <%= order.id %></span>
-                <% if order.reason.nil? %>
-                  <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "Confirmar reembolso de orden." } do |f| %>
-                    <%= f.input :reason, placeholder: "Motivo", label: false, required: true %>
-                    <%= f.submit 'Confirmar motivo', class: 'btn btn-primary p-1 w-100'  %>
-                  <% end %>
-                <% else %>
-                  <p>Motivo: <%=order.reason %></p>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="mt-5 text-center">No hay órdenes reembolsadas</p>
-        <% end %>
-      </div>
-    </div>
-</div>
-    <div class="text-center">
-      <div class="" style="margin-bottom: 45px; margin-top: 35px;">
-        <h2 >Todos mis kits</h2>
-        <div class="">
-        <%= link_to "Crear nuevo Kit", new_kit_path, class: "btn btn-outline-primary", style: "" %>
-      </div>
-    </div>
-
+<h1 class="dashboard-title text-center mt-4"><%= @restaurant.name %></h1>
+<div class="container-fluid mb-5 mt-3 d-flex justify-content-center">
   <div>
-  <div class="image-container d-md-block ">
-    <div class="cards-scroll">
-      <div class="cards-scroll mt-2 mb-5">
-        <% @kits.each do |kit| %>
-        <%= link_to kit_path(kit) do  %>
-        <div class="card-scroll col-md-4">
-          <div class="card-kit-showkit text-center border">
-            <img style="height: 220px;" src=<%= kit.image %>  />
-            <div class="card-body">
-              <div>
-                <p class="card-title text-truncate mb-1" style="font-size: 14px; box-sizing: ;"><%= kit.name %></p>
-              </div>
-                <div class="card-body position-relative">
-                  <div class="">
-                    <%= link_to "Editar", edit_kit_path(kit), class: "btn btn-primary position-absolute", style: " top: -95px; right: 1px" %>
-                    <p class="card-title mb-1 text-wrap text-truncate" style="height: 45px"><%= kit.name %> - <small><%= kit.restaurant.name %></small></p>
-                    <p class="card-text overflow-ellipsis card-description" style=""><%= kit.description %></p>
-                    <p class="card-text card-price">$ <%= kit.price %></p>
-                  </div>
+    <table class="summary">
+      <thead>
+        <tr>
+          <td>Zona</td>
+          <td class="text-center">A Preparar</td>
+          <td class="text-center">A Entregar</td>
+          <td class="text-center">Entregados</td>
+          <td class="text-center">Cancelados</td>
+          <td class="text-center">Reembolsados</td>
+          <td class="text-center payment-summary">Tarjeta</td>
+          <td class="text-center payment-summary">Efectivo</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders_by_store.each do |store_numbers| %>
+        <tr>
+          <td><%= store_numbers[0] %></td>
+          <td class="text-center"><%= store_numbers[1] %></td>
+          <td class="text-center"><%= store_numbers[2] %></td>
+          <td class="text-center"><%= store_numbers[3] %></td>
+          <td class="text-center"><%= store_numbers[4] %></td>
+          <td class="text-center"><%= store_numbers[5] %></td>
+          <td class="text-center payment-summary-data">$<%= store_numbers[6][:amount] %> (<%= pluralize(store_numbers[6][:quantity], "kits") %>)</td>
+          <td class="text-center payment-summary-data">$<%= store_numbers[7][:amount] %> (<%= pluralize(store_numbers[7][:quantity], "kits") %>)</td>
+        </tr>
+        <% end %>
+        <tr>
+          <td class="payment-total">TOTAL</td>
+          <td class="text-center payment-total"></td>
+          <td class="text-center payment-total"></td>
+          <td class="text-center payment-total"></td>
+          <td class="text-center payment-total"></td>
+          <td class="text-center payment-total"></td>
+          <td class="text-center payment-summary"></td>
+          <td class="text-center payment-summary"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                  <div class="d-flex justify-content-between mt-2" style="margin-left: -13px;">
-                    <%= link_to "Ingredientes", kit_kit_ingredients_path(kit), class: "btn btn-outline-primary", style: "width: 130px;" %>
-                    <%= link_to 'Utensilios',  kit_kit_cookwares_path(kit), class: "btn btn-outline-primary", style: "width: 130px;" %>
-
-                  </div>
-                    <div class="d-flex justify-content-between mt-2" style="margin-left: -13px;">
-                      <%= link_to "Deshabilitar kit",
-                          kit_path(kit),
-                          method: :delete,
-                          data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger", style: "width: 130px;" %>
-
-                      <%= link_to 'Paso a paso',  guide_path(kit.guide), class: "btn btn-outline-primary", style: "width: 130px;" %>
-
-                    </div>
-                  </div>
-            </div>
+<div class="container-fluid my-3">
+  <div class="row">
+    <div class="col-2" style="border-right: 3px solid #2c9c7c;">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <p class="font-weight-bold">ESTADO DE ORDENES</p>
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">A PREPARAR</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">A ENTREGAR</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">ENTREGADOS</a>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">CANCELADOS</a>
+        <a class="nav-link" id="v-pills-past-tab" data-toggle="pill" href="#v-pills-past" role="tab" aria-controls="v-pills-past" aria-selected="false">HISTORICO (5 días)</a>
+        <a class="nav-link" id="v-pills-kits-tab" data-toggle="pill" href="#v-pills-kits" role="tab" aria-controls="v-pills-kits" aria-selected="false">MIS KITS</a>
+        <p class="mt-5 font-weight-bold">PANEL</p>
+        <%= link_to stores_admin_path, class:"nav-link" do %>
+          <i class="fas fa-map-marked-alt"></i>
+          <span class="ml-3">ZONAS DE DELIVERY</span>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+          <div class="container">
+            <%= render "admin/kits_pending", orders: @pending_orders %>
           </div>
         </div>
-        <% end %>
-        <% end %>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+          <div class="container">
+            <%= render "admin/on_transit", orders: @on_transit_orders %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+          <div class="container">
+            <%= render "admin/delivered", orders: @delivered_orders %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+          <div class="container">
+            <%= render "admin/canceled", orders: @canceled_orders %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-past" role="tabpanel" aria-labelledby="v-pills-past-tab">
+          <div class="container">
+            <%= render "admin/past_orders", orders: @past_orders %>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="v-pills-kits" role="tabpanel" aria-labelledby="v-pills-kits-tab">
+          <div class="container">
+            <%= render "admin/my_kits", kits: @restaurant_kits %>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
 
-    </div>

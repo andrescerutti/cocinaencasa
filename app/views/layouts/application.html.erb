@@ -5,23 +5,8 @@
   <link rel="icon" type="image/png" href="<%= image_path('logo.ico') %>">
 
   <!-- Primary Meta Tags -->
-  <title>Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa</title>
-  <meta name="title" content="Cocina en casa | Tus restaurantes favoritos en tu casa">
-  <meta name="description" content="¡Cocina en Casa te trae tus restaurantes favoritos a tu cocina! .">
-
   <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.cocinaencasa.com.ar/">
-  <meta property="og:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
-  <meta property="og:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
-  <meta property="og:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://www.cocinaencasa.com.ar/">
-  <meta property="twitter:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
-  <meta property="twitter:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
-  <meta property="twitter:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
+  <%= yield :metadata %>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Galindo&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -30,6 +15,9 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= stylesheet_pack_tag 'application', media: 'all' %>
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&libraries=geometry,places" %>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
@@ -41,7 +29,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-165662050-1');
   </script>
 
@@ -66,6 +53,7 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1102854696738268');
+    fbq('track', 'PageView');
   </script>
   <%= yield :fb_track %>
   <noscript><img height="1" width="1" style="display:none"

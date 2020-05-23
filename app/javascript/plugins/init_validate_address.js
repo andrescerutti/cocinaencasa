@@ -10,7 +10,7 @@ const validateAddress = () => {
   const poligono = document.querySelector("#poligono")
 
   if (address) {
-    const autocomplete = new google.maps.places.Autocomplete(address, { types: [ 'geocode' ]});
+    const autocomplete = new google.maps.places.Autocomplete(address, { componentRestrictions: {country: "ar"} });
     const geocoder = new google.maps.Geocoder();
   }
 

@@ -1,7 +1,29 @@
+<% content_for :fb_track do %>
+  <script>fbq('track', 'ViewContent');</script>
+<% end %>
+<%= content_for :metadata do %>
+<title>Cociná en casa | <%= @kit.name %></title>
+<meta name="title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+<meta name="description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+
+<meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
+  <meta property="og:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+  <meta property="og:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+  <meta property="og:image" content="<%= @kit.image %>">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
+  <meta property="twitter:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+  <meta property="twitter:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+  <meta property="twitter:image" content="<%= @kit.image %>">
+<% end %>
+
 <div class="container mt-3 mt-sm-5">
   <div class="d-flex">
     <div class="mt-3 kit-information w-100">
-      <h1><%= @kit.name %></h1>
+      <h1 id="kit-show"><%= @kit.name %></h1>
       <p><%= @kit.description %></p>
       <div class="d-none d-sm-flex kit-show-store-main-information-sm">
         <div style="background-image: url(<%= @store.restaurant.brand.logo %>);" class="kit-store-square-logo"></div>
@@ -26,9 +48,13 @@
             <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
           </div>
         </div>
-        <div class="d-none d-sm-block map-zone" id="poligono" data-coordinates=<%= @coordinates.to_json %>>⚠ Ver zona de envío</div>
+
+        <div class="d-none d-sm-block map-zone" data-store="<%= @store.id %>" id="poligono" data-coordinates=<%= @coordinates.to_json %>>⚠ Ver zona de envío</div>
       </div>
-      <div class="d-block d-sm-none mt-3 map-zone">⚠ Ver zona de envío</div>
+      <div class="d-block d-sm-none mt-3 map-zone map-open" data-store="<%= @store.id %>">⚠ Ver zona de envío</div>
+      <div class="map-wrapper">
+        <div class="map-canvas d-none" id="store-<%= @store.id %>" data-polygon="<%= @store.polygon.to_json %>"></div>
+      </div>
       <div id="delivery-area" class="area-information-disclaimer d-none">
       </div>
       <div class="d-block d-sm-none mt-1 map-zone"  id="ingredients-trigger">Ver ingredientes y utencillos</div>
@@ -58,11 +84,11 @@
       <div class="kit-information-disclaimer kit-details d-sm-none">
         <div class="d-flex justify-content-around">
           <div class="kit-disclaimer">
-            <i class="fas fa-utensils"></i>
+            <i class="far fa-user"></i>
             <span><%= @kit.size %> personas</span>
           </div>
           <div class="kit-disclaimer">
-            <i class="fas fa-utensils"></i>
+            <i class="far fa-clock"></i>
             <span><%= @kit.preparation_time %> minutos</span>
           </div>
         </div>
@@ -71,7 +97,7 @@
           <span><%= @store.days_in_text %></span>
         </div>
         <div class="kit-disclaimer">
-          <i class="fas fa-utensils"></i>
+          <i class="far fa-calendar-alt"></i>
           <span>Hace tu pedido <%= @store.next_available_time %></span>
         </div>
       </div>
@@ -96,9 +122,9 @@
       </div>
     </div>
     <div style="background-image: url(<%= @kit.image %>);" class="d-none d-sm-block kit-show-sm-image">
-    <% @store.flags.split(", ").each_with_index do |flag, index| %>
+      <% @store.flags.split(", ").each_with_index do |flag, index| %>
       <span class="<%= 'second-category' if index.odd? %>"><%= flag %></span>
-    <% end %>
+      <% end %>
     </div>
   </div>
 
@@ -185,7 +211,141 @@
       <%= render "components/kit", kit: kit, kits: @kits %>
       <% end %>
     </div>
-
-    <h2 class="mb-4 section-secondary store-show-kit-offer">Otros restaurants similares</h2>
-
   </div>
+</div>
+
+<style>
+  .map-wrapper > div {
+    border-radius: 4px;
+    border: 1px solid #01788c;
+    background-color: #01788c0d;
+    color: #01788c;
+    text-align: center;
+    font-weight: bold;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 5px;
+  }
+  .map-canvas {
+    width: auto;
+    height: 35vh;
+  }
+  .info {
+    color: #222;
+  }
+  .lngLat {
+    color: #fff;
+    margin-bottom: 5px;
+  }
+  .lngLat .one {
+    padding-left: 250px;
+  }
+  .lngLat .two {
+    padding-left: 34px;
+  }
+  .info {
+    height: 140px;
+    float: left;
+    margin-bottom: 30px;
+    border: solid 2px #eee;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: inset 0 2px 5px #444;
+    -webkit-box-shadow: inset 0 2px 5px #444;
+    box-shadow: inset 0 2px 5px #444;
+  }
+  .info, .lngLat {
+    font-family: arial, sans-serif;
+    font-size: 12px;
+    padding-top: 10px;
+    width: 270px;
+  }
+</style>
+
+<script>
+
+  function buildMap(element) {
+
+    function createInitialPolygon() {
+      return new Promise(resolve => {
+        const standardData = [
+        new google.maps.LatLng(-34.55793, -58.37472),
+        new google.maps.LatLng(-34.58888, -58.34004),
+        new google.maps.LatLng(-34.63056, -58.32871),
+        new google.maps.LatLng(-34.62336, -58.36614),
+        new google.maps.LatLng(-34.62294, -58.38845),
+        new google.maps.LatLng(-34.63198, -58.44338),
+        new google.maps.LatLng(-34.61249, -58.48802),
+        new google.maps.LatLng(-34.55184, -58.51954),
+        new google.maps.LatLng(-34.5036, -58.59775),
+        new google.maps.LatLng(-34.52252, -58.74045),
+        new google.maps.LatLng(-34.47454, -58.81557),
+        new google.maps.LatLng(-34.48655, -58.93739),
+        new google.maps.LatLng(-34.46529, -58.99974),
+        new google.maps.LatLng(-34.41898, -58.80147),
+        new google.maps.LatLng(-34.34864, -58.66037),
+        new google.maps.LatLng(-34.43696, -58.5110)
+        ];
+        const initialPolygon = JSON.parse(JSON.parse(element.dataset.polygon));
+        const createPolygon = function(initialPolygon) {
+          return new Promise(resolve => {
+            const initialPolygonDB = initialPolygon.map((point) => {
+              return new google.maps.LatLng(point.lat,point.lng)
+            })
+            resolve(initialPolygonDB)
+          })
+        }
+        if (initialPolygon.length === 0) {
+          resolve(standardData);
+        } else {
+          return createPolygon(initialPolygon).then(data => resolve(data))
+        }
+      })
+    }
+
+    createInitialPolygon().then((drawPoligon) => {
+    // Map Center
+    const polygon = JSON.parse(JSON.parse(document.querySelector(".map-canvas").dataset.polygon))
+
+    if (polygon.length === 0) {
+      var myLatLng = new google.maps.LatLng(-34.603722, -58.381592);
+    } else {
+      var myLatLng = new google.maps.LatLng(eval(polygon[0].lat), eval(polygon[0].lng));
+    }
+
+    // General Options
+    var mapOptions = {
+      zoom: 10,
+      center: myLatLng,
+      mapTypeId: google.maps.MapTypeId.RoadMap,
+      zoomControl: true,
+      mapTypeControl: false,
+      streetViewControl: false,
+      rotateControl: true,
+    };
+
+    var map = new google.maps.Map(element, mapOptions);
+
+    // Styling & Controls
+    const myPolygon = new google.maps.Polygon({
+      paths: drawPoligon,
+      draggable: false,
+      editable: false,
+      strokeColor: '#01788c',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#01788c',
+      fillOpacity: 0.35
+    });
+    myPolygon.setMap(map);
+  }
+  )}
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const maps = document.querySelectorAll(".map-wrapper")
+      maps.forEach((map) => {
+        buildMap(map.children[0])
+      })
+    })
+  </script>

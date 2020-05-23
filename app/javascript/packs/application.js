@@ -8,6 +8,8 @@ import { autocomplete } from '../plugins/init_autocomplete';
 import { initIngredients } from '../plugins/init_ingredients';
 import { initGoogleAnalytics } from '../plugins/init_ga';
 import { initCashPayment } from '../plugins/init_cash_payment';
+import { initRestaurant } from '../plugins/init_restaurant';
+import { initAdminDashboard } from '../plugins/init_admin_dashboard';
 
 initFormToggler();
 validateAddress();
@@ -16,3 +18,5 @@ autocomplete();
 initIngredients();
 initGoogleAnalytics();
 initCashPayment();
+initRestaurant();
+initAdminDashboard();

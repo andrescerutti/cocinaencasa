@@ -14,7 +14,6 @@ class PagesController < ApplicationController
   end
 
   def user_dashboard
-    # @brands = Brand.find(1..5)
     @restaurants = Restaurant.all
     @kits = Kit.all
     @orders = Order.where(user: current_user)
@@ -24,19 +23,23 @@ class PagesController < ApplicationController
   end
 
   def admin_dashboard
-    status_color = { pending: '#fd1015', on_transit: '#eeff00', delivered: '#4dc433', canceled: '#ff9900', refunded: '#23264D' }
-    @orders = Order.joins(kit: { restaurant: :user }).joins(:payment).where(users: { id: current_user.id }).where(payments: { approved: true })
-    @kits = Kit.joins(restaurant: :user).where(users: { id: current_user.id })
-
-    # @markers = @orders.map do |order|
-    #   {
-    #     lat: order.address.latitude,
-    #     lng: order.address.longitude,
-    #     # infoWindow: render_to_string(partial: "infowindow", locals: { order: order }),
-    #     color: status_color[order.status.to_sym]
-    #   }
-    # authorize :page, :admin_dashboard?
-    # end
+    delivery_day = Proc.new {|order| order.date_delivery.in_time_zone("Buenos Aires").strftime("%A %d-%b") }
+    @restaurant = current_user.restaurants.first
+    @restaurant_kits = Kit.joins(:restaurant).where(restaurant: @restaurant)
+    orders = Order.includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where(payments: { status: "approved" }).order("orders.date_delivery ASC").where("orders.date_delivery > ?", Date.today.in_time_zone("Buenos Aires") - 1.day )
+    @past_orders = Order.includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where(payments: { status: "approved" }).order("orders.date_delivery ASC").where("orders.date_delivery <= ?", Date.today.in_time_zone("Buenos Aires") - 1.day ).where("orders.date_delivery > ?", Date.today.in_time_zone("Buenos Aires") - 5.day ).group_by(&delivery_day)
+    orders_by_status = orders.group_by { |order| order.status }
+    @orders_by_store = orders.group_by { |order| order.store_id }.map { |store_id, orders| [Store.find(store_id).name, orders.count {|order| order.status == "pending" }, orders.count {|order| order.status == "on_transit" }, orders.count {|order| order.status == "delivered" }, orders.count {|order| order.status == "canceled" }, orders.count {|order| order.status == "refunded" }, { amount: orders.select { |order| !order.payment.cash }.reduce(0) {|acum, order| acum + order.amount * order.kit.price }, quantity: orders.count {|order| !order.payment.cash } }, { amount: orders.select { |order| order.payment.cash }.reduce(0) {|acum, order| acum + order.amount * order.kit.price }, quantity: orders.count {|order| order.payment.cash } } ] }
+    @pending_orders = orders_by_status["pending"].group_by(&delivery_day)  if orders_by_status.key?("pending")
+    @on_transit_orders = orders_by_status["on_transit"].group_by(&delivery_day) if orders_by_status.key?("on_transit")
+    @delivered_orders = orders_by_status["delivered"].group_by(&delivery_day) if orders_by_status.key?("delivered")
+    @canceled_orders = orders_by_status["canceled"].group_by(&delivery_day) if orders_by_status.key?("canceled")
+    @refunded_orders = orders_by_status["refunded"].group_by(&delivery_day) if orders_by_status.key?("refunded")
+    @pending_orders ||= {}
+    @on_transit_orders ||= {}
+    @delivered_orders ||= {}
+    @canceled_orders ||= {}
+    @refunded_orders ||= {}
   end
 
   def stores_admin
