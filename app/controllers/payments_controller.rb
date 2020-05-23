@@ -22,19 +22,14 @@ class PaymentsController < ApplicationController
     @restaurant = @order.kit.restaurant
 
     if params["payment"].present? && params["payment"]["cash"].present? && params["payment"]["cash"] == "true"
-      if @payment.status == "approved"
-        @kit.stock -= @order.amount
-        @kit.save
-        @payment = Payment.new(status: "approved", cash: true, dni: cash_params["dni"], date_approved: Time.now.to_s, operation_type: "cash", order: @order, payment_method_id: "cash", payment_method_id: "cash", status_detail: "approved")
-        @payment.save
-        authorize @payment
-        PaymentMailer.with(user: current_user, payment: @payment, store: @store)
-        RestaurantSaleMailer.with(user: current_user, order: @order, payment: @payment, restaurant: @restaurant, store: @store)
-        redirect_to order_payment_path(@order, @payment)
-      else
-        UserMailer.with(user: current_user, order: @order, store: @store).error_on_buying.deliver_now
-        redirect_to failed_path(@order.id)
-      end
+      @kit.stock -= @order.amount
+      @kit.save
+      @payment = Payment.new(status: "approved", cash: true, dni: cash_params["dni"], date_approved: Time.now.to_s, operation_type: "cash", order: @order, payment_method_id: "cash", payment_type_id: "cash", status_detail: "approved")
+      @payment.save
+      authorize @payment
+      PaymentMailer.with(user: current_user, payment: @payment, store: @store)
+      RestaurantSaleMailer.with(user: current_user, order: @order, payment: @payment, restaurant: @restaurant, store: @store)
+      redirect_to order_payment_path(@order, @payment)
     else
       @payment = MercadoPagoHelper::create(params, @order, @restaurant.prod_mp_private_key)
       if @payment
@@ -64,6 +59,6 @@ class PaymentsController < ApplicationController
   end
 
   def cash_params
-    params.permit("dni")
+    params["payment"].permit("dni")
   end
 end
