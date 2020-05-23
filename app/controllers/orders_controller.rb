@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
   def order_assignment
     @order.update(orders_params) if params[:order].present?
     if @order.save
-      flash[:notice] = "La orden a sido actualizada."
+      flash[:notice] = "La orden a sido actualizada cómo #{@order.estado}"
 
       if @order.status == "on_transit"
         mail = OrderReadyMailer.with(user: current_user.email, order: @order).order_ready

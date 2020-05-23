@@ -29,4 +29,9 @@ class Order < ApplicationRecord
   def client_comment
     comment.nil? ? "Sin comentarios." : "'#{comment}'"
   end
+
+  def estado
+    delivery_status = {"pending" => "PENDIENTE", "on_transit" => "A ENTREGAR", "delivered" => "ENTREGADA", "canceled" => "CANCELADA"}
+    delivery_status[status]
+  end
 end

@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="cta-btn">
-          <p class="btn text-center btn-primary p-1 px-2 w-100"> FUE CANCELADO EL <%= order.updated_at.in_time_zone("Buenos Aires").strftime("%a %d-%b %l:%M %p") %></p>
+          <p class="btn text-center btn-danger p-1 px-2 w-100"> Cancelado el <%= order.updated_at.in_time_zone("Buenos Aires").strftime("%a %d-%b %l:%M %p") %></p>
         </div>
       </div>
     </div>
