@@ -31,7 +31,7 @@ class PagesController < ApplicationController
     orders_by_status = orders.group_by { |order| order.status }
     @orders_by_store = orders.group_by { |order| order.store_id }.map { |store_id, orders| [Store.find(store_id).name, orders.count {|order| order.status == "pending" }, orders.count {|order| order.status == "on_transit" }, orders.count {|order| order.status == "delivered" }, orders.count {|order| order.status == "canceled" }, orders.count {|order| order.status == "refunded" }, { amount: orders.select { |order| !order.payment.cash }.reduce(0) {|acum, order| acum + order.amount * order.kit.price }, quantity: orders.count {|order| !order.payment.cash } }, { amount: orders.select { |order| order.payment.cash }.reduce(0) {|acum, order| acum + order.amount * order.kit.price }, quantity: orders.count {|order| order.payment.cash } } ] }
     @pending_orders = orders_by_status["pending"].group_by(&delivery_day)  if orders_by_status.key?("pending")
-    @on_transit_orders = orders_by_status["on_transit"].group_by(&delivery_day) if orders_by_status.key?("delivered")
+    @on_transit_orders = orders_by_status["on_transit"].group_by(&delivery_day) if orders_by_status.key?("on_transit")
     @delivered_orders = orders_by_status["delivered"].group_by(&delivery_day) if orders_by_status.key?("delivered")
     @canceled_orders = orders_by_status["canceled"].group_by(&delivery_day) if orders_by_status.key?("canceled")
     @refunded_orders = orders_by_status["refunded"].group_by(&delivery_day) if orders_by_status.key?("refunded")

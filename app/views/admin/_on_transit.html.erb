@@ -1,6 +1,6 @@
 <% orders.each do |day, order_list| %>
-<h2>
-  <%= day %>
+<h2 class="day-delivery-group">
+  <%= l(day.to_datetime) %>
 </h2>
 <% order_list.each do |order| %>
 <div class="mb-3 payment-card-wrapper position-relative">
@@ -74,7 +74,7 @@
             <a href="tel:<%= order.user.phone %>">
               <p class="m-0 phone mb-0 mr-3"><%= order.user.phone %></p>
             </a>
-            <a href="https://api.whatsapp.com/send?phone=<%= order.user.phone %>&text=Hola, Te contacto desde <%= order.kit.restaurant.name %> por tu Chef Box <%= order.kit.name %>, pedido a través de CocinaEnCasa.com.ar." target="_blank">
+            <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>&text=Hola, Te contacto desde <%= order.kit.restaurant.name %> por tu Chef Box <%= order.kit.name %>, pedido a través de CocinaEnCasa.com.ar." target="_blank">
               <i class="fab fa-whatsapp"></i>
             </a>
           </div>
