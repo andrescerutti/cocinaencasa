@@ -145,7 +145,6 @@ ActiveRecord::Schema.define(version: 2020_05_23_025855) do
     t.string "tags", default: ""
     t.string "difficulty", default: ""
     t.string "slug"
-    t.integer "ready_price", default: 0
     t.index ["restaurant_id"], name: "index_kits_on_restaurant_id"
     t.index ["slug"], name: "index_kits_on_slug", unique: true
   end
