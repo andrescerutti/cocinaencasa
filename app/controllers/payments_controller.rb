@@ -24,7 +24,7 @@ class PaymentsController < ApplicationController
     if params["payment"].present? && params["payment"]["cash"].present? && params["payment"]["cash"] == "true"
       @kit.stock -= @order.amount
       @kit.save
-      @payment = Payment.new(status: "approved", cash: true, dni: cash_params["dni"], date_approved: Time.now.to_s, operation_type: "cash", order: @order, payment_method_id: "cash", payment_type_id: "cash", status_detail: "approved")
+      @payment = Payment.new(status: "approved", cash: true, dni: cash_params["dni"], date_approved: Time.now.to_s, operation_type: "cash", order: @order, payment_method_id: "cash", payment_type_id: "cash", status_detail: "approved", total: @kit.price * @order.amount * (100 - @store.discount) / 100)
       @payment.save
       authorize @payment
       # PaymentMailer.with(user: current_user, payment: @payment, store: @store).confirmed.deliver_now
@@ -35,6 +35,8 @@ class PaymentsController < ApplicationController
       if @payment
         if @payment.status == "approved"
           @kit.stock -= @order.amount
+          @payment.total = @kit.price * @order.amount
+          @payment.save
           @kit.save
           authorize @payment
           # PaymentMailer.with(user: current_user, payment: @payment, store: @store).confirmed.deliver_now
