@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_015940) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
+    t.string "cash_amount"
     t.boolean "cash", default: false
     t.string "status"
     t.string "external_id"
