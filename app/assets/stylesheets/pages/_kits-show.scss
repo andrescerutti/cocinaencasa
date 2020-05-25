@@ -272,3 +272,35 @@
     margin-top: 14px;
   }
 }
+
+.ready-made-options {
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  svg {
+    filter: grayscale(0.9);
+  }
+  span {
+    background-color: whitesmoke;
+    font-size: 8px;
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-weight: bold;
+    bottom: -16px;
+    border: 1px solid #bbb;
+    width: 130px;
+    text-align: center;
+  }
+}
+
+.ready-made-options.active {
+  border: 1px solid #2c9c7c;
+  background-color: #2c9c7c3b;
+  span {
+    background-color: #2c9c7c;
+    border: 1px solid #2c9c7c;
+    color: white;
+  }
+  svg {
+    filter: grayscale(0);
+  }
+}

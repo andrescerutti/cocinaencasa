@@ -10,6 +10,7 @@ import { initGoogleAnalytics } from '../plugins/init_ga';
 import { initCashPayment } from '../plugins/init_cash_payment';
 import { initRestaurant } from '../plugins/init_restaurant';
 import { initAdminDashboard } from '../plugins/init_admin_dashboard';
+import { initReadyMade } from '../plugins/init_ready_made';
 
 initFormToggler();
 validateAddress();
@@ -20,3 +21,4 @@ initGoogleAnalytics();
 initCashPayment();
 initRestaurant();
 initAdminDashboard();
+initReadyMade();
