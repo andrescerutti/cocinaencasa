@@ -1,5 +1,9 @@
-<h2 class="day-delivery-group">
-  Kits publicados
+<h2 class="day-delivery-group d-flex justify-content-between">
+  <span>Kits publicados</span>
+  <%= link_to new_kit_path, class:"btn btn-primary" do %>
+    <i class="fas fa-plus-circle text-white"></i>
+    <span>Agregar Kit</span>
+  <% end %>
 </h2>
 
 <div class="kits-wrapper">

@@ -1,6 +1,6 @@
 <% orders.each do |day, order_list| %>
-<h2>
-  <%= day %>
+<h2 class="day-delivery-group">
+  <%= l(day.to_datetime) %>
 </h2>
 <% order_list.each do |order| %>
 <div class="mb-3 payment-card-wrapper position-relative">
@@ -16,9 +16,9 @@
       <% if order.payment.cash %>
       <p>PICK UP</p>
       <% else %>
-      <p><%= order.address.address %></p>
+      <p><%= truncate(order.address.address, length: 40) %></p>
       <div>
-        <p><%= order.address.flat_number %></p>
+        <p>Piso/Lote: <%= order.address.flat_number %></p>
       </div>
       <% end %>
     </div>
@@ -58,7 +58,7 @@
         </a>
         <div class="ml-4 d-flex flex-column justify-content-between">
           <div>
-            <div class="mb-2" ><i class="fas fa-map-marker-alt mr-2" style="color: #01788c;"></i></i><%= order.address.address %></div>
+            <div class="mb-2" ><i class="fas fa-map-marker-alt mr-2" style="color: #01788c;"></i></i><%= truncate(order.address.address, length: 45) %></div>
             <div class="mb-2" ><i class="fas fa-building mr-2" style="color: #01788c;"></i><%= order.address.flat_number %></div>
           </div>
           <div class="client-comment">
@@ -74,7 +74,7 @@
             <a href="tel:<%= order.user.phone %>">
               <p class="m-0 phone mb-0 mr-3"><%= order.user.phone %></p>
             </a>
-            <a href="https://api.whatsapp.com/send?phone=<%= order.user.phone %>&text=Hola, Te contacto desde <%= order.kit.restaurant.name %> por tu Chef Box <%= order.kit.name %>, pedido a través de CocinaEnCasa.com.ar." target="_blank">
+            <a href="https://api.whatsapp.com/send?phone=+549<%= order.user.phone %>&text=Hola, Te contacto desde <%= order.kit.restaurant.name %> por tu Chef Box <%= order.kit.name %>, pedido a través de CocinaEnCasa.com.ar." target="_blank">
               <i class="fab fa-whatsapp"></i>
             </a>
           </div>
@@ -85,10 +85,10 @@
           </div>
         </div>
         <div class="cta-btn">
-          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como preparado?" }, class:"w-100" do |f| %>
-          <%= f.hidden_field :status, value: :on_transit %>
+          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como entregado?" }, class:"w-100" do |f| %>
+          <%= f.hidden_field :status, value: :delivered %>
           <div class="d-flex justify-content-center">
-            <%= f.submit "MARCAR PEDIDO COMO PREPARADO", class: 'btn text-center btn-primary p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
+            <%= f.submit "MARCAR PEDIDO COMO ENTREGADO", class: 'btn text-center btn-primary p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
           </div>
           <% end %>
         </div>
