@@ -32,51 +32,26 @@
     </iframe>
   </div>
 
-  <div class="description-container mt-5">
-    <h4 class="ingredients-title"><strong>Ingredientes:</strong></h4>
-    <p class="text-secondary">Esto encontrarás en tu kit.</p>
-  </div>
-  <div class="image-container d-md-block">
-    <div class="cards-scroll">
-      <div class="cards-scroll mt-3">
-        <% @kit.ingredients.each do |kit| %>
-        <div class="card-scroll col-md-4">
-          <div class="card-kit-showkit border">
-            <img src=<%= kit.image %>  />
-            <div class="card-body">
-              <div>
-                <h5 class="card-title mb-1"><%= kit.name %></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      </div>
+<div class="container">
+<div class="row">
+    <div class="col">
+      <p class="text-secondary" style="font-size: 15px">Ingredientes</p>
+      <% @kit.ingredients.each do |kit| %>
+      <p class="card-title mb-1" style="font-size: 13px">-<%= kit.name %></p>
+      <% end %>
     </div>
-  </div>
-
-   <div class="carrousel my-5">
-    <h4><strong>Utensilios que vas a necesitar:</strong></h4>
-    <p class="text-secondary">Para que vayas ganando tiempo te decimos que vas a necesitar.</p>
-    <div class="cards-scroll">
-      <div class="cards-scroll mt-3">
-        <% @kit.cookware.each do |kit| %>
-        <div class="card-scroll col-md-4">
-          <div class="card-kit-showkit border">
-            <img src=<%= kit.image %> >
-            <div class="card-body">
-              <div>
-                <h5 class="card-title mb-1"><%= kit.name %></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      </div>
+    <div class="col">
+      <p class="text-secondary" style="font-size: 15px" >Utensilios</p>
+      <% @kit.cookware.each do |kit| %>
+      <p class="card-title mb-1"  style="font-size: 13px">-<%= kit.name %></p>
+      <% end %>
     </div>
-  </div>
+</div>
+</div>
   <div class="steps">
-    <h4 class="mb-3 mt-5">Pasos a seguir:</h4>
+    <p class="text-secondary mt-5">Paso a paso</p>
+    <h4 class="mb-1 text-primary">Instrucciones</h4>
+
     <% @guide.steps.order(order: :asc).each_with_index do |step, index| %>
 
       <% if @kit.restaurant.user == current_user %>
@@ -96,7 +71,7 @@
 
       <% else %>
         <div class="d-flex align-items-center">
-          <p class="stepnumber mr-3 my-4" style="font-size: 25px">Paso<%= index + 1 %>.</p>
+          <p class="stepnumber mr-3 my-4 text-primary" style="font-size: 20px"><%= index + 1 %>.</p>
           <p class="text-muted my-4"><%= step.content %></p>
         </div>
       <% end %>
@@ -120,4 +95,10 @@
 
 
 
+<div class="container">
+<h6>Musicalizá tu momento</h6>
+<div>
+<iframe src="https://open.spotify.com/embed/playlist/1fnPBOGfGvLBrcMm0vsJrE" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+</div>
 
+</div>
