@@ -21,4 +21,9 @@ class Payment < ApplicationRecord
     return type
   end
 
+  def total_price
+    return total unless total.nil?
+    order.amount * order.kit.price
+  end
+
 end

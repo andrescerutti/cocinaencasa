@@ -7,17 +7,17 @@
 <meta name="description" content="¡Cocina en Casa te trae tus restaurantes favoritos a tu cocina! .">
 
 <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.cocinaencasa.com.ar/">
-  <meta property="og:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
-  <meta property="og:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
-  <meta property="og:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
+<meta property="og:url" content="https://www.cocinaencasa.com.ar/">
+<meta property="og:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
+<meta property="og:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
+<meta property="og:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://www.cocinaencasa.com.ar/">
-  <meta property="twitter:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
-  <meta property="twitter:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
-  <meta property="twitter:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.cocinaencasa.com.ar/">
+<meta property="twitter:title" content="Cociná en casa | Tus restaurantes favoritos en la cocina de tu casa.">
+<meta property="twitter:description" content="Te brindamos todo lo necesario para que puedas cocinar como todo un profesional desde la comodidad de tu casa. Te damos las herramientas a través de guías interactivas junto con todos los ingredientes para preparar tu plato. Con la APP de Cociná en casa tenes todo lo necesario a un clic de distancia.">
+<meta property="twitter:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
 <% end %>
 
 <div class="container mt-5">
@@ -73,7 +73,6 @@
       </div>
       <div class="d-block d-sm-none mt-3 map-zone">⚠ Ver zona de envío</div>
       <div class="d-block d-sm-none mt-1 map-zone"  id="ingredients-trigger">Ver ingredientes y utencillos</div>
-
       <div class="kit-information-disclaimer d-none" id="ingredients" >
         <div>
           <h5>Ingredientes</h5>
@@ -115,6 +114,10 @@
           <div class="d-flex">
             <div class="w-50 checkout-title">Fecha de entrega</div>
             <div class="w-50 checkout-data"><%= l(@order.date_delivery.in_time_zone("Buenos Aires"), format: "%A %d-%b") %></div>
+          </div>
+          <div class="d-flex">
+            <div class="w-50 checkout-title">Tipo de pedido</div>
+            <div class="w-50 checkout-data"><%= @order.prepared ? 'Comida preparada' : 'Kit para cocinar' %></div>
           </div>
           <div class="d-flex">
             <div class="w-50 checkout-title">Dirección</div>

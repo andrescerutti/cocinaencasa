@@ -1,5 +1,5 @@
 <% content_for :fb_track do %>
-  <script>fbq('track', 'ViewContent');</script>
+<script>fbq('track', 'ViewContent');</script>
 <% end %>
 <%= content_for :metadata do %>
 <title>Cociná en casa | <%= @kit.name %></title>
@@ -7,17 +7,17 @@
 <meta name="description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
 
 <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
-  <meta property="og:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
-  <meta property="og:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
-  <meta property="og:image" content="<%= @kit.image %>">
+<meta property="og:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
+<meta property="og:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+<meta property="og:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+<meta property="og:image" content="<%= @kit.image %>">
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
-  <meta property="twitter:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
-  <meta property="twitter:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
-  <meta property="twitter:image" content="<%= @kit.image %>">
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://www.cocinaencasa.com.ar/kits/<%= @kit.name.downcase.split(' ').join('-') %>">
+<meta property="twitter:title" content="Cocina en casa el <%= @kit.name %> de <%= @kit.restaurant.name %>">
+<meta property="twitter:description" content="¡CocinaEnCasa.com.ar te trae el <%= @kit.name %> de <%= @kit.restaurant.name %> a tu casa!">
+<meta property="twitter:image" content="<%= @kit.image %>">
 <% end %>
 
 <div class="container mt-3 mt-sm-5">
@@ -127,18 +127,29 @@
       <% end %>
     </div>
   </div>
-
   <div class="d-flex">
     <div class="w-100 w-sm-50 p-0 p-sm-3">
-      <h2 class="mb-2 mt-4 section-secondary store-show-kit-offer">Pedí tu Chef Box</h2>
+      <h2 class="mb-2 mt-4 section-secondary store-show-kit-offer">Pedí tu <%= @store.ready_made ? 'Plato o ' : '' %>Chef Box</h2>
       <div>
         <%= simple_form_for([@kit, @order])  do |f| %>
         <% stock = [@kit.stock, 10].min %>
+        <% if @store.ready_made %>
+        <%= f.input :prepared, as: :hidden, input_html: {style: "margin: 0;", id: "ready-made"} %>
+        <label style="font-weight: bold;font-size: 14px;">Tipo de pedido</label>
+        <div class="d-flex mb-4">
+          <div class="w-50 my-1 mr-1 d-flex justify-content-center align-items-center ready-made-options active p-2 position-relative" id="to-cook">
+            <%= render "components/to_cook" %>
+          </div>
+          <div class="w-50 my-1 ml-1 d-flex justify-content-center align-items-center ready-made-options p-2 position-relative" id="prepared">
+            <%= render "components/prepared" %>
+          </div>
+        </div>
+        <% end %>
         <div class="d-flex justify-content-between">
           <div class="kit-input-group kit-show-xs-input">
             <span id="disabled_dates" data-delivery=<%= @store.disabled.to_json %>></span>
             <label for="amount">Día de Entrega</label>
-            <%= f.input :date_delivery, as: :string, required: false, input_html: {class: "datepicker"}, label:false %>
+            <%= f.input :date_delivery, as: :string, required: false, input_html: {class: "datepicker"}, wrapper_html: {style: "margin: 0;"}, label:false %>
           </div>
           <div class="kit-input-group kit-show-xs-input">
             <label for="amount">Cantidad</label>
