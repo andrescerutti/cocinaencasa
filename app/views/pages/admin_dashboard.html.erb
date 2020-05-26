@@ -17,6 +17,15 @@
 <meta property="twitter:image" content="https://res.cloudinary.com/dvgogqjkc/image/upload/v1588539877/metadata-min_t7ynje.png">
 <% end %>
 
+<% if @restaurants.count > 1 %>
+<div class="container-fluid d-flex justify-content-center mt-3">
+  <div>
+    <% @restaurants.each do |restaurant| %>
+    <%= link_to restaurant.name, admin_dashboard_path(restaurant: restaurant), class:"btn btn-primary mx-3" %>
+    <% end %>
+  </div>
+</div>
+<% end %>
 
 <h1 class="dashboard-title text-center mt-4"><%= @restaurant.name %></h1>
 <div class="container-fluid mb-5 mt-3 d-flex justify-content-center">
@@ -75,8 +84,8 @@
         <a class="nav-link" id="v-pills-kits-tab" data-toggle="pill" href="#v-pills-kits" role="tab" aria-controls="v-pills-kits" aria-selected="false">MIS KITS</a>
         <p class="mt-5 font-weight-bold">PANEL</p>
         <%= link_to stores_admin_path, class:"nav-link" do %>
-          <i class="fas fa-map-marked-alt"></i>
-          <span class="ml-3">ZONAS DE DELIVERY</span>
+        <i class="fas fa-map-marked-alt"></i>
+        <span class="ml-3">ZONAS DE DELIVERY</span>
         <% end %>
       </div>
     </div>

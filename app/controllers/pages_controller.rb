@@ -24,7 +24,12 @@ class PagesController < ApplicationController
 
   def admin_dashboard
     delivery_day = Proc.new {|order| order.date_delivery.in_time_zone("Buenos Aires") }
-    @restaurant = current_user.restaurants.first
+    if params["restaurant"].present?
+      @restaurant = Restaurant.friendly.find(params["restaurant"])
+    else
+      @restaurant = current_user.restaurants.first
+    end
+    @restaurants = current_user.restaurants
     @restaurant_kits = Kit.joins(:restaurant).where(restaurant: @restaurant)
     orders = Order.includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where(payments: { status: "approved" }).order("orders.date_delivery ASC").where("orders.date_delivery > ?", Date.today.in_time_zone("Buenos Aires") - 2.day )
     @past_orders = Order.includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where(payments: { status: "approved" }).order("orders.date_delivery ASC").where("orders.date_delivery <= ?", Date.today.in_time_zone("Buenos Aires") - 1.day ).where("orders.date_delivery > ?", Date.today.in_time_zone("Buenos Aires") - 5.day ).group_by(&delivery_day)
