@@ -32,51 +32,26 @@
     </iframe>
   </div>
 
-  <div class="description-container mt-5">
-    <h4 class="ingredients-title"><strong>Ingredientes:</strong></h4>
-    <p class="text-secondary">Esto encontrarás en tu kit.</p>
-  </div>
-  <div class="image-container d-md-block">
-    <div class="cards-scroll">
-      <div class="cards-scroll mt-3">
-        <% @kit.ingredients.each do |kit| %>
-        <div class="card-scroll col-md-4">
-          <div class="card-kit-showkit border">
-            <img src=<%= kit.image %>  />
-            <div class="card-body">
-              <div>
-                <h5 class="card-title mb-1"><%= kit.name %></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      </div>
+<div class="container">
+<div class="row">
+    <div class="col">
+      <p class="text-secondary" style="font-size: 15px">Ingredientes</p>
+      <% @kit.ingredients.each do |kit| %>
+      <p class="card-title mb-1" style="font-size: 13px">-<%= kit.name %></p>
+      <% end %>
     </div>
-  </div>
-
-   <div class="carrousel my-5">
-    <h4><strong>Utensilios que vas a necesitar:</strong></h4>
-    <p class="text-secondary">Para que vayas ganando tiempo te decimos que vas a necesitar.</p>
-    <div class="cards-scroll">
-      <div class="cards-scroll mt-3">
-        <% @kit.cookware.each do |kit| %>
-        <div class="card-scroll col-md-4">
-          <div class="card-kit-showkit border">
-            <img src=<%= kit.image %> >
-            <div class="card-body">
-              <div>
-                <h5 class="card-title mb-1"><%= kit.name %></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      </div>
+    <div class="col">
+      <p class="text-secondary" style="font-size: 15px" >Utensilios</p>
+      <% @kit.cookware.each do |kit| %>
+      <p class="card-title mb-1"  style="font-size: 13px">-<%= kit.name %></p>
+      <% end %>
     </div>
-  </div>
+</div>
+</div>
   <div class="steps">
-    <h4 class="mb-3 mt-5">Pasos a seguir:</h4>
+    <h4 class="mb-1 text-primary mt-3">Instrucciones</h4>
+    <p class="text-secondary ">Paso a paso</p>
+
     <% @guide.steps.order(order: :asc).each_with_index do |step, index| %>
 
       <% if @kit.restaurant.user == current_user %>
@@ -96,7 +71,7 @@
 
       <% else %>
         <div class="d-flex align-items-center">
-          <p class="stepnumber mr-3 my-4" style="font-size: 25px">Paso<%= index + 1 %>.</p>
+          <p class="stepnumber mr-3 my-4 text-primary" style="font-size: 20px"><%= index + 1 %>.</p>
           <p class="text-muted my-4"><%= step.content %></p>
         </div>
       <% end %>
@@ -112,12 +87,30 @@
         <% end %>
     <% end %>
   </div>
+
+
+<div class="align-items-center text-center mb-3">
+<h6 class="text-primary mb-3">Musicalizá tu momento con nuestras playlists</h6>
+      <a href="https://open.spotify.com/user/xwcg9qyl97re5v7jbcsltxlnp?si=e2-UOyPYQOuC1Mox6uFCuw" target="_blank">
+         <img alt="Qries" src="https://image.flaticon.com/icons/svg/174/174872.svg"
+         height="40">
+      </a>
   </div>
-<br>
-<br>
-<br>
-<br>
 
+  <div class="row">
+    <div class="col">
+      <a href="https://open.spotify.com/playlist/1fnPBOGfGvLBrcMm0vsJrE?si=cma-YmojSTyvS4zfjcEI4Q" target="_blank"><img border="0" alt="spotify" src="https://res.cloudinary.com/cocina-en-casa/image/upload/v1590432249/weekenddd_l5kqxi.jpg" width="70" height="70"></a>
+      <p style="font-size: 13px">Weekends</p>
+    </div>
+    <div class="col">
 
+      <a href="https://open.spotify.com/playlist/7ubvR4JJHNZ3fT9e0ncF1b?si=4f21X-6cTrqx6S9g1mjWuw" target="_blank"><img border="0" alt="spotify" src="https://res.cloudinary.com/cocina-en-casa/image/upload/v1590432248/loveee_sju7nd.jpg" width="70" height="70"></a>
+      <p style="font-size: 13px">Love</p>
+    </div>
+    <div class="col">
+      <a href="https://open.spotify.com/playlist/1o5GNQQQ5n6nURTuF6VnDe?si=vanPymKmSlOpOcwVRLKhRw" target="_blank"><img border="0" alt="spotify" src="https://res.cloudinary.com/cocina-en-casa/image/upload/v1590432248/chilllll_zyjxoi.jpg" width="70" height="70"></a>
+      <p style="font-size: 13px">Chill</p>
+    </div>
+  </div>
 
-
+<br>
