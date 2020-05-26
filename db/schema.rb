@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_222402) do
+ActiveRecord::Schema.define(version: 2020_05_26_135112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,7 +145,6 @@ ActiveRecord::Schema.define(version: 2020_05_25_222402) do
     t.string "tags", default: ""
     t.string "difficulty", default: ""
     t.string "slug"
-    t.integer "ready_price", default: 0
     t.index ["restaurant_id"], name: "index_kits_on_restaurant_id"
     t.index ["slug"], name: "index_kits_on_slug", unique: true
   end
@@ -180,6 +179,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_222402) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "approved", default: false
+    t.string "cash_amount"
     t.boolean "cash", default: false
     t.string "status"
     t.string "external_id"
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_222402) do
     t.boolean "accepts_cash", default: false
     t.float "discount", default: 0.0
     t.boolean "ready_made", default: false
+    t.string "delivery_time", default: ""
     t.index ["addressable_type", "addressable_id"], name: "index_stores_on_addressable_type_and_addressable_id"
     t.index ["restaurant_id"], name: "index_stores_on_restaurant_id"
   end

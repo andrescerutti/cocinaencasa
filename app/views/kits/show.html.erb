@@ -29,7 +29,7 @@
         <div style="background-image: url(<%= @store.restaurant.brand.logo %>);" class="kit-store-square-logo"></div>
         <div class="store-address">
           <h1><%= @store.restaurant.name %></h1>
-          <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
+          <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %> Horarios delivery: <%= @store.delivery_time %></h4>
         </div>
       </div>
       <div style="background-image: url(<%= @kit.image %>);" class="d-block d-sm-none kit-show-image">
@@ -99,6 +99,13 @@
         <div class="kit-disclaimer">
           <i class="far fa-calendar-alt"></i>
           <span>Hace tu pedido <%= @store.next_available_time %></span>
+        </div>
+        <div class="kit-disclaimer">
+          <% if @store.delivery_time.empty? %>
+          <% else  %>
+          <i class="fas fa-motorcycle"></i>
+          <span>Horarios delivery: <%= @store.delivery_time %></span>
+          <% end %>
         </div>
       </div>
 
