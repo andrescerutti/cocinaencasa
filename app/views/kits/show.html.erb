@@ -29,7 +29,11 @@
         <div style="background-image: url(<%= @store.restaurant.brand.logo %>);" class="kit-store-square-logo"></div>
         <div class="store-address">
           <h1><%= @store.restaurant.name %></h1>
-          <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %> Horarios delivery: <%= @store.delivery_time %></h4>
+          <h4><%= "#{@store.name} - " if @store.name != "" %><%= truncate(@store.address.address, length: 20) %></h4>
+          <% if @store.delivery_time.empty? %>
+          <% else  %>
+          <h4>Horarios delivery: <%= @store.delivery_time %></h4>
+          <% end %>
         </div>
       </div>
       <div style="background-image: url(<%= @kit.image %>);" class="d-block d-sm-none kit-show-image">
