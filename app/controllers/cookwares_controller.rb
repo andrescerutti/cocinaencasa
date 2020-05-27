@@ -10,7 +10,7 @@ class CookwaresController < ApplicationController
     @kit_cookware.kit = @kit
     @kit_cookware.cookware = @cookware
     authorize @cookware
-    return redirect_to @kit if @kit_cookware.save
+    return redirect_to kit_kit_cookwares_path(@kit) if @kit_cookware.save
 
     render "kit_cookwares/index"
   end

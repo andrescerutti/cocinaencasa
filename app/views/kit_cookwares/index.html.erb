@@ -23,10 +23,9 @@
   <div class="image-container d-md-block">
     <div class="cards-scroll">
       <div class="cards-scroll mt-2 mb-5">
-        <% @kit.cookware.each do |cookware| %>
+        <% @kit.cookware.order(created_at: :desc).each do |cookware| %>
         <div class="card-scroll col-md-4">
           <div class="card-kit-showkit border">
-            <img src=<%= cookware.image %>  />
             <div class="card-body">
               <div>
                 <h5 class="card-title mb-1"><%= cookware.name %></h5>
@@ -42,7 +41,6 @@
   <%= simple_form_for([@kit, @cookware], method: :post, url: kit_cookwares_path) do |f| %>
     <div class="d-row align-items-center">
       <%= f.input :name, placeholder: "Nombre", label: false %>
-      <%= f.input :image, placeholder: "Imagen", label: false %>
       <%= f.simple_fields_for :kit_ingredient do |a| %>
       <% end %>
   </div>

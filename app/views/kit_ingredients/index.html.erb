@@ -23,10 +23,9 @@
   <div class="image-container d-md-block">
     <div class="cards-scroll">
       <div class="cards-scroll mt-2 mb-5">
-        <% @kit.ingredients.each do |ingredient| %>
+        <% @kit.ingredients.order(created_at: :desc).each do |ingredient| %>
         <div class="card-scroll col-md-4">
           <div class="card-kit-showkit border">
-            <img src=<%= ingredient.image %>  />
             <div class="card-body">
               <div>
                 <h5 class="card-title mb-1"><%= ingredient.name %></h5>
@@ -42,10 +41,7 @@
   <%= simple_form_for([@kit, @ingredient], method: :post, url: kit_ingredients_path) do |f| %>
     <div class="d-row align-items-center">
       <%= f.input :name, placeholder: "Nombre", label: false %>
-      <%= f.input :image, placeholder: "Imagen", label: false %>
       <%= f.simple_fields_for :kit_ingredient do |a| %>
-        <%= a.input :quantity, label: "Cantidad" %>
-        <%= a.input :unit, label: "Unidad de medida" %>
       <% end %>
   </div>
   <%= f.submit "Agregar Ingrediente", class: "btn btn-primary mb-5"%>

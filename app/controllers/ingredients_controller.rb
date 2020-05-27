@@ -16,7 +16,7 @@ class IngredientsController < ApplicationController
     @kit_ingredient.kit = @kit
     @kit_ingredient.ingredient = @ingredient
     authorize @ingredient
-    return redirect_to @kit if @kit_ingredient.save
+    return redirect_to kit_kit_ingredients_path(@kit) if @kit_ingredient.save
 
     render "kit_ingredients/index"
   end
@@ -29,10 +29,9 @@ class IngredientsController < ApplicationController
   end
 
   def destroy
-  @ingredient.kit_ingredients.destroy
-  @ingredient.destroy
-      redirect_to '/admin_dashboard'
-
+    @ingredient.kit_ingredients.destroy
+    @ingredient.destroy
+    redirect_to '/admin_dashboard'
   end
 
   private
@@ -57,6 +56,6 @@ class IngredientsController < ApplicationController
   end
 
   def kit_ingredient_params
-    params.require(:ingredient).require(:kit_ingredient).permit(:quantity, :unit)
+    # params.require(:ingredient).require(:kit_ingredient).permit(:quantity, :unit)
   end
 end
