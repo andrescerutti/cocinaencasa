@@ -75,7 +75,7 @@ class Store < ApplicationRecord
 
   def disabled
     tomorrow = next_available_time == "para mañana" ? 1 : 0
-    first_day_open = day_for_order.positive? ? (Date.today + day_for_order.days) : (Date.today + tomorrow.days)
-    [(Date.today..Date.today + 60).reject { |day| delivery_days[day.wday] }.map(&:to_s), (Date.today...first_day_open).map(&:to_s)].flatten.uniq
+    first_day_open = day_for_order.positive? ? (Date.today.in_time_zone("Buenos Aires").to_date + day_for_order.days) : (Date.today.in_time_zone("Buenos Aires").to_date + tomorrow.days)
+    [(Date.today.in_time_zone("Buenos Aires").to_date..Date.today.in_time_zone("Buenos Aires").to_date + 60).reject { |day| delivery_days[day.wday] }.map(&:to_s), (Date.today.in_time_zone("Buenos Aires").to_date...first_day_open).map(&:to_s)].flatten.uniq
   end
 end
