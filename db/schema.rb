@@ -144,8 +144,8 @@ ActiveRecord::Schema.define(version: 2020_05_25_222402) do
     t.integer "priority", default: 0
     t.string "tags", default: ""
     t.string "difficulty", default: ""
-    t.string "slug"
     t.integer "ready_price", default: 0
+    t.string "slug"
     t.index ["restaurant_id"], name: "index_kits_on_restaurant_id"
     t.index ["slug"], name: "index_kits_on_slug", unique: true
   end
