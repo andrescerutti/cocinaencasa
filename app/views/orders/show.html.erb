@@ -110,6 +110,13 @@
           <div class="d-flex">
             <div class="w-50 checkout-title">Cantidad</div>
             <div class="w-50 checkout-data"><%= @order.amount %> Chef Boxes (ARS $<%= @order.kit.price %> c/u)</div>
+             </div>
+           <div class="d-flex">
+            <% if @store.delivery_time.empty? %>
+            <% else  %>
+              <div class="w-50 checkout-title">Hora de entrega</div>
+              <div class="w-50 checkout-data"><%= @store.delivery_time %></div>
+            <% end %>
           </div>
           <div class="d-flex">
             <div class="w-50 checkout-title">Fecha de entrega</div>
