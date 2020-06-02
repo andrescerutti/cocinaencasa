@@ -56,6 +56,15 @@
             <p class="mt-2 mt-sm-0">delivery</p>
           </div>
         </div>
+            <div class="my-2 mb-sm-0">
+          <% if @store.delivery_time.empty? %>
+          <% else  %>
+          <h3 class="mb-0 mb-sm-2">Horarios entrega</h3>
+          <div class="d-flex">
+              <p class="mt-2 mt-sm-0"><%= @store.delivery_time %></p>
+          <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
