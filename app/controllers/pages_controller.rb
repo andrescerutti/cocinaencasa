@@ -10,15 +10,10 @@ class PagesController < ApplicationController
   end
 
   def contact
-
   end
 
   def user_dashboard
-    @restaurants = Restaurant.all
-    @kits = Kit.all
-    @orders = Order.where(user: current_user)
-    @payments = Payment.where(order: @orders)
-    @pages = "asd"
+    @orders = Order.includes(:payment).where(orders: { user_id: current_user.id}).where("payments.status = 'approved'").order("payments.updated_at DESC")
     authorize :page, :user_dashboard?
   end
 
@@ -31,7 +26,7 @@ class PagesController < ApplicationController
     end
     @restaurants = current_user.restaurants
     @restaurant_kits = Kit.joins(:restaurant).where(restaurant: @restaurant)
-    orders = Order.includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where(payments: { status: "approved" }).order("orders.date_delivery ASC").where("orders.date_delivery > ?", Date.today.in_time_zone("Buenos Aires") - 2.day )
+    orders = Order.includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where("restaurants.id = ?", @restaurant.id).where(payments: { status: "approved" }) #.order("orders.date_delivery ASC").where("orders.date_delivery > ?", Date.today.in_time_zone("Buenos Aires") - 2.day )
     @past_orders = Order.includes(:payment).joins(kit: { restaurant: :user }).where(users: { id: current_user.id }).where(payments: { status: "approved" }).order("orders.date_delivery ASC").where("orders.date_delivery <= ?", Date.today.in_time_zone("Buenos Aires") - 1.day ).where("orders.date_delivery > ?", Date.today.in_time_zone("Buenos Aires") - 5.day ).group_by(&delivery_day)
     orders_by_status = orders.group_by { |order| order.status }
     @orders_by_store = orders.group_by { |order| order.store_id }.map { |store_id, orders| [Store.find(store_id).name, orders.count {|order| order.status == "pending" }, orders.count {|order| order.status == "on_transit" }, orders.count {|order| order.status == "delivered" }, orders.count {|order| order.status == "canceled" }, orders.count {|order| order.status == "refunded" }, { amount: orders.select { |order| !order.payment.cash }.reduce(0) {|acum, order| acum + order.amount * order.kit.price }, quantity: orders.count {|order| !order.payment.cash } }, { amount: orders.select { |order| order.payment.cash }.reduce(0) {|acum, order| acum + order.amount * order.kit.price }, quantity: orders.count {|order| order.payment.cash } } ] }

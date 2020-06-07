@@ -176,16 +176,14 @@
           <%= f.input :store_id, input_html: { value: @store.id }, as: :hidden %>
         </div>
         <%= f.simple_fields_for :addresses do |a| %>
-        <% address = user_signed_in? && !current_user.addresses.last.nil? ? current_user.addresses.last.address : nil %>
-        <% flat_number = user_signed_in? && !current_user.addresses.last.nil? ? current_user.addresses.last.flat_number : nil %>
         <div class="justify-content-between hide-field-address" id="address_fields">
           <div class="kit-input-group kit-show-sm-input">
             <label for="amount">Dirección de Entrega</label>
-            <%= a.input :address, placeholder: "Ingresar dirección...", label: false, input_html: { value: address }  %>
+            <%= a.input :address, placeholder: "Ingresar dirección...", label: false  %>
           </div>
           <div class="kit-input-group kit-show-sm-input">
             <label for="amount">Piso o lote</label>
-            <%= a.input :flat_number, placeholder: "Piso o lote", label: false, input_html: { value: flat_number } %>
+            <%= a.input :flat_number, placeholder: "Piso o lote", label: false %>
           </div>
         </div>
         <%= a.input :state, placeholder: "Provincia", label: false, as: :hidden %>

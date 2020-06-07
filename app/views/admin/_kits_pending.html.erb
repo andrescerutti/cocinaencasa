@@ -88,9 +88,16 @@
           <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como a entregar?" }, class:"w-100" do |f| %>
           <%= f.hidden_field :status, value: :on_transit %>
           <div class="d-flex justify-content-center">
-            <%= f.submit "MARCAR PEDIDO COMO PREPARADO", class: 'btn text-center btn-primary p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
+            <%= f.submit "MARCAR PEDIDO COMO PREPARADO", class: 'btn text-center btn-primary p-1 px-2 w-100 mb-1', style:"font-size: 10px !important;"  %>
           </div>
           <% end %>
+          <%= simple_form_for :order, url: order_assignment_path(order), method: :patch, data: { confirm: "¿Marcar kit como cancelado?" }, class:"w-100" do |f| %>
+          <%= f.hidden_field :status, value: :canceled %>
+          <div class="d-flex justify-content-center">
+            <%= f.submit "MARCAR PEDIDO COMO CANCELADO", class: 'btn text-center btn-danger p-1 px-2 w-100', style:"font-size: 10px !important;"  %>
+          </div>
+          <% end %>
+
         </div>
       </div>
     </div>

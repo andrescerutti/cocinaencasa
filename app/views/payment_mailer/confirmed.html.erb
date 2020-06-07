@@ -138,7 +138,7 @@
                                                             <td>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.2; letter-spacing: -0.5; font-size: 40px; font-weight: bold;">
-                                                                    Hola <%= @payment.order.user.first_name.capitalize %>,
+                                                                    Hola <%= @user.first_name.capitalize %>,
 
 
                                                                 </p>
@@ -196,7 +196,7 @@
                                                                 <p
 
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 30px; font-weight: bold;">
-                                                                    $<%= @payment.order.amount * @payment.order.kit.price %></p>
+                                                                    $<%= @order.amount * @payment.order.kit.price %></p>
                                                                 <p
                                                                     style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
                                                                     Metodo
@@ -242,7 +242,7 @@
                                                                     TU TIPO DE ENTREGA</p>
                                                                 <p
                                                                     style="color: #303336; line-height: 1.8; letter-spacing: -0.5; font-size: 22px; font-weight: bold;">
-                                                                    <%= @payment.order.delivery_provider %></p><span
+                                                                    </p><span
                                                                     style="display:;">
                                                                     <p
                                                                         style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
@@ -421,13 +421,14 @@
                                                                         <td>
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                                Medio de envio
+                                                                                Entrega
                                                                               </p>
+                                                                              <%= @order.delivery ? "Delivery" : "Retiro por local" %>
                                                                         </td>
                                                                         <td align="right">
                                                                             <p
                                                                                 style="color: #6b6f72; line-height: 1.8; letter-spacing: -0.5; font-size: 14px;">
-                                                                            <%= @payment.order.delivery_provider %>
+
                                                                             </p>
                                                                         </td>
                                                                     </tr>

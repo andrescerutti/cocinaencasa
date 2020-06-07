@@ -4,7 +4,6 @@ class GuidesController < ApplicationController
   def show
     @kit = @guide.kit
     @review = Review.new
-    @guide = Guide.find(params[:id])
     @step = Step.new
   end
 
@@ -24,7 +23,7 @@ class GuidesController < ApplicationController
   private
 
   def set_guide
-    @guide = Guide.find(params[:id])
+    @guide = Kit.friendly.find(params[:id]).guide
     authorize @guide
   end
 

@@ -5,6 +5,6 @@ class RestaurantSaleMailer < ApplicationMailer
     @user = params[:user]
     @restaurant = params[:restaurant]
     @store = params[:store]
-    mail(to: @restaurant.user.email, subject: 'Realizaste una nueva venta!')
+    mail(to: @restaurant.user.email, subject: '👏 Realizaste una nueva venta!')
   end
 end
