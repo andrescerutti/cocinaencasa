@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :addresses, as: :addressable
   has_many :cards
-  has_many :restaurants
+  has_many :restaurants, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
   # validates :first_name, presence: true
